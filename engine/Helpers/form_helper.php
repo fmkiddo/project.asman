@@ -36,7 +36,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 use Config\Services;
 
 /**
@@ -45,925 +44,872 @@ use Config\Services;
  * @package CodeIgniter
  */
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_open'))
-{
-	/**
-	 * Form Declaration
-	 *
-	 * Creates the opening portion of the form.
-	 *
-	 * @param string       $action     the URI segments of the form destination
-	 * @param array|string $attributes a key/value pair of attributes, or string representation
-	 * @param array        $hidden     a key/value pair hidden data
-	 *
-	 * @return string
-	 */
-	function form_open(string $action = '', $attributes = [], array $hidden = []): string
-	{
-		// If no action is provided then set to the current url
-		if (! $action)
-		{
-			$action = current_url(true);
-		} // If an action is not a full URL then turn it into one
-		elseif (strpos($action, '://') === false)
-		{
-			// If an action has {locale}
-			if (strpos($action, '{locale}') !== false)
-			{
-				$action = str_replace('{locale}', Services::request()->getLocale(), $action);
-			}
+if (! function_exists('form_open')) {
 
-			$action = site_url($action);
-		}
+    /**
+     * Form Declaration
+     *
+     * Creates the opening portion of the form.
+     *
+     * @param string $action
+     *            the URI segments of the form destination
+     * @param array|string $attributes
+     *            a key/value pair of attributes, or string representation
+     * @param array $hidden
+     *            a key/value pair hidden data
+     *            
+     * @return string
+     */
+    function form_open(string $action = '', $attributes = [], array $hidden = []): string
+    {
+        // If no action is provided then set to the current url
+        if (! $action) {
+            $action = current_url(true);
+        } // If an action is not a full URL then turn it into one
+        elseif (strpos($action, '://') === false) {
+            // If an action has {locale}
+            if (strpos($action, '{locale}') !== false) {
+                $action = str_replace('{locale}', Services::request()->getLocale(), $action);
+            }
 
-		if (is_array($attributes) && array_key_exists('csrf_id', $attributes))
-		{
-			$csrfId = $attributes['csrf_id'];
-			unset($attributes['csrf_id']);
-		}
+            $action = site_url($action);
+        }
 
-		$attributes = stringify_attributes($attributes);
+        if (is_array($attributes) && array_key_exists('csrf_id', $attributes)) {
+            $csrfId = $attributes['csrf_id'];
+            unset($attributes['csrf_id']);
+        }
 
-		if (stripos($attributes, 'method=') === false)
-		{
-			$attributes .= ' method="post"';
-		}
-		if (stripos($attributes, 'accept-charset=') === false)
-		{
-			$config      = config(\Config\App::class);
-			$attributes .= ' accept-charset="' . strtolower($config->charset) . '"';
-		}
+        $attributes = stringify_attributes($attributes);
 
-		$form = '<form action="' . $action . '"' . $attributes . ">\n";
+        if (stripos($attributes, 'method=') === false) {
+            $attributes .= ' method="post"';
+        }
+        if (stripos($attributes, 'accept-charset=') === false) {
+            $config = config(\Config\App::class);
+            $attributes .= ' accept-charset="' . strtolower($config->charset) . '"';
+        }
 
-		// Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
-		$before = Services::filters()
-						  ->getFilters()['before'];
+        $form = '<form action="' . $action . '"' . $attributes . ">\n";
 
-		if ((in_array('csrf', $before) || array_key_exists('csrf', $before)) && strpos($action, base_url()) !== false && ! stripos($form, 'method="get"'))
-		{
-			$form .= csrf_field($csrfId ?? null);
-		}
+        // Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
+        $before = Services::filters()->getFilters()['before'];
 
-		if (is_array($hidden))
-		{
-			foreach ($hidden as $name => $value)
-			{
-				$form .= form_hidden($name, $value);
-			}
-		}
+        if ((in_array('csrf', $before) || array_key_exists('csrf', $before)) && strpos($action, base_url()) !== false && ! stripos($form, 'method="get"')) {
+            $form .= csrf_field($csrfId ?? null);
+        }
 
-		return $form;
-	}
+        if (is_array($hidden)) {
+            foreach ($hidden as $name => $value) {
+                $form .= form_hidden($name, $value);
+            }
+        }
+
+        return $form;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_open_multipart'))
-{
-	/**
-	 * Form Declaration - Multipart type
-	 *
-	 * Creates the opening portion of the form, but with "multipart/form-data".
-	 *
-	 * @param string       $action     The URI segments of the form destination
-	 * @param array|string $attributes A key/value pair of attributes, or the same as a string
-	 * @param array        $hidden     A key/value pair hidden data
-	 *
-	 * @return string
-	 */
-	function form_open_multipart(string $action = '', $attributes = [], array $hidden = []): string
-	{
-		if (is_string($attributes))
-		{
-			$attributes .= ' enctype="' . esc('multipart/form-data', 'attr') . '"';
-		}
-		else
-		{
-			$attributes['enctype'] = 'multipart/form-data';
-		}
+if (! function_exists('form_open_multipart')) {
 
-		return form_open($action, $attributes, $hidden);
-	}
+    /**
+     * Form Declaration - Multipart type
+     *
+     * Creates the opening portion of the form, but with "multipart/form-data".
+     *
+     * @param string $action
+     *            The URI segments of the form destination
+     * @param array|string $attributes
+     *            A key/value pair of attributes, or the same as a string
+     * @param array $hidden
+     *            A key/value pair hidden data
+     *            
+     * @return string
+     */
+    function form_open_multipart(string $action = '', $attributes = [], array $hidden = []): string
+    {
+        if (is_string($attributes)) {
+            $attributes .= ' enctype="' . esc('multipart/form-data', 'attr') . '"';
+        } else {
+            $attributes['enctype'] = 'multipart/form-data';
+        }
+
+        return form_open($action, $attributes, $hidden);
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_hidden'))
-{
-	/**
-	 * Hidden Input Field
-	 *
-	 * Generates hidden fields. You can pass a simple key/value string or
-	 * an associative array with multiple values.
-	 *
-	 * @param string|array $name      Field name or associative array to create multiple fields
-	 * @param string|array $value     Field value
-	 * @param boolean      $recursing
-	 *
-	 * @return string
-	 */
-	function form_hidden($name, $value = '', bool $recursing = false): string
-	{
-		static $form;
+if (! function_exists('form_hidden')) {
 
-		if ($recursing === false)
-		{
-			$form = "\n";
-		}
+    /**
+     * Hidden Input Field
+     *
+     * Generates hidden fields. You can pass a simple key/value string or
+     * an associative array with multiple values.
+     *
+     * @param string|array $name
+     *            Field name or associative array to create multiple fields
+     * @param string|array $value
+     *            Field value
+     * @param boolean $recursing
+     *
+     * @return string
+     */
+    function form_hidden($name, $value = '', bool $recursing = false): string
+    {
+        static $form;
 
-		if (is_array($name))
-		{
-			foreach ($name as $key => $val)
-			{
-				form_hidden($key, $val, true);
-			}
+        if ($recursing === false) {
+            $form = "\n";
+        }
 
-			return $form;
-		}
+        if (is_array($name)) {
+            foreach ($name as $key => $val) {
+                form_hidden($key, $val, true);
+            }
 
-		if (! is_array($value))
-		{
-			$form .= '<input type="hidden" name="' . $name . '" value="' . esc($value) . "\" style=\"display:none;\" />\n";
-		}
-		else
-		{
-			foreach ($value as $k => $v)
-			{
-				$k = is_int($k) ? '' : $k;
-				form_hidden($name . '[' . $k . ']', $v, true);
-			}
-		}
+            return $form;
+        }
 
-		return $form;
-	}
+        if (! is_array($value)) {
+            $form .= '<input type="hidden" name="' . $name . '" value="' . esc($value) . "\" style=\"display:none;\" />\n";
+        } else {
+            foreach ($value as $k => $v) {
+                $k = is_int($k) ? '' : $k;
+                form_hidden($name . '[' . $k . ']', $v, true);
+            }
+        }
+
+        return $form;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_input'))
-{
-	/**
-	 * Text Input Field. If 'type' is passed in the $type field, it will be
-	 * used as the input type, for making 'email', 'phone', etc input fields.
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 * @param string $type
-	 *
-	 * @return string
-	 */
-	function form_input($data = '', string $value = '', $extra = '', string $type = 'text'): string
-	{
-		$defaults = [
-			'type'  => $type,
-			'name'  => is_array($data) ? '' : $data,
-			'value' => $value,
-		];
+if (! function_exists('form_input')) {
 
-		return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
-	}
+    /**
+     * Text Input Field.
+     * If 'type' is passed in the $type field, it will be
+     * used as the input type, for making 'email', 'phone', etc input fields.
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     * @param string $type
+     *
+     * @return string
+     */
+    function form_input($data = '', string $value = '', $extra = '', string $type = 'text'): string
+    {
+        $defaults = [
+            'type' => $type,
+            'name' => is_array($data) ? '' : $data,
+            'value' => $value
+        ];
+
+        return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_password'))
-{
-	/**
-	 * Password Field
-	 *
-	 * Identical to the input function but adds the "password" type
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_password($data = '', string $value = '', $extra = ''): string
-	{
-		is_array($data) || $data = ['name' => $data];
-		$data['type']            = 'password';
+if (! function_exists('form_password')) {
 
-		return form_input($data, $value, $extra);
-	}
+    /**
+     * Password Field
+     *
+     * Identical to the input function but adds the "password" type
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_password($data = '', string $value = '', $extra = ''): string
+    {
+        is_array($data) || $data = [
+            'name' => $data
+        ];
+        $data['type'] = 'password';
+
+        return form_input($data, $value, $extra);
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_upload'))
-{
-	/**
-	 * Upload Field
-	 *
-	 * Identical to the input function but adds the "file" type
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_upload($data = '', string $value = '', $extra = ''): string
-	{
-		$defaults                = [
-			'type' => 'file',
-			'name' => '',
-		];
-		is_array($data) || $data = ['name' => $data];
-		$data['type']            = 'file';
+if (! function_exists('form_upload')) {
 
-		return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
-	}
+    /**
+     * Upload Field
+     *
+     * Identical to the input function but adds the "file" type
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_upload($data = '', string $value = '', $extra = ''): string
+    {
+        $defaults = [
+            'type' => 'file',
+            'name' => ''
+        ];
+        is_array($data) || $data = [
+            'name' => $data
+        ];
+        $data['type'] = 'file';
+
+        return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_textarea'))
-{
-	/**
-	 * Textarea field
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_textarea($data = '', string $value = '', $extra = ''): string
-	{
-		$defaults = [
-			'name' => is_array($data) ? '' : $data,
-			'cols' => '40',
-			'rows' => '10',
-		];
-		if (! is_array($data) || ! isset($data['value']))
-		{
-			$val = $value;
-		}
-		else
-		{
-			$val = $data['value'];
-			unset($data['value']); // textareas don't use the value attribute
-		}
+if (! function_exists('form_textarea')) {
 
-		return '<textarea ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . '>'
-				. htmlspecialchars($val)
-				. "</textarea>\n";
-	}
+    /**
+     * Textarea field
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_textarea($data = '', string $value = '', $extra = ''): string
+    {
+        $defaults = [
+            'name' => is_array($data) ? '' : $data,
+            'cols' => '40',
+            'rows' => '10'
+        ];
+        if (! is_array($data) || ! isset($data['value'])) {
+            $val = $value;
+        } else {
+            $val = $data['value'];
+            unset($data['value']); // textareas don't use the value attribute
+        }
+
+        return '<textarea ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . '>' . htmlspecialchars($val) . "</textarea>\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_multiselect'))
-{
-	/**
-	 * Multi-select menu
-	 *
-	 * @param string $name
-	 * @param array  $options
-	 * @param array  $selected
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_multiselect(string $name = '', array $options = [], array $selected = [], $extra = ''): string
-	{
-		$extra = stringify_attributes($extra);
+if (! function_exists('form_multiselect')) {
 
-		if (stripos($extra, 'multiple') === false)
-		{
-			$extra .= ' multiple="multiple"';
-		}
+    /**
+     * Multi-select menu
+     *
+     * @param string $name
+     * @param array $options
+     * @param array $selected
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_multiselect(string $name = '', array $options = [], array $selected = [], $extra = ''): string
+    {
+        $extra = stringify_attributes($extra);
 
-		return form_dropdown($name, $options, $selected, $extra);
-	}
+        if (stripos($extra, 'multiple') === false) {
+            $extra .= ' multiple="multiple"';
+        }
+
+        return form_dropdown($name, $options, $selected, $extra);
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_dropdown'))
-{
-	/**
-	 * Drop-down Menu
-	 *
-	 * @param mixed $data
-	 * @param mixed $options
-	 * @param mixed $selected
-	 * @param mixed $extra
-	 *
-	 * @return string
-	 */
-	function form_dropdown($data = '', $options = [], $selected = [], $extra = ''): string
-	{
-		$defaults = [];
-		if (is_array($data))
-		{
-			if (isset($data['selected']))
-			{
-				$selected = $data['selected'];
-				unset($data['selected']); // select tags don't have a selected attribute
-			}
-			if (isset($data['options']))
-			{
-				$options = $data['options'];
-				unset($data['options']); // select tags don't use an options attribute
-			}
-		}
-		else
-		{
-			$defaults = ['name' => $data];
-		}
+if (! function_exists('form_dropdown')) {
 
-		is_array($selected) || $selected = [$selected];
-		is_array($options) || $options   = [$options];
+    /**
+     * Drop-down Menu
+     *
+     * @param mixed $data
+     * @param mixed $options
+     * @param mixed $selected
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_dropdown($data = '', $options = [], $selected = [], $extra = ''): string
+    {
+        $defaults = [];
+        if (is_array($data)) {
+            if (isset($data['selected'])) {
+                $selected = $data['selected'];
+                unset($data['selected']); // select tags don't have a selected attribute
+            }
+            if (isset($data['options'])) {
+                $options = $data['options'];
+                unset($data['options']); // select tags don't use an options attribute
+            }
+        } else {
+            $defaults = [
+                'name' => $data
+            ];
+        }
 
-		// If no selected state was submitted we will attempt to set it automatically
-		if (empty($selected))
-		{
-			if (is_array($data))
-			{
-				if (isset($data['name'], $_POST[$data['name']]))
-				{
-					$selected = [$_POST[$data['name']]];
-				}
-			}
-			elseif (isset($_POST[$data]))
-			{
-				$selected = [$_POST[$data]];
-			}
-		}
+        is_array($selected) || $selected = [
+            $selected
+        ];
+        is_array($options) || $options = [
+            $options
+        ];
 
-		$extra    = stringify_attributes($extra);
-		$multiple = (count($selected) > 1 && stripos($extra, 'multiple') === false) ? ' multiple="multiple"' : '';
-		$form     = '<select ' . rtrim(parse_form_attributes($data, $defaults)) . $extra . $multiple . ">\n";
-		foreach ($options as $key => $val)
-		{
-			$key = (string) $key;
-			if (is_array($val))
-			{
-				if (empty($val))
-				{
-					continue;
-				}
-				$form .= '<optgroup label="' . $key . "\">\n";
-				foreach ($val as $optgroup_key => $optgroup_val)
-				{
-					$sel   = in_array($optgroup_key, $selected) ? ' selected="selected"' : '';
-					$form .= '<option value="' . htmlspecialchars($optgroup_key) . '"' . $sel . '>'
-							. $optgroup_val . "</option>\n";
-				}
-				$form .= "</optgroup>\n";
-			}
-			else
-			{
-				$form .= '<option value="' . htmlspecialchars($key) . '"'
-						. (in_array($key, $selected) ? ' selected="selected"' : '') . '>'
-						. $val . "</option>\n";
-			}
-		}
+        // If no selected state was submitted we will attempt to set it automatically
+        if (empty($selected)) {
+            if (is_array($data)) {
+                if (isset($data['name'], $_POST[$data['name']])) {
+                    $selected = [
+                        $_POST[$data['name']]
+                    ];
+                }
+            } elseif (isset($_POST[$data])) {
+                $selected = [
+                    $_POST[$data]
+                ];
+            }
+        }
 
-		return $form . "</select>\n";
-	}
+        $extra = stringify_attributes($extra);
+        $multiple = (count($selected) > 1 && stripos($extra, 'multiple') === false) ? ' multiple="multiple"' : '';
+        $form = '<select ' . rtrim(parse_form_attributes($data, $defaults)) . $extra . $multiple . ">\n";
+        foreach ($options as $key => $val) {
+            $key = (string) $key;
+            if (is_array($val)) {
+                if (empty($val)) {
+                    continue;
+                }
+                $form .= '<optgroup label="' . $key . "\">\n";
+                foreach ($val as $optgroup_key => $optgroup_val) {
+                    $sel = in_array($optgroup_key, $selected) ? ' selected="selected"' : '';
+                    $form .= '<option value="' . htmlspecialchars($optgroup_key) . '"' . $sel . '>' . $optgroup_val . "</option>\n";
+                }
+                $form .= "</optgroup>\n";
+            } else {
+                $form .= '<option value="' . htmlspecialchars($key) . '"' . (in_array($key, $selected) ? ' selected="selected"' : '') . '>' . $val . "</option>\n";
+            }
+        }
+
+        return $form . "</select>\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_checkbox'))
-{
-	/**
-	 * Checkbox Field
-	 *
-	 * @param mixed   $data
-	 * @param string  $value
-	 * @param boolean $checked
-	 * @param mixed   $extra
-	 *
-	 * @return string
-	 */
-	function form_checkbox($data = '', string $value = '', bool $checked = false, $extra = ''): string
-	{
-		$defaults = [
-			'type'  => 'checkbox',
-			'name'  => ( ! is_array($data) ? $data : ''),
-			'value' => $value,
-		];
+if (! function_exists('form_checkbox')) {
 
-		if (is_array($data) && array_key_exists('checked', $data))
-		{
-			$checked = $data['checked'];
-			if ($checked === false)
-			{
-				unset($data['checked']);
-			}
-			else
-			{
-				$data['checked'] = 'checked';
-			}
-		}
+    /**
+     * Checkbox Field
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param boolean $checked
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_checkbox($data = '', string $value = '', bool $checked = false, $extra = ''): string
+    {
+        $defaults = [
+            'type' => 'checkbox',
+            'name' => (! is_array($data) ? $data : ''),
+            'value' => $value
+        ];
 
-		if ($checked === true)
-		{
-			$defaults['checked'] = 'checked';
-		}
-		else
-		{
-			unset($defaults['checked']);
-		}
+        if (is_array($data) && array_key_exists('checked', $data)) {
+            $checked = $data['checked'];
+            if ($checked === false) {
+                unset($data['checked']);
+            } else {
+                $data['checked'] = 'checked';
+            }
+        }
 
-		return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
-	}
+        if ($checked === true) {
+            $defaults['checked'] = 'checked';
+        } else {
+            unset($defaults['checked']);
+        }
+
+        return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_radio'))
-{
-	/**
-	 * Radio Button
-	 *
-	 * @param mixed   $data
-	 * @param string  $value
-	 * @param boolean $checked
-	 * @param mixed   $extra
-	 *
-	 * @return string
-	 */
-	function form_radio($data = '', string $value = '', bool $checked = false, $extra = ''): string
-	{
-		is_array($data) || $data = ['name' => $data];
-		$data['type']            = 'radio';
+if (! function_exists('form_radio')) {
 
-		return form_checkbox($data, $value, $checked, $extra);
-	}
+    /**
+     * Radio Button
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param boolean $checked
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_radio($data = '', string $value = '', bool $checked = false, $extra = ''): string
+    {
+        is_array($data) || $data = [
+            'name' => $data
+        ];
+        $data['type'] = 'radio';
+
+        return form_checkbox($data, $value, $checked, $extra);
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_submit'))
-{
-	/**
-	 * Submit Button
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_submit($data = '', string $value = '', $extra = ''): string
-	{
-		$defaults = [
-			'type'  => 'submit',
-			'name'  => is_array($data) ? '' : $data,
-			'value' => $value,
-		];
+if (! function_exists('form_submit')) {
 
-		return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
-	}
+    /**
+     * Submit Button
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_submit($data = '', string $value = '', $extra = ''): string
+    {
+        $defaults = [
+            'type' => 'submit',
+            'name' => is_array($data) ? '' : $data,
+            'value' => $value
+        ];
+
+        return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_reset'))
-{
-	/**
-	 * Reset Button
-	 *
-	 * @param mixed  $data
-	 * @param string $value
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_reset($data = '', string $value = '', $extra = ''): string
-	{
-		$defaults = [
-			'type'  => 'reset',
-			'name'  => is_array($data) ? '' : $data,
-			'value' => $value,
-		];
+if (! function_exists('form_reset')) {
 
-		return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
-	}
+    /**
+     * Reset Button
+     *
+     * @param mixed $data
+     * @param string $value
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_reset($data = '', string $value = '', $extra = ''): string
+    {
+        $defaults = [
+            'type' => 'reset',
+            'name' => is_array($data) ? '' : $data,
+            'value' => $value
+        ];
+
+        return '<input ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . " />\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_button'))
-{
-	/**
-	 * Form Button
-	 *
-	 * @param mixed  $data
-	 * @param string $content
-	 * @param mixed  $extra
-	 *
-	 * @return string
-	 */
-	function form_button($data = '', string $content = '', $extra = ''): string
-	{
-		$defaults = [
-			'name' => is_array($data) ? '' : $data,
-			'type' => 'button',
-		];
+if (! function_exists('form_button')) {
 
-		if (is_array($data) && isset($data['content']))
-		{
-			$content = $data['content'];
-			unset($data['content']); // content is not an attribute
-		}
+    /**
+     * Form Button
+     *
+     * @param mixed $data
+     * @param string $content
+     * @param mixed $extra
+     *
+     * @return string
+     */
+    function form_button($data = '', string $content = '', $extra = ''): string
+    {
+        $defaults = [
+            'name' => is_array($data) ? '' : $data,
+            'type' => 'button'
+        ];
 
-		return '<button ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . '>'
-				. $content
-				. "</button>\n";
-	}
+        if (is_array($data) && isset($data['content'])) {
+            $content = $data['content'];
+            unset($data['content']); // content is not an attribute
+        }
+
+        return '<button ' . parse_form_attributes($data, $defaults) . stringify_attributes($extra) . '>' . $content . "</button>\n";
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_label'))
-{
-	/**
-	 * Form Label Tag
-	 *
-	 * @param string $label_text The text to appear onscreen
-	 * @param string $id         The id the label applies to
-	 * @param array  $attributes Additional attributes
-	 *
-	 * @return string
-	 */
-	function form_label(string $label_text = '', string $id = '', array $attributes = []): string
-	{
-		$label = '<label';
+if (! function_exists('form_label')) {
 
-		if ($id !== '')
-		{
-			$label .= ' for="' . $id . '"';
-		}
+    /**
+     * Form Label Tag
+     *
+     * @param string $label_text
+     *            The text to appear onscreen
+     * @param string $id
+     *            The id the label applies to
+     * @param array $attributes
+     *            Additional attributes
+     *            
+     * @return string
+     */
+    function form_label(string $label_text = '', string $id = '', array $attributes = []): string
+    {
+        $label = '<label';
 
-		if (is_array($attributes) && $attributes)
-		{
-			foreach ($attributes as $key => $val)
-			{
-				$label .= ' ' . $key . '="' . $val . '"';
-			}
-		}
+        if ($id !== '') {
+            $label .= ' for="' . $id . '"';
+        }
 
-		return $label . '>' . $label_text . '</label>';
-	}
+        if (is_array($attributes) && $attributes) {
+            foreach ($attributes as $key => $val) {
+                $label .= ' ' . $key . '="' . $val . '"';
+            }
+        }
+
+        return $label . '>' . $label_text . '</label>';
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_datalist'))
-{
-	/**
-	 * Datalist
-	 *
-	 * The <datalist> element specifies a list of pre-defined options for an <input> element.
-	 * Users will see a drop-down list of pre-defined options as they input data.
-	 * The list attribute of the <input> element, must refer to the id attribute of the <datalist> element.
-	 *
-	 * @param string $name
-	 * @param string $value
-	 * @param array  $options
-	 *
-	 * @return string
-	 */
-	function form_datalist(string $name, string $value, array $options): string
-	{
-		$data = [
-			'type'  => 'text',
-			'name'  => $name,
-			'list'  => $name . '_list',
-			'value' => $value,
-		];
+if (! function_exists('form_datalist')) {
 
-		$out  = form_input($data) . "\n";
-		$out .= "<datalist id='" . $name . '_list' . "'>";
+    /**
+     * Datalist
+     *
+     * The <datalist> element specifies a list of pre-defined options for an <input> element.
+     * Users will see a drop-down list of pre-defined options as they input data.
+     * The list attribute of the <input> element, must refer to the id attribute of the <datalist> element.
+     *
+     * @param string $name
+     * @param string $value
+     * @param array $options
+     *
+     * @return string
+     */
+    function form_datalist(string $name, string $value, array $options): string
+    {
+        $data = [
+            'type' => 'text',
+            'name' => $name,
+            'list' => $name . '_list',
+            'value' => $value
+        ];
 
-		foreach ($options as $option)
-		{
-			$out .= "<option value='$option'>" . "\n";
-		}
+        $out = form_input($data) . "\n";
+        $out .= "<datalist id='" . $name . '_list' . "'>";
 
-		return $out . ('</datalist>' . "\n");
-	}
+        foreach ($options as $option) {
+            $out .= "<option value='$option'>" . "\n";
+        }
+
+        return $out . ('</datalist>' . "\n");
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_fieldset'))
-{
-	/**
-	 * Fieldset Tag
-	 *
-	 * Used to produce <fieldset><legend>text</legend>.  To close fieldset
-	 * use form_fieldset_close()
-	 *
-	 * @param string $legend_text The legend text
-	 * @param array  $attributes  Additional attributes
-	 *
-	 * @return string
-	 */
-	function form_fieldset(string $legend_text = '', array $attributes = []): string
-	{
-		$fieldset = '<fieldset' . stringify_attributes($attributes) . ">\n";
+if (! function_exists('form_fieldset')) {
 
-		if ($legend_text !== '')
-		{
-			return $fieldset . '<legend>' . $legend_text . "</legend>\n";
-		}
+    /**
+     * Fieldset Tag
+     *
+     * Used to produce <fieldset><legend>text</legend>. To close fieldset
+     * use form_fieldset_close()
+     *
+     * @param string $legend_text
+     *            The legend text
+     * @param array $attributes
+     *            Additional attributes
+     *            
+     * @return string
+     */
+    function form_fieldset(string $legend_text = '', array $attributes = []): string
+    {
+        $fieldset = '<fieldset' . stringify_attributes($attributes) . ">\n";
 
-		return $fieldset;
-	}
+        if ($legend_text !== '') {
+            return $fieldset . '<legend>' . $legend_text . "</legend>\n";
+        }
+
+        return $fieldset;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_fieldset_close'))
-{
-	/**
-	 * Fieldset Close Tag
-	 *
-	 * @param string $extra
-	 *
-	 * @return string
-	 */
-	function form_fieldset_close(string $extra = ''): string
-	{
-		return '</fieldset>' . $extra;
-	}
+if (! function_exists('form_fieldset_close')) {
+
+    /**
+     * Fieldset Close Tag
+     *
+     * @param string $extra
+     *
+     * @return string
+     */
+    function form_fieldset_close(string $extra = ''): string
+    {
+        return '</fieldset>' . $extra;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('form_close'))
-{
-	/**
-	 * Form Close Tag
-	 *
-	 * @param string $extra
-	 *
-	 * @return string
-	 */
-	function form_close(string $extra = ''): string
-	{
-		return '</form>' . $extra;
-	}
+if (! function_exists('form_close')) {
+
+    /**
+     * Form Close Tag
+     *
+     * @param string $extra
+     *
+     * @return string
+     */
+    function form_close(string $extra = ''): string
+    {
+        return '</form>' . $extra;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('set_value'))
-{
-	/**
-	 * Form Value
-	 *
-	 * Grabs a value from the POST array for the specified field so you can
-	 * re-populate an input field or textarea
-	 *
-	 * @param string  $field       Field name
-	 * @param string  $default     Default value
-	 * @param boolean $html_escape Whether to escape HTML special characters or not
-	 *
-	 * @return string
-	 */
-	function set_value(string $field, string $default = '', bool $html_escape = true): string
-	{
-		$request = Services::request();
+if (! function_exists('set_value')) {
 
-		// Try any old input data we may have first
-		$value = $request->getOldInput($field);
+    /**
+     * Form Value
+     *
+     * Grabs a value from the POST array for the specified field so you can
+     * re-populate an input field or textarea
+     *
+     * @param string $field
+     *            Field name
+     * @param string $default
+     *            Default value
+     * @param boolean $html_escape
+     *            Whether to escape HTML special characters or not
+     *            
+     * @return string
+     */
+    function set_value(string $field, string $default = '', bool $html_escape = true): string
+    {
+        $request = Services::request();
 
-		if ($value === null)
-		{
-			$value = $request->getPost($field) ?? $default;
-		}
+        // Try any old input data we may have first
+        $value = $request->getOldInput($field);
 
-		return ($html_escape) ? esc($value) : $value;
-	}
+        if ($value === null) {
+            $value = $request->getPost($field) ?? $default;
+        }
+
+        return ($html_escape) ? esc($value) : $value;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('set_select'))
-{
-	/**
-	 * Set Select
-	 *
-	 * Let's you set the selected value of a <select> menu via data in the POST array.
-	 * If Form Validation is active it retrieves the info from the validation class
-	 *
-	 * @param string  $field
-	 * @param string  $value
-	 * @param boolean $default
-	 *
-	 * @return string
-	 */
-	function set_select(string $field, string $value = '', bool $default = false): string
-	{
-		$request = Services::request();
+if (! function_exists('set_select')) {
 
-		// Try any old input data we may have first
-		$input = $request->getOldInput($field);
+    /**
+     * Set Select
+     *
+     * Let's you set the selected value of a <select> menu via data in the POST array.
+     * If Form Validation is active it retrieves the info from the validation class
+     *
+     * @param string $field
+     * @param string $value
+     * @param boolean $default
+     *
+     * @return string
+     */
+    function set_select(string $field, string $value = '', bool $default = false): string
+    {
+        $request = Services::request();
 
-		if ($input === null)
-		{
-			$input = $request->getPost($field);
-		}
+        // Try any old input data we may have first
+        $input = $request->getOldInput($field);
 
-		if ($input === null)
-		{
-			return ($default === true) ? ' selected="selected"' : '';
-		}
+        if ($input === null) {
+            $input = $request->getPost($field);
+        }
 
-		if (is_array($input))
-		{
-			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($input as &$v)
-			{
-				if ($value === $v)
-				{
-					return ' selected="selected"';
-				}
-			}
+        if ($input === null) {
+            return ($default === true) ? ' selected="selected"' : '';
+        }
 
-			return '';
-		}
+        if (is_array($input)) {
+            // Note: in_array('', array(0)) returns TRUE, do not use it
+            foreach ($input as &$v) {
+                if ($value === $v) {
+                    return ' selected="selected"';
+                }
+            }
 
-		return ($input === $value) ? ' selected="selected"' : '';
-	}
+            return '';
+        }
+
+        return ($input === $value) ? ' selected="selected"' : '';
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('set_checkbox'))
-{
-	/**
-	 * Set Checkbox
-	 *
-	 * Let's you set the selected value of a checkbox via the value in the POST array.
-	 * If Form Validation is active it retrieves the info from the validation class
-	 *
-	 * @param string  $field
-	 * @param string  $value
-	 * @param boolean $default
-	 *
-	 * @return string
-	 */
-	function set_checkbox(string $field, string $value = '', bool $default = false): string
-	{
-		$request = Services::request();
+if (! function_exists('set_checkbox')) {
 
-		// Try any old input data we may have first
-		$input = $request->getOldInput($field);
+    /**
+     * Set Checkbox
+     *
+     * Let's you set the selected value of a checkbox via the value in the POST array.
+     * If Form Validation is active it retrieves the info from the validation class
+     *
+     * @param string $field
+     * @param string $value
+     * @param boolean $default
+     *
+     * @return string
+     */
+    function set_checkbox(string $field, string $value = '', bool $default = false): string
+    {
+        $request = Services::request();
 
-		if ($input === null)
-		{
-			$input = $request->getPost($field);
-		}
+        // Try any old input data we may have first
+        $input = $request->getOldInput($field);
 
-		if (is_array($input))
-		{
-			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($input as &$v)
-			{
-				if ($value === $v)
-				{
-					return ' checked="checked"';
-				}
-			}
+        if ($input === null) {
+            $input = $request->getPost($field);
+        }
 
-			return '';
-		}
+        if (is_array($input)) {
+            // Note: in_array('', array(0)) returns TRUE, do not use it
+            foreach ($input as &$v) {
+                if ($value === $v) {
+                    return ' checked="checked"';
+                }
+            }
 
-		// Unchecked checkbox and radio inputs are not even submitted by browsers ...
-		if (intval($input) === 0 || ! empty($request->getPost()) || ! empty(old($field)))
-		{
-			return ($input === $value) ? ' checked="checked"' : '';
-		}
+            return '';
+        }
 
-		return ($default === true) ? ' checked="checked"' : '';
-	}
+        // Unchecked checkbox and radio inputs are not even submitted by browsers ...
+        if (intval($input) === 0 || ! empty($request->getPost()) || ! empty(old($field))) {
+            return ($input === $value) ? ' checked="checked"' : '';
+        }
+
+        return ($default === true) ? ' checked="checked"' : '';
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('set_radio'))
-{
-	/**
-	 * Set Radio
-	 *
-	 * Let's you set the selected value of a radio field via info in the POST array.
-	 * If Form Validation is active it retrieves the info from the validation class
-	 *
-	 * @param string  $field
-	 * @param string  $value
-	 * @param boolean $default
-	 *
-	 * @return string
-	 */
-	function set_radio(string $field, string $value = '', bool $default = false): string
-	{
-		$request = Services::request();
+if (! function_exists('set_radio')) {
 
-		// Try any old input data we may have first
-		$input = $request->getOldInput($field);
-		if ($input === null)
-		{
-			$input = $request->getPost($field) ?? $default;
-		}
+    /**
+     * Set Radio
+     *
+     * Let's you set the selected value of a radio field via info in the POST array.
+     * If Form Validation is active it retrieves the info from the validation class
+     *
+     * @param string $field
+     * @param string $value
+     * @param boolean $default
+     *
+     * @return string
+     */
+    function set_radio(string $field, string $value = '', bool $default = false): string
+    {
+        $request = Services::request();
 
-		if (is_array($input))
-		{
-			// Note: in_array('', array(0)) returns TRUE, do not use it
-			foreach ($input as &$v)
-			{
-				if ($value === $v)
-				{
-					return ' checked="checked"';
-				}
-			}
+        // Try any old input data we may have first
+        $input = $request->getOldInput($field);
+        if ($input === null) {
+            $input = $request->getPost($field) ?? $default;
+        }
 
-			return '';
-		}
+        if (is_array($input)) {
+            // Note: in_array('', array(0)) returns TRUE, do not use it
+            foreach ($input as &$v) {
+                if ($value === $v) {
+                    return ' checked="checked"';
+                }
+            }
 
-		// Unchecked checkbox and radio inputs are not even submitted by browsers ...
-		$result = '';
-		if (intval($input) === 0 || ! empty($input = $request->getPost($field)) || ! empty($input = old($field)))
-		{
-			$result = ($input === $value) ? ' checked="checked"' : '';
-		}
+            return '';
+        }
 
-		if (empty($result))
-		{
-			$result = ($default === true) ? ' checked="checked"' : '';
-		}
-		return $result;
-	}
+        // Unchecked checkbox and radio inputs are not even submitted by browsers ...
+        $result = '';
+        if (intval($input) === 0 || ! empty($input = $request->getPost($field)) || ! empty($input = old($field))) {
+            $result = ($input === $value) ? ' checked="checked"' : '';
+        }
+
+        if (empty($result)) {
+            $result = ($default === true) ? ' checked="checked"' : '';
+        }
+        return $result;
+    }
 }
 
-//--------------------------------------------------------------------
+// --------------------------------------------------------------------
 
-if (! function_exists('parse_form_attributes'))
-{
-	/**
-	 * Parse the form attributes
-	 *
-	 * Helper function used by some of the form helpers
-	 *
-	 * @param string|array $attributes List of attributes
-	 * @param array        $default    Default values
-	 *
-	 * @return string
-	 */
-	function parse_form_attributes($attributes, array $default): string
-	{
-		if (is_array($attributes))
-		{
-			foreach ($default as $key => $val)
-			{
-				if (isset($attributes[$key]))
-				{
-					$default[$key] = $attributes[$key];
-					unset($attributes[$key]);
-				}
-			}
-			if (! empty($attributes))
-			{
-				$default = array_merge($default, $attributes);
-			}
-		}
+if (! function_exists('parse_form_attributes')) {
 
-		$att = '';
+    /**
+     * Parse the form attributes
+     *
+     * Helper function used by some of the form helpers
+     *
+     * @param string|array $attributes
+     *            List of attributes
+     * @param array $default
+     *            Default values
+     *            
+     * @return string
+     */
+    function parse_form_attributes($attributes, array $default): string
+    {
+        if (is_array($attributes)) {
+            foreach ($default as $key => $val) {
+                if (isset($attributes[$key])) {
+                    $default[$key] = $attributes[$key];
+                    unset($attributes[$key]);
+                }
+            }
+            if (! empty($attributes)) {
+                $default = array_merge($default, $attributes);
+            }
+        }
 
-		foreach ($default as $key => $val)
-		{
-			if (! is_bool($val))
-			{
-				if ($key === 'value')
-				{
-					$val = esc($val);
-				}
-				elseif ($key === 'name' && ! strlen($default['name']))
-				{
-					continue;
-				}
-				$att .= $key . '="' . $val . '" ';
-			}
-			else
-			{
-				$att .= $key . ' ';
-			}
-		}
+        $att = '';
 
-		return $att;
-	}
+        foreach ($default as $key => $val) {
+            if (! is_bool($val)) {
+                if ($key === 'value') {
+                    $val = esc($val);
+                } elseif ($key === 'name' && ! strlen($default['name'])) {
+                    continue;
+                }
+                $att .= $key . '="' . $val . '" ';
+            } else {
+                $att .= $key . ' ';
+            }
+        }
 
-	//--------------------------------------------------------------------
+        return $att;
+    }
+
+    // --------------------------------------------------------------------
 }

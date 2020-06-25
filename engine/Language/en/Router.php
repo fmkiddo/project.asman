@@ -13,8 +13,7 @@
  *
  * @codeCoverageIgnore
  */
-
 return [
-   'invalidParameter'    => 'A parameter does not match the expected type.',
-   'missingDefaultRoute' => 'Unable to determine what should be displayed. A default route has not been specified in the routing file.',
+    'invalidParameter' => 'A parameter does not match the expected type.',
+    'missingDefaultRoute' => 'Unable to determine what should be displayed. A default route has not been specified in the routing file.'
 ];

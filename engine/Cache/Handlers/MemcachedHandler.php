@@ -35,7 +35,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Cache\Handlers;
 
 use CodeIgniter\Cache\CacheInterface;
@@ -47,343 +46,317 @@ use CodeIgniter\Exceptions\CriticalError;
 class MemcachedHandler implements CacheInterface
 {
 
-	/**
-	 * Prefixed to all cache names.
-	 *
-	 * @var string
-	 */
-	protected $prefix;
+    /**
+     * Prefixed to all cache names.
+     *
+     * @var string
+     */
+    protected $prefix;
 
-	/**
-	 * The memcached object
-	 *
-	 * @var \Memcached|\Memcache
-	 */
-	protected $memcached;
+    /**
+     * The memcached object
+     *
+     * @var \Memcached|\Memcache
+     */
+    protected $memcached;
 
-	/**
-	 * Memcached Configuration
-	 *
-	 * @var array
-	 */
-	protected $config = [
-		'host'   => '127.0.0.1',
-		'port'   => 11211,
-		'weight' => 1,
-		'raw'    => false,
-	];
+    /**
+     * Memcached Configuration
+     *
+     * @var array
+     */
+    protected $config = [
+        'host' => '127.0.0.1',
+        'port' => 11211,
+        'weight' => 1,
+        'raw' => false
+    ];
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Constructor.
-	 *
-	 * @param  type $config
-	 * @throws type
-	 */
-	public function __construct($config)
-	{
-		$config       = (array)$config;
-		$this->prefix = $config['prefix'] ?? '';
+    /**
+     * Constructor.
+     *
+     * @param type $config
+     * @throws type
+     */
+    public function __construct($config)
+    {
+        $config = (array) $config;
+        $this->prefix = $config['prefix'] ?? '';
 
-		if (! empty($config))
-		{
-			$this->config = array_merge($this->config, $config['memcached']);
-		}
-	}
+        if (! empty($config)) {
+            $this->config = array_merge($this->config, $config['memcached']);
+        }
+    }
 
-	/**
-	 * Class destructor
-	 *
-	 * Closes the connection to Memcache(d) if present.
-	 */
-	public function __destruct()
-	{
-		if ($this->memcached instanceof \Memcached)
-		{
-			$this->memcached->quit();
-		}
-		elseif ($this->memcached instanceof \Memcache)
-		{
-			$this->memcached->close();
-		}
-	}
+    /**
+     * Class destructor
+     *
+     * Closes the connection to Memcache(d) if present.
+     */
+    public function __destruct()
+    {
+        if ($this->memcached instanceof \Memcached) {
+            $this->memcached->quit();
+        } elseif ($this->memcached instanceof \Memcache) {
+            $this->memcached->close();
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Takes care of any handler-specific setup that must be done.
-	 */
-	public function initialize()
-	{
-		// Try to connect to Memcache or Memcached, if an issue occurs throw a CriticalError exception,
-		// so that the CacheFactory can attempt to initiate the next cache handler.
-		try
-		{
-			if (class_exists('\Memcached'))
-			{
-				// Create new instance of \Memcached
-				$this->memcached = new \Memcached();
-				if ($this->config['raw'])
-				{
-					$this->memcached->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
-				}
+    /**
+     * Takes care of any handler-specific setup that must be done.
+     */
+    public function initialize()
+    {
+        // Try to connect to Memcache or Memcached, if an issue occurs throw a CriticalError exception,
+        // so that the CacheFactory can attempt to initiate the next cache handler.
+        try {
+            if (class_exists('\Memcached')) {
+                // Create new instance of \Memcached
+                $this->memcached = new \Memcached();
+                if ($this->config['raw']) {
+                    $this->memcached->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
+                }
 
-				// Add server
-				$this->memcached->addServer(
-					$this->config['host'], $this->config['port'], $this->config['weight']
-				);
+                // Add server
+                $this->memcached->addServer($this->config['host'], $this->config['port'], $this->config['weight']);
 
-				// attempt to get status of servers
-				$stats = $this->memcached->getStats();
+                // attempt to get status of servers
+                $stats = $this->memcached->getStats();
 
-				// $stats should be an associate array with a key in the format of host:port.
-				// If it doesn't have the key, we know the server is not working as expected.
-				if (! isset($stats[$this->config['host'] . ':' . $this->config['port']]))
-				{
-					throw new CriticalError('Cache: Memcached connection failed.');
-				}
-			}
-			elseif (class_exists('\Memcache'))
-			{
-				// Create new instance of \Memcache
-				$this->memcached = new \Memcache();
+                // $stats should be an associate array with a key in the format of host:port.
+                // If it doesn't have the key, we know the server is not working as expected.
+                if (! isset($stats[$this->config['host'] . ':' . $this->config['port']])) {
+                    throw new CriticalError('Cache: Memcached connection failed.');
+                }
+            } elseif (class_exists('\Memcache')) {
+                // Create new instance of \Memcache
+                $this->memcached = new \Memcache();
 
-				// Check if we can connect to the server
-				$can_connect = $this->memcached->connect(
-					$this->config['host'], $this->config['port']
-				);
+                // Check if we can connect to the server
+                $can_connect = $this->memcached->connect($this->config['host'], $this->config['port']);
 
-				// If we can't connect, throw a CriticalError exception
-				if ($can_connect === false)
-				{
-					throw new CriticalError('Cache: Memcache connection failed.');
-				}
+                // If we can't connect, throw a CriticalError exception
+                if ($can_connect === false) {
+                    throw new CriticalError('Cache: Memcache connection failed.');
+                }
 
-				// Add server, third parameter is persistence and defaults to TRUE.
-				$this->memcached->addServer(
-					$this->config['host'], $this->config['port'], true, $this->config['weight']
-				);
-			}
-			else
-			{
-				throw new CriticalError('Cache: Not support Memcache(d) extension.');
-			}
-		}
-		catch (CriticalError $e)
-		{
-			// If a CriticalError exception occurs, throw it up.
-			throw $e;
-		}
-		catch (\Exception $e)
-		{
-			// If an \Exception occurs, convert it into a CriticalError exception and throw it.
-			throw new CriticalError('Cache: Memcache(d) connection refused (' . $e->getMessage() . ').');
-		}
-	}
+                // Add server, third parameter is persistence and defaults to TRUE.
+                $this->memcached->addServer($this->config['host'], $this->config['port'], true, $this->config['weight']);
+            } else {
+                throw new CriticalError('Cache: Not support Memcache(d) extension.');
+            }
+        } catch (CriticalError $e) {
+            // If a CriticalError exception occurs, throw it up.
+            throw $e;
+        } catch (\Exception $e) {
+            // If an \Exception occurs, convert it into a CriticalError exception and throw it.
+            throw new CriticalError('Cache: Memcache(d) connection refused (' . $e->getMessage() . ').');
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Attempts to fetch an item from the cache store.
-	 *
-	 * @param string $key Cache item name
-	 *
-	 * @return mixed
-	 */
-	public function get(string $key)
-	{
-		$key = $this->prefix . $key;
+    /**
+     * Attempts to fetch an item from the cache store.
+     *
+     * @param string $key
+     *            Cache item name
+     *            
+     * @return mixed
+     */
+    public function get(string $key)
+    {
+        $key = $this->prefix . $key;
 
-		if ($this->memcached instanceof \Memcached)
-		{
-			$data = $this->memcached->get($key);
+        if ($this->memcached instanceof \Memcached) {
+            $data = $this->memcached->get($key);
 
-			// check for unmatched key
-			if ($this->memcached->getResultCode() === \Memcached::RES_NOTFOUND)
-			{
-				return null;
-			}
-		}
-		elseif ($this->memcached instanceof \Memcache)
-		{
-			$flags = false;
-			$data  = $this->memcached->get($key, $flags);
+            // check for unmatched key
+            if ($this->memcached->getResultCode() === \Memcached::RES_NOTFOUND) {
+                return null;
+            }
+        } elseif ($this->memcached instanceof \Memcache) {
+            $flags = false;
+            $data = $this->memcached->get($key, $flags);
 
-			// check for unmatched key (i.e. $flags is untouched)
-			if ($flags === false)
-			{
-				return null;
-			}
-		}
+            // check for unmatched key (i.e. $flags is untouched)
+            if ($flags === false) {
+                return null;
+            }
+        }
 
-		return is_array($data) ? $data[0] : $data;
-	}
+        return is_array($data) ? $data[0] : $data;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Saves an item to the cache store.
-	 *
-	 * @param string  $key   Cache item name
-	 * @param mixed   $value The data to save
-	 * @param integer $ttl   Time To Live, in seconds (default 60)
-	 *
-	 * @return mixed
-	 */
-	public function save(string $key, $value, int $ttl = 60)
-	{
-		$key = $this->prefix . $key;
+    /**
+     * Saves an item to the cache store.
+     *
+     * @param string $key
+     *            Cache item name
+     * @param mixed $value
+     *            The data to save
+     * @param integer $ttl
+     *            Time To Live, in seconds (default 60)
+     *            
+     * @return mixed
+     */
+    public function save(string $key, $value, int $ttl = 60)
+    {
+        $key = $this->prefix . $key;
 
-		if (! $this->config['raw'])
-		{
-			$value = [
-				$value,
-				time(),
-				$ttl,
-			];
-		}
+        if (! $this->config['raw']) {
+            $value = [
+                $value,
+                time(),
+                $ttl
+            ];
+        }
 
-		if ($this->memcached instanceof \Memcached)
-		{
-			return $this->memcached->set($key, $value, $ttl);
-		}
-		elseif ($this->memcached instanceof \Memcache)
-		{
-			return $this->memcached->set($key, $value, 0, $ttl);
-		}
+        if ($this->memcached instanceof \Memcached) {
+            return $this->memcached->set($key, $value, $ttl);
+        } elseif ($this->memcached instanceof \Memcache) {
+            return $this->memcached->set($key, $value, 0, $ttl);
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Deletes a specific item from the cache store.
-	 *
-	 * @param string $key Cache item name
-	 *
-	 * @return mixed
-	 */
-	public function delete(string $key)
-	{
-		$key = $this->prefix . $key;
+    /**
+     * Deletes a specific item from the cache store.
+     *
+     * @param string $key
+     *            Cache item name
+     *            
+     * @return mixed
+     */
+    public function delete(string $key)
+    {
+        $key = $this->prefix . $key;
 
-		return $this->memcached->delete($key);
-	}
+        return $this->memcached->delete($key);
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Performs atomic incrementation of a raw stored value.
-	 *
-	 * @param string  $key    Cache ID
-	 * @param integer $offset Step/value to increase by
-	 *
-	 * @return mixed
-	 */
-	public function increment(string $key, int $offset = 1)
-	{
-		if (! $this->config['raw'])
-		{
-			return false;
-		}
+    /**
+     * Performs atomic incrementation of a raw stored value.
+     *
+     * @param string $key
+     *            Cache ID
+     * @param integer $offset
+     *            Step/value to increase by
+     *            
+     * @return mixed
+     */
+    public function increment(string $key, int $offset = 1)
+    {
+        if (! $this->config['raw']) {
+            return false;
+        }
 
-		$key = $this->prefix . $key;
+        $key = $this->prefix . $key;
 
-		return $this->memcached->increment($key, $offset, $offset, 60);
-	}
+        return $this->memcached->increment($key, $offset, $offset, 60);
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Performs atomic decrementation of a raw stored value.
-	 *
-	 * @param string  $key    Cache ID
-	 * @param integer $offset Step/value to increase by
-	 *
-	 * @return mixed
-	 */
-	public function decrement(string $key, int $offset = 1)
-	{
-		if (! $this->config['raw'])
-		{
-			return false;
-		}
+    /**
+     * Performs atomic decrementation of a raw stored value.
+     *
+     * @param string $key
+     *            Cache ID
+     * @param integer $offset
+     *            Step/value to increase by
+     *            
+     * @return mixed
+     */
+    public function decrement(string $key, int $offset = 1)
+    {
+        if (! $this->config['raw']) {
+            return false;
+        }
 
-		$key = $this->prefix . $key;
+        $key = $this->prefix . $key;
 
-		//FIXME: third parameter isn't other handler actions.
-		return $this->memcached->decrement($key, $offset, $offset, 60);
-	}
+        // FIXME: third parameter isn't other handler actions.
+        return $this->memcached->decrement($key, $offset, $offset, 60);
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Will delete all items in the entire cache.
-	 *
-	 * @return mixed
-	 */
-	public function clean()
-	{
-		return $this->memcached->flush();
-	}
+    /**
+     * Will delete all items in the entire cache.
+     *
+     * @return mixed
+     */
+    public function clean()
+    {
+        return $this->memcached->flush();
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns information on the entire cache.
-	 *
-	 * The information returned and the structure of the data
-	 * varies depending on the handler.
-	 *
-	 * @return mixed
-	 */
-	public function getCacheInfo()
-	{
-		return $this->memcached->getStats();
-	}
+    /**
+     * Returns information on the entire cache.
+     *
+     * The information returned and the structure of the data
+     * varies depending on the handler.
+     *
+     * @return mixed
+     */
+    public function getCacheInfo()
+    {
+        return $this->memcached->getStats();
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns detailed information about the specific item in the cache.
-	 *
-	 * @param string $key Cache item name.
-	 *
-	 * @return mixed
-	 */
-	public function getMetaData(string $key)
-	{
-		$key = $this->prefix . $key;
+    /**
+     * Returns detailed information about the specific item in the cache.
+     *
+     * @param string $key
+     *            Cache item name.
+     *            
+     * @return mixed
+     */
+    public function getMetaData(string $key)
+    {
+        $key = $this->prefix . $key;
 
-		$stored = $this->memcached->get($key);
+        $stored = $this->memcached->get($key);
 
-		// if not an array, don't try to count for PHP7.2
-		if (! is_array($stored) || count($stored) !== 3)
-		{
-			return false;
-		}
+        // if not an array, don't try to count for PHP7.2
+        if (! is_array($stored) || count($stored) !== 3) {
+            return false;
+        }
 
-		list($data, $time, $ttl) = $stored;
+        list ($data, $time, $ttl) = $stored;
 
-		return [
-			'expire' => $time + $ttl,
-			'mtime'  => $time,
-			'data'   => $data,
-		];
-	}
+        return [
+            'expire' => $time + $ttl,
+            'mtime' => $time,
+            'data' => $data
+        ];
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Determines if the driver is supported on this system.
-	 *
-	 * @return boolean
-	 */
-	public function isSupported(): bool
-	{
-		return (extension_loaded('memcached') || extension_loaded('memcache'));
-	}
-
+    /**
+     * Determines if the driver is supported on this system.
+     *
+     * @return boolean
+     */
+    public function isSupported(): bool
+    {
+        return (extension_loaded('memcached') || extension_loaded('memcache'));
+    }
 }

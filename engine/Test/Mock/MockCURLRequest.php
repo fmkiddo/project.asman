@@ -1,4 +1,6 @@
-<?php namespace CodeIgniter\Test\Mock;
+<?php
+
+namespace CodeIgniter\Test\Mock;
 
 use CodeIgniter\HTTP\CURLRequest;
 
@@ -12,39 +14,37 @@ use CodeIgniter\HTTP\CURLRequest;
 class MockCURLRequest extends CURLRequest
 {
 
-	public $curl_options;
-	protected $output = '';
+    public $curl_options;
 
-	//--------------------------------------------------------------------
+    protected $output = '';
 
-	public function setOutput($output)
-	{
-		$this->output = $output;
+    // --------------------------------------------------------------------
+    public function setOutput($output)
+    {
+        $this->output = $output;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    protected function sendRequest(array $curl_options = []): string
+    {
+        // Save so we can access later.
+        $this->curl_options = $curl_options;
 
-	protected function sendRequest(array $curl_options = []): string
-	{
-		// Save so we can access later.
-		$this->curl_options = $curl_options;
+        return $this->output;
+    }
 
-		return $this->output;
-	}
+    // --------------------------------------------------------------------
+    // for testing purposes only
+    public function getBaseURI()
+    {
+        return $this->baseURI;
+    }
 
-	//--------------------------------------------------------------------
-	// for testing purposes only
-	public function getBaseURI()
-	{
-		return $this->baseURI;
-	}
-
-	// for testing purposes only
-	public function getDelay()
-	{
-		return $this->delay;
-	}
-
+    // for testing purposes only
+    public function getDelay()
+    {
+        return $this->delay;
+    }
 }

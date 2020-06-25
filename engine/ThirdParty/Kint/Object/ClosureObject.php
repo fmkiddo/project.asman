@@ -22,26 +22,30 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 class ClosureObject extends InstanceObject
 {
+
     public $parameters = array();
-    public $hints = array('object', 'callable', 'closure');
+
+    public $hints = array(
+        'object',
+        'callable',
+        'closure'
+    );
 
     private $paramcache;
 
     public function getAccessPath()
     {
         if (null !== $this->access_path) {
-            return parent::getAccessPath().'('.$this->getParams().')';
+            return parent::getAccessPath() . '(' . $this->getParams() . ')';
         }
     }
 
     public function getSize()
-    {
-    }
+    {}
 
     public function getParams()
     {
@@ -57,9 +61,9 @@ class ClosureObject extends InstanceObject
             $ref = $p->reference ? '&' : '';
 
             if ($type) {
-                $out[] = $type.' '.$ref.$p->getName();
+                $out[] = $type . ' ' . $ref . $p->getName();
             } else {
-                $out[] = $ref.$p->getName();
+                $out[] = $ref . $p->getName();
             }
         }
 

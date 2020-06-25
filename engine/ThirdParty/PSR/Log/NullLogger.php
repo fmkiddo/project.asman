@@ -1,5 +1,4 @@
 <?php
-
 namespace Psr\Log;
 
 /**
@@ -12,6 +11,7 @@ namespace Psr\Log;
  */
 class NullLogger extends AbstractLogger
 {
+
     /**
      * Logs with an arbitrary level.
      *

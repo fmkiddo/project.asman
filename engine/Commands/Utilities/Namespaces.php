@@ -36,7 +36,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Commands\Utilities;
 
 use CodeIgniter\CLI\BaseCommand;
@@ -45,7 +44,8 @@ use Config\Autoload;
 
 /**
  * Lists namespaces set in Config\Autoload with their
- * full server path. Helps you to verify that you have
+ * full server path.
+ * Helps you to verify that you have
  * the namespaces setup correctly.
  *
  * @package CodeIgniter\Commands
@@ -53,79 +53,77 @@ use Config\Autoload;
 class Namespaces extends BaseCommand
 {
 
-	/**
-	 * The group the command is lumped under
-	 * when listing commands.
-	 *
-	 * @var string
-	 */
-	protected $group = 'CodeIgniter';
+    /**
+     * The group the command is lumped under
+     * when listing commands.
+     *
+     * @var string
+     */
+    protected $group = 'CodeIgniter';
 
-	/**
-	 * The Command's name
-	 *
-	 * @var string
-	 */
-	protected $name = 'namespaces';
+    /**
+     * The Command's name
+     *
+     * @var string
+     */
+    protected $name = 'namespaces';
 
-	/**
-	 * the Command's short description
-	 *
-	 * @var string
-	 */
-	protected $description = 'Verifies your namespaces are setup correctly.';
+    /**
+     * the Command's short description
+     *
+     * @var string
+     */
+    protected $description = 'Verifies your namespaces are setup correctly.';
 
-	/**
-	 * the Command's usage
-	 *
-	 * @var string
-	 */
-	protected $usage = 'namespaces';
+    /**
+     * the Command's usage
+     *
+     * @var string
+     */
+    protected $usage = 'namespaces';
 
-	/**
-	 * the Command's Arguments
-	 *
-	 * @var array
-	 */
-	protected $arguments = [];
+    /**
+     * the Command's Arguments
+     *
+     * @var array
+     */
+    protected $arguments = [];
 
-	/**
-	 * the Command's Options
-	 *
-	 * @var array
-	 */
-	protected $options = [];
+    /**
+     * the Command's Options
+     *
+     * @var array
+     */
+    protected $options = [];
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Displays the help for the spark cli script itself.
-	 *
-	 * @param array $params
-	 */
-	public function run(array $params)
-	{
-		$config = new Autoload();
+    /**
+     * Displays the help for the spark cli script itself.
+     *
+     * @param array $params
+     */
+    public function run(array $params)
+    {
+        $config = new Autoload();
 
-		$tbody = [];
-		foreach ($config->psr4 as $ns => $path)
-		{
-			$path = realpath($path) ?? $path;
+        $tbody = [];
+        foreach ($config->psr4 as $ns => $path) {
+            $path = realpath($path) ?? $path;
 
-			$tbody[] = [
-				$ns,
-				realpath($path) ?? $path,
-				is_dir($path) ? 'Yes' : 'MISSING',
-			];
-		}
+            $tbody[] = [
+                $ns,
+                realpath($path) ?? $path,
+                is_dir($path) ? 'Yes' : 'MISSING'
+            ];
+        }
 
-		$thead = [
-			'Namespace',
-			'Path',
-			'Found?',
-		];
+        $thead = [
+            'Namespace',
+            'Path',
+            'Found?'
+        ];
 
-		CLI::table($tbody, $thead);
-	}
-
+        CLI::table($tbody, $thead);
+    }
 }

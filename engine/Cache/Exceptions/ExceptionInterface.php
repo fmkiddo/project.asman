@@ -1,4 +1,6 @@
-<?php namespace CodeIgniter\Cache\Exceptions;
+<?php
+
+namespace CodeIgniter\Cache\Exceptions;
 
 /**
  * Provides a domain-level interface for broad capture
@@ -6,7 +8,6 @@
  *
  * catch (\CodeIgniter\Cache\Exceptions\ExceptionInterface) { ... }
  */
-
 interface ExceptionInterface
 {
 }

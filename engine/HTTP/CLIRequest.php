@@ -35,7 +35,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\HTTP;
 
 use Config\App;
@@ -58,197 +57,190 @@ use Config\App;
 class CLIRequest extends Request
 {
 
-	/**
-	 * Stores the segments of our cli "URI" command.
-	 *
-	 * @var array
-	 */
-	protected $segments = [];
+    /**
+     * Stores the segments of our cli "URI" command.
+     *
+     * @var array
+     */
+    protected $segments = [];
 
-	/**
-	 * Command line options and their values.
-	 *
-	 * @var array
-	 */
-	protected $options = [];
+    /**
+     * Command line options and their values.
+     *
+     * @var array
+     */
+    protected $options = [];
 
-	/**
-	 * Set the expected HTTP verb
-	 *
-	 * @var string
-	 */
-	protected $method = 'cli';
+    /**
+     * Set the expected HTTP verb
+     *
+     * @var string
+     */
+    protected $method = 'cli';
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Constructor
-	 *
-	 * @param App $config
-	 */
-	public function __construct(App $config)
-	{
-		parent::__construct($config);
+    /**
+     * Constructor
+     *
+     * @param App $config
+     */
+    public function __construct(App $config)
+    {
+        parent::__construct($config);
 
-		// Don't terminate the script when the cli's tty goes away
-		ignore_user_abort(true);
+        // Don't terminate the script when the cli's tty goes away
+        ignore_user_abort(true);
 
-		$this->parseCommand();
-	}
+        $this->parseCommand();
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns the "path" of the request script so that it can be used
-	 * in routing to the appropriate controller/method.
-	 *
-	 * The path is determined by treating the command line arguments
-	 * as if it were a URL - up until we hit our first option.
-	 *
-	 * Example:
-	 *      php index.php users 21 profile -foo bar
-	 *
-	 *      // Routes to /users/21/profile (index is removed for routing sake)
-	 *      // with the option foo = bar.
-	 *
-	 * @return string
-	 */
-	public function getPath(): string
-	{
-		$path = implode('/', $this->segments);
+    /**
+     * Returns the "path" of the request script so that it can be used
+     * in routing to the appropriate controller/method.
+     *
+     * The path is determined by treating the command line arguments
+     * as if it were a URL - up until we hit our first option.
+     *
+     * Example:
+     * php index.php users 21 profile -foo bar
+     *
+     * // Routes to /users/21/profile (index is removed for routing sake)
+     * // with the option foo = bar.
+     *
+     * @return string
+     */
+    public function getPath(): string
+    {
+        $path = implode('/', $this->segments);
 
-		return empty($path) ? '' : $path;
-	}
+        return empty($path) ? '' : $path;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns an associative array of all CLI options found, with
-	 * their values.
-	 *
-	 * @return array
-	 */
-	public function getOptions(): array
-	{
-		return $this->options;
-	}
+    /**
+     * Returns an associative array of all CLI options found, with
+     * their values.
+     *
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns the path segments.
-	 *
-	 * @return array
-	 */
-	public function getSegments(): array
-	{
-		return $this->segments;
-	}
+    /**
+     * Returns the path segments.
+     *
+     * @return array
+     */
+    public function getSegments(): array
+    {
+        return $this->segments;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns the value for a single CLI option that was passed in.
-	 *
-	 * @param string $key
-	 *
-	 * @return string|null
-	 */
-	public function getOption(string $key)
-	{
-		return $this->options[$key] ?? null;
-	}
+    /**
+     * Returns the value for a single CLI option that was passed in.
+     *
+     * @param string $key
+     *
+     * @return string|null
+     */
+    public function getOption(string $key)
+    {
+        return $this->options[$key] ?? null;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Returns the options as a string, suitable for passing along on
-	 * the CLI to other commands.
-	 *
-	 * Example:
-	 *      $options = [
-	 *          'foo' => 'bar',
-	 *          'baz' => 'queue some stuff'
-	 *      ];
-	 *
-	 *      getOptionString() = '-foo bar -baz "queue some stuff"'
-	 *
-	 * @return string
-	 */
-	public function getOptionString(): string
-	{
-		if (empty($this->options))
-		{
-			return '';
-		}
+    /**
+     * Returns the options as a string, suitable for passing along on
+     * the CLI to other commands.
+     *
+     * Example:
+     * $options = [
+     * 'foo' => 'bar',
+     * 'baz' => 'queue some stuff'
+     * ];
+     *
+     * getOptionString() = '-foo bar -baz "queue some stuff"'
+     *
+     * @return string
+     */
+    public function getOptionString(): string
+    {
+        if (empty($this->options)) {
+            return '';
+        }
 
-		$out = '';
+        $out = '';
 
-		foreach ($this->options as $name => $value)
-		{
-			// If there's a space, we need to group
-			// so it will pass correctly.
-			if (strpos($value, ' ') !== false)
-			{
-				$value = '"' . $value . '"';
-			}
+        foreach ($this->options as $name => $value) {
+            // If there's a space, we need to group
+            // so it will pass correctly.
+            if (strpos($value, ' ') !== false) {
+                $value = '"' . $value . '"';
+            }
 
-			$out .= "-{$name} $value ";
-		}
+            $out .= "-{$name} $value ";
+        }
 
-		return trim($out);
-	}
+        return trim($out);
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Parses the command line it was called from and collects all options
-	 * and valid segments.
-	 *
-	 * NOTE: I tried to use getopt but had it fail occasionally to find
-	 * any options, where argv has always had our back.
-	 */
-	protected function parseCommand()
-	{
-		// Since we're building the options ourselves,
-		// we stop adding it to the segments array once
-		// we have found the first dash.
-		$options_found = false;
+    /**
+     * Parses the command line it was called from and collects all options
+     * and valid segments.
+     *
+     * NOTE: I tried to use getopt but had it fail occasionally to find
+     * any options, where argv has always had our back.
+     */
+    protected function parseCommand()
+    {
+        // Since we're building the options ourselves,
+        // we stop adding it to the segments array once
+        // we have found the first dash.
+        $options_found = false;
 
-		$argc = $this->getServer('argc', FILTER_SANITIZE_NUMBER_INT);
-		$argv = $this->getServer('argv');
+        $argc = $this->getServer('argc', FILTER_SANITIZE_NUMBER_INT);
+        $argv = $this->getServer('argv');
 
-		// We start at 1 since we never want to include index.php
-		for ($i = 1; $i < $argc; $i ++)
-		{
-			// If there's no '-' at the beginning of the argument
-			// then add it to our segments.
-			if (! $options_found && strpos($argv[$i], '-') === false)
-			{
-				$this->segments[] = filter_var($argv[$i], FILTER_SANITIZE_STRING);
-				continue;
-			}
+        // We start at 1 since we never want to include index.php
+        for ($i = 1; $i < $argc; $i ++) {
+            // If there's no '-' at the beginning of the argument
+            // then add it to our segments.
+            if (! $options_found && strpos($argv[$i], '-') === false) {
+                $this->segments[] = filter_var($argv[$i], FILTER_SANITIZE_STRING);
+                continue;
+            }
 
-			$options_found = true;
+            $options_found = true;
 
-			if (strpos($argv[$i], '-') !== 0)
-			{
-				continue;
-			}
+            if (strpos($argv[$i], '-') !== 0) {
+                continue;
+            }
 
-			$arg   = filter_var(str_replace('-', '', $argv[$i]), FILTER_SANITIZE_STRING);
-			$value = null;
+            $arg = filter_var(str_replace('-', '', $argv[$i]), FILTER_SANITIZE_STRING);
+            $value = null;
 
-			// If the next item starts with a dash it's a value
-			if (isset($argv[$i + 1]) && strpos($argv[$i + 1], '-') !== 0)
-			{
-				$value = filter_var($argv[$i + 1], FILTER_SANITIZE_STRING);
-				$i ++;
-			}
+            // If the next item starts with a dash it's a value
+            if (isset($argv[$i + 1]) && strpos($argv[$i + 1], '-') !== 0) {
+                $value = filter_var($argv[$i + 1], FILTER_SANITIZE_STRING);
+                $i ++;
+            }
 
-			$this->options[$arg] = $value;
-		}
-	}
+            $this->options[$arg] = $value;
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 }

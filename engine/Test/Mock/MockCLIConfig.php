@@ -1,32 +1,48 @@
-<?php namespace CodeIgniter\Test\Mock;
+<?php
+
+namespace CodeIgniter\Test\Mock;
 
 class MockCLIConfig extends \Config\App
 {
-	public $baseURL = 'http://example.com';
 
-	public $uriProtocol = 'REQUEST_URI';
+    public $baseURL = 'http://example.com';
 
-	public $cookiePrefix   = '';
-	public $cookieDomain   = '';
-	public $cookiePath     = '/';
-	public $cookieSecure   = false;
-	public $cookieHTTPOnly = false;
+    public $uriProtocol = 'REQUEST_URI';
 
-	public $proxyIPs = '';
+    public $cookiePrefix = '';
 
-	public $CSRFProtection  = false;
-	public $CSRFTokenName   = 'csrf_test_name';
-	public $CSRFCookieName  = 'csrf_cookie_name';
-	public $CSRFExpire      = 7200;
-	public $CSRFRegenerate  = true;
-	public $CSRFExcludeURIs = ['http://example.com'];
+    public $cookieDomain = '';
 
-	public $CSPEnabled = false;
+    public $cookiePath = '/';
 
-	public $defaultLocale    = 'en';
-	public $negotiateLocale  = false;
-	public $supportedLocales = [
-		'en',
-		'es',
-	];
+    public $cookieSecure = false;
+
+    public $cookieHTTPOnly = false;
+
+    public $proxyIPs = '';
+
+    public $CSRFProtection = false;
+
+    public $CSRFTokenName = 'csrf_test_name';
+
+    public $CSRFCookieName = 'csrf_cookie_name';
+
+    public $CSRFExpire = 7200;
+
+    public $CSRFRegenerate = true;
+
+    public $CSRFExcludeURIs = [
+        'http://example.com'
+    ];
+
+    public $CSPEnabled = false;
+
+    public $defaultLocale = 'en';
+
+    public $negotiateLocale = false;
+
+    public $supportedLocales = [
+        'en',
+        'es'
+    ];
 }

@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,6 +29,7 @@ use Kint\Object\Representation\Representation;
 
 class SerializePlugin extends Plugin
 {
+
     /**
      * Disables automatic unserialization on arrays and objects.
      *
@@ -45,11 +45,16 @@ class SerializePlugin extends Plugin
      * @var bool
      */
     public static $safe_mode = true;
-    public static $options = array(true);
+
+    public static $options = array(
+        true
+    );
 
     public function getTypes()
     {
-        return array('string');
+        return array(
+            'string'
+        );
     }
 
     public function getTriggers()
@@ -61,11 +66,15 @@ class SerializePlugin extends Plugin
     {
         $trimmed = \rtrim($var);
 
-        if ('N;' !== $trimmed && !\preg_match('/^(?:[COabis]:\\d+[:;]|d:\\d+(?:\\.\\d+);)/', $trimmed)) {
+        if ('N;' !== $trimmed && ! \preg_match('/^(?:[COabis]:\\d+[:;]|d:\\d+(?:\\.\\d+);)/', $trimmed)) {
             return;
         }
 
-        if (!self::$safe_mode || !\in_array($trimmed[0], array('C', 'O', 'a'), true)) {
+        if (! self::$safe_mode || ! \in_array($trimmed[0], array(
+            'C',
+            'O',
+            'a'
+        ), true)) {
             // Second parameter only supported on PHP 7
             if (KINT_PHP70) {
                 // Suppress warnings on unserializeable variable
@@ -81,13 +90,17 @@ class SerializePlugin extends Plugin
 
         $base_obj = new BasicObject();
         $base_obj->depth = $o->depth + 1;
-        $base_obj->name = 'unserialize('.$o->name.')';
+        $base_obj->name = 'unserialize(' . $o->name . ')';
 
         if ($o->access_path) {
-            $base_obj->access_path = 'unserialize('.$o->access_path;
-            if (!KINT_PHP70 || self::$options === array(true)) {
+            $base_obj->access_path = 'unserialize(' . $o->access_path;
+            if (! KINT_PHP70 || self::$options === array(
+                true
+            )) {
                 $base_obj->access_path .= ')';
-            } elseif (self::$options === array(false)) {
+            } elseif (self::$options === array(
+                false
+            )) {
                 $base_obj->access_path .= ', false)';
             } else {
                 $base_obj->access_path .= ', Serialize::$options)';

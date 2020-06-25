@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,9 +29,12 @@ use Kint\Object\Representation\ColorRepresentation;
 
 class ColorPlugin extends Plugin
 {
+
     public function getTypes()
     {
-        return array('string');
+        return array(
+            'string'
+        );
     }
 
     public function getTriggers()
@@ -48,7 +50,7 @@ class ColorPlugin extends Plugin
 
         $trimmed = \strtolower(\trim($var));
 
-        if (!isset(ColorRepresentation::$color_map[$trimmed]) && !\preg_match('/^(?:(?:rgb|hsl)[^\\)]{6,}\\)|#[0-9a-fA-F]{3,8})$/', $trimmed)) {
+        if (! isset(ColorRepresentation::$color_map[$trimmed]) && ! \preg_match('/^(?:(?:rgb|hsl)[^\\)]{6,}\\)|#[0-9a-fA-F]{3,8})$/', $trimmed)) {
             return;
         }
 

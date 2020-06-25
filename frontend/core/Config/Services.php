@@ -1,7 +1,8 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\Services as CoreServices;
-
 require_once SYSTEMPATH . 'Config/Services.php';
 
 /**
@@ -20,13 +21,13 @@ require_once SYSTEMPATH . 'Config/Services.php';
 class Services extends CoreServices
 {
 
-	//    public static function example($getShared = true)
-	//    {
-	//        if ($getShared)
-	//        {
-	//            return static::getSharedInstance('example');
-	//        }
-	//
-	//        return new \CodeIgniter\Example();
-	//    }
+    // public static function example($getShared = true)
+    // {
+    // if ($getShared)
+    // {
+    // return static::getSharedInstance('example');
+    // }
+    //
+    // return new \CodeIgniter\Example();
+    // }
 }

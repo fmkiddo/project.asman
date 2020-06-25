@@ -22,11 +22,11 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint;
 
 class CallFinder
 {
+
     private static $ignore = array(
         T_CLOSE_TAG => true,
         T_COMMENT => true,
@@ -34,14 +34,14 @@ class CallFinder
         T_INLINE_HTML => true,
         T_OPEN_TAG => true,
         T_OPEN_TAG_WITH_ECHO => true,
-        T_WHITESPACE => true,
+        T_WHITESPACE => true
     );
 
     /**
      * Things we need to do specially for operator tokens:
      * - Refuse to strip spaces around them
      * - Wrap the access path in parentheses if there
-     *   are any of these in the final short parameter.
+     * are any of these in the final short parameter.
      */
     private static $operator = array(
         T_AND_EQUAL => true,
@@ -99,7 +99,7 @@ class CallFinder
         '?' => true,
         '^' => true,
         '|' => true,
-        '~' => true,
+        '~' => true
     );
 
     private static $strip = array(
@@ -111,7 +111,7 @@ class CallFinder
         '}' => true,
         T_OBJECT_OPERATOR => true,
         T_DOUBLE_COLON => true,
-        T_NS_SEPARATOR => true,
+        T_NS_SEPARATOR => true
     );
 
     public static function getFunctionCalls($source, $line, $function)
@@ -121,24 +121,24 @@ class CallFinder
             '[' => true,
             '{' => true,
             T_CURLY_OPEN => true,
-            T_DOLLAR_OPEN_CURLY_BRACES => true,
+            T_DOLLAR_OPEN_CURLY_BRACES => true
         );
         static $down = array(
             ')' => true,
             ']' => true,
-            '}' => true,
+            '}' => true
         );
         static $modifiers = array(
             '!' => true,
             '@' => true,
             '~' => true,
             '+' => true,
-            '-' => true,
+            '-' => true
         );
         static $identifier = array(
             T_DOUBLE_COLON => true,
             T_STRING => true,
-            T_NS_SEPARATOR => true,
+            T_NS_SEPARATOR => true
         );
 
         if (KINT_PHP56) {
@@ -158,7 +158,11 @@ class CallFinder
         $cursor = 1;
         $function_calls = array();
         /** @var array<int, null|array|string> Performance optimization preventing backwards loops */
-        $prev_tokens = array(null, null, null);
+        $prev_tokens = array(
+            null,
+            null,
+            null
+        );
 
         if (\is_array($function)) {
             $class = \explode('\\', $function[0]);
@@ -171,7 +175,7 @@ class CallFinder
 
         // Loop through tokens
         foreach ($tokens as $index => $token) {
-            if (!\is_array($token)) {
+            if (! \is_array($token)) {
                 continue;
             }
 
@@ -188,7 +192,11 @@ class CallFinder
                 continue;
             }
 
-            $prev_tokens = array($prev_tokens[1], $prev_tokens[2], $token);
+            $prev_tokens = array(
+                $prev_tokens[1],
+                $prev_tokens[2],
+                $token
+            );
 
             // Check if it's the right type to be the function we're looking for
             if (T_STRING !== $token[0] || \strtolower($token[1]) !== $function) {
@@ -197,21 +205,24 @@ class CallFinder
 
             // Check if it's a function call
             $nextReal = self::realTokenIndex($tokens, $index);
-            if (!isset($nextReal, $tokens[$nextReal]) || '(' !== $tokens[$nextReal]) {
+            if (! isset($nextReal, $tokens[$nextReal]) || '(' !== $tokens[$nextReal]) {
                 continue;
             }
 
             // Check if it matches the signature
             if (null === $class) {
-                if ($prev_tokens[1] && \in_array($prev_tokens[1][0], array(T_DOUBLE_COLON, T_OBJECT_OPERATOR), true)) {
+                if ($prev_tokens[1] && \in_array($prev_tokens[1][0], array(
+                    T_DOUBLE_COLON,
+                    T_OBJECT_OPERATOR
+                ), true)) {
                     continue;
                 }
             } else {
-                if (!$prev_tokens[1] || T_DOUBLE_COLON !== $prev_tokens[1][0]) {
+                if (! $prev_tokens[1] || T_DOUBLE_COLON !== $prev_tokens[1][0]) {
                     continue;
                 }
 
-                if (!$prev_tokens[0] || T_STRING !== $prev_tokens[0][0] || \strtolower($prev_tokens[0][1]) !== $class) {
+                if (! $prev_tokens[0] || T_STRING !== $prev_tokens[0][0] || \strtolower($prev_tokens[0][1]) !== $class) {
                     continue;
                 }
             }
@@ -236,7 +247,7 @@ class CallFinder
                     $inner_cursor += \substr_count($token[1], "\n");
                 }
 
-                if (!isset(self::$ignore[$token[0]]) && !isset($down[$token[0]])) {
+                if (! isset(self::$ignore[$token[0]]) && ! isset($down[$token[0]])) {
                     $paramrealtokens = $realtokens = true;
                 }
 
@@ -247,9 +258,9 @@ class CallFinder
                         $realtokens = false;
                     }
 
-                    ++$depth;
+                    ++ $depth;
                 } elseif (isset($down[$token[0]])) {
-                    --$depth;
+                    -- $depth;
 
                     // If this brings us down to the parameter level, and we've had
                     // real tokens since going up, fill the $shortparam with an ellipsis
@@ -263,28 +274,28 @@ class CallFinder
                     // Strings use the same symbol for up and down, but we can
                     // only ever be inside one string, so just use a bool for that
                     if ($instring) {
-                        --$depth;
+                        -- $depth;
                         if (1 === $depth) {
                             $shortparam[] = '...';
                         }
                     } else {
-                        ++$depth;
+                        ++ $depth;
                     }
 
-                    $instring = !$instring;
+                    $instring = ! $instring;
 
                     $shortparam[] = '"';
                 } elseif (1 === $depth) {
                     if (',' === $token[0]) {
                         $params[] = array(
                             'full' => \array_slice($tokens, $param_start, $offset - $param_start),
-                            'short' => $shortparam,
+                            'short' => $shortparam
                         );
                         $shortparam = array();
                         $paramrealtokens = false;
                         $param_start = $offset + 1;
                     } elseif (T_CONSTANT_ENCAPSED_STRING === $token[0] && \strlen($token[1]) > 2) {
-                        $shortparam[] = $token[1][0].'...'.$token[1][0];
+                        $shortparam[] = $token[1][0] . '...' . $token[1][0];
                     } else {
                         $shortparam[] = $token;
                     }
@@ -295,14 +306,14 @@ class CallFinder
                     if ($paramrealtokens) {
                         $params[] = array(
                             'full' => \array_slice($tokens, $param_start, $offset - $param_start),
-                            'short' => $shortparam,
+                            'short' => $shortparam
                         );
                     }
 
                     break;
                 }
 
-                ++$offset;
+                ++ $offset;
             }
 
             // If we're not passed (or at) the line at the end
@@ -325,32 +336,32 @@ class CallFinder
                 $param = array(
                     'name' => self::tokensToString($name),
                     'path' => self::tokensToString(self::tokensTrim($param['full'])),
-                    'expression' => $expression,
+                    'expression' => $expression
                 );
             }
 
             // Get the modifiers
-            --$index;
+            -- $index;
 
             while (isset($tokens[$index])) {
-                if (!isset(self::$ignore[$tokens[$index][0]]) && !isset($identifier[$tokens[$index][0]])) {
+                if (! isset(self::$ignore[$tokens[$index][0]]) && ! isset($identifier[$tokens[$index][0]])) {
                     break;
                 }
 
-                --$index;
+                -- $index;
             }
 
             $mods = array();
 
             while (isset($tokens[$index])) {
                 if (isset(self::$ignore[$tokens[$index][0]])) {
-                    --$index;
+                    -- $index;
                     continue;
                 }
 
                 if (isset($modifiers[$tokens[$index][0]])) {
                     $mods[] = $tokens[$index];
-                    --$index;
+                    -- $index;
                     continue;
                 }
 
@@ -359,7 +370,7 @@ class CallFinder
 
             $function_calls[] = array(
                 'parameters' => $params,
-                'modifiers' => $mods,
+                'modifiers' => $mods
             );
         }
 
@@ -368,14 +379,14 @@ class CallFinder
 
     private static function realTokenIndex(array $tokens, $index)
     {
-        ++$index;
+        ++ $index;
 
         while (isset($tokens[$index])) {
-            if (!isset(self::$ignore[$tokens[$index][0]])) {
+            if (! isset(self::$ignore[$tokens[$index][0]])) {
                 return $index;
             }
 
-            ++$index;
+            ++ $index;
         }
 
         return null;
@@ -383,11 +394,13 @@ class CallFinder
 
     /**
      * We need a separate method to check if tokens are operators because we
-     * occasionally add "..." to short parameter versions. If we simply check
+     * occasionally add "..." to short parameter versions.
+     * If we simply check
      * for `$token[0]` then "..." will incorrectly match the "." operator.
      *
-     * @param array|string $token The token to check
-     *
+     * @param array|string $token
+     *            The token to check
+     *            
      * @return bool
      */
     private static function tokenIsOperator($token)
@@ -450,11 +463,11 @@ class CallFinder
 
                 $next = $tokens[self::realTokenIndex($tokens, $index)];
 
-                if (isset(self::$strip[$last[0]]) && !self::tokenIsOperator($next)) {
+                if (isset(self::$strip[$last[0]]) && ! self::tokenIsOperator($next)) {
                     continue;
                 }
 
-                if (isset(self::$strip[$next[0]]) && $last && !self::tokenIsOperator($last)) {
+                if (isset(self::$strip[$next[0]]) && $last && ! self::tokenIsOperator($last)) {
                     continue;
                 }
 

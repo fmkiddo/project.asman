@@ -59,7 +59,7 @@ body.setup-body {
 	margin-bottom: 13px;
 }
 
-.card-message a,a:visited,a:active {
+.card-message a, a:visited, a:active {
 	color: #6c767d;
 }
 
@@ -78,11 +78,22 @@ footer.login-footer {
 	margin-bottom: 13px;
 }
 
-footer.login-footer a,a:visited,a:active {
-	color: #6c757d; 	
+footer.login-footer a, a:visited, a:active {
+	color: #6c757d;
 }
 
 footer.login-footer a:hover {
 	color: lightgrey;
 	text-decoration: none;
+}
+
+.tab-content.form {
+	padding: 20px 0 0;
+	border-left: 1px solid #DEE2E6;
+	border-right: 1px solid #DEE2E6;
+	border-bottom: 1px solid #DEE2E6;
+}
+
+.row.button-section {
+	padding: 10px 0px 35px 0px;
 }

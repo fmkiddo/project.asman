@@ -35,7 +35,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Filters;
 
 use CodeIgniter\Honeypot\Exceptions\HoneypotException;
@@ -49,37 +48,35 @@ use Config\Services;
 class Honeypot implements FilterInterface
 {
 
-	/**
-	 * Checks if Honeypot field is empty; if not
-	 * then the requester is a bot
-	 *
-	 * @param \CodeIgniter\HTTP\RequestInterface $request
-	 *
-	 * @return void
-	 *
-	 * @throws \CodeIgniter\Honeypot\Exceptions\HoneypotException
-	 */
-	public function before(RequestInterface $request)
-	{
-		$honeypot = Services::honeypot(new \Config\Honeypot());
-		if ($honeypot->hasContent($request))
-		{
-			throw HoneypotException::isBot();
-		}
-	}
+    /**
+     * Checks if Honeypot field is empty; if not
+     * then the requester is a bot
+     *
+     * @param \CodeIgniter\HTTP\RequestInterface $request
+     *
+     * @return void
+     *
+     * @throws \CodeIgniter\Honeypot\Exceptions\HoneypotException
+     */
+    public function before(RequestInterface $request)
+    {
+        $honeypot = Services::honeypot(new \Config\Honeypot());
+        if ($honeypot->hasContent($request)) {
+            throw HoneypotException::isBot();
+        }
+    }
 
-	/**
-	 * Attach a honeypot to the current response.
-	 *
-	 * @param \CodeIgniter\HTTP\RequestInterface  $request
-	 * @param \CodeIgniter\HTTP\ResponseInterface $response
-	 *
-	 * @return void
-	 */
-	public function after(RequestInterface $request, ResponseInterface $response)
-	{
-		$honeypot = Services::honeypot(new \Config\Honeypot());
-		$honeypot->attachHoneypot($response);
-	}
-
+    /**
+     * Attach a honeypot to the current response.
+     *
+     * @param \CodeIgniter\HTTP\RequestInterface $request
+     * @param \CodeIgniter\HTTP\ResponseInterface $response
+     *
+     * @return void
+     */
+    public function after(RequestInterface $request, ResponseInterface $response)
+    {
+        $honeypot = Services::honeypot(new \Config\Honeypot());
+        $honeypot->attachHoneypot($response);
+    }
 }

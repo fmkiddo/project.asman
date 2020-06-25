@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -31,11 +30,17 @@ use SplFileInfo;
 
 class FsPathPlugin extends Plugin
 {
-    public static $blacklist = array('/', '.');
+
+    public static $blacklist = array(
+        '/',
+        '.'
+    );
 
     public function getTypes()
     {
-        return array('string');
+        return array(
+            'string'
+        );
     }
 
     public function getTriggers()
@@ -49,7 +54,7 @@ class FsPathPlugin extends Plugin
             return;
         }
 
-        if (!\preg_match('/[\\/\\'.DIRECTORY_SEPARATOR.']/', $var)) {
+        if (! \preg_match('/[\\/\\' . DIRECTORY_SEPARATOR . ']/', $var)) {
             return;
         }
 
@@ -57,7 +62,7 @@ class FsPathPlugin extends Plugin
             return;
         }
 
-        if (!@\file_exists($var)) {
+        if (! @\file_exists($var)) {
             return;
         }
 

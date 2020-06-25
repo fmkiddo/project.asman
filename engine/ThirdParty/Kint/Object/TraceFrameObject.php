@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 use Kint\Object\Representation\Representation;
@@ -32,8 +31,12 @@ use ReflectionMethod;
 
 class TraceFrameObject extends BasicObject
 {
+
     public $trace;
-    public $hints = array('trace_frame');
+
+    public $hints = array(
+        'trace_frame'
+    );
 
     public function __construct(BasicObject $base, array $raw_frame)
     {
@@ -48,13 +51,13 @@ class TraceFrameObject extends BasicObject
             'class' => isset($raw_frame['class']) ? $raw_frame['class'] : null,
             'type' => isset($raw_frame['type']) ? $raw_frame['type'] : null,
             'object' => null,
-            'args' => null,
+            'args' => null
         );
 
         if ($this->trace['class'] && \method_exists($this->trace['class'], $this->trace['function'])) {
             $func = new ReflectionMethod($this->trace['class'], $this->trace['function']);
             $this->trace['function'] = new MethodObject($func);
-        } elseif (!$this->trace['class'] && \function_exists($this->trace['function'])) {
+        } elseif (! $this->trace['class'] && \function_exists($this->trace['function'])) {
             $func = new ReflectionFunction($this->trace['function']);
             $this->trace['function'] = new MethodObject($func);
         }
@@ -92,7 +95,7 @@ class TraceFrameObject extends BasicObject
 
         if ($this->trace['object']) {
             $callee = new Representation('object');
-            $callee->label = 'Callee object ['.$this->trace['object']->classname.']';
+            $callee->label = 'Callee object [' . $this->trace['object']->classname . ']';
             $callee->contents[] = $this->trace['object'];
             $this->addRepresentation($callee);
         }

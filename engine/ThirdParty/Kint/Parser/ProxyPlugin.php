@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use InvalidArgumentException;
@@ -30,17 +29,20 @@ use Kint\Object\BasicObject;
 
 class ProxyPlugin extends Plugin
 {
+
     protected $types;
+
     protected $triggers;
+
     protected $callback;
 
     public function __construct(array $types, $triggers, $callback)
     {
-        if (!\is_int($triggers)) {
+        if (! \is_int($triggers)) {
             throw new InvalidArgumentException('ProxyPlugin triggers must be an int bitmask');
         }
 
-        if (!\is_callable($callback)) {
+        if (! \is_callable($callback)) {
             throw new InvalidArgumentException('ProxyPlugin callback must be callable');
         }
 
@@ -61,6 +63,11 @@ class ProxyPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        return \call_user_func_array($this->callback, array(&$var, &$o, $trigger, $this->parser));
+        return \call_user_func_array($this->callback, array(
+            &$var,
+            &$o,
+            $trigger,
+            $this->parser
+        ));
     }
 }

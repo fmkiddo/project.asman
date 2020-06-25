@@ -22,15 +22,15 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Renderer\Rich;
 
 use Kint\Object\BasicObject;
 
 class RecursionPlugin extends Plugin implements ObjectPluginInterface
 {
+
     public function renderObject(BasicObject $o)
     {
-        return '<dl>'.$this->renderLockedHeader($o, '<var>Recursion</var>').'</dl>';
+        return '<dl>' . $this->renderLockedHeader($o, '<var>Recursion</var>') . '</dl>';
     }
 }

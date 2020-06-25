@@ -35,7 +35,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Honeypot;
 
 use CodeIgniter\Config\BaseConfig;
@@ -49,84 +48,79 @@ use CodeIgniter\HTTP\ResponseInterface;
 class Honeypot
 {
 
-	/**
-	 * Our configuration.
-	 *
-	 * @var BaseConfig
-	 */
-	protected $config;
+    /**
+     * Our configuration.
+     *
+     * @var BaseConfig
+     */
+    protected $config;
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Constructor.
-	 *
-	 * @param  BaseConfig $config
-	 * @throws type
-	 */
-	function __construct(BaseConfig $config)
-	{
-		$this->config = $config;
+    /**
+     * Constructor.
+     *
+     * @param BaseConfig $config
+     * @throws type
+     */
+    function __construct(BaseConfig $config)
+    {
+        $this->config = $config;
 
-		if ($this->config->hidden === '')
-		{
-			throw HoneypotException::forNoHiddenValue();
-		}
+        if ($this->config->hidden === '') {
+            throw HoneypotException::forNoHiddenValue();
+        }
 
-		if ($this->config->template === '')
-		{
-			throw HoneypotException::forNoTemplate();
-		}
+        if ($this->config->template === '') {
+            throw HoneypotException::forNoTemplate();
+        }
 
-		if ($this->config->name === '')
-		{
-			throw HoneypotException::forNoNameField();
-		}
-	}
+        if ($this->config->name === '') {
+            throw HoneypotException::forNoNameField();
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Checks the request if honeypot field has data.
-	 *
-	 * @param \CodeIgniter\HTTP\RequestInterface $request
-	 */
-	public function hasContent(RequestInterface $request)
-	{
-		return ! empty($request->getPost($this->config->name));
-	}
+    /**
+     * Checks the request if honeypot field has data.
+     *
+     * @param \CodeIgniter\HTTP\RequestInterface $request
+     */
+    public function hasContent(RequestInterface $request)
+    {
+        return ! empty($request->getPost($this->config->name));
+    }
 
-	/**
-	 * Attaches Honeypot template to response.
-	 *
-	 * @param \CodeIgniter\HTTP\ResponseInterface $response
-	 */
-	public function attachHoneypot(ResponseInterface $response)
-	{
-		$prep_field = $this->prepareTemplate($this->config->template);
+    /**
+     * Attaches Honeypot template to response.
+     *
+     * @param \CodeIgniter\HTTP\ResponseInterface $response
+     */
+    public function attachHoneypot(ResponseInterface $response)
+    {
+        $prep_field = $this->prepareTemplate($this->config->template);
 
-		$body = $response->getBody();
-		$body = str_ireplace('</form>', $prep_field . '</form>', $body);
-		$response->setBody($body);
-	}
+        $body = $response->getBody();
+        $body = str_ireplace('</form>', $prep_field . '</form>', $body);
+        $response->setBody($body);
+    }
 
-	/**
-	 * Prepares the template by adding label
-	 * content and field name.
-	 *
-	 * @param  string $template
-	 * @return string
-	 */
-	protected function prepareTemplate(string $template): string
-	{
-		$template = str_ireplace('{label}', $this->config->label, $template);
-		$template = str_ireplace('{name}', $this->config->name, $template);
+    /**
+     * Prepares the template by adding label
+     * content and field name.
+     *
+     * @param string $template
+     * @return string
+     */
+    protected function prepareTemplate(string $template): string
+    {
+        $template = str_ireplace('{label}', $this->config->label, $template);
+        $template = str_ireplace('{name}', $this->config->name, $template);
 
-		if ($this->config->hidden)
-		{
-			$template = '<div style="display:none">' . $template . '</div>';
-		}
-		return $template;
-	}
-
+        if ($this->config->hidden) {
+            $template = '<div style="display:none">' . $template . '</div>';
+        }
+        return $template;
+    }
 }

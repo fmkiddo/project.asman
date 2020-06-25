@@ -1,34 +1,37 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
 class Honeypot extends BaseConfig
 {
 
-	/**
-	 * Makes Honeypot visible or not to human
-	 *
-	 * @var boolean
-	 */
-	public $hidden = true;
-	/**
-	 * Honeypot Label Content
-	 *
-	 * @var string
-	 */
-	public $label = 'Fill This Field';
+    /**
+     * Makes Honeypot visible or not to human
+     *
+     * @var boolean
+     */
+    public $hidden = true;
 
-	/**
-	 * Honeypot Field Name
-	 *
-	 * @var string
-	 */
-	public $name = 'honeypot';
+    /**
+     * Honeypot Label Content
+     *
+     * @var string
+     */
+    public $label = 'Fill This Field';
 
-	/**
-	 * Honeypot HTML Template
-	 *
-	 * @var string
-	 */
-	public $template = '<label>{label}</label><input type="text" name="{name}" value=""/>';
+    /**
+     * Honeypot Field Name
+     *
+     * @var string
+     */
+    public $name = 'honeypot';
+
+    /**
+     * Honeypot HTML Template
+     *
+     * @var string
+     */
+    public $template = '<label>{label}</label><input type="text" name="{name}" value=""/>';
 }

@@ -22,23 +22,26 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
 
 class TimestampPlugin extends Plugin
 {
+
     public static $blacklist = array(
         2147483648,
         2147483647,
         1073741824,
-        1073741823,
+        1073741823
     );
 
     public function getTypes()
     {
-        return array('string', 'integer');
+        return array(
+            'string',
+            'integer'
+        );
     }
 
     public function getTriggers()
@@ -48,7 +51,7 @@ class TimestampPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (\is_string($var) && !\ctype_digit($var)) {
+        if (\is_string($var) && ! \ctype_digit($var)) {
             return;
         }
 

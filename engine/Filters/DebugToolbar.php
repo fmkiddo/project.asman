@@ -36,7 +36,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Filters;
 
 use CodeIgniter\HTTP\RequestInterface;
@@ -48,32 +47,32 @@ use Config\Services;
  */
 class DebugToolbar implements FilterInterface
 {
-	/**
-	 * We don't need to do anything here.
-	 *
-	 * @param RequestInterface|\CodeIgniter\HTTP\IncomingRequest $request
-	 *
-	 * @return void
-	 */
-	public function before(RequestInterface $request)
-	{
-	}
 
-	//--------------------------------------------------------------------
+    /**
+     * We don't need to do anything here.
+     *
+     * @param RequestInterface|\CodeIgniter\HTTP\IncomingRequest $request
+     *
+     * @return void
+     */
+    public function before(RequestInterface $request)
+    {}
 
-	/**
-	 * If the debug flag is set (CI_DEBUG) then collect performance
-	 * and debug information and display it in a toolbar.
-	 *
-	 * @param RequestInterface|\CodeIgniter\HTTP\IncomingRequest $request
-	 * @param ResponseInterface|\CodeIgniter\HTTP\Response       $response
-	 *
-	 * @return void
-	 */
-	public function after(RequestInterface $request, ResponseInterface $response)
-	{
-		Services::toolbar()->prepare($request, $response);
-	}
+    // --------------------------------------------------------------------
 
-	//--------------------------------------------------------------------
+    /**
+     * If the debug flag is set (CI_DEBUG) then collect performance
+     * and debug information and display it in a toolbar.
+     *
+     * @param RequestInterface|\CodeIgniter\HTTP\IncomingRequest $request
+     * @param ResponseInterface|\CodeIgniter\HTTP\Response $response
+     *
+     * @return void
+     */
+    public function after(RequestInterface $request, ResponseInterface $response)
+    {
+        Services::toolbar()->prepare($request, $response);
+    }
+
+    // --------------------------------------------------------------------
 }

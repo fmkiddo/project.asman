@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -36,18 +35,19 @@ use Mysqli;
  */
 class MysqliPlugin extends Plugin
 {
+
     // These 'properties' are actually globals
     protected $always_readable = array(
         'client_version' => true,
         'connect_errno' => true,
-        'connect_error' => true,
+        'connect_error' => true
     );
 
     // These are readable on empty mysqli objects, but not on failed connections
     protected $empty_readable = array(
         'client_info' => true,
         'errno' => true,
-        'error' => true,
+        'error' => true
     );
 
     // These are only readable on connected mysqli objects
@@ -64,12 +64,14 @@ class MysqliPlugin extends Plugin
         'sqlstate' => true,
         'protocol_version' => true,
         'thread_id' => true,
-        'warning_count' => true,
+        'warning_count' => true
     );
 
     public function getTypes()
     {
-        return array('object');
+        return array(
+            'object'
+        );
     }
 
     public function getTriggers()
@@ -79,7 +81,7 @@ class MysqliPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (!$var instanceof Mysqli) {
+        if (! $var instanceof Mysqli) {
             return;
         }
 
@@ -94,14 +96,14 @@ class MysqliPlugin extends Plugin
 
         foreach ($o->value->contents as $key => $obj) {
             if (isset($this->connected_readable[$obj->name])) {
-                if (!$connected) {
+                if (! $connected) {
                     continue;
                 }
             } elseif (isset($this->empty_readable[$obj->name])) {
-                if (!$connected && !$empty) {
+                if (! $connected && ! $empty) {
                     continue;
                 }
-            } elseif (!isset($this->always_readable[$obj->name])) {
+            } elseif (! isset($this->always_readable[$obj->name])) {
                 continue;
             }
 

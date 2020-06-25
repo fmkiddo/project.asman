@@ -22,81 +22,83 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 class BlobObject extends BasicObject
 {
+
     /**
+     *
      * @var array Character encodings to detect
-     *
-     * @see https://secure.php.net/function.mb-detect-order
-     *
-     * In practice, mb_detect_encoding can only successfully determine the
-     * difference between the following common charsets at once without
-     * breaking things for one of the other charsets:
-     * - ASCII
-     * - UTF-8
-     * - SJIS
-     * - EUC-JP
-     *
-     * The order of the charsets is significant. If you put UTF-8 before ASCII
-     * it will never match ASCII, because UTF-8 is a superset of ASCII.
-     * Similarly, SJIS and EUC-JP frequently match UTF-8 strings, so you should
-     * check UTF-8 first. SJIS and EUC-JP seem to work either way, but SJIS is
-     * more common so it should probably be first.
-     *
-     * While you're free to experiment with other charsets, remember to keep
-     * this behavior in mind when setting up your char_encodings array.
-     *
-     * This depends on the mbstring extension
+     *     
+     * @see https://secure.php.net/function.mb-detect-order In practice, mb_detect_encoding can only successfully determine the
+     *      difference between the following common charsets at once without
+     *      breaking things for one of the other charsets:
+     *      - ASCII
+     *      - UTF-8
+     *      - SJIS
+     *      - EUC-JP
+     *     
+     *      The order of the charsets is significant. If you put UTF-8 before ASCII
+     *      it will never match ASCII, because UTF-8 is a superset of ASCII.
+     *      Similarly, SJIS and EUC-JP frequently match UTF-8 strings, so you should
+     *      check UTF-8 first. SJIS and EUC-JP seem to work either way, but SJIS is
+     *      more common so it should probably be first.
+     *     
+     *      While you're free to experiment with other charsets, remember to keep
+     *      this behavior in mind when setting up your char_encodings array.
+     *     
+     *      This depends on the mbstring extension
      */
     public static $char_encodings = array(
         'ASCII',
-        'UTF-8',
+        'UTF-8'
     );
 
     /**
+     *
      * @var array Legacy character encodings to detect
-     *
-     * @see https://secure.php.net/function.iconv
-     *
-     * Assuming the other encoding checks fail, this will perform a
-     * simple iconv conversion to check for invalid bytes. If any are
-     * found it will not match.
-     *
-     * This can be useful for ambiguous single byte encodings like
-     * windows-125x and iso-8859-x which have practically undetectable
-     * differences because they use every single byte available.
-     *
-     * This is *NOT* reliable and should not be trusted implicitly. As
-     * with char_encodings, the order of the charsets is significant.
-     *
-     * This depends on the iconv extension
+     *     
+     * @see https://secure.php.net/function.iconv Assuming the other encoding checks fail, this will perform a
+     *      simple iconv conversion to check for invalid bytes. If any are
+     *      found it will not match.
+     *     
+     *      This can be useful for ambiguous single byte encodings like
+     *      windows-125x and iso-8859-x which have practically undetectable
+     *      differences because they use every single byte available.
+     *     
+     *      This is *NOT* reliable and should not be trusted implicitly. As
+     *      with char_encodings, the order of the charsets is significant.
+     *     
+     *      This depends on the iconv extension
      */
     public static $legacy_encodings = array();
 
     public $type = 'string';
+
     public $encoding = false;
-    public $hints = array('string');
+
+    public $hints = array(
+        'string'
+    );
 
     public function getType()
     {
         if (false === $this->encoding) {
-            return 'binary '.$this->type;
+            return 'binary ' . $this->type;
         }
 
         if ('ASCII' === $this->encoding) {
             return $this->type;
         }
 
-        return $this->encoding.' '.$this->type;
+        return $this->encoding . ' ' . $this->type;
     }
 
     public function getValueShort()
     {
         if ($rep = $this->value) {
-            return '"'.$rep->contents.'"';
+            return '"' . $rep->contents . '"';
         }
     }
 
@@ -165,10 +167,10 @@ class BlobObject extends BasicObject
                     return $encoding;
                 }
             }
-        } elseif (!\function_exists('mb_detect_encoding')) { // @codeCoverageIgnore
-            // If a user has neither mb_detect_encoding, nor iconv, nor the
-            // polyfills, there's not much we can do about it...
-            // Pretend it's ASCII and pray the browser renders it properly.
+        } elseif (! \function_exists('mb_detect_encoding')) { // @codeCoverageIgnore
+                                                              // If a user has neither mb_detect_encoding, nor iconv, nor the
+                                                              // polyfills, there's not much we can do about it...
+                                                              // Pretend it's ASCII and pray the browser renders it properly.
             return 'ASCII'; // @codeCoverageIgnore
         }
 

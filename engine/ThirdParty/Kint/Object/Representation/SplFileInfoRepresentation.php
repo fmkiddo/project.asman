@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object\Representation;
 
 use Kint\Utils;
@@ -30,22 +29,40 @@ use SplFileInfo;
 
 class SplFileInfoRepresentation extends Representation
 {
+
     public $perms;
+
     public $flags;
+
     public $path;
+
     public $realpath;
+
     public $linktarget;
+
     public $size;
+
     public $is_dir = false;
+
     public $is_file = false;
+
     public $is_link = false;
+
     public $owner;
+
     public $group;
+
     public $ctime;
+
     public $mtime;
+
     public $typename = 'Unknown file';
+
     public $typeflag = '-';
-    public $hints = array('fspath');
+
+    public $hints = array(
+        'fspath'
+    );
 
     public function __construct(SplFileInfo $fileInfo)
     {
@@ -109,7 +126,9 @@ class SplFileInfoRepresentation extends Representation
                 break;
         }
 
-        $this->flags = array($this->typeflag);
+        $this->flags = array(
+            $this->typeflag
+        );
 
         // User
         $this->flags[] = (($this->perms & 0400) ? 'r' : '-');
@@ -138,11 +157,11 @@ class SplFileInfoRepresentation extends Representation
             $this->flags[] = ($this->perms & 01000) ? 'S' : '-';
         }
 
-        $this->contents = \implode($this->flags).' '.$this->owner.' '.$this->group;
-        $this->contents .= ' '.$this->getSize().' '.$this->getMTime().' ';
+        $this->contents = \implode($this->flags) . ' ' . $this->owner . ' ' . $this->group;
+        $this->contents .= ' ' . $this->getSize() . ' ' . $this->getMTime() . ' ';
 
         if ($this->is_link && $this->linktarget) {
-            $this->contents .= $this->path.' -> '.$this->linktarget;
+            $this->contents .= $this->path . ' -> ' . $this->linktarget;
         } elseif (null !== $this->realpath && \strlen($this->realpath) < \strlen($this->path)) {
             $this->contents .= $this->realpath;
         } else {
@@ -152,7 +171,7 @@ class SplFileInfoRepresentation extends Representation
 
     public function getLabel()
     {
-        return $this->typename.' ('.$this->getSize().')';
+        return $this->typename . ' (' . $this->getSize() . ')';
     }
 
     public function getSize()
@@ -160,7 +179,7 @@ class SplFileInfoRepresentation extends Representation
         if ($this->size) {
             $size = Utils::getHumanReadableBytes($this->size);
 
-            return \round($size['value'], 2).$size['unit'];
+            return \round($size['value'], 2) . $size['unit'];
         }
     }
 

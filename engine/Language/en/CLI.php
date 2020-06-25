@@ -13,12 +13,11 @@
  *
  * @codeCoverageIgnore
  */
-
 return [
-   'commandNotFound' => 'Command "{0}" not found.',
-   'helpUsage'       => 'Usage:',
-   'helpDescription' => 'Description:',
-   'helpOptions'     => 'Options:',
-   'helpArguments'   => 'Arguments:',
-   'invalidColor'    => 'Invalid {0} color: {1}.',
+    'commandNotFound' => 'Command "{0}" not found.',
+    'helpUsage' => 'Usage:',
+    'helpDescription' => 'Description:',
+    'helpOptions' => 'Options:',
+    'helpArguments' => 'Arguments:',
+    'invalidColor' => 'Invalid {0} color: {1}.'
 ];

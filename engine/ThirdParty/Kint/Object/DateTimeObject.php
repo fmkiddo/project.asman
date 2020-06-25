@@ -22,16 +22,19 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 use DateTime;
 
 class DateTimeObject extends InstanceObject
 {
+
     public $dt;
 
-    public $hints = array('object', 'datetime');
+    public $hints = array(
+        'object',
+        'datetime'
+    );
 
     public function __construct(DateTime $dt)
     {
@@ -44,7 +47,7 @@ class DateTimeObject extends InstanceObject
     {
         $stamp = $this->dt->format('Y-m-d H:i:s');
         if ((int) ($micro = $this->dt->format('u'))) {
-            $stamp .= '.'.$micro;
+            $stamp .= '.' . $micro;
         }
         $stamp .= $this->dt->format('P T');
 

@@ -5,7 +5,6 @@
  * @copyright https://github.com/laminas/laminas-escaper/blob/master/COPYRIGHT.md
  * @license   https://github.com/laminas/laminas-escaper/blob/master/LICENSE.md New BSD License
  */
-
 namespace Laminas\Escaper;
 
 /**
@@ -13,25 +12,27 @@ namespace Laminas\Escaper;
  */
 class Escaper
 {
+
     /**
      * Entity Map mapping Unicode codepoints to any available named HTML entities.
      *
      * While HTML supports far more named entities, the lowest common denominator
      * has become HTML5's XML Serialisation which is restricted to the those named
      * entities that XML supports. Using HTML entities would result in this error:
-     *     XML Parsing Error: undefined entity
+     * XML Parsing Error: undefined entity
      *
      * @var array
      */
     protected static $htmlNamedEntityMap = [
-        34 => 'quot',         // quotation mark
-        38 => 'amp',          // ampersand
-        60 => 'lt',           // less-than sign
-        62 => 'gt',           // greater-than sign
+        34 => 'quot', // quotation mark
+        38 => 'amp', // ampersand
+        60 => 'lt', // less-than sign
+        62 => 'gt' // greater-than sign
     ];
 
     /**
-     * Current encoding for escaping. If not UTF-8, we convert strings from this encoding
+     * Current encoding for escaping.
+     * If not UTF-8, we convert strings from this encoding
      * pre-escaping and back to this encoding post-escaping.
      *
      * @var string
@@ -73,15 +74,40 @@ class Escaper
      * @var array
      */
     protected $supportedEncodings = [
-        'iso-8859-1',   'iso8859-1',    'iso-8859-5',   'iso8859-5',
-        'iso-8859-15',  'iso8859-15',   'utf-8',        'cp866',
-        'ibm866',       '866',          'cp1251',       'windows-1251',
-        'win-1251',     '1251',         'cp1252',       'windows-1252',
-        '1252',         'koi8-r',       'koi8-ru',      'koi8r',
-        'big5',         '950',          'gb2312',       '936',
-        'big5-hkscs',   'shift_jis',    'sjis',         'sjis-win',
-        'cp932',        '932',          'euc-jp',       'eucjp',
-        'eucjp-win',    'macroman'
+        'iso-8859-1',
+        'iso8859-1',
+        'iso-8859-5',
+        'iso8859-5',
+        'iso-8859-15',
+        'iso8859-15',
+        'utf-8',
+        'cp866',
+        'ibm866',
+        '866',
+        'cp1251',
+        'windows-1251',
+        'win-1251',
+        '1251',
+        'cp1252',
+        'windows-1252',
+        '1252',
+        'koi8-r',
+        'koi8-ru',
+        'koi8r',
+        'big5',
+        '950',
+        'gb2312',
+        '936',
+        'big5-hkscs',
+        'shift_jis',
+        'sjis',
+        'sjis-win',
+        'cp932',
+        '932',
+        'euc-jp',
+        'eucjp',
+        'eucjp-win',
+        'macroman'
     ];
 
     /**
@@ -95,22 +121,15 @@ class Escaper
     {
         if ($encoding !== null) {
             if (! is_string($encoding)) {
-                throw new Exception\InvalidArgumentException(
-                    get_class($this) . ' constructor parameter must be a string, received ' . gettype($encoding)
-                );
+                throw new Exception\InvalidArgumentException(get_class($this) . ' constructor parameter must be a string, received ' . gettype($encoding));
             }
             if ($encoding === '') {
-                throw new Exception\InvalidArgumentException(
-                    get_class($this) . ' constructor parameter does not allow a blank value'
-                );
+                throw new Exception\InvalidArgumentException(get_class($this) . ' constructor parameter does not allow a blank value');
             }
 
             $encoding = strtolower($encoding);
             if (! in_array($encoding, $this->supportedEncodings)) {
-                throw new Exception\InvalidArgumentException(
-                    'Value of \'' . $encoding . '\' passed to ' . get_class($this)
-                    . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
-                );
+                throw new Exception\InvalidArgumentException('Value of \'' . $encoding . '\' passed to ' . get_class($this) . ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()');
             }
 
             $this->encoding = $encoding;
@@ -120,9 +139,18 @@ class Escaper
         $this->htmlSpecialCharsFlags = ENT_QUOTES | ENT_SUBSTITUTE;
 
         // set matcher callbacks
-        $this->htmlAttrMatcher = [$this, 'htmlAttrMatcher'];
-        $this->jsMatcher       = [$this, 'jsMatcher'];
-        $this->cssMatcher      = [$this, 'cssMatcher'];
+        $this->htmlAttrMatcher = [
+            $this,
+            'htmlAttrMatcher'
+        ];
+        $this->jsMatcher = [
+            $this,
+            'jsMatcher'
+        ];
+        $this->cssMatcher = [
+            $this,
+            'cssMatcher'
+        ];
     }
 
     /**
@@ -137,7 +165,8 @@ class Escaper
 
     /**
      * Escape a string for the HTML Body context where there are very few characters
-     * of special meaning. Internally this will use htmlspecialchars().
+     * of special meaning.
+     * Internally this will use htmlspecialchars().
      *
      * @param string $string
      * @return string
@@ -148,7 +177,8 @@ class Escaper
     }
 
     /**
-     * Escape a string for the HTML Attribute context. We use an extended set of characters
+     * Escape a string for the HTML Attribute context.
+     * We use an extended set of characters
      * to escape that are not covered by htmlspecialchars() to cover cases where an attribute
      * might be unquoted or quoted illegally (e.g. backticks are valid quotes for IE).
      *
@@ -167,7 +197,8 @@ class Escaper
     }
 
     /**
-     * Escape a string for the Javascript context. This does not use json_encode(). An extended
+     * Escape a string for the Javascript context.
+     * This does not use json_encode(). An extended
      * set of characters are escaped beyond ECMAScript's rules for Javascript literal string
      * escaping in order to prevent misinterpretation of Javascript as HTML leading to the
      * injection of special characters and entities. The escaping used should be tolerant
@@ -190,7 +221,8 @@ class Escaper
     }
 
     /**
-     * Escape a string for the URI or Parameter contexts. This should not be used to escape
+     * Escape a string for the URI or Parameter contexts.
+     * This should not be used to escape
      * an entire URI - only a subcomponent being inserted. The function is a simple proxy
      * to rawurlencode() which now implements RFC 3986 since PHP 5.3 completely.
      *
@@ -203,7 +235,8 @@ class Escaper
     }
 
     /**
-     * Escape a string for the CSS context. CSS escaping can be applied to any string being
+     * Escape a string for the CSS context.
+     * CSS escaping can be applied to any string being
      * inserted into CSS and escapes everything except alphanumerics.
      *
      * @param string $string
@@ -236,9 +269,7 @@ class Escaper
          * The following replaces characters undefined in HTML with the
          * hex entity for the Unicode replacement character.
          */
-        if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r")
-            || ($ord >= 0x7f && $ord <= 0x9f)
-        ) {
+        if (($ord <= 0x1f && $chr != "\t" && $chr != "\n" && $chr != "\r") || ($ord >= 0x7f && $ord <= 0x9f)) {
             return '&#xFFFD;';
         }
 
@@ -309,7 +340,8 @@ class Escaper
     }
 
     /**
-     * Converts a string to UTF-8 from the base encoding. The base encoding is set via this
+     * Converts a string to UTF-8 from the base encoding.
+     * The base encoding is set via this
      * class' constructor.
      *
      * @param string $string
@@ -325,17 +357,17 @@ class Escaper
         }
 
         if (! $this->isUtf8($result)) {
-            throw new Exception\RuntimeException(
-                sprintf('String to be escaped was not valid UTF-8 or could not be converted: %s', $result)
-            );
+            throw new Exception\RuntimeException(sprintf('String to be escaped was not valid UTF-8 or could not be converted: %s', $result));
         }
 
         return $result;
     }
 
     /**
-     * Converts a string from UTF-8 to the base encoding. The base encoding is set via this
+     * Converts a string from UTF-8 to the base encoding.
+     * The base encoding is set via this
      * class' constructor.
+     *
      * @param string $string
      * @return string
      */
@@ -376,11 +408,7 @@ class Escaper
         } elseif (function_exists('mb_convert_encoding')) {
             $result = mb_convert_encoding($string, $to, $from);
         } else {
-            throw new Exception\RuntimeException(
-                get_class($this)
-                . ' requires either the iconv or mbstring extension to be installed'
-                . ' when escaping for non UTF-8 strings.'
-            );
+            throw new Exception\RuntimeException(get_class($this) . ' requires either the iconv or mbstring extension to be installed' . ' when escaping for non UTF-8 strings.');
         }
 
         if ($result === false) {

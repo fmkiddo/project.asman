@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,9 +29,12 @@ use Kint\Object\BlobObject;
 
 class BinaryPlugin extends Plugin
 {
+
     public function getTypes()
     {
-        return array('string');
+        return array(
+            'string'
+        );
     }
 
     public function getTriggers()
@@ -42,7 +44,10 @@ class BinaryPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (!$o instanceof BlobObject || !\in_array($o->encoding, array('ASCII', 'UTF-8'), true)) {
+        if (! $o instanceof BlobObject || ! \in_array($o->encoding, array(
+            'ASCII',
+            'UTF-8'
+        ), true)) {
             $o->value->hints[] = 'binary';
         }
     }

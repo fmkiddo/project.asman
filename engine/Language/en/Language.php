@@ -13,7 +13,6 @@
  *
  * @codeCoverageIgnore
  */
-
 return [
-   'languageGetLineInvalidArgumentException' => 'Get line must be a string or array of strings.',
+    'languageGetLineInvalidArgumentException' => 'Get line must be a string or array of strings.'
 ];

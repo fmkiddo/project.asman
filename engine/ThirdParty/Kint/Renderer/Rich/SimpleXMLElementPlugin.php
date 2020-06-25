@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Renderer\Rich;
 
 use Kint\Object\BasicObject;
@@ -31,6 +30,7 @@ use Kint\Renderer\RichRenderer;
 
 class SimpleXMLElementPlugin extends Plugin implements ObjectPluginInterface
 {
+
     public function renderObject(BasicObject $o)
     {
         $children = $this->renderer->renderChildren($o);
@@ -38,14 +38,14 @@ class SimpleXMLElementPlugin extends Plugin implements ObjectPluginInterface
         $header = '';
 
         if (null !== ($s = $o->getModifiers())) {
-            $header .= '<var>'.$s.'</var> ';
+            $header .= '<var>' . $s . '</var> ';
         }
 
         if (null !== ($s = $o->getName())) {
-            $header .= '<dfn>'.$this->renderer->escape($s).'</dfn> ';
+            $header .= '<dfn>' . $this->renderer->escape($s) . '</dfn> ';
 
             if ($s = $o->getOperator()) {
-                $header .= $this->renderer->escape($s, 'ASCII').' ';
+                $header .= $this->renderer->escape($s, 'ASCII') . ' ';
             }
         }
 
@@ -53,14 +53,14 @@ class SimpleXMLElementPlugin extends Plugin implements ObjectPluginInterface
             $s = $this->renderer->escape($s);
 
             if ($o->reference) {
-                $s = '&amp;'.$s;
+                $s = '&amp;' . $s;
             }
 
-            $header .= '<var>'.$this->renderer->escape($s).'</var> ';
+            $header .= '<var>' . $this->renderer->escape($s) . '</var> ';
         }
 
         if (null !== ($s = $o->getSize())) {
-            $header .= '('.$this->renderer->escape($s).') ';
+            $header .= '(' . $this->renderer->escape($s) . ') ';
         }
 
         if (null === $s && $c = $o->getRepresentation('contents')) {
@@ -68,7 +68,7 @@ class SimpleXMLElementPlugin extends Plugin implements ObjectPluginInterface
 
             if ($c && null !== ($s = $c->getValueShort())) {
                 if (RichRenderer::$strlen_max && BlobObject::strlen($s) > RichRenderer::$strlen_max) {
-                    $s = \substr($s, 0, RichRenderer::$strlen_max).'...';
+                    $s = \substr($s, 0, RichRenderer::$strlen_max) . '...';
                 }
                 $header .= $this->renderer->escape($s);
             }
@@ -76,6 +76,6 @@ class SimpleXMLElementPlugin extends Plugin implements ObjectPluginInterface
 
         $header = $this->renderer->renderHeaderWrapper($o, (bool) \strlen($children), $header);
 
-        return '<dl>'.$header.$children.'</dl>';
+        return '<dl>' . $header . $children . '</dl>';
     }
 }

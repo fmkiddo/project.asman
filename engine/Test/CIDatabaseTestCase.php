@@ -35,7 +35,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Test;
 
 use CodeIgniter\Database\BaseConnection;
@@ -50,311 +49,301 @@ use Config\Services;
  */
 class CIDatabaseTestCase extends CIUnitTestCase
 {
-	/**
-	 * Should the db be refreshed before
-	 * each test?
-	 *
-	 * @var boolean
-	 */
-	protected $refresh = true;
 
-	/**
-	 * The seed file(s) used for all tests within this test case.
-	 * Should be fully-namespaced or relative to $basePath
-	 *
-	 * @var string|array
-	 */
-	protected $seed = '';
+    /**
+     * Should the db be refreshed before
+     * each test?
+     *
+     * @var boolean
+     */
+    protected $refresh = true;
 
-	/**
-	 * The path to the seeds directory.
-	 * Allows overriding the default application directories.
-	 *
-	 * @var string
-	 */
-	protected $basePath = SUPPORTPATH . 'Database';
+    /**
+     * The seed file(s) used for all tests within this test case.
+     * Should be fully-namespaced or relative to $basePath
+     *
+     * @var string|array
+     */
+    protected $seed = '';
 
-	/**
-	 * The namespace(s) to help us find the migration classes.
-	 * Empty is equivalent to running `spark migrate -all`.
-	 * Note that running "all" runs migrations in date order,
-	 * but specifying namespaces runs them in namespace order (then date)
-	 *
-	 * @var string|array|null
-	 */
-	protected $namespace = 'Tests\Support';
+    /**
+     * The path to the seeds directory.
+     * Allows overriding the default application directories.
+     *
+     * @var string
+     */
+    protected $basePath = SUPPORTPATH . 'Database';
 
-	/**
-	 * The name of the database group to connect to.
-	 * If not present, will use the defaultGroup.
-	 *
-	 * @var string
-	 */
-	protected $DBGroup = 'tests';
+    /**
+     * The namespace(s) to help us find the migration classes.
+     * Empty is equivalent to running `spark migrate -all`.
+     * Note that running "all" runs migrations in date order,
+     * but specifying namespaces runs them in namespace order (then date)
+     *
+     * @var string|array|null
+     */
+    protected $namespace = 'Tests\Support';
 
-	/**
-	 * Our database connection.
-	 *
-	 * @var BaseConnection
-	 */
-	protected $db;
+    /**
+     * The name of the database group to connect to.
+     * If not present, will use the defaultGroup.
+     *
+     * @var string
+     */
+    protected $DBGroup = 'tests';
 
-	/**
-	 * Migration Runner instance.
-	 *
-	 * @var MigrationRunner|mixed
-	 */
-	protected $migrations;
+    /**
+     * Our database connection.
+     *
+     * @var BaseConnection
+     */
+    protected $db;
 
-	/**
-	 * Seeder instance
-	 *
-	 * @var \CodeIgniter\Database\Seeder
-	 */
-	protected $seeder;
+    /**
+     * Migration Runner instance.
+     *
+     * @var MigrationRunner|mixed
+     */
+    protected $migrations;
 
-	/**
-	 * Stores information needed to remove any
-	 * rows inserted via $this->hasInDatabase();
-	 *
-	 * @var array
-	 */
-	protected $insertCache = [];
+    /**
+     * Seeder instance
+     *
+     * @var \CodeIgniter\Database\Seeder
+     */
+    protected $seeder;
 
-	//--------------------------------------------------------------------
+    /**
+     * Stores information needed to remove any
+     * rows inserted via $this->hasInDatabase();
+     *
+     * @var array
+     */
+    protected $insertCache = [];
 
-	/**
-	 * Load any database test dependencies.
-	 */
-	public function loadDependencies()
-	{
-		if ($this->db === null)
-		{
-			$this->db = Database::connect($this->DBGroup);
-			$this->db->initialize();
-		}
+    // --------------------------------------------------------------------
 
-		if ($this->migrations === null)
-		{
-			// Ensure that we can run migrations
-			$config          = new Migrations();
-			$config->enabled = true;
+    /**
+     * Load any database test dependencies.
+     */
+    public function loadDependencies()
+    {
+        if ($this->db === null) {
+            $this->db = Database::connect($this->DBGroup);
+            $this->db->initialize();
+        }
 
-			$this->migrations = Services::migrations($config, $this->db);
-			$this->migrations->setSilent(false);
-		}
+        if ($this->migrations === null) {
+            // Ensure that we can run migrations
+            $config = new Migrations();
+            $config->enabled = true;
 
-		if ($this->seeder === null)
-		{
-			$this->seeder = Database::seeder($this->DBGroup);
-			$this->seeder->setSilent(true);
-		}
-	}
+            $this->migrations = Services::migrations($config, $this->db);
+            $this->migrations->setSilent(false);
+        }
 
-	//--------------------------------------------------------------------
+        if ($this->seeder === null) {
+            $this->seeder = Database::seeder($this->DBGroup);
+            $this->seeder->setSilent(true);
+        }
+    }
 
-	/**
-	 * Ensures that the database is cleaned up to a known state
-	 * before each test runs.
-	 *
-	 * @throws ConfigException
-	 */
-	protected function setUp(): void
-	{
-		parent::setUp();
+    // --------------------------------------------------------------------
 
-		$this->loadDependencies();
+    /**
+     * Ensures that the database is cleaned up to a known state
+     * before each test runs.
+     *
+     * @throws ConfigException
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
 
-		if ($this->refresh === true)
-		{
-			// If no namespace was specified then rollback/migrate all
-			if (empty($this->namespace))
-			{
-				$this->migrations->setNamespace(null);
+        $this->loadDependencies();
 
-				$this->migrations->regress(0, 'tests');
+        if ($this->refresh === true) {
+            // If no namespace was specified then rollback/migrate all
+            if (empty($this->namespace)) {
+                $this->migrations->setNamespace(null);
 
-				$this->migrations->latest('tests');
-			}
+                $this->migrations->regress(0, 'tests');
 
-			// Run migrations for each specified namespace
-			else
-			{
-				$namespaces = is_array($this->namespace) ? $this->namespace : [$this->namespace];
+                $this->migrations->latest('tests');
+            } // Run migrations for each specified namespace
+            else {
+                $namespaces = is_array($this->namespace) ? $this->namespace : [
+                    $this->namespace
+                ];
 
-				foreach ($namespaces as $namespace)
-				{
-					$this->migrations->setNamespace($namespace);
-					$this->migrations->regress(0, 'tests');
-				}
+                foreach ($namespaces as $namespace) {
+                    $this->migrations->setNamespace($namespace);
+                    $this->migrations->regress(0, 'tests');
+                }
 
-				foreach ($namespaces as $namespace)
-				{
-					$this->migrations->setNamespace($namespace);
-					$this->migrations->latest('tests');
-				}
-			}
-		}
+                foreach ($namespaces as $namespace) {
+                    $this->migrations->setNamespace($namespace);
+                    $this->migrations->latest('tests');
+                }
+            }
+        }
 
-		if (! empty($this->seed))
-		{
-			if (! empty($this->basePath))
-			{
-				$this->seeder->setPath(rtrim($this->basePath, '/') . '/Seeds');
-			}
+        if (! empty($this->seed)) {
+            if (! empty($this->basePath)) {
+                $this->seeder->setPath(rtrim($this->basePath, '/') . '/Seeds');
+            }
 
-			$seeds = is_array($this->seed) ? $this->seed : [$this->seed];
-			foreach ($seeds as $seed)
-			{
-				$this->seed($seed);
-			}
-		}
-	}
+            $seeds = is_array($this->seed) ? $this->seed : [
+                $this->seed
+            ];
+            foreach ($seeds as $seed) {
+                $this->seed($seed);
+            }
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Takes care of any required cleanup after the test, like
-	 * removing any rows inserted via $this->hasInDatabase()
-	 */
-	protected function tearDown(): void
-	{
-		parent::tearDown();
+    /**
+     * Takes care of any required cleanup after the test, like
+     * removing any rows inserted via $this->hasInDatabase()
+     */
+    protected function tearDown(): void
+    {
+        parent::tearDown();
 
-		if (! empty($this->insertCache))
-		{
-			foreach ($this->insertCache as $row)
-			{
-				$this->db->table($row[0])
-						->where($row[1])
-						->delete();
-			}
-		}
-	}
+        if (! empty($this->insertCache)) {
+            foreach ($this->insertCache as $row) {
+                $this->db->table($row[0])
+                    ->where($row[1])
+                    ->delete();
+            }
+        }
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Seeds that database with a specific seeder.
-	 *
-	 * @param string $name
-	 */
-	public function seed(string $name)
-	{
-		return $this->seeder->call($name);
-	}
+    /**
+     * Seeds that database with a specific seeder.
+     *
+     * @param string $name
+     */
+    public function seed(string $name)
+    {
+        return $this->seeder->call($name);
+    }
 
-	//--------------------------------------------------------------------
-	// Database Test Helpers
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // Database Test Helpers
+    // --------------------------------------------------------------------
 
-	/**
-	 * Asserts that records that match the conditions in $where do
-	 * not exist in the database.
-	 *
-	 * @param string $table
-	 * @param array  $where
-	 *
-	 * @return boolean
-	 */
-	public function dontSeeInDatabase(string $table, array $where)
-	{
-		$count = $this->db->table($table)
-				->where($where)
-				->countAllResults();
+    /**
+     * Asserts that records that match the conditions in $where do
+     * not exist in the database.
+     *
+     * @param string $table
+     * @param array $where
+     *
+     * @return boolean
+     */
+    public function dontSeeInDatabase(string $table, array $where)
+    {
+        $count = $this->db->table($table)
+            ->where($where)
+            ->countAllResults();
 
-		$this->assertTrue($count === 0, 'Row was found in database');
-	}
+        $this->assertTrue($count === 0, 'Row was found in database');
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Asserts that records that match the conditions in $where DO
-	 * exist in the database.
-	 *
-	 * @param string $table
-	 * @param array  $where
-	 *
-	 * @return boolean
-	 * @throws \CodeIgniter\Database\Exceptions\DatabaseException
-	 */
-	public function seeInDatabase(string $table, array $where)
-	{
-		$count = $this->db->table($table)
-				->where($where)
-				->countAllResults();
+    /**
+     * Asserts that records that match the conditions in $where DO
+     * exist in the database.
+     *
+     * @param string $table
+     * @param array $where
+     *
+     * @return boolean
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
+    public function seeInDatabase(string $table, array $where)
+    {
+        $count = $this->db->table($table)
+            ->where($where)
+            ->countAllResults();
 
-		$this->assertTrue($count > 0, 'Row not found in database: ' . $this->db->showLastQuery());
-	}
+        $this->assertTrue($count > 0, 'Row not found in database: ' . $this->db->showLastQuery());
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Fetches a single column from a database row with criteria
-	 * matching $where.
-	 *
-	 * @param string $table
-	 * @param string $column
-	 * @param array  $where
-	 *
-	 * @return boolean
-	 * @throws \CodeIgniter\Database\Exceptions\DatabaseException
-	 */
-	public function grabFromDatabase(string $table, string $column, array $where)
-	{
-		$query = $this->db->table($table)
-				->select($column)
-				->where($where)
-				->get();
+    /**
+     * Fetches a single column from a database row with criteria
+     * matching $where.
+     *
+     * @param string $table
+     * @param string $column
+     * @param array $where
+     *
+     * @return boolean
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
+    public function grabFromDatabase(string $table, string $column, array $where)
+    {
+        $query = $this->db->table($table)
+            ->select($column)
+            ->where($where)
+            ->get();
 
-		$query = $query->getRow();
+        $query = $query->getRow();
 
-		return $query->$column ?? false;
-	}
+        return $query->$column ?? false;
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Inserts a row into to the database. This row will be removed
-	 * after the test has run.
-	 *
-	 * @param string $table
-	 * @param array  $data
-	 *
-	 * @return boolean
-	 */
-	public function hasInDatabase(string $table, array $data)
-	{
-		$this->insertCache[] = [
-			$table,
-			$data,
-		];
+    /**
+     * Inserts a row into to the database.
+     * This row will be removed
+     * after the test has run.
+     *
+     * @param string $table
+     * @param array $data
+     *
+     * @return boolean
+     */
+    public function hasInDatabase(string $table, array $data)
+    {
+        $this->insertCache[] = [
+            $table,
+            $data
+        ];
 
-		return $this->db->table($table)
-					->insert($data);
-	}
+        return $this->db->table($table)->insert($data);
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 
-	/**
-	 * Asserts that the number of rows in the database that match $where
-	 * is equal to $expected.
-	 *
-	 * @param integer $expected
-	 * @param string  $table
-	 * @param array   $where
-	 *
-	 * @return boolean
-	 * @throws \CodeIgniter\Database\Exceptions\DatabaseException
-	 */
-	public function seeNumRecords(int $expected, string $table, array $where)
-	{
-		$count = $this->db->table($table)
-				->where($where)
-				->countAllResults();
+    /**
+     * Asserts that the number of rows in the database that match $where
+     * is equal to $expected.
+     *
+     * @param integer $expected
+     * @param string $table
+     * @param array $where
+     *
+     * @return boolean
+     * @throws \CodeIgniter\Database\Exceptions\DatabaseException
+     */
+    public function seeNumRecords(int $expected, string $table, array $where)
+    {
+        $count = $this->db->table($table)
+            ->where($where)
+            ->countAllResults();
 
-		$this->assertEquals($expected, $count, 'Wrong number of matching rows in database.');
-	}
+        $this->assertEquals($expected, $count, 'Wrong number of matching rows in database.');
+    }
 
-	//--------------------------------------------------------------------
+    // --------------------------------------------------------------------
 }

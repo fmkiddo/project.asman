@@ -36,7 +36,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Commands\Database;
 
 use CodeIgniter\CLI\BaseCommand;
@@ -50,118 +49,109 @@ use Config\Services;
  */
 class Migrate extends BaseCommand
 {
-	/**
-	 * The group the command is lumped under
-	 * when listing commands.
-	 *
-	 * @var string
-	 */
-	protected $group = 'Database';
 
-	/**
-	 * The Command's name
-	 *
-	 * @var string
-	 */
-	protected $name = 'migrate';
+    /**
+     * The group the command is lumped under
+     * when listing commands.
+     *
+     * @var string
+     */
+    protected $group = 'Database';
 
-	/**
-	 * the Command's short description
-	 *
-	 * @var string
-	 */
-	protected $description = 'Locates and runs all new migrations against the database.';
+    /**
+     * The Command's name
+     *
+     * @var string
+     */
+    protected $name = 'migrate';
 
-	/**
-	 * the Command's usage
-	 *
-	 * @var string
-	 */
-	protected $usage = 'migrate [options]';
+    /**
+     * the Command's short description
+     *
+     * @var string
+     */
+    protected $description = 'Locates and runs all new migrations against the database.';
 
-	/**
-	 * the Command's Arguments
-	 *
-	 * @var array
-	 */
-	protected $arguments = [];
+    /**
+     * the Command's usage
+     *
+     * @var string
+     */
+    protected $usage = 'migrate [options]';
 
-	/**
-	 * the Command's Options
-	 *
-	 * @var array
-	 */
-	protected $options = [
-		'-n'   => 'Set migration namespace',
-		'-g'   => 'Set database group',
-		'-all' => 'Set for all namespaces, will ignore (-n) option',
-	];
+    /**
+     * the Command's Arguments
+     *
+     * @var array
+     */
+    protected $arguments = [];
 
-	/**
-	 * Ensures that all migrations have been run.
-	 *
-	 * @param array $params
-	 */
-	public function run(array $params = [])
-	{
-		$runner = Services::migrations();
-		$runner->clearCliMessages();
+    /**
+     * the Command's Options
+     *
+     * @var array
+     */
+    protected $options = [
+        '-n' => 'Set migration namespace',
+        '-g' => 'Set database group',
+        '-all' => 'Set for all namespaces, will ignore (-n) option'
+    ];
 
-		CLI::write(lang('Migrations.latest'), 'yellow');
+    /**
+     * Ensures that all migrations have been run.
+     *
+     * @param array $params
+     */
+    public function run(array $params = [])
+    {
+        $runner = Services::migrations();
+        $runner->clearCliMessages();
 
-		$namespace = $params['-n'] ?? CLI::getOption('n');
-		$group     = $params['-g'] ?? CLI::getOption('g');
+        CLI::write(lang('Migrations.latest'), 'yellow');
 
-		try
-		{
-			// Check for 'all' namespaces
-			if ($this->isAllNamespace($params))
-			{
-				$runner->setNamespace(null);
-			}
-			// Check for a specified namespace
-			elseif ($namespace)
-			{
-				$runner->setNamespace($namespace);
-			}
+        $namespace = $params['-n'] ?? CLI::getOption('n');
+        $group = $params['-g'] ?? CLI::getOption('g');
 
-			if (! $runner->latest($group))
-			{
-				CLI::write(lang('Migrations.generalFault'), 'red');
-			}
+        try {
+            // Check for 'all' namespaces
+            if ($this->isAllNamespace($params)) {
+                $runner->setNamespace(null);
+            } // Check for a specified namespace
+            elseif ($namespace) {
+                $runner->setNamespace($namespace);
+            }
 
-			$messages = $runner->getCliMessages();
-			foreach ($messages as $message)
-			{
-				CLI::write($message);
-			}
+            if (! $runner->latest($group)) {
+                CLI::write(lang('Migrations.generalFault'), 'red');
+            }
 
-			CLI::write('Done');
-		}
-		catch (\Exception $e)
-		{
-			$this->showError($e);
-		}
-	}
+            $messages = $runner->getCliMessages();
+            foreach ($messages as $message) {
+                CLI::write($message);
+            }
 
-	/**
-	 * To migrate all namespaces to the latest migration
-	 *
-	 * Demo:
-	 *  1. command line: php spark migrate:latest -all
-	 *  2. command file: $this->call('migrate:latest', ['-g' => 'test','-all']);
-	 *
-	 * @param  array $params
-	 * @return boolean
-	 */
-	private function isAllNamespace(array $params): bool
-	{
-		if (array_search('-all', $params) !== false)
-		{
-			return true;
-		}
+            CLI::write('Done');
+        } catch (\Exception $e) {
+            $this->showError($e);
+        }
+    }
 
-		return ! is_null(CLI::getOption('all'));
-	}
+    /**
+     * To migrate all namespaces to the latest migration
+     *
+     * Demo:
+     * 1. command line: php spark migrate:latest -all
+     * 2. command file: $this->call('migrate:latest', ['-g' => 'test','-all']);
+     *
+     * @param array $params
+     * @return boolean
+     */
+    private function isAllNamespace(array $params): bool
+    {
+        if (array_search('-all', $params) !== false) {
+            return true;
+        }
 
+        return ! is_null(CLI::getOption('all'));
+    }
 }

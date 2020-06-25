@@ -36,7 +36,6 @@
  * @since      Version 4.0.0
  * @filesource
  */
-
 namespace CodeIgniter\Encryption;
 
 /**
@@ -47,21 +46,25 @@ namespace CodeIgniter\Encryption;
 interface EncrypterInterface
 {
 
-	/**
-	 * Encrypt - convert plaintext into ciphertext
-	 *
-	 * @param  string $data   Input data
-	 * @param  array  $params Over-ridden parameters, specifically the key
-	 * @return string
-	 */
-	public function encrypt($data, $params = null);
+    /**
+     * Encrypt - convert plaintext into ciphertext
+     *
+     * @param string $data
+     *            Input data
+     * @param array $params
+     *            Over-ridden parameters, specifically the key
+     * @return string
+     */
+    public function encrypt($data, $params = null);
 
-	/**
-	 * Decrypt - convert ciphertext into plaintext
-	 *
-	 * @param  string $data   Encrypted data
-	 * @param  array  $params Over-ridden parameters, specifically the key
-	 * @return string
-	 */
-	public function decrypt($data, $params = null);
+    /**
+     * Decrypt - convert ciphertext into plaintext
+     *
+     * @param string $data
+     *            Encrypted data
+     * @param array $params
+     *            Over-ridden parameters, specifically the key
+     * @return string
+     */
+    public function decrypt($data, $params = null);
 }

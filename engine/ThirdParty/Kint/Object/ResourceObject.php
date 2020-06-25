@@ -22,17 +22,17 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 class ResourceObject extends BasicObject
 {
+
     public $resource_type;
 
     public function getType()
     {
         if ($this->resource_type) {
-            return $this->resource_type.' resource';
+            return $this->resource_type . ' resource';
         }
 
         return 'resource';

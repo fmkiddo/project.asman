@@ -1,5 +1,4 @@
 <?php
-
 namespace Psr\Log;
 
 /**
@@ -11,6 +10,7 @@ namespace Psr\Log;
  */
 abstract class AbstractLogger implements LoggerInterface
 {
+
     /**
      * System is unusable.
      *

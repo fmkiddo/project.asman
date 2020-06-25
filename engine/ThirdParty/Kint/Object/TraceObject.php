@@ -22,12 +22,14 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 class TraceObject extends BasicObject
 {
-    public $hints = array('trace');
+
+    public $hints = array(
+        'trace'
+    );
 
     public function getType()
     {
@@ -36,7 +38,7 @@ class TraceObject extends BasicObject
 
     public function getSize()
     {
-        if (!$this->size) {
+        if (! $this->size) {
             return 'empty';
         }
 

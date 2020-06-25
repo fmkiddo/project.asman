@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,9 +29,12 @@ use Kint\Object\Representation\Representation;
 
 class TablePlugin extends Plugin
 {
+
     public function getTypes()
     {
-        return array('array');
+        return array(
+            'array'
+        );
     }
 
     public function getTriggers()
@@ -57,7 +59,7 @@ class TablePlugin extends Plugin
         // "table" inside we'll just make another one down the value tab
         $keys = null;
         foreach ($array as $elem) {
-            if (!\is_array($elem) || \count($elem) < 2) {
+            if (! \is_array($elem) || \count($elem) < 2) {
                 return;
             }
 

@@ -1,16 +1,23 @@
-<?php namespace CodeIgniter\Test\Mock;
+<?php
 
-class MockTable extends \CodeIgniter\View\Table {
+namespace CodeIgniter\Test\Mock;
 
-	// Override inaccessible protected method
-	public function __call($method, $params)
-	{
-		if (is_callable([$this, '_' . $method]))
-		{
-			return call_user_func_array([$this, '_' . $method], $params);
-		}
+class MockTable extends \CodeIgniter\View\Table
+{
 
-		throw new BadMethodCallException('Method ' . $method . ' was not found');
-	}
+    // Override inaccessible protected method
+    public function __call($method, $params)
+    {
+        if (is_callable([
+            $this,
+            '_' . $method
+        ])) {
+            return call_user_func_array([
+                $this,
+                '_' . $method
+            ], $params);
+        }
 
+        throw new BadMethodCallException('Method ' . $method . ' was not found');
+    }
 }

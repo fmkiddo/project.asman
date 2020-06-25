@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use DOMDocument;
@@ -32,6 +31,7 @@ use Kint\Object\Representation\Representation;
 
 class XmlPlugin extends Plugin
 {
+
     /**
      * Which method to parse the variable with.
      *
@@ -45,7 +45,9 @@ class XmlPlugin extends Plugin
 
     public function getTypes()
     {
-        return array('string');
+        return array(
+            'string'
+        );
     }
 
     public function getTriggers()
@@ -59,17 +61,20 @@ class XmlPlugin extends Plugin
             return;
         }
 
-        if (!\method_exists(\get_class($this), 'xmlTo'.self::$parse_method)) {
+        if (! \method_exists(\get_class($this), 'xmlTo' . self::$parse_method)) {
             return;
         }
 
-        $xml = \call_user_func(array(\get_class($this), 'xmlTo'.self::$parse_method), $var, $o->access_path);
+        $xml = \call_user_func(array(
+            \get_class($this),
+            'xmlTo' . self::$parse_method
+        ), $var, $o->access_path);
 
         if (empty($xml)) {
             return;
         }
 
-        list($xml, $access_path, $name) = $xml;
+        list ($xml, $access_path, $name) = $xml;
 
         $base_obj = new BasicObject();
         $base_obj->depth = $o->depth + 1;
@@ -96,19 +101,23 @@ class XmlPlugin extends Plugin
             return;
         }
 
-        if (!$xml) {
+        if (! $xml) {
             return;
         }
 
         if (null === $parent_path) {
             $access_path = null;
         } else {
-            $access_path = 'simplexml_load_string('.$parent_path.')';
+            $access_path = 'simplexml_load_string(' . $parent_path . ')';
         }
 
         $name = $xml->getName();
 
-        return array($xml, $access_path, $name);
+        return array(
+            $xml,
+            $access_path,
+            $name
+        );
     }
 
     /**
@@ -121,15 +130,17 @@ class XmlPlugin extends Plugin
      *
      * If it errors loading then we wouldn't have gotten this far in the first place.
      *
-     * @param string      $var         The XML string
-     * @param null|string $parent_path The path to the parent, in this case the XML string
-     *
+     * @param string $var
+     *            The XML string
+     * @param null|string $parent_path
+     *            The path to the parent, in this case the XML string
+     *            
      * @return null|array The root element DOMNode, the access path, and the root element name
      */
     protected static function xmlToDOMDocument($var, $parent_path)
     {
         // There's no way to check validity in DOMDocument without making errors. For shame!
-        if (!self::xmlToSimpleXML($var, $parent_path)) {
+        if (! self::xmlToSimpleXML($var, $parent_path)) {
             return null;
         }
 
@@ -140,11 +151,15 @@ class XmlPlugin extends Plugin
         if (null === $parent_path) {
             $access_path = null;
         } else {
-            $access_path = '@\\DOMDocument::loadXML('.$parent_path.')->firstChild';
+            $access_path = '@\\DOMDocument::loadXML(' . $parent_path . ')->firstChild';
         }
 
         $name = $xml->nodeName;
 
-        return array($xml, $access_path, $name);
+        return array(
+            $xml,
+            $access_path,
+            $name
+        );
     }
 }

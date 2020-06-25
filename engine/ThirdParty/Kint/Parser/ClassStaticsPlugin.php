@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -33,11 +32,14 @@ use ReflectionProperty;
 
 class ClassStaticsPlugin extends Plugin
 {
+
     private static $cache = array();
 
     public function getTypes()
     {
-        return array('object');
+        return array(
+            'object'
+        );
     }
 
     public function getTriggers()
@@ -52,11 +54,11 @@ class ClassStaticsPlugin extends Plugin
 
         // Constants
         // TODO: PHP 7.1 allows private consts but reflection doesn't have a way to check them yet
-        if (!isset(self::$cache[$class])) {
+        if (! isset(self::$cache[$class])) {
             $consts = array();
 
             foreach ($reflection->getConstants() as $name => $val) {
-                $const = BasicObject::blank($name, '\\'.$class.'::'.$name);
+                $const = BasicObject::blank($name, '\\' . $class . '::' . $name);
                 $const->const = true;
                 $const->depth = $o->depth + 1;
                 $const->owner_class = $class;
@@ -74,7 +76,7 @@ class ClassStaticsPlugin extends Plugin
 
         foreach ($reflection->getProperties(ReflectionProperty::IS_STATIC) as $static) {
             $prop = new BasicObject();
-            $prop->name = '$'.$static->getName();
+            $prop->name = '$' . $static->getName();
             $prop->depth = $o->depth + 1;
             $prop->static = true;
             $prop->operator = BasicObject::OPERATOR_STATIC;
@@ -88,7 +90,7 @@ class ClassStaticsPlugin extends Plugin
             }
 
             if ($this->parser->childHasPath($o, $prop)) {
-                $prop->access_path = '\\'.$prop->owner_class.'::'.$prop->name;
+                $prop->access_path = '\\' . $prop->owner_class . '::' . $prop->name;
             }
 
             $static->setAccessible(true);
@@ -100,7 +102,10 @@ class ClassStaticsPlugin extends Plugin
             return;
         }
 
-        \usort($statics->contents, array('Kint\\Parser\\ClassStaticsPlugin', 'sort'));
+        \usort($statics->contents, array(
+            'Kint\\Parser\\ClassStaticsPlugin',
+            'sort'
+        ));
 
         $o->addRepresentation($statics);
     }

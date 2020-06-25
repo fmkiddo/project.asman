@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Renderer;
 
 use Kint\Object\BasicObject;
@@ -30,12 +29,17 @@ use Kint\Object\InstanceObject;
 
 abstract class Renderer
 {
+
     const SORT_NONE = 0;
+
     const SORT_VISIBILITY = 1;
+
     const SORT_FULL = 2;
 
     protected $call_info = array();
+
     protected $statics = array();
+
     protected $show_trace = true;
 
     abstract public function render(BasicObject $o);
@@ -44,23 +48,23 @@ abstract class Renderer
 
     public function setCallInfo(array $info)
     {
-        if (!isset($info['params'])) {
+        if (! isset($info['params'])) {
             $info['params'] = null;
         }
 
-        if (!isset($info['modifiers']) || !\is_array($info['modifiers'])) {
+        if (! isset($info['modifiers']) || ! \is_array($info['modifiers'])) {
             $info['modifiers'] = array();
         }
 
-        if (!isset($info['callee'])) {
+        if (! isset($info['callee'])) {
             $info['callee'] = null;
         }
 
-        if (!isset($info['caller'])) {
+        if (! isset($info['caller'])) {
             $info['caller'] = null;
         }
 
-        if (!isset($info['trace']) || !\is_array($info['trace'])) {
+        if (! isset($info['trace']) || ! \is_array($info['trace'])) {
             $info['trace'] = array();
         }
 
@@ -69,7 +73,7 @@ abstract class Renderer
             'modifiers' => $info['modifiers'],
             'callee' => $info['callee'],
             'caller' => $info['caller'],
-            'trace' => $info['trace'],
+            'trace' => $info['trace']
         );
     }
 
@@ -81,7 +85,7 @@ abstract class Renderer
     public function setStatics(array $statics)
     {
         $this->statics = $statics;
-        $this->setShowTrace(!empty($statics['display_called_from']));
+        $this->setShowTrace(! empty($statics['display_called_from']));
     }
 
     public function getStatics()
@@ -102,9 +106,11 @@ abstract class Renderer
     /**
      * Returns the first compatible plugin available.
      *
-     * @param array $plugins Array of hints to class strings
-     * @param array $hints   Array of object hints
-     *
+     * @param array $plugins
+     *            Array of hints to class strings
+     * @param array $hints
+     *            Array of object hints
+     *            
      * @return array Array of hints to class strings filtered and sorted by object hints
      */
     public function matchPlugins(array $plugins, array $hints)
@@ -153,8 +159,9 @@ abstract class Renderer
     /**
      * Sorts an array of BasicObject.
      *
-     * @param BasicObject[] $contents Object properties to sort
-     * @param int           $sort
+     * @param BasicObject[] $contents
+     *            Object properties to sort
+     * @param int $sort
      *
      * @return BasicObject[]
      */
@@ -167,7 +174,7 @@ abstract class Renderer
                     BasicObject::ACCESS_PUBLIC => array(),
                     BasicObject::ACCESS_PROTECTED => array(),
                     BasicObject::ACCESS_PRIVATE => array(),
-                    BasicObject::ACCESS_NONE => array(),
+                    BasicObject::ACCESS_NONE => array()
                 );
 
                 foreach ($contents as $item) {
@@ -176,8 +183,11 @@ abstract class Renderer
 
                 return \call_user_func_array('array_merge', $containers);
             case self::SORT_FULL:
-                \usort($contents, array('Kint\\Renderer\\Renderer', 'sortPropertiesFull'));
-                // no break
+                \usort($contents, array(
+                    'Kint\\Renderer\\Renderer',
+                    'sortPropertiesFull'
+                ));
+            // no break
             default:
                 return $contents;
         }

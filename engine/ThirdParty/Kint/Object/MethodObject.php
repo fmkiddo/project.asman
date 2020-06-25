@@ -22,7 +22,6 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 namespace Kint\Object;
 
 use Kint\Object\Representation\DocstringRepresentation;
@@ -32,18 +31,34 @@ use ReflectionMethod;
 
 class MethodObject extends BasicObject
 {
+
     public $type = 'method';
+
     public $filename;
+
     public $startline;
+
     public $endline;
+
     public $parameters = array();
+
     public $abstract;
+
     public $final;
+
     public $internal;
+
     public $docstring;
+
     public $returntype;
+
     public $return_reference = false;
-    public $hints = array('callable', 'method');
+
+    public $hints = array(
+        'callable',
+        'method'
+    );
+
     public $showparams = true;
 
     private $paramcache;
@@ -89,11 +104,7 @@ class MethodObject extends BasicObject
             return;
         }
 
-        $docstring = new DocstringRepresentation(
-            $this->docstring,
-            $this->filename,
-            $this->startline
-        );
+        $docstring = new DocstringRepresentation($this->docstring, $this->filename, $this->startline);
 
         $docstring->implicit_label = true;
         $this->addRepresentation($docstring);
@@ -117,39 +128,39 @@ class MethodObject extends BasicObject
             '__sleep' => true,
             '__tostring' => true,
             '__unset' => true,
-            '__wakeup' => true,
+            '__wakeup' => true
         );
 
         $name = \strtolower($this->name);
 
         if ('__construct' === $name) {
-            $this->access_path = 'new \\'.$parent->getType();
+            $this->access_path = 'new \\' . $parent->getType();
         } elseif ('__invoke' === $name) {
             $this->access_path = $parent->access_path;
         } elseif ('__clone' === $name) {
-            $this->access_path = 'clone '.$parent->access_path;
+            $this->access_path = 'clone ' . $parent->access_path;
             $this->showparams = false;
         } elseif ('__tostring' === $name) {
-            $this->access_path = '(string) '.$parent->access_path;
+            $this->access_path = '(string) ' . $parent->access_path;
             $this->showparams = false;
         } elseif (isset($magic[$name])) {
             $this->access_path = null;
         } elseif ($this->static) {
-            $this->access_path = '\\'.$this->owner_class.'::'.$this->name;
+            $this->access_path = '\\' . $this->owner_class . '::' . $this->name;
         } else {
-            $this->access_path = $parent->access_path.'->'.$this->name;
+            $this->access_path = $parent->access_path . '->' . $this->name;
         }
     }
 
     public function getValueShort()
     {
-        if (!$this->value || !($this->value instanceof DocstringRepresentation)) {
+        if (! $this->value || ! ($this->value instanceof DocstringRepresentation)) {
             return parent::getValueShort();
         }
 
         $ds = $this->value->getDocstringWithoutComments();
 
-        if (!$ds) {
+        if (! $ds) {
             return null;
         }
 
@@ -162,7 +173,7 @@ class MethodObject extends BasicObject
                 break;
             }
 
-            $out .= $line.' ';
+            $out .= $line . ' ';
         }
 
         if (\strlen($out)) {
@@ -176,14 +187,14 @@ class MethodObject extends BasicObject
             $this->abstract ? 'abstract' : null,
             $this->final ? 'final' : null,
             $this->getAccess(),
-            $this->static ? 'static' : null,
+            $this->static ? 'static' : null
         );
 
         $out = '';
 
         foreach ($mods as $word) {
             if (null !== $word) {
-                $out .= $word.' ';
+                $out .= $word . ' ';
             }
         }
 
@@ -196,7 +207,7 @@ class MethodObject extends BasicObject
     {
         if (null !== $this->access_path) {
             if ($this->showparams) {
-                return parent::getAccessPath().'('.$this->getParams().')';
+                return parent::getAccessPath() . '(' . $this->getParams() . ')';
             }
 
             return parent::getAccessPath();
@@ -219,12 +230,12 @@ class MethodObject extends BasicObject
 
             $default = $p->getDefault();
             if ($default) {
-                $default = ' = '.$default;
+                $default = ' = ' . $default;
             }
 
             $ref = $p->reference ? '&' : '';
 
-            $out[] = $type.$ref.$p->getName().$default;
+            $out[] = $type . $ref . $p->getName() . $default;
         }
 
         return $this->paramcache = \implode(', ', $out);
@@ -232,7 +243,7 @@ class MethodObject extends BasicObject
 
     public function getPhpDocUrl()
     {
-        if (!$this->internal) {
+        if (! $this->internal) {
             return null;
         }
 
@@ -248,6 +259,6 @@ class MethodObject extends BasicObject
             $funcname = \substr($funcname, 2);
         }
 
-        return 'https://secure.php.net/'.$class.'.'.$funcname;
+        return 'https://secure.php.net/' . $class . '.' . $funcname;
     }
 }

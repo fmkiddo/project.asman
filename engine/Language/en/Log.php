@@ -13,7 +13,6 @@
  *
  * @codeCoverageIgnore
  */
-
 return [
-   'invalidLogLevel' => '{0} is an invalid log level.',
+    'invalidLogLevel' => '{0} is an invalid log level.'
 ];
