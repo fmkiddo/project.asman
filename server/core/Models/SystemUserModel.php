@@ -3,8 +3,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SystemUserModel extends Model
-{
+class SystemUserModel extends Model {
 
     protected $tableName = 'oapusr';
 
@@ -17,8 +16,7 @@ class SystemUserModel extends Model
         'created_by'
     ];
 
-    public function countSystemUser()
-    {
+    public function countSystemUser() {
         $result = $this->findAll();
         if ($result == NULL)
             return 0;

@@ -30,22 +30,22 @@ abstract class BaseController extends Controller
 
     protected $serverModel;
 
-    protected function init()
-    {}
+    protected function init() {}
 
     /**
      * Constructor.
      */
-    public function initController(\CodeIgniter\HTTP\RequestInterface $request, \CodeIgniter\HTTP\ResponseInterface $response, \Psr\Log\LoggerInterface $logger)
-    {
+    public function initController(
+            \CodeIgniter\HTTP\RequestInterface $request, 
+            \CodeIgniter\HTTP\ResponseInterface $response, 
+            \Psr\Log\LoggerInterface $logger) {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
         $this->serverModel = new \App\Models\ServerModel();
         $this->init();
     }
 
-    protected function isFirstTime()
-    {
+    protected function isFirstTime() {
         $firstTime = false;
         $curlClient = \Config\Services::curlrequest();
         $requestData = 'check-system-user.' . $this->serverModel->getServerKey() . '';

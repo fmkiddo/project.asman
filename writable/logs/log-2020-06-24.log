@@ -1,0 +1,17 @@
+CRITICAL - 2020-06-24 21:58:49 --> {0} : {1}
+#0 Q:\Users\rizky\git\project.asman\engine\HTTP\CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('7', 'Failed to conne...')
+#1 Q:\Users\rizky\git\project.asman\engine\HTTP\CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 Q:\Users\rizky\git\project.asman\engine\HTTP\CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('PUT', 'http://localhos...')
+#3 Q:\Users\rizky\git\project.asman\server\core\Controllers\BaseController.php(55): CodeIgniter\HTTP\CURLRequest->request('PUT', 'http://localhos...', Array)
+#4 Q:\Users\rizky\git\project.asman\server\core\Controllers\ServerLogin.php(31): App\Controllers\BaseController->isFirstTime()
+#5 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(914): App\Controllers\ServerLogin->index()
+#6 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ServerLogin))
+#7 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 Q:\Users\rizky\git\project.asman\server\public\index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2020-06-24 23:31:28 --> Call to a member function run() on null
+#0 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(914): App\Controllers\Dashboard->setup()
+#1 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(400): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#2 Q:\Users\rizky\git\project.asman\engine\CodeIgniter.php(308): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 Q:\Users\rizky\git\project.asman\server\public\index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}

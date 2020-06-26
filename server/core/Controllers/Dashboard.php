@@ -6,8 +6,7 @@ class Dashboard extends BaseController
 
     private $persistenceData = [];
 
-    private function doSetup(array $post = []): bool
-    {
+    private function doSetup(array $post = []) : bool {
         $setupSuccess = false;
         $put = [
             'json' => $post
@@ -22,8 +21,7 @@ class Dashboard extends BaseController
      * {@inheritdoc}
      * @see \App\Controllers\BaseController::init()
      */
-    protected function init()
-    {
+    protected function init() {
         // TODO Auto-generated method stub
         $router = \Config\Services::router();
         $this->persistenceData['assetsFolder'] = base_url('assets');
@@ -31,13 +29,11 @@ class Dashboard extends BaseController
         $this->validator = \Config\Services::validation();
     }
 
-    public function index()
-    {
+    public function index() {
         return view('dashboard', $this->persistenceData);
     }
 
-    public function setup()
-    {
+    public function setup() {
         $this->persistenceData['formAction'] = base_url('system/setup');
         if ($this->request->hasHeader('Content-Type')) {
             $header = $this->request->getHeader('Content-Type');
@@ -56,8 +52,7 @@ class Dashboard extends BaseController
         return view('setup', $this->persistenceData);
     }
 
-    public function test()
-    {
+    public function test() {
         $data = 'abdD2';
 
         echo $data . '<br />';

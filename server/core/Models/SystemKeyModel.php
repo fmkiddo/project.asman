@@ -3,19 +3,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SystemKeyModel extends Model
-{
+class SystemKeyModel extends Model {
 
     private const serverKey = 'bc4f0ae5b082d37604e49d4a4971e7c4a0ec7637e2c2962a67b639f964946f8f1520721ced81abe1dcf1a1d7172c4e22aedefe631fbb3a95335f311ac2a98fc0';
 
-    public function generate($length = 64)
-    {
+    public function generate($length = 64) {
         $randKey = openssl_random_pseudo_bytes($length);
         return bin2hex($randKey);
     }
 
-    public function validateRequest(\CodeIgniter\HTTP\IncomingRequest $request)
-    {
+    public function validateRequest(\CodeIgniter\HTTP\IncomingRequest $request) {
         $valid = false;
         if ($request->hasHeader('Content-Type')) {
             $header = $request->getHeader('Content-Type');
@@ -29,8 +26,7 @@ class SystemKeyModel extends Model
         return $valid;
     }
 
-    public function validateSystemKey($key = '')
-    {
+    public function validateSystemKey($key = '') {
         return strcmp($key, SystemKeyModel::serverKey) == 0;
     }
 }

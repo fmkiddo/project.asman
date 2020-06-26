@@ -1,11 +1,9 @@
 <?php
 namespace App\Controllers;
 
-class ServerRequest extends BaseRESTController
-{
+class ServerRequest extends BaseRESTController {
 
-    public function generate_request_key()
-    {
+    public function generate_request_key() {
         $respond = [
             'status' => 403,
             'message' => 'Forbidden Access',
@@ -24,8 +22,7 @@ class ServerRequest extends BaseRESTController
         return $this->respond($respond);
     }
 
-    public function index()
-    {
+    public function index() {
         $response = [
             'statusCode' => 403,
             'message' => '',
