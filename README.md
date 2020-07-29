@@ -1,1 +1,1 @@
-# project.mithril
+# project assets manager
