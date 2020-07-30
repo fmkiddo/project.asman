@@ -35,6 +35,7 @@
  * @since      Version 3.0.0
  * @filesource
  */
+
 namespace CodeIgniter\RESTful;
 
 use CodeIgniter\API\ResponseTrait;
@@ -51,159 +52,152 @@ use Psr\Log\LoggerInterface;
 class ResourceController extends Controller
 {
 
-    use ResponseTrait;
+	use ResponseTrait;
 
-    /**
-     *
-     * @var string Name of the model class managing this resource's data
-     */
-    protected $modelName;
+	/**
+	 *
+	 * @var string Name of the model class managing this resource's data
+	 */
+	protected $modelName;
 
-    /**
-     *
-     * @var \CodeIgniter\Model the model holding this resource's data
-     */
-    protected $model;
+	/**
+	 *
+	 * @var \CodeIgniter\Model the model holding this resource's data
+	 */
+	protected $model;
 
-    // --------------------------------------------------------------------
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
+	//--------------------------------------------------------------------
 
-        // instantiate our model, if needed
-        $this->setModel($this->modelName);
-    }
+	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+	{
+		parent::initController($request, $response, $logger);
 
-    // --------------------------------------------------------------------
+		// instantiate our model, if needed
+		$this->setModel($this->modelName);
+	}
 
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return array an array
-     */
-    public function index()
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'index'
-        ]), 501);
-    }
+	//--------------------------------------------------------------------
 
-    /**
-     * Return the properties of a resource object
-     *
-     * @return array an array
-     */
-    public function show($id = null)
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'show'
-        ]), 501);
-    }
+	/**
+	 * Return an array of resource objects, themselves in array format
+	 *
+	 * @return array	an array
+	 */
+	public function index()
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['index']), 501);
+	}
 
-    /**
-     * Return a new resource object, with default properties
-     *
-     * @return array an array
-     */
-    public function new()
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'new'
-        ]), 501);
-    }
+	/**
+	 * Return the properties of a resource object
+	 *
+	 * @return array	an array
+	 */
+	public function show($id = null)
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['show']), 501);
+	}
 
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return array an array
-     */
-    public function create()
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'create'
-        ]), 501);
-    }
+	/**
+	 * Return a new resource object, with default properties
+	 *
+	 * @return array	an array
+	 */
+	public function new()
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['new']), 501);
+	}
 
-    /**
-     * Return the editable properties of a resource object
-     *
-     * @return array an array
-     */
-    public function edit($id = null)
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'edit'
-        ]), 501);
-    }
+	/**
+	 * Create a new resource object, from "posted" parameters
+	 *
+	 * @return array	an array
+	 */
+	public function create()
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['create']), 501);
+	}
 
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return array an array
-     */
-    public function update($id = null)
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'update'
-        ]), 501);
-    }
+	/**
+	 * Return the editable properties of a resource object
+	 *
+	 * @return array	an array
+	 */
+	public function edit($id = null)
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['edit']), 501);
+	}
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return array an array
-     */
-    public function delete($id = null)
-    {
-        return $this->fail(lang('RESTful.notImplemented', [
-            'delete'
-        ]), 501);
-    }
+	/**
+	 * Add or update a model resource, from "posted" properties
+	 *
+	 * @return array	an array
+	 */
+	public function update($id = null)
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['update']), 501);
+	}
 
-    // --------------------------------------------------------------------
+	/**
+	 * Delete the designated resource object from the model
+	 *
+	 * @return array	an array
+	 */
+	public function delete($id = null)
+	{
+		return $this->fail(lang('RESTful.notImplemented', ['delete']), 501);
+	}
 
-    /**
-     * Set or change the model this controller is bound to.
-     * Given either the name or the object, determine the other.
-     *
-     * @param string|object $which
-     */
-    public function setModel($which = null)
-    {
-        // save what we have been given
-        if (! empty($which)) {
-            if (is_object($which)) {
-                $this->model = $which;
-            } else {
-                $this->modelName = $which;
-            }
-        }
+	//--------------------------------------------------------------------
 
-        // make a model object if needed
-        if (empty($this->model) && ! empty($this->modelName)) {
-            if (class_exists($this->modelName)) {
-                $this->model = new $this->modelName();
-            }
-        }
+	/**
+	 * Set or change the model this controller is bound to.
+	 * Given either the name or the object, determine the other.
+	 *
+	 * @param string|object $which
+	 */
+	public function setModel($which = null)
+	{
+		// save what we have been given
+		if (! empty($which))
+		{
+			if (is_object($which))
+			{
+				$this->model = $which;
+			}
+			else
+			{
+				$this->modelName = $which;
+			}
+		}
 
-        // determine model name if needed
-        if (empty($this->modelName) && ! empty($this->model)) {
-            $this->modelName = get_class($this->model);
-        }
-    }
+		// make a model object if needed
+		if (empty($this->model) && ! empty($this->modelName))
+		{
+			if (class_exists($this->modelName))
+			{
+				$this->model = model($this->modelName);
+			}
+		}
 
-    /**
-     * Set/change the expected response representation for returned objects
-     *
-     * @param string $format
-     */
-    public function setFormat(string $format = 'json')
-    {
-        if (in_array($format, [
-            'json',
-            'xml'
-        ])) {
-            $this->format = $format;
-        }
-    }
+		// determine model name if needed
+		if (empty($this->modelName) && ! empty($this->model))
+		{
+			$this->modelName = get_class($this->model);
+		}
+	}
+
+	/**
+	 * Set/change the expected response representation for returned objects
+	 *
+	 * @param string $format
+	 */
+	public function setFormat(string $format = 'json')
+	{
+		if (in_array($format, ['json', 'xml']))
+		{
+			$this->format = $format;
+		}
+	}
+
 }

@@ -22,20 +22,15 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object\Representation;
 
 class DocstringRepresentation extends Representation
 {
-
     public $file;
-
     public $line;
-
     public $class;
-
-    public $hints = array(
-        'docstring'
-    );
+    public $hints = array('docstring');
 
     public function __construct($docstring, $file, $line, $class = null)
     {
@@ -66,11 +61,11 @@ class DocstringRepresentation extends Representation
      */
     public function getDocstringWithoutComments()
     {
-        if (! $this->contents) {
+        if (!$this->contents) {
             return null;
         }
 
-        $string = \substr($this->contents, 3, - 2);
+        $string = \substr($this->contents, 3, -2);
         $string = \preg_replace('/^\\s*\\*\\s*?(\\S|$)/m', '\\1', $string);
 
         return \trim($string);

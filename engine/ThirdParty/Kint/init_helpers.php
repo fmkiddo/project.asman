@@ -22,10 +22,10 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 use Kint\Kint;
 
-if (! \function_exists('d')) {
-
+if (!\function_exists('d')) {
     /**
      * Alias of Kint::dump().
      *
@@ -35,17 +35,13 @@ if (! \function_exists('d')) {
     {
         $args = \func_get_args();
 
-        return \call_user_func_array(array(
-            'Kint',
-            'dump'
-        ), $args);
+        return \call_user_func_array(array('Kint', 'dump'), $args);
     }
 
     Kint::$aliases[] = 'd';
 }
 
-if (! \function_exists('s')) {
-
+if (!\function_exists('s')) {
     /**
      * Alias of Kint::dump(), however the output is in plain text.
      *
@@ -63,7 +59,7 @@ if (! \function_exists('s')) {
      */
     function s()
     {
-        if (! Kint::$enabled_mode) {
+        if (!Kint::$enabled_mode) {
             return 0;
         }
 
@@ -77,10 +73,7 @@ if (! \function_exists('s')) {
         }
 
         $args = \func_get_args();
-        $out = \call_user_func_array(array(
-            'Kint',
-            'dump'
-        ), $args);
+        $out = \call_user_func_array(array('Kint', 'dump'), $args);
 
         Kint::$enabled_mode = $stash;
 

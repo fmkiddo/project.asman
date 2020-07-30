@@ -35,6 +35,7 @@
  * @since      Version 3.0.0
  * @filesource
  */
+
 namespace CodeIgniter\RESTful;
 
 use CodeIgniter\Controller;
@@ -50,163 +51,156 @@ use Psr\Log\LoggerInterface;
 class ResourcePresenter extends Controller
 {
 
-    /**
-     *
-     * @var string Name of the model class managing this resource's data
-     */
-    protected $modelName;
+	/**
+	 *
+	 * @var string Name of the model class managing this resource's data
+	 */
+	protected $modelName;
 
-    /**
-     *
-     * @var \CodeIgniter\Model the model holding this resource's data
-     */
-    protected $model;
+	/**
+	 *
+	 * @var \CodeIgniter\Model the model holding this resource's data
+	 */
+	protected $model;
 
-    // --------------------------------------------------------------------
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
-        parent::initController($request, $response, $logger);
+	//--------------------------------------------------------------------
 
-        // instantiate our model, if needed
-        $this->setModel($this->modelName);
-    }
+	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
+	{
+		parent::initController($request, $response, $logger);
 
-    // --------------------------------------------------------------------
+		// instantiate our model, if needed
+		$this->setModel($this->modelName);
+	}
 
-    /**
-     * Present a view of resource objects
-     *
-     * @return string
-     */
-    public function index()
-    {
-        return lang('RESTful.notImplemented', [
-            'index'
-        ]);
-    }
+	//--------------------------------------------------------------------
 
-    /**
-     * Present a view to present a specific resource object
-     *
-     * @param type $id
-     * @return string
-     */
-    public function show($id = null)
-    {
-        return lang('RESTful.notImplemented', [
-            'show'
-        ]);
-    }
+	/**
+	 * Present a view of resource objects
+	 *
+	 * @return string
+	 */
+	public function index()
+	{
+		return lang('RESTful.notImplemented', ['index']);
+	}
 
-    /**
-     * Present a view to present a new single resource object
-     *
-     * @return string
-     */
-    public function new()
-    {
-        return lang('RESTful.notImplemented', [
-            'new'
-        ]);
-    }
+	/**
+	 * Present a view to present a specific resource object
+	 *
+	 * @param  type $id
+	 * @return string
+	 */
+	public function show($id = null)
+	{
+		return lang('RESTful.notImplemented', ['show']);
+	}
 
-    /**
-     * Process the creation/insertion of a new resource object.
-     * This should be a POST.
-     *
-     * @return string
-     */
-    public function create()
-    {
-        return lang('RESTful.notImplemented', [
-            'create'
-        ]);
-    }
+	/**
+	 * Present a view to present a new single resource object
+	 *
+	 * @return string
+	 */
+	public function new()
+	{
+		return lang('RESTful.notImplemented', ['new']);
+	}
 
-    /**
-     * Present a view to confirm the deletion of a specific resource object
-     *
-     * @param type $id
-     * @return string
-     */
-    public function remove($id = null)
-    {
-        return lang('RESTful.notImplemented', [
-            'remove'
-        ]);
-    }
+	/**
+	 * Process the creation/insertion of a new resource object.
+	 * This should be a POST.
+	 *
+	 * @return string
+	 */
+	public function create()
+	{
+		return lang('RESTful.notImplemented', ['create']);
+	}
 
-    /**
-     * Process the deletion of a specific resource object
-     *
-     * @param type $id
-     * @return string
-     */
-    public function delete($id = null)
-    {
-        return lang('RESTful.notImplemented', [
-            'delete'
-        ]);
-    }
+	/**
+	 * Present a view to confirm the deletion of a specific resource object
+	 *
+	 * @param  type $id
+	 * @return string
+	 */
+	public function remove($id = null)
+	{
+		return lang('RESTful.notImplemented', ['remove']);
+	}
 
-    /**
-     * Present a view to edit the properties of a specific resource object
-     *
-     * @param type $id
-     * @return string
-     */
-    public function edit($id = null)
-    {
-        return lang('RESTful.notImplemented', [
-            'edit'
-        ]);
-    }
+	/**
+	 * Process the deletion of a specific resource object
+	 *
+	 * @param  type $id
+	 * @return string
+	 */
+	public function delete($id = null)
+	{
+		return lang('RESTful.notImplemented', ['delete']);
+	}
 
-    /**
-     * Process the updating, full or partial, of a specific resource object.
-     * This should be a POST.
-     *
-     * @param type $id
-     * @return string
-     */
-    public function update($id = null)
-    {
-        return lang('RESTful.notImplemented', [
-            'update'
-        ]);
-    }
+	/**
+	 * Present a view to edit the properties of a specific resource object
+	 *
+	 * @param  type $id
+	 * @return string
+	 */
+	public function edit($id = null)
+	{
+		return lang('RESTful.notImplemented', ['edit']);
+	}
 
-    // --------------------------------------------------------------------
+	/**
+	 * Process the updating, full or partial, of a specific resource object.
+	 * This should be a POST.
+	 *
+	 * @param  type $id
+	 * @return string
+	 */
+	public function update($id = null)
+	{
+		return lang('RESTful.notImplemented', ['update']);
+	}
 
-    /**
-     * Set or change the model this controller is bound to.
-     * Given either the name or the object, determine the other.
-     *
-     * @param string|object $which
-     */
-    public function setModel($which = null)
-    {
-        // save what we have been given
-        if (! empty($which)) {
-            if (is_object($which)) {
-                $this->model = $which;
-                $this->modelName = null;
-            } else {
-                $this->model = null;
-                $this->modelName = $which;
-            }
-        }
+	//--------------------------------------------------------------------
 
-        // make a model object if needed
-        if (empty($this->model) && ! empty($this->modelName)) {
-            if (class_exists($this->modelName)) {
-                $this->model = new $this->modelName();
-            }
-        }
+	/**
+	 * Set or change the model this controller is bound to.
+	 * Given either the name or the object, determine the other.
+	 *
+	 * @param string|object $which
+	 */
+	public function setModel($which = null)
+	{
+		// save what we have been given
+		if (! empty($which))
+		{
+			if (is_object($which))
+			{
+				$this->model     = $which;
+				$this->modelName = null;
+			}
+			else
+			{
+				$this->model     = null;
+				$this->modelName = $which;
+			}
+		}
 
-        // determine model name if needed
-        if (empty($this->modelName) && ! empty($this->model)) {
-            $this->modelName = get_class($this->model);
-        }
-    }
+		// make a model object if needed
+		if (empty($this->model) && ! empty($this->modelName))
+		{
+			if (class_exists($this->modelName))
+			{
+				$this->model = model($this->modelName);
+			}
+		}
+
+		// determine model name if needed
+		if (empty($this->modelName) && ! empty($this->model))
+		{
+			$this->modelName = get_class($this->model);
+		}
+	}
+
 }

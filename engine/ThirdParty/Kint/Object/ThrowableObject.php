@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object;
 
 use Exception;
@@ -30,17 +31,12 @@ use Throwable;
 
 class ThrowableObject extends InstanceObject
 {
-
     public $message;
-
-    public $hints = array(
-        'object',
-        'throwable'
-    );
+    public $hints = array('object', 'throwable');
 
     public function __construct($throw)
     {
-        if (! $throw instanceof Exception && (! KINT_PHP70 || ! $throw instanceof Throwable)) {
+        if (!$throw instanceof Exception && (!KINT_PHP70 || !$throw instanceof Throwable)) {
             throw new InvalidArgumentException('ThrowableObject must be constructed with a Throwable');
         }
 
@@ -52,7 +48,7 @@ class ThrowableObject extends InstanceObject
     public function getValueShort()
     {
         if (\strlen($this->message)) {
-            return '"' . $this->message . '"';
+            return '"'.$this->message.'"';
         }
     }
 }

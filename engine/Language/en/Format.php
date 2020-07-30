@@ -13,7 +13,8 @@
  *
  * @codeCoverageIgnore
  */
+
 return [
-    'invalidJSON' => 'Failed to parse json string, error: "{0}".',
-    'missingExtension' => 'The SimpleXML extension is required to format XML.'
+   'invalidJSON'      => 'Failed to parse json string, error: "{0}".',
+   'missingExtension' => 'The SimpleXML extension is required to format XML.',
 ];

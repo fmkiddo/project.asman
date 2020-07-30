@@ -22,24 +22,17 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object;
 
 class InstanceObject extends BasicObject
 {
-
     public $type = 'object';
-
     public $classname;
-
     public $hash;
-
     public $filename;
-
     public $startline;
-
-    public $hints = array(
-        'object'
-    );
+    public $hints = array('object');
 
     public function getType()
     {
@@ -63,7 +56,7 @@ class InstanceObject extends BasicObject
         if (\is_string($a) && \is_string($b)) {
             $aclass = $a;
             $bclass = $b;
-        } elseif (! ($a instanceof BasicObject) || ! ($b instanceof BasicObject)) {
+        } elseif (!($a instanceof BasicObject) || !($b instanceof BasicObject)) {
             return 0;
         } elseif ($a instanceof self && $b instanceof self) {
             $aclass = $a->classname;
@@ -73,7 +66,7 @@ class InstanceObject extends BasicObject
         }
 
         if (\is_subclass_of($aclass, $bclass)) {
-            return - 1;
+            return -1;
         }
 
         if (\is_subclass_of($bclass, $aclass)) {

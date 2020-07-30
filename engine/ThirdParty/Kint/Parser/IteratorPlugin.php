@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,7 +31,6 @@ use Traversable;
 
 class IteratorPlugin extends Plugin
 {
-
     /**
      * List of classes and interfaces to blacklist.
      *
@@ -45,14 +45,12 @@ class IteratorPlugin extends Plugin
         'DOMNodeList',
         'mysqli_result',
         'PDOStatement',
-        'SplFileObject'
+        'SplFileObject',
     );
 
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -62,22 +60,20 @@ class IteratorPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $var instanceof Traversable) {
+        if (!$var instanceof Traversable) {
             return;
         }
 
         foreach (self::$blacklist as $class) {
             if ($var instanceof $class) {
                 $b = new BasicObject();
-                $b->name = $class . ' Iterator Contents';
-                $b->access_path = 'iterator_to_array(' . $o->access_path . ', true)';
+                $b->name = $class.' Iterator Contents';
+                $b->access_path = 'iterator_to_array('.$o->access_path.', true)';
                 $b->depth = $o->depth + 1;
                 $b->hints[] = 'blacklist';
 
                 $r = new Representation('Iterator');
-                $r->contents = array(
-                    $b
-                );
+                $r->contents = array($b);
 
                 $o->addRepresentation($r);
 
@@ -96,7 +92,7 @@ class IteratorPlugin extends Plugin
         $base_obj->depth = $o->depth;
 
         if ($o->access_path) {
-            $base_obj->access_path = 'iterator_to_array(' . $o->access_path . ')';
+            $base_obj->access_path = 'iterator_to_array('.$o->access_path.')';
         }
 
         $r = new Representation('Iterator');

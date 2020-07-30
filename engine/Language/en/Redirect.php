@@ -13,6 +13,7 @@
  *
  * @codeCoverageIgnore
  */
+
 return [
-    'forUnableToRedirect' => 'Unable to redirect to "{0}". Error status code "{1}"'
+   'forUnableToRedirect' => 'Unable to redirect to "{0}". Error status code "{1}"',
 ];

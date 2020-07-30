@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -29,7 +30,6 @@ use Kint\Object\InstanceObject;
 
 class BlacklistPlugin extends Plugin
 {
-
     /**
      * List of classes and interfaces to blacklist.
      *
@@ -60,10 +60,7 @@ class BlacklistPlugin extends Plugin
 
     public function getTypes()
     {
-        return array(
-            'object',
-            'array'
-        );
+        return array('object', 'array');
     }
 
     public function getTriggers()

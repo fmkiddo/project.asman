@@ -22,59 +22,42 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object;
 
 use Kint\Object\Representation\Representation;
 
 class BasicObject
 {
-
     const ACCESS_NONE = null;
-
     const ACCESS_PUBLIC = 1;
-
     const ACCESS_PROTECTED = 2;
-
     const ACCESS_PRIVATE = 3;
 
     const OPERATOR_NONE = null;
-
     const OPERATOR_ARRAY = 1;
-
     const OPERATOR_OBJECT = 2;
-
     const OPERATOR_STATIC = 3;
 
     public $name;
-
     public $type;
-
     public $static = false;
-
     public $const = false;
-
     public $access = self::ACCESS_NONE;
-
     public $owner_class;
-
     public $access_path;
-
     public $operator = self::OPERATOR_NONE;
-
     public $reference = false;
-
     public $depth = 0;
-
     public $size;
-
     public $value;
-
     public $hints = array();
 
     protected $representations = array();
 
     public function __construct()
-    {}
+    {
+    }
 
     public function addRepresentation(Representation $rep, $pos = null)
     {
@@ -85,9 +68,11 @@ class BasicObject
         if (null === $pos) {
             $this->representations[$rep->getName()] = $rep;
         } else {
-            $this->representations = \array_merge(\array_slice($this->representations, 0, $pos), array(
-                $rep->getName() => $rep
-            ), \array_slice($this->representations, $pos));
+            $this->representations = \array_merge(
+                \array_slice($this->representations, 0, $pos),
+                array($rep->getName() => $rep),
+                \array_slice($this->representations, $pos)
+            );
         }
 
         return true;
@@ -244,7 +229,7 @@ class BasicObject
             self::ACCESS_PUBLIC => 1,
             self::ACCESS_PROTECTED => 2,
             self::ACCESS_PRIVATE => 3,
-            self::ACCESS_NONE => 4
+            self::ACCESS_NONE => 4,
         );
 
         return $sorts[$a->access] - $sorts[$b->access];

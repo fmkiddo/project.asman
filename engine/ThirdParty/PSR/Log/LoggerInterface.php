@@ -1,6 +1,4 @@
-<?php
-
-namespace Psr\Log;
+<?php namespace Psr\Log;
 
 /**
  * Describes a logger instance
@@ -19,7 +17,6 @@ namespace Psr\Log;
  */
 interface LoggerInterface
 {
-
     /**
      * System is unusable.
      *

@@ -35,6 +35,7 @@
  * @since      Version 4.0.0
  * @filesource
  */
+
 namespace CodeIgniter\Commands\Database;
 
 use CodeIgniter\CLI\BaseCommand;
@@ -49,130 +50,137 @@ use Config\Services;
 class CreateMigration extends BaseCommand
 {
 
-    /**
-     * The group the command is lumped under
-     * when listing commands.
-     *
-     * @var string
-     */
-    protected $group = 'Database';
+	/**
+	 * The group the command is lumped under
+	 * when listing commands.
+	 *
+	 * @var string
+	 */
+	protected $group = 'Database';
 
-    /**
-     * The Command's name
-     *
-     * @var string
-     */
-    protected $name = 'migrate:create';
+	/**
+	 * The Command's name
+	 *
+	 * @var string
+	 */
+	protected $name = 'migrate:create';
 
-    /**
-     * the Command's short description
-     *
-     * @var string
-     */
-    protected $description = 'Creates a new migration file.';
+	/**
+	 * the Command's short description
+	 *
+	 * @var string
+	 */
+	protected $description = 'Creates a new migration file.';
 
-    /**
-     * the Command's usage
-     *
-     * @var string
-     */
-    protected $usage = 'migrate:create [migration_name] [Options]';
+	/**
+	 * the Command's usage
+	 *
+	 * @var string
+	 */
+	protected $usage = 'migrate:create [migration_name] [Options]';
 
-    /**
-     * the Command's Arguments
-     *
-     * @var array
-     */
-    protected $arguments = [
-        'migration_name' => 'The migration file name'
-    ];
+	/**
+	 * the Command's Arguments
+	 *
+	 * @var array
+	 */
+	protected $arguments = [
+		'migration_name' => 'The migration file name',
+	];
 
-    /**
-     * the Command's Options
-     *
-     * @var array
-     */
-    protected $options = [
-        '-n' => 'Set migration namespace'
-    ];
+	/**
+	 * the Command's Options
+	 *
+	 * @var array
+	 */
+	protected $options = [
+		'-n' => 'Set migration namespace',
+	];
 
-    /**
-     * Creates a new migration file with the current timestamp.
-     *
-     * @param array $params
-     */
-    public function run(array $params = [])
-    {
-        helper('inflector');
-        $name = array_shift($params);
+	/**
+	 * Creates a new migration file with the current timestamp.
+	 *
+	 * @param array $params
+	 */
+	public function run(array $params = [])
+	{
+		helper('inflector');
+		$name = array_shift($params);
 
-        if (empty($name)) {
-            $name = CLI::prompt(lang('Migrations.nameMigration'));
-        }
+		if (empty($name))
+		{
+			$name = CLI::prompt(lang('Migrations.nameMigration'));
+		}
 
-        if (empty($name)) {
-            CLI::error(lang('Migrations.badCreateName'));
-            return;
-        }
+		if (empty($name))
+		{
+			CLI::error(lang('Migrations.badCreateName'));
+			return;
+		}
 
-        $ns = $params['-n'] ?? CLI::getOption('n');
-        $homepath = APPPATH;
+		$ns       = $params['-n'] ?? CLI::getOption('n');
+		$homepath = APPPATH;
 
-        if (! empty($ns)) {
-            // Get all namespaces
-            $namespaces = Services::autoloader()->getNamespace();
+		if (! empty($ns))
+		{
+			// Get all namespaces
+			$namespaces = Services::autoloader()->getNamespace();
 
-            foreach ($namespaces as $namespace => $path) {
-                if ($namespace === $ns) {
-                    $homepath = realpath(reset($path));
-                    break;
-                }
-            }
-        } else {
-            $ns = 'App';
-        }
+			foreach ($namespaces as $namespace => $path)
+			{
+				if ($namespace === $ns)
+				{
+					$homepath = realpath(reset($path));
+					break;
+				}
+			}
+		}
+		else
+		{
+			$ns = 'App';
+		}
 
-        // Always use UTC/GMT so global teams can work together
-        $config = config('Migrations');
-        $fileName = gmdate($config->timestampFormat) . $name;
+		// Always use UTC/GMT so global teams can work together
+		$config   = config('Migrations');
+		$fileName = gmdate($config->timestampFormat) . $name;
 
-        // full path
-        $path = $homepath . '/Database/Migrations/' . $fileName . '.php';
+		// full path
+		$path = $homepath . '/Database/Migrations/' . $fileName . '.php';
 
-        // Class name should be pascal case now (camel case with upper first letter)
-        $name = pascalize($name);
+		// Class name should be pascal case now (camel case with upper first letter)
+		$name = pascalize($name);
 
-        $template = <<<EOD
-        <?php namespace $ns\Database\Migrations;
-        
-        use CodeIgniter\Database\Migration;
-        
-        class {name} extends Migration
-        {
-        	public function up()
-        	{
-        		//
-        	}
-        
-        	//--------------------------------------------------------------------
-        
-        	public function down()
-        	{
-        		//
-        	}
-        }
-        
-        EOD;
-        $template = str_replace('{name}', $name, $template);
+		$template = <<<EOD
+<?php namespace $ns\Database\Migrations;
 
-        helper('filesystem');
-        if (! write_file($path, $template)) {
-            CLI::error(lang('Migrations.writeError', [
-                $path
-            ]));
-            return;
-        }
+use CodeIgniter\Database\Migration;
 
-        CLI::write('Created file: ' . CLI::color(str_replace($homepath, $ns, $path), 'green'));
-    }
+class {name} extends Migration
+{
+	public function up()
+	{
+		//
+	}
+
+	//--------------------------------------------------------------------
+
+	public function down()
+	{
+		//
+	}
+}
+
+EOD;
+		$template = str_replace('{name}', $name, $template);
+
+		helper('filesystem');
+		if (! write_file($path, $template))
+		{
+			CLI::error(lang('Migrations.writeError', [$path]));
+			return;
+		}
+
+		CLI::write('Created file: ' . CLI::color(str_replace($homepath, $ns, $path), 'green'));
+	}
+
 }

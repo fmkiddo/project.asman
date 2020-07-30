@@ -35,6 +35,7 @@
  * @since      Version 4.0.0
  * @filesource
  */
+
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 /**
@@ -48,7 +49,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
  */
 // Prevent access to BaseController
 $routes->add('basecontroller(:any)', function () {
-    throw PageNotFoundException::forPageNotFound();
+	throw PageNotFoundException::forPageNotFound();
 });
 
 // Migrations
@@ -61,5 +62,5 @@ $routes->cli('ci(:any)', '\CodeIgniter\CLI\CommandRunner::index/$1');
 
 // Prevent access to initController method
 $routes->add('(:any)/initController', function () {
-    throw PageNotFoundException::forPageNotFound();
+	throw PageNotFoundException::forPageNotFound();
 });

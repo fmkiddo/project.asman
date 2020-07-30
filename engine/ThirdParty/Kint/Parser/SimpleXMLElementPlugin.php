@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -31,7 +32,6 @@ use SimpleXMLElement;
 
 class SimpleXMLElementPlugin extends Plugin
 {
-
     /**
      * Show all properties and methods.
      *
@@ -41,9 +41,7 @@ class SimpleXMLElementPlugin extends Plugin
 
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -53,13 +51,13 @@ class SimpleXMLElementPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $var instanceof SimpleXMLElement) {
+        if (!$var instanceof SimpleXMLElement) {
             return;
         }
 
         $o->hints[] = 'simplexml_element';
 
-        if (! self::$verbose) {
+        if (!self::$verbose) {
             $o->removeRepresentation('properties');
             $o->removeRepresentation('iterator');
             $o->removeRepresentation('methods');
@@ -72,7 +70,7 @@ class SimpleXMLElementPlugin extends Plugin
         $base_obj->depth = $o->depth;
 
         if ($o->access_path) {
-            $base_obj->access_path = '(string) ' . $o->access_path;
+            $base_obj->access_path = '(string) '.$o->access_path;
         }
 
         if ($attribs = $var->attributes()) {
@@ -113,25 +111,25 @@ class SimpleXMLElementPlugin extends Plugin
                         $base_obj->depth = $o->depth + 1;
                         $base_obj->name = $value->name;
                         if ($value->access_path) {
-                            $base_obj->access_path = $value->access_path . '[' . $i . ']';
+                            $base_obj->access_path = $value->access_path.'['.$i.']';
                         }
 
                         $value = $this->parser->parse($children->{$value->name}[$i], $base_obj);
 
                         if ($value->access_path && 'string' === $value->type) {
-                            $value->access_path = '(string) ' . $value->access_path;
+                            $value->access_path = '(string) '.$value->access_path;
                         }
 
                         $c->contents[] = $value;
 
-                        ++ $i;
+                        ++$i;
                     }
                 }
             }
 
             $o->size = \count($c->contents);
 
-            if (! $o->size) {
+            if (!$o->size) {
                 $o->size = null;
 
                 if (\strlen((string) $var)) {
@@ -139,16 +137,14 @@ class SimpleXMLElementPlugin extends Plugin
                     $base_obj->depth = $o->depth + 1;
                     $base_obj->name = $o->name;
                     if ($o->access_path) {
-                        $base_obj->access_path = '(string) ' . $o->access_path;
+                        $base_obj->access_path = '(string) '.$o->access_path;
                     }
 
                     $value = (string) $var;
 
                     $c = new Representation('Contents');
                     $c->implicit_label = true;
-                    $c->contents = array(
-                        $this->parser->parseDeep($value, $base_obj)
-                    );
+                    $c->contents = array($this->parser->parseDeep($value, $base_obj));
                 }
             }
 

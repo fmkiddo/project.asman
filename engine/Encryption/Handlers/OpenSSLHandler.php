@@ -35,6 +35,7 @@
  * @since      Version 4.0.0
  * @filesource
  */
+
 namespace CodeIgniter\Encryption\Handlers;
 
 use CodeIgniter\Config\BaseConfig;
@@ -46,117 +47,129 @@ use CodeIgniter\Encryption\Exceptions\EncryptionException;
 class OpenSSLHandler extends BaseHandler
 {
 
-    /**
-     * HMAC digest to use
-     */
-    protected $digest = 'SHA512';
+	/**
+	 * HMAC digest to use
+	 */
+	protected $digest = 'SHA512';
 
-    /**
-     * Cipher to use
-     */
-    protected $cipher = 'AES-256-CTR';
+	/**
+	 * Cipher to use
+	 */
+	protected $cipher = 'AES-256-CTR';
 
-    // --------------------------------------------------------------------
+	// --------------------------------------------------------------------
 
-    /**
-     * Initialize OpenSSL, remembering parameters
-     *
-     * @param BaseConfig $config
-     *
-     * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
-     */
-    public function __construct(BaseConfig $config = null)
-    {
-        parent::__construct($config);
-    }
+	/**
+	 * Initialize OpenSSL, remembering parameters
+	 *
+	 * @param BaseConfig $config
+	 *
+	 * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
+	 */
+	public function __construct(BaseConfig $config = null)
+	{
+		parent::__construct($config);
+	}
 
-    /**
-     * Encrypt plaintext, with optional HMAC and base64 encoding
-     *
-     * @param string $data
-     *            Input data
-     * @param array $params
-     *            Over-ridden parameters, specifically the key
-     * @return string
-     * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
-     */
-    public function encrypt($data, $params = null)
-    {
-        // Allow key over-ride
-        if (! empty($params)) {
-            if (isset($params['key'])) {
-                $this->key = $params['key'];
-            } else {
-                $this->key = $params;
-            }
-        }
-        if (empty($this->key)) {
-            throw EncryptionException::forNeedsStarterKey();
-        }
+	/**
+	 * Encrypt plaintext, with optional HMAC and base64 encoding
+	 *
+	 * @param  string $data   Input data
+	 * @param  array  $params Over-ridden parameters, specifically the key
+	 * @return string
+	 * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
+	 */
+	public function encrypt($data, $params = null)
+	{
+		// Allow key over-ride
+		if (! empty($params))
+		{
+			if (isset($params['key']))
+			{
+				$this->key = $params['key'];
+			}
+			else
+			{
+				$this->key = $params;
+			}
+		}
+		if (empty($this->key))
+		{
+			throw EncryptionException::forNeedsStarterKey();
+		}
 
-        // derive a secret key
-        $secret = \hash_hkdf($this->digest, $this->key);
+		// derive a secret key
+		$secret = \hash_hkdf($this->digest, $this->key);
 
-        // basic encryption
-        $iv = ($iv_size = \openssl_cipher_iv_length($this->cipher)) ? \openssl_random_pseudo_bytes($iv_size) : null;
+		// basic encryption
+		$iv = ($iv_size = \openssl_cipher_iv_length($this->cipher)) ? \openssl_random_pseudo_bytes($iv_size) : null;
 
-        $data = \openssl_encrypt($data, $this->cipher, $secret, OPENSSL_RAW_DATA, $iv);
+		$data = \openssl_encrypt($data, $this->cipher, $secret, OPENSSL_RAW_DATA, $iv);
 
-        if ($data === false) {
-            throw EncryptionException::forEncryptionFailed();
-        }
+		if ($data === false)
+		{
+			throw EncryptionException::forEncryptionFailed();
+		}
 
-        $result = $iv . $data;
+		$result = $iv . $data;
 
-        $hmacKey = \hash_hmac($this->digest, $result, $secret, true);
+		$hmacKey = \hash_hmac($this->digest, $result, $secret, true);
 
-        return $hmacKey . $result;
-    }
+		return $hmacKey . $result;
+	}
 
-    // --------------------------------------------------------------------
+	// --------------------------------------------------------------------
 
-    /**
-     * Decrypt ciphertext, with optional HMAC and base64 encoding
-     *
-     * @param string $data
-     *            Encrypted data
-     * @param array $params
-     *            Over-ridden parameters, specifically the key
-     * @return string
-     * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
-     */
-    public function decrypt($data, $params = null)
-    {
-        // Allow key over-ride
-        if (! empty($params)) {
-            if (isset($params['key'])) {
-                $this->key = $params['key'];
-            } else {
-                $this->key = $params;
-            }
-        }
-        if (empty($this->key)) {
-            throw EncryptionException::forNeedsStarterKey();
-        }
+	/**
+	 * Decrypt ciphertext, with optional HMAC and base64 encoding
+	 *
+	 * @param  string $data   Encrypted data
+	 * @param  array  $params Over-ridden parameters, specifically the key
+	 * @return string
+	 * @throws \CodeIgniter\Encryption\Exceptions\EncryptionException
+	 */
+	public function decrypt($data, $params = null)
+	{
+		// Allow key over-ride
+		if (! empty($params))
+		{
+			if (isset($params['key']))
+			{
+				$this->key = $params['key'];
+			}
+			else
+			{
+				$this->key = $params;
+			}
+		}
+		if (empty($this->key))
+		{
+			throw EncryptionException::forNeedsStarterKey();
+		}
 
-        // derive a secret key
-        $secret = \hash_hkdf($this->digest, $this->key);
+		// derive a secret key
+		$secret = \hash_hkdf($this->digest, $this->key);
 
-        $hmacLength = self::substr($this->digest, 3) / 8;
-        $hmacKey = self::substr($data, 0, $hmacLength);
-        $data = self::substr($data, $hmacLength);
-        $hmacCalc = \hash_hmac($this->digest, $data, $secret, true);
-        if (! hash_equals($hmacKey, $hmacCalc)) {
-            throw EncryptionException::forAuthenticationFailed();
-        }
+		$hmacLength = self::substr($this->digest, 3) / 8;
+		$hmacKey    = self::substr($data, 0, $hmacLength);
+		$data       = self::substr($data, $hmacLength);
+		$hmacCalc   = \hash_hmac($this->digest, $data, $secret, true);
+		if (! hash_equals($hmacKey, $hmacCalc))
+		{
+			throw EncryptionException::forAuthenticationFailed();
+		}
 
-        if ($iv_size = \openssl_cipher_iv_length($this->cipher)) {
-            $iv = self::substr($data, 0, $iv_size);
-            $data = self::substr($data, $iv_size);
-        } else {
-            $iv = null;
-        }
+		if ($iv_size = \openssl_cipher_iv_length($this->cipher))
+		{
+			$iv   = self::substr($data, 0, $iv_size);
+			$data = self::substr($data, $iv_size);
+		}
+		else
+		{
+			$iv = null;
+		}
 
-        return \openssl_decrypt($data, $this->cipher, $secret, OPENSSL_RAW_DATA, $iv);
-    }
+		return \openssl_decrypt($data, $this->cipher, $secret, OPENSSL_RAW_DATA, $iv);
+	}
+
 }

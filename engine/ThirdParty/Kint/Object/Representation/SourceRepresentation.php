@@ -22,21 +22,15 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object\Representation;
 
 class SourceRepresentation extends Representation
 {
-
-    public $hints = array(
-        'source'
-    );
-
+    public $hints = array('source');
     public $source = array();
-
     public $filename;
-
     public $line = 0;
-
     public $showfilename = false;
 
     public function __construct($filename, $line, $padding = 7)
@@ -57,18 +51,15 @@ class SourceRepresentation extends Representation
     /**
      * Gets section of source code.
      *
-     * @param string $filename
-     *            Full path to file
-     * @param int $start_line
-     *            The first line to display (1 based)
-     * @param null|int $length
-     *            Amount of lines to show
-     *            
+     * @param string   $filename   Full path to file
+     * @param int      $start_line The first line to display (1 based)
+     * @param null|int $length     Amount of lines to show
+     *
      * @return null|array
      */
     public static function getSource($filename, $start_line = 1, $length = null)
     {
-        if (! $filename || ! \file_exists($filename) || ! \is_readable($filename)) {
+        if (!$filename || !\file_exists($filename) || !\is_readable($filename)) {
             return null;
         }
 

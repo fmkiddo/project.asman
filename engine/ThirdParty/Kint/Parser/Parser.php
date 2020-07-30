@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use DomainException;
@@ -36,7 +37,6 @@ use stdClass;
 
 class Parser
 {
-
     /**
      * Plugin triggers.
      *
@@ -51,35 +51,22 @@ class Parser
      * While a plugin's getTriggers may return any of these
      */
     const TRIGGER_NONE = 0;
-
     const TRIGGER_BEGIN = 1;
-
     const TRIGGER_SUCCESS = 2;
-
     const TRIGGER_RECURSION = 4;
-
     const TRIGGER_DEPTH_LIMIT = 8;
-
     const TRIGGER_COMPLETE = 14;
 
     protected $caller_class;
-
     protected $depth_limit = false;
-
     protected $marker;
-
     protected $object_hashes = array();
-
     protected $parse_break = false;
-
     protected $plugins = array();
 
     /**
-     *
-     * @param false|int $depth_limit
-     *            Maximum depth to parse data
-     * @param null|string $caller
-     *            Caller class name
+     * @param false|int   $depth_limit Maximum depth to parse data
+     * @param null|string $caller      Caller class name
      */
     public function __construct($depth_limit = false, $caller = null)
     {
@@ -95,8 +82,7 @@ class Parser
     /**
      * Set the caller class.
      *
-     * @param null|string $caller
-     *            Caller class name
+     * @param null|string $caller Caller class name
      */
     public function setCallerClass($caller = null)
     {
@@ -113,8 +99,7 @@ class Parser
     /**
      * Set the depth limit.
      *
-     * @param false|int $depth_limit
-     *            Maximum depth to parse data
+     * @param false|int $depth_limit Maximum depth to parse data
      */
     public function setDepthLimit($depth_limit = false)
     {
@@ -133,11 +118,9 @@ class Parser
      *
      * This should not be used unless you know what you're doing!
      *
-     * @param mixed $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param mixed       $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     public function parseDeep(&$var, BasicObject $o)
@@ -155,18 +138,16 @@ class Parser
     /**
      * Parses a variable into a Kint object structure.
      *
-     * @param mixed $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param mixed       $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     public function parse(&$var, BasicObject $o)
     {
         $o->type = \strtolower(\gettype($var));
 
-        if (! $this->applyPlugins($var, $o, self::TRIGGER_BEGIN)) {
+        if (!$this->applyPlugins($var, $o, self::TRIGGER_BEGIN)) {
             return $o;
         }
 
@@ -191,23 +172,23 @@ class Parser
 
     public function addPlugin(Plugin $p)
     {
-        if (! $types = $p->getTypes()) {
+        if (!$types = $p->getTypes()) {
             return false;
         }
 
-        if (! $triggers = $p->getTriggers()) {
+        if (!$triggers = $p->getTriggers()) {
             return false;
         }
 
         $p->setParser($this);
 
         foreach ($types as $type) {
-            if (! isset($this->plugins[$type])) {
+            if (!isset($this->plugins[$type])) {
                 $this->plugins[$type] = array(
                     self::TRIGGER_BEGIN => array(),
                     self::TRIGGER_SUCCESS => array(),
                     self::TRIGGER_RECURSION => array(),
-                    self::TRIGGER_DEPTH_LIMIT => array()
+                    self::TRIGGER_DEPTH_LIMIT => array(),
                 );
             }
 
@@ -266,9 +247,8 @@ class Parser
      * DO NOT pass an array that has had it's marker removed back
      * into the parser, it will result in an extra recursion
      *
-     * @param array $array
-     *            Array potentially containing a recursion marker
-     *            
+     * @param array $array Array potentially containing a recursion marker
+     *
      * @return array Array with recursion marker removed
      */
     public function getCleanArray(array $array)
@@ -283,7 +263,7 @@ class Parser
         $bt = \debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS);
 
         $caller_frame = array(
-            'function' => __FUNCTION__
+            'function' => __FUNCTION__,
         );
 
         while (isset($bt[0]['object']) && $bt[0]['object'] === $this) {
@@ -292,7 +272,7 @@ class Parser
 
         foreach ($bt as $frame) {
             if (isset($frame['object']) && $frame['object'] === $this) {
-                throw new DomainException(__CLASS__ . '::' . $caller_frame['function'] . ' cannot be called from inside a parse');
+                throw new DomainException(__CLASS__.'::'.$caller_frame['function'].' cannot be called from inside a parse');
             }
         }
     }
@@ -313,11 +293,9 @@ class Parser
     /**
      * Parses a string into a Kint BlobObject structure.
      *
-     * @param string $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param string      $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     private function parseString(&$var, BasicObject $o)
@@ -342,11 +320,9 @@ class Parser
     /**
      * Parses an array into a Kint object structure.
      *
-     * @param array $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param array       $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     private function parseArray(array &$var, BasicObject $o)
@@ -356,7 +332,7 @@ class Parser
         $array->size = \count($var);
 
         if (isset($var[$this->marker])) {
-            -- $array->size;
+            --$array->size;
             $array->hints[] = 'recursion';
 
             $this->applyPlugins($var, $array, self::TRIGGER_RECURSION);
@@ -369,7 +345,7 @@ class Parser
         $array->addRepresentation($rep);
         $array->value = $rep;
 
-        if (! $array->size) {
+        if (!$array->size) {
             $this->applyPlugins($var, $array, self::TRIGGER_SUCCESS);
 
             return $array;
@@ -411,9 +387,9 @@ class Parser
 
             if (null !== $array->access_path) {
                 if (\is_string($key) && (string) (int) $key === $key) {
-                    $child->access_path = 'array_values(' . $array->access_path . ')[' . $i . ']'; // @codeCoverageIgnore
+                    $child->access_path = 'array_values('.$array->access_path.')['.$i.']'; // @codeCoverageIgnore
                 } else {
-                    $child->access_path = $array->access_path . '[' . \var_export($key, true) . ']';
+                    $child->access_path = $array->access_path.'['.\var_export($key, true).']';
                 }
             }
 
@@ -425,7 +401,7 @@ class Parser
             }
 
             $rep->contents[] = $this->parse($val, $child);
-            ++ $i;
+            ++$i;
         }
 
         $this->applyPlugins($var, $array, self::TRIGGER_SUCCESS);
@@ -437,11 +413,9 @@ class Parser
     /**
      * Parses an object into a Kint InstanceObject structure.
      *
-     * @param object $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param object      $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     private function parseObject(&$var, BasicObject $o)
@@ -521,12 +495,12 @@ class Parser
             if ($this->childHasPath($object, $child)) {
                 $child->access_path = $object->access_path;
 
-                if (! KINT_PHP72 && \is_int($child->name)) {
-                    $child->access_path = 'array_values((array) ' . $child->access_path . ')[' . $i . ']'; // @codeCoverageIgnore
+                if (!KINT_PHP72 && \is_int($child->name)) {
+                    $child->access_path = 'array_values((array) '.$child->access_path.')['.$i.']'; // @codeCoverageIgnore
                 } elseif (\preg_match('/^[a-zA-Z_\\x7f-\\xff][a-zA-Z0-9_\\x7f-\\xff]*$/', $child->name)) {
-                    $child->access_path .= '->' . $child->name;
+                    $child->access_path .= '->'.$child->name;
                 } else {
-                    $child->access_path .= '->{' . \var_export((string) $child->name, true) . '}';
+                    $child->access_path .= '->{'.\var_export((string) $child->name, true).'}';
                 }
             }
 
@@ -538,7 +512,7 @@ class Parser
             }
 
             $rep->contents[] = $this->parse($val, $child);
-            ++ $i;
+            ++$i;
         }
 
         $object->addRepresentation($rep);
@@ -552,11 +526,9 @@ class Parser
     /**
      * Parses a resource into a Kint ResourceObject structure.
      *
-     * @param resource $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param resource    $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     private function parseResource(&$var, BasicObject $o)
@@ -573,11 +545,9 @@ class Parser
     /**
      * Parses an unknown into a Kint object structure.
      *
-     * @param mixed $var
-     *            The input variable
-     * @param BasicObject $o
-     *            The base object
-     *            
+     * @param mixed       $var The input variable
+     * @param BasicObject $o   The base object
+     *
      * @return BasicObject
      */
     private function parseUnknown(&$var, BasicObject $o)
@@ -591,13 +561,10 @@ class Parser
     /**
      * Applies plugins for an object type.
      *
-     * @param mixed $var
-     *            variable
-     * @param BasicObject $o
-     *            Kint object parsed so far
-     * @param int $trigger
-     *            The trigger to check for the plugins
-     *            
+     * @param mixed       $var     variable
+     * @param BasicObject $o       Kint object parsed so far
+     * @param int         $trigger The trigger to check for the plugins
+     *
      * @return bool Continue parsing
      */
     private function applyPlugins(&$var, BasicObject &$o, $trigger)
@@ -617,7 +584,10 @@ class Parser
             try {
                 $plugin->parse($var, $o, $trigger);
             } catch (Exception $e) {
-                \trigger_error('An exception (' . \get_class($e) . ') was thrown in ' . $e->getFile() . ' on line ' . $e->getLine() . ' while executing Kint Parser Plugin "' . \get_class($plugin) . '". Error message: ' . $e->getMessage(), E_USER_WARNING);
+                \trigger_error(
+                    'An exception ('.\get_class($e).') was thrown in '.$e->getFile().' on line '.$e->getLine().' while executing Kint Parser Plugin "'.\get_class($plugin).'". Error message: '.$e->getMessage(),
+                    E_USER_WARNING
+                );
             }
 
             if ($this->parse_break) {

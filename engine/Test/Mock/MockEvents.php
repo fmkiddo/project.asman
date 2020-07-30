@@ -1,6 +1,4 @@
-<?php
-
-namespace CodeIgniter\Test\Mock;
+<?php namespace CodeIgniter\Test\Mock;
 
 /**
  * CodeIgniter
@@ -29,14 +27,15 @@ namespace CodeIgniter\Test\Mock;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package CodeIgniter
- * @author CodeIgniter Dev Team
- * @copyright 2014-2018 British Columbia Institute of Technology (https://bcit.ca/)
- * @license https://opensource.org/licenses/MIT MIT License
- * @link https://codeigniter.com
- * @since Version 4.0.0
+ * @package    CodeIgniter
+ * @author     CodeIgniter Dev Team
+ * @copyright  2014-2018 British Columbia Institute of Technology (https://bcit.ca/)
+ * @license    https://opensource.org/licenses/MIT	MIT License
+ * @link       https://codeigniter.com
+ * @since      Version 4.0.0
  * @filesource
  */
+
 use CodeIgniter\Events\Events;
 
 /**
@@ -45,23 +44,23 @@ use CodeIgniter\Events\Events;
 class MockEvents extends Events
 {
 
-    public function getListeners()
-    {
-        return self::$listeners;
-    }
+	public function getListeners()
+	{
+		return self::$listeners;
+	}
 
-    public function getEventsFile()
-    {
-        return self::$eventsFile;
-    }
+	public function getEventsFile()
+	{
+		return self::$eventsFile;
+	}
 
-    public function getSimulate()
-    {
-        return self::$simulate;
-    }
+	public function getSimulate()
+	{
+		return self::$simulate;
+	}
 
-    public function unInitialize()
-    {
-        static::$initialized = false;
-    }
+	public function unInitialize()
+	{
+		static::$initialized = false;
+	}
 }

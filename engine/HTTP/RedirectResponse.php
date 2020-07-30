@@ -36,6 +36,7 @@
  * @since      Version 4.0.0
  * @filesource
  */
+
 namespace CodeIgniter\HTTP;
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
@@ -46,127 +47,185 @@ use Config\Services;
  */
 class RedirectResponse extends Response
 {
+	/**
+	 * Sets the URI to redirect to and, optionally, the HTTP status code to use.
+	 * If no code is provided it will be automatically determined.
+	 *
+	 * @param string       $uri    The URI to redirect to
+	 * @param integer|null $code   HTTP status code
+	 * @param string       $method
+	 *
+	 * @return $this
+	 */
+	public function to(string $uri, int $code = null, string $method = 'auto')
+	{
+		// If it appears to be a relative URL, then convert to full URL
+		// for better security.
+		if (strpos($uri, 'http') !== 0)
+		{
+			$url = current_url(true)->resolveRelativeURI($uri);
+			$uri = (string)$url;
+		}
 
-    /**
-     * Sets the URI to redirect to and, optionally, the HTTP status code to use.
-     * If no code is provided it will be automatically determined.
-     *
-     * @param string $uri
-     *            The URI to redirect to
-     * @param integer|null $code
-     *            HTTP status code
-     * @param string $method
-     *
-     * @return $this
-     */
-    public function to(string $uri, int $code = null, string $method = 'auto')
-    {
-        // If it appears to be a relative URL, then convert to full URL
-        // for better security.
-        if (strpos($uri, 'http') !== 0) {
-            $url = current_url(true)->resolveRelativeURI($uri);
-            $uri = (string) $url;
-        }
+		return $this->redirect($uri, $method, $code);
+	}
 
-        return $this->redirect($uri, $method, $code);
-    }
+	/**
+	 * Sets the URI to redirect to but as a reverse-routed or named route
+	 * instead of a raw URI.
+	 *
+	 * @param string       $route
+	 * @param array        $params
+	 * @param integer|null $code
+	 * @param string       $method
+	 *
+	 * @return $this
+	 */
+	public function route(string $route, array $params = [], int $code = 302, string $method = 'auto')
+	{
+		$routes = Services::routes(true);
 
-    /**
-     * Sets the URI to redirect to but as a reverse-routed or named route
-     * instead of a raw URI.
-     *
-     * @param string $route
-     * @param array $params
-     * @param integer|null $code
-     * @param string $method
-     *
-     * @return $this
-     */
-    public function route(string $route, array $params = [], int $code = 302, string $method = 'auto')
-    {
-        $routes = Services::routes(true);
+		$route = $routes->reverseRoute($route, ...$params);
 
-        $route = $routes->reverseRoute($route, ...$params);
+		if (! $route)
+		{
+			throw HTTPException::forInvalidRedirectRoute($route);
+		}
 
-        if (! $route) {
-            throw HTTPException::forInvalidRedirectRoute($route);
-        }
+		return $this->redirect(site_url($route), $method, $code);
+	}
 
-        return $this->redirect(site_url($route), $method, $code);
-    }
+	/**
+	 * Helper function to return to previous page.
+	 *
+	 * Example:
+	 *  return redirect()->back();
+	 *
+	 * @param integer|null $code
+	 * @param string       $method
+	 *
+	 * @return $this
+	 */
+	public function back(int $code = null, string $method = 'auto')
+	{
+		$this->ensureSession();
 
-    /**
-     * Helper function to return to previous page.
-     *
-     * Example:
-     * return redirect()->back();
-     *
-     * @param integer|null $code
-     * @param string $method
-     *
-     * @return $this
-     */
-    public function back(int $code = null, string $method = 'auto')
-    {
-        $this->ensureSession();
+		return $this->redirect(previous_url(), $method, $code);
+	}
 
-        return $this->redirect(previous_url(), $method, $code);
-    }
+	/**
+	 * Specifies that the current $_GET and $_POST arrays should be
+	 * packaged up with the response. It will then be available via
+	 * the 'old()' helper function.
+	 *
+	 * @return $this
+	 */
+	public function withInput()
+	{
+		$session = $this->ensureSession();
 
-    /**
-     * Specifies that the current $_GET and $_POST arrays should be
-     * packaged up with the response.
-     * It will then be available via
-     * the 'old()' helper function.
-     *
-     * @return $this
-     */
-    public function withInput()
-    {
-        $session = $this->ensureSession();
+		$input = [
+			'get'  => $_GET ?? [],
+			'post' => $_POST ?? [],
+		];
 
-        $input = [
-            'get' => $_GET ?? [],
-            'post' => $_POST ?? []
-        ];
+		$session->setFlashdata('_ci_old_input', $input);
 
-        $session->setFlashdata('_ci_old_input', $input);
+		// If the validator has any errors, transmit those back
+		// so they can be displayed when the validation is
+		// handled within a method different than displaying the form.
+		$validator = Services::validation();
+		if (! empty($validator->getErrors()))
+		{
+			$session->setFlashdata('_ci_validation_errors', serialize($validator->getErrors()));
+		}
 
-        // If the validator has any errors, transmit those back
-        // so they can be displayed when the validation is
-        // handled within a method different than displaying the form.
-        $validator = Services::validation();
-        if (! empty($validator->getErrors())) {
-            $session->setFlashdata('_ci_validation_errors', serialize($validator->getErrors()));
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Adds a key and message to the session as Flashdata.
+	 *
+	 * @param string       $key
+	 * @param string|array $message
+	 *
+	 * @return $this
+	 */
+	public function with(string $key, $message)
+	{
+		$session = $this->ensureSession();
 
-    /**
-     * Adds a key and message to the session as Flashdata.
-     *
-     * @param string $key
-     * @param string|array $message
-     *
-     * @return $this
-     */
-    public function with(string $key, $message)
-    {
-        $session = $this->ensureSession();
+		$session->setFlashdata($key, $message);
 
-        $session->setFlashdata($key, $message);
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * Copies any cookies from the global Response instance
+	 * into this RedirectResponse. Useful when you've just
+	 * set a cookie but need ensure that's actually sent
+	 * with the response instead of lost.
+	 *
+	 * @return $this|RedirectResponse
+	 */
+	public function withCookies()
+	{
+		$cookies = service('response')->getCookies();
 
-    /**
-     * Ensures the session is loaded and started.
-     *
-     * @return \CodeIgniter\Session\Session
-     */
-    protected function ensureSession()
-    {
-        return Services::session();
-    }
+		if (empty($cookies))
+		{
+			return $this;
+		}
+
+		foreach ($cookies as $cookie)
+		{
+			$this->setCookie(
+				$cookie['name'],
+				$cookie['value'],
+				$cookie['expires'],
+				$cookie['domain'],
+				$cookie['path'],
+				'', // prefix
+				$cookie['secure'],
+				$cookie['httponly']
+			);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Copies any headers from the global Response instance
+	 * into this RedirectResponse. Useful when you've just
+	 * set a header be need to ensure its actually sent
+	 * with the redirect response.
+	 *
+	 * @return $this|RedirectResponse
+	 */
+	public function withHeaders()
+	{
+		$headers = service('response')->getHeaders();
+
+		if (empty($headers))
+		{
+			return $this;
+		}
+
+		foreach ($headers as $name => $header)
+		{
+			$this->setHeader($name, $header->getValue());
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Ensures the session is loaded and started.
+	 *
+	 * @return \CodeIgniter\Session\Session
+	 */
+	protected function ensureSession()
+	{
+		return Services::session();
+	}
 }

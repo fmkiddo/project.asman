@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object;
 
 use Kint\Utils;
@@ -30,16 +31,10 @@ use ReflectionParameter;
 
 class ParameterObject extends BasicObject
 {
-
     public $type_hint;
-
     public $default;
-
     public $position;
-
-    public $hints = array(
-        'parameter'
-    );
+    public $hints = array('parameter');
 
     public function __construct(ReflectionParameter $param)
     {
@@ -95,7 +90,7 @@ class ParameterObject extends BasicObject
 
     public function getName()
     {
-        return '$' . $this->name;
+        return '$'.$this->name;
     }
 
     public function getDefault()

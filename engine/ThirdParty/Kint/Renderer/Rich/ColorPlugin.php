@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Renderer\Rich;
 
 use Kint\Object\BasicObject;
@@ -30,12 +31,11 @@ use Kint\Object\Representation\Representation;
 
 class ColorPlugin extends Plugin implements TabPluginInterface, ObjectPluginInterface
 {
-
     public function renderObject(BasicObject $o)
     {
         $r = $o->getRepresentation('color');
 
-        if (! $r instanceof ColorRepresentation) {
+        if (!$r instanceof ColorRepresentation) {
             return;
         }
 
@@ -48,53 +48,53 @@ class ColorPlugin extends Plugin implements TabPluginInterface, ObjectPluginInte
 
         $header = $this->renderer->renderHeaderWrapper($o, (bool) \strlen($children), $header);
 
-        return '<dl>' . $header . $children . '</dl>';
+        return '<dl>'.$header.$children.'</dl>';
     }
 
     public function renderTab(Representation $r)
     {
-        if (! $r instanceof ColorRepresentation) {
+        if (!$r instanceof ColorRepresentation) {
             return;
         }
 
         $out = '';
 
         if ($color = $r->getColor(ColorRepresentation::COLOR_NAME)) {
-            $out .= '<dfn>' . $color . "</dfn>\n";
+            $out .= '<dfn>'.$color."</dfn>\n";
         }
         if ($color = $r->getColor(ColorRepresentation::COLOR_HEX_3)) {
-            $out .= '<dfn>' . $color . "</dfn>\n";
+            $out .= '<dfn>'.$color."</dfn>\n";
         }
         if ($color = $r->getColor(ColorRepresentation::COLOR_HEX_6)) {
-            $out .= '<dfn>' . $color . "</dfn>\n";
+            $out .= '<dfn>'.$color."</dfn>\n";
         }
 
         if ($r->hasAlpha()) {
             if ($color = $r->getColor(ColorRepresentation::COLOR_HEX_4)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
             if ($color = $r->getColor(ColorRepresentation::COLOR_HEX_8)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
             if ($color = $r->getColor(ColorRepresentation::COLOR_RGBA)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
             if ($color = $r->getColor(ColorRepresentation::COLOR_HSLA)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
         } else {
             if ($color = $r->getColor(ColorRepresentation::COLOR_RGB)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
             if ($color = $r->getColor(ColorRepresentation::COLOR_HSL)) {
-                $out .= '<dfn>' . $color . "</dfn>\n";
+                $out .= '<dfn>'.$color."</dfn>\n";
             }
         }
 
-        if (! \strlen($out)) {
+        if (!\strlen($out)) {
             return false;
         }
 
-        return '<pre>' . $out . '</pre>';
+        return '<pre>'.$out.'</pre>';
     }
 }

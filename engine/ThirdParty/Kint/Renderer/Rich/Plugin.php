@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Renderer\Rich;
 
 use Kint\Object\BasicObject;
@@ -29,7 +30,6 @@ use Kint\Renderer\RichRenderer;
 
 abstract class Plugin implements PluginInterface
 {
-
     protected $renderer;
 
     public function __construct(RichRenderer $r)
@@ -41,7 +41,7 @@ abstract class Plugin implements PluginInterface
      * Renders a locked header.
      *
      * @param BasicObject $o
-     * @param string $content
+     * @param string      $content
      */
     public function renderLockedHeader(BasicObject $o, $content)
     {
@@ -54,14 +54,14 @@ abstract class Plugin implements PluginInterface
         $header .= '<span class="kint-popup-trigger" title="Open in new window">&boxbox;</span><nav></nav>';
 
         if (null !== ($s = $o->getModifiers())) {
-            $header .= '<var>' . $s . '</var> ';
+            $header .= '<var>'.$s.'</var> ';
         }
 
         if (null !== ($s = $o->getName())) {
-            $header .= '<dfn>' . $this->renderer->escape($s) . '</dfn> ';
+            $header .= '<dfn>'.$this->renderer->escape($s).'</dfn> ';
 
             if ($s = $o->getOperator()) {
-                $header .= $this->renderer->escape($s, 'ASCII') . ' ';
+                $header .= $this->renderer->escape($s, 'ASCII').' ';
             }
         }
 
@@ -69,22 +69,22 @@ abstract class Plugin implements PluginInterface
             $s = $this->renderer->escape($s);
 
             if ($o->reference) {
-                $s = '&amp;' . $s;
+                $s = '&amp;'.$s;
             }
 
-            $header .= '<var>' . $s . '</var> ';
+            $header .= '<var>'.$s.'</var> ';
         }
 
         if (null !== ($s = $o->getSize())) {
-            $header .= '(' . $this->renderer->escape($s) . ') ';
+            $header .= '('.$this->renderer->escape($s).') ';
         }
 
         $header .= $content;
 
-        if (! empty($ap)) {
-            $header .= '<div class="access-path">' . $this->renderer->escape($ap) . '</div>';
+        if (!empty($ap)) {
+            $header .= '<div class="access-path">'.$this->renderer->escape($ap).'</div>';
         }
 
-        return $header . '</dt>';
+        return $header.'</dt>';
     }
 }

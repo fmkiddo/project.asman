@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint;
 
 use InvalidArgumentException;
@@ -30,43 +31,34 @@ use ReflectionNamedType;
 use ReflectionType;
 
 /**
- * A collection of utility methods.
- * Should all be static methods with no dependencies.
+ * A collection of utility methods. Should all be static methods with no dependencies.
  */
 final class Utils
 {
-
     /**
-     *
      * @codeCoverageIgnore
      */
     private function __construct()
-    {}
+    {
+    }
 
     /**
      * Turns a byte value into a human-readable representation.
      *
-     * @param int $value
-     *            Amount of bytes
-     *            
+     * @param int $value Amount of bytes
+     *
      * @return array Human readable value and unit
      */
     public static function getHumanReadableBytes($value)
     {
-        static $unit = array(
-            'B',
-            'KB',
-            'MB',
-            'GB',
-            'TB'
-        );
+        static $unit = array('B', 'KB', 'MB', 'GB', 'TB');
 
         $i = \floor(\log($value, 1024));
         $i = \min($i, 4); // Only go up to TB
 
         return array(
             'value' => (float) ($value / \pow(1024, $i)),
-            'unit' => $unit[$i]
+            'unit' => $unit[$i],
         );
     }
 
@@ -84,10 +76,10 @@ final class Utils
             return $extras; // @codeCoverageIgnore
         }
 
-        $folder = KINT_DIR . '/vendor';
+        $folder = KINT_DIR.'/vendor';
 
-        for ($i = 0; $i < 4; ++ $i) {
-            $installed = $folder . '/composer/installed.json';
+        for ($i = 0; $i < 4; ++$i) {
+            $installed = $folder.'/composer/installed.json';
 
             if (\file_exists($installed) && \is_readable($installed)) {
                 $packages = \json_decode(\file_get_contents($installed), true);
@@ -100,8 +92,8 @@ final class Utils
 
                 $folder = \dirname($folder);
 
-                if (\file_exists($folder . '/composer.json') && \is_readable($folder . '/composer.json')) {
-                    $composer = \json_decode(\file_get_contents($folder . '/composer.json'), true);
+                if (\file_exists($folder.'/composer.json') && \is_readable($folder.'/composer.json')) {
+                    $composer = \json_decode(\file_get_contents($folder.'/composer.json'), true);
 
                     if (isset($composer['extra'][$key]) && \is_array($composer['extra'][$key])) {
                         $extras = \array_replace($extras, $composer['extra'][$key]);
@@ -118,25 +110,24 @@ final class Utils
     }
 
     /**
-     *
      * @codeCoverageIgnore
      */
     public static function composerSkipFlags()
     {
         $extras = self::composerGetExtras();
 
-        if (! empty($extras['disable-facade']) && ! \defined('KINT_SKIP_FACADE')) {
+        if (!empty($extras['disable-facade']) && !\defined('KINT_SKIP_FACADE')) {
             \define('KINT_SKIP_FACADE', true);
         }
 
-        if (! empty($extras['disable-helpers']) && ! \defined('KINT_SKIP_HELPERS')) {
+        if (!empty($extras['disable-helpers']) && !\defined('KINT_SKIP_HELPERS')) {
             \define('KINT_SKIP_HELPERS', true);
         }
     }
 
     public static function isTrace(array $trace)
     {
-        if (! self::isSequential($trace)) {
+        if (!self::isSequential($trace)) {
             return false;
         }
 
@@ -147,18 +138,18 @@ final class Utils
             'class' => 'string',
             'object' => 'object',
             'type' => 'string',
-            'args' => 'array'
+            'args' => 'array',
         );
 
         $file_found = false;
 
         foreach ($trace as $frame) {
-            if (! \is_array($frame) || ! isset($frame['function'])) {
+            if (!\is_array($frame) || !isset($frame['function'])) {
                 return false;
             }
 
             foreach ($frame as $key => $val) {
-                if (! isset($bt_structure[$key])) {
+                if (!isset($bt_structure[$key])) {
                     return false;
                 }
 
@@ -178,10 +169,7 @@ final class Utils
     public static function traceFrameIsListed(array $frame, array $matches)
     {
         if (isset($frame['class'])) {
-            $called = array(
-                \strtolower($frame['class']),
-                \strtolower($frame['function'])
-            );
+            $called = array(\strtolower($frame['class']), \strtolower($frame['function']));
         } else {
             $called = \strtolower($frame['function']);
         }
@@ -197,17 +185,20 @@ final class Utils
             if (\is_array($alias) && 2 === \count($alias)) {
                 $alias = \array_values(\array_filter($alias, 'is_string'));
 
-                if (2 === \count($alias) && \preg_match('/^' . $name_regex . '$/', $alias[1]) && \preg_match('/^\\\\?(' . $name_regex . '\\\\)*' . $name_regex . '$/', $alias[0])) {
+                if (2 === \count($alias) &&
+                    \preg_match('/^'.$name_regex.'$/', $alias[1]) &&
+                    \preg_match('/^\\\\?('.$name_regex.'\\\\)*'.$name_regex.'$/', $alias[0])
+                ) {
                     $alias = array(
                         \strtolower(\ltrim($alias[0], '\\')),
-                        \strtolower($alias[1])
+                        \strtolower($alias[1]),
                     );
                 } else {
                     unset($aliases[$index]);
                     continue;
                 }
             } elseif (\is_string($alias)) {
-                if (\preg_match('/^\\\\?(' . $name_regex . '\\\\)*' . $name_regex . '$/', $alias)) {
+                if (\preg_match('/^\\\\?('.$name_regex.'\\\\)*'.$name_regex.'$/', $alias)) {
                     $alias = \explode('\\', \strtolower($alias));
                     $alias = \end($alias);
                 } else {
@@ -228,11 +219,11 @@ final class Utils
         $endlength = BlobObject::strlen($end);
 
         if ($endlength >= $length) {
-            throw new InvalidArgumentException('Can\'t truncate a string to ' . $length . ' characters if ending with string ' . $endlength . ' characters long');
+            throw new InvalidArgumentException('Can\'t truncate a string to '.$length.' characters if ending with string '.$endlength.' characters long');
         }
 
         if (BlobObject::strlen($input, $encoding) > $length) {
-            return BlobObject::substr($input, 0, $length - $endlength, $encoding) . $end;
+            return BlobObject::substr($input, 0, $length - $endlength, $encoding).$end;
         }
 
         return $input;

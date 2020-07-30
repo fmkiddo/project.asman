@@ -22,22 +22,22 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Renderer\Text;
 
 use Kint\Object\BasicObject;
 
 class DepthLimitPlugin extends Plugin
 {
-
     public function render(BasicObject $o)
     {
         $out = '';
 
         if (0 == $o->depth) {
-            $out .= $this->renderer->colorTitle($this->renderer->renderTitle($o)) . PHP_EOL;
+            $out .= $this->renderer->colorTitle($this->renderer->renderTitle($o)).PHP_EOL;
         }
 
-        $out .= $this->renderer->renderHeader($o) . ' ' . $this->renderer->colorValue('DEPTH LIMIT') . PHP_EOL;
+        $out .= $this->renderer->renderHeader($o).' '.$this->renderer->colorValue('DEPTH LIMIT').PHP_EOL;
 
         return $out;
     }

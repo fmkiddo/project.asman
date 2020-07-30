@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -31,16 +32,11 @@ use Kint\Utils;
 
 class TracePlugin extends Plugin
 {
-
-    public static $blacklist = array(
-        'spl_autoload_call'
-    );
+    public static $blacklist = array('spl_autoload_call');
 
     public function getTypes()
     {
-        return array(
-            'array'
-        );
+        return array('array');
     }
 
     public function getTriggers()
@@ -50,13 +46,13 @@ class TracePlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $o->value) {
+        if (!$o->value) {
             return;
         }
 
         $trace = $this->parser->getCleanArray($var);
 
-        if (\count($trace) !== \count($o->value->contents) || ! Utils::isTrace($trace)) {
+        if (\count($trace) !== \count($o->value->contents) || !Utils::isTrace($trace)) {
             return;
         }
 
@@ -73,7 +69,7 @@ class TracePlugin extends Plugin
         foreach ($old_trace as $frame) {
             $index = $frame->name;
 
-            if (! isset($trace[$index]['function'])) {
+            if (!isset($trace[$index]['function'])) {
                 // Something's very very wrong here, but it's probably a plugin's fault
                 continue;
             }

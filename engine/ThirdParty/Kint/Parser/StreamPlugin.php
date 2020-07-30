@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -31,12 +32,9 @@ use Kint\Object\StreamObject;
 
 class StreamPlugin extends Plugin
 {
-
     public function getTypes()
     {
-        return array(
-            'resource'
-        );
+        return array('resource');
     }
 
     public function getTriggers()
@@ -46,11 +44,11 @@ class StreamPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $o instanceof ResourceObject || 'stream' !== $o->resource_type) {
+        if (!$o instanceof ResourceObject || 'stream' !== $o->resource_type) {
             return;
         }
 
-        if (! $meta = \stream_get_meta_data($var)) {
+        if (!$meta = \stream_get_meta_data($var)) {
             return;
         }
 
@@ -61,12 +59,12 @@ class StreamPlugin extends Plugin
         $base_obj->depth = $o->depth;
 
         if ($o->access_path) {
-            $base_obj->access_path = 'stream_get_meta_data(' . $o->access_path . ')';
+            $base_obj->access_path = 'stream_get_meta_data('.$o->access_path.')';
         }
 
         $rep->contents = $this->parser->parse($meta, $base_obj);
 
-        if (! \in_array('depth_limit', $rep->contents->hints, true)) {
+        if (!\in_array('depth_limit', $rep->contents->hints, true)) {
             $rep->contents = $rep->contents->value->contents;
         }
 

@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -32,14 +33,11 @@ use ReflectionClass;
 
 class ClassMethodsPlugin extends Plugin
 {
-
     private static $cache = array();
 
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -52,7 +50,7 @@ class ClassMethodsPlugin extends Plugin
         $class = \get_class($var);
 
         // assuming class definition will not change inside one request
-        if (! isset(self::$cache[$class])) {
+        if (!isset(self::$cache[$class])) {
             $methods = array();
 
             $reflection = new ReflectionClass($class);
@@ -61,15 +59,12 @@ class ClassMethodsPlugin extends Plugin
                 $methods[] = new MethodObject($method);
             }
 
-            \usort($methods, array(
-                'Kint\\Parser\\ClassMethodsPlugin',
-                'sort'
-            ));
+            \usort($methods, array('Kint\\Parser\\ClassMethodsPlugin', 'sort'));
 
             self::$cache[$class] = $methods;
         }
 
-        if (! empty(self::$cache[$class])) {
+        if (!empty(self::$cache[$class])) {
             $rep = new Representation('Available methods', 'methods');
 
             // Can't cache access paths
@@ -77,7 +72,7 @@ class ClassMethodsPlugin extends Plugin
                 $method = clone $m;
                 $method->depth = $o->depth + 1;
 
-                if (! $this->parser->childHasPath($o, $method)) {
+                if (!$this->parser->childHasPath($o, $method)) {
                     $method->access_path = null;
                 } else {
                     $method->setAccessPathFrom($o);

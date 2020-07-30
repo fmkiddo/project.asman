@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Exception;
@@ -32,12 +33,9 @@ use Throwable;
 
 class ThrowablePlugin extends Plugin
 {
-
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -47,7 +45,7 @@ class ThrowablePlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $var instanceof Exception && (! KINT_PHP70 || ! $var instanceof Throwable)) {
+        if (!$var instanceof Exception && (!KINT_PHP70 || !$var instanceof Throwable)) {
             return;
         }
 

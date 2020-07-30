@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -30,17 +31,14 @@ use ReflectionClass;
 
 class ToStringPlugin extends Plugin
 {
-
     public static $blacklist = array(
         'SimpleXMLElement',
-        'SplFileObject'
+        'SplFileObject',
     );
 
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -51,7 +49,7 @@ class ToStringPlugin extends Plugin
     public function parse(&$var, BasicObject &$o, $trigger)
     {
         $reflection = new ReflectionClass($var);
-        if (! $reflection->hasMethod('__toString')) {
+        if (!$reflection->hasMethod('__toString')) {
             return;
         }
 

@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use DOMNamedNodeMap;
@@ -38,7 +39,6 @@ use Kint\Object\Representation\Representation;
  */
 class DOMDocumentPlugin extends Plugin
 {
-
     /**
      * List of properties to skip parsing.
      *
@@ -69,7 +69,7 @@ class DOMDocumentPlugin extends Plugin
         'lastChild' => 'DOMNode',
         'previousSibling' => 'DOMNode',
         'nextSibling' => 'DOMNode',
-        'ownerDocument' => 'DOMDocument'
+        'ownerDocument' => 'DOMDocument',
     );
 
     /**
@@ -81,9 +81,7 @@ class DOMDocumentPlugin extends Plugin
 
     public function getTypes()
     {
-        return array(
-            'object'
-        );
+        return array('object');
     }
 
     public function getTriggers()
@@ -93,7 +91,7 @@ class DOMDocumentPlugin extends Plugin
 
     public function parse(&$var, BasicObject &$o, $trigger)
     {
-        if (! $o instanceof InstanceObject) {
+        if (!$o instanceof InstanceObject) {
             return;
         }
 
@@ -109,7 +107,7 @@ class DOMDocumentPlugin extends Plugin
     protected function parseList(&$var, InstanceObject &$o, $trigger)
     {
         // Recursion should never happen, should always be stopped at the parent
-        // DOMNode. Depth limit on the other hand we're going to skip since
+        // DOMNode.  Depth limit on the other hand we're going to skip since
         // that would show an empty iterator and rather useless. Let the depth
         // limit hit the children (DOMNodeList only has DOMNode as children)
         if ($trigger & Parser::TRIGGER_RECURSION) {
@@ -128,15 +126,13 @@ class DOMDocumentPlugin extends Plugin
         // Make empty iterator representation since we need it in DOMNode to point out depth limits
         if ($this->parser->getDepthLimit() && $o->depth + 1 >= $this->parser->getDepthLimit()) {
             $b = new BasicObject();
-            $b->name = $o->classname . ' Iterator Contents';
-            $b->access_path = 'iterator_to_array(' . $o->access_path . ')';
+            $b->name = $o->classname.' Iterator Contents';
+            $b->access_path = 'iterator_to_array('.$o->access_path.')';
             $b->depth = $o->depth + 1;
             $b->hints[] = 'depth_limit';
 
             $r = new Representation('Iterator');
-            $r->contents = array(
-                $b
-            );
+            $r->contents = array($b);
             $o->replaceRepresentation($r, 0);
 
             return;
@@ -154,11 +150,11 @@ class DOMDocumentPlugin extends Plugin
 
             if ($o->access_path) {
                 if ($var instanceof DOMNamedNodeMap) {
-                    $base_obj->access_path = $o->access_path . '->getNamedItem(' . \var_export($key, true) . ')';
+                    $base_obj->access_path = $o->access_path.'->getNamedItem('.\var_export($key, true).')';
                 } elseif ($var instanceof DOMNodeList) {
-                    $base_obj->access_path = $o->access_path . '->item(' . \var_export($key, true) . ')';
+                    $base_obj->access_path = $o->access_path.'->item('.\var_export($key, true).')';
                 } else {
-                    $base_obj->access_path = 'iterator_to_array(' . $o->access_path . ')';
+                    $base_obj->access_path = 'iterator_to_array('.$o->access_path.')';
                 }
             }
 
@@ -174,7 +170,7 @@ class DOMDocumentPlugin extends Plugin
         $known_properties = array(
             'nodeValue',
             'childNodes',
-            'attributes'
+            'attributes',
         );
 
         if (self::$verbose) {
@@ -194,7 +190,7 @@ class DOMDocumentPlugin extends Plugin
                 'prefix',
                 'localName',
                 'baseURI',
-                'textContent'
+                'textContent',
             );
         }
 
@@ -214,18 +210,14 @@ class DOMDocumentPlugin extends Plugin
             }
         }
 
-        if (! self::$verbose) {
+        if (!self::$verbose) {
             $o->removeRepresentation('methods');
             $o->removeRepresentation('properties');
         }
 
         // Attributes and comments and text nodes don't
         // need children or attributes of their own
-        if (\in_array($o->classname, array(
-            'DOMAttr',
-            'DOMText',
-            'DOMComment'
-        ), true)) {
+        if (\in_array($o->classname, array('DOMAttr', 'DOMText', 'DOMComment'), true)) {
             return;
         }
 
@@ -247,9 +239,7 @@ class DOMDocumentPlugin extends Plugin
                 $n->transplant($node);
                 $n->name = 'childNodes';
                 $n->classname = 'DOMNodeList';
-                $c->contents = array(
-                    $n
-                );
+                $c->contents = array($n);
             } else {
                 foreach ($childNodes->contents as $index => $node) {
                     // Shortcircuit text nodes to plain strings
@@ -273,7 +263,7 @@ class DOMDocumentPlugin extends Plugin
             $o->size = \count($c->contents);
         }
 
-        if (! $o->size) {
+        if (!$o->size) {
             $o->size = null;
         }
     }
@@ -292,13 +282,13 @@ class DOMDocumentPlugin extends Plugin
             $base_obj->access_path = $o->access_path;
 
             if (\preg_match('/^[A-Za-z0-9_]+$/', $base_obj->name)) {
-                $base_obj->access_path .= '->' . $base_obj->name;
+                $base_obj->access_path .= '->'.$base_obj->name;
             } else {
-                $base_obj->access_path .= '->{' . \var_export($base_obj->name, true) . '}';
+                $base_obj->access_path .= '->{'.\var_export($base_obj->name, true).'}';
             }
         }
 
-        if (! isset($var->{$prop})) {
+        if (!isset($var->{$prop})) {
             $base_obj->type = 'null';
         } elseif (isset(self::$blacklist[$prop])) {
             $b = new InstanceObject();
@@ -322,11 +312,7 @@ class DOMDocumentPlugin extends Plugin
             return;
         }
 
-        if (! \in_array($o->classname, array(
-            'DOMText',
-            'DOMAttr',
-            'DOMComment'
-        ), true)) {
+        if (!\in_array($o->classname, array('DOMText', 'DOMAttr', 'DOMComment'), true)) {
             return;
         }
 

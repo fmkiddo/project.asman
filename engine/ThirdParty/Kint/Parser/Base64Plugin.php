@@ -22,6 +22,7 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Parser;
 
 use Kint\Object\BasicObject;
@@ -29,7 +30,6 @@ use Kint\Object\Representation\Representation;
 
 class Base64Plugin extends Plugin
 {
-
     /**
      * The minimum length before a string will be considered for base64 decoding.
      *
@@ -46,9 +46,7 @@ class Base64Plugin extends Plugin
 
     public function getTypes()
     {
-        return array(
-            'string'
-        );
+        return array('string');
     }
 
     public function getTriggers()
@@ -66,7 +64,7 @@ class Base64Plugin extends Plugin
             return;
         }
 
-        if (! \preg_match('/^[A-Za-z0-9+\\/=]+$/', $var)) {
+        if (!\preg_match('/^[A-Za-z0-9+\\/=]+$/', $var)) {
             return;
         }
 
@@ -79,10 +77,10 @@ class Base64Plugin extends Plugin
 
         $base_obj = new BasicObject();
         $base_obj->depth = $o->depth + 1;
-        $base_obj->name = 'base64_decode(' . $o->name . ')';
+        $base_obj->name = 'base64_decode('.$o->name.')';
 
         if ($o->access_path) {
-            $base_obj->access_path = 'base64_decode(' . $o->access_path . ')';
+            $base_obj->access_path = 'base64_decode('.$o->access_path.')';
         }
 
         $r = new Representation('Base64');

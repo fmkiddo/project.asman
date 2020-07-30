@@ -22,38 +22,25 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 namespace Kint\Object\Representation;
 
 use DateTime;
 
 class MicrotimeRepresentation extends Representation
 {
-
     public $seconds;
-
     public $microseconds;
-
     public $group;
-
     public $lap;
-
     public $total;
-
     public $avg;
-
     public $i = 0;
-
     public $mem = 0;
-
     public $mem_real = 0;
-
     public $mem_peak = 0;
-
     public $mem_peak_real = 0;
-
-    public $hints = array(
-        'microtime'
-    );
+    public $hints = array('microtime');
 
     public function __construct($seconds, $microseconds, $group, $lap = null, $total = null, $i = 0)
     {
@@ -79,6 +66,6 @@ class MicrotimeRepresentation extends Representation
 
     public function getDateTime()
     {
-        return DateTime::createFromFormat('U u', $this->seconds . ' ' . \str_pad($this->microseconds, 6, '0', STR_PAD_LEFT));
+        return DateTime::createFromFormat('U u', $this->seconds.' '.\str_pad($this->microseconds, 6, '0', STR_PAD_LEFT));
     }
 }
