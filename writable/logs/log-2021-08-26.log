@@ -1,0 +1,24 @@
+CRITICAL - 2021-08-26 09:13:27 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/core/Controllers/BaseController.php(77): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/core/Controllers/DashboardController.php(286): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('usergroups-edit...')
+#7 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-08-26 09:35:24 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/core/Controllers/BaseController.php(77): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/core/Controllers/DashboardController.php(286): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('usergroups-edit...')
+#7 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}

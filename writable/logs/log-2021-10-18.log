@@ -1,0 +1,15 @@
+CRITICAL - 2021-10-18 14:11:03 --> Call to undefined method App\Libraries\Core\PageAssets::scripts()
+#0 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('new-asset')
+#1 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#2 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-10-18 14:25:51 --> Object of class CodeIgniter\Entity could not be converted to string
+#0 /home/fmkiddo/git/project.asman/engine/View/View.php(246): include()
+#1 /home/fmkiddo/git/project.asman/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/asset...', Array, true)
+#2 /home/fmkiddo/git/project.asman/core/Controllers/DashboardController.php(478): view('dashboard/asset...', Array)
+#3 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('new-asset')
+#4 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#5 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}

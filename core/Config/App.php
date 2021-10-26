@@ -265,4 +265,9 @@ class App extends BaseConfig
 	|   - http://www.w3.org/TR/CSP/
 	*/
 	public $CSPEnabled = false;
+	
+	public $serverURL			= 'http://localhost:8080';
+	public $clientAccessKey		= '';
+	public $clientEncryptionKey = '';
+	public $authExpiration		= 3600;
 }

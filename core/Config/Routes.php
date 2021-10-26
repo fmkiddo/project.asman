@@ -28,9 +28,26 @@ $routes->setAutoRoute(true);
  * --------------------------------------------------------------------
  */
 
-// We get a performance increase by specifying the default
+// We get a performance'', increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get ('{locale}/development/reset-cookie', 'FrontpageController::resetCookie');
+$routes->get ('{locale}/client/setup/firsttime', 'SystemSetupController::firstTimeSetup');
+$routes->get ('{locale}/assets/user-login', 'FrontpageController::authentication');
+$routes->get ('{locale}/assets/authenticate-client', 'FrontpageController::doClientAuthentication');
+$routes->get ('{locale}/assets/do-logout', 'FrontpageController::userLogout');
+$routes->get ('{locale}/dashboard', 'DashboardController::displayDashboard');
+$routes->get ('{locale}/dashboard/(:any)', 'DashboardController::displayDashboard/$1');
+
+$routes->post ('{locale}/assets/user-login', 'FrontpageController::authentication');
+$routes->post ('{locale}/dashboard/(:any)', 'DashboardController::displayDashboard/$1');
+$routes->post ('{locale}/api/process', 'FrontendRequestController::postRequest');
+
+$routes->add ('ajax-request/frontend', 'FrontendRequestController::ajaxRequest');
+$routes->put ('{locale}/api/get', 'FrontendRequestController::ajaxRequest');
+$routes->put ('{locale}/api/sent', 'FrontendRequestController::ajaxRequest');
+$routes->put ('{locale}/client/setup/firsttime-process', 'SystemSetupController::doFirstTimeSetup');
+$routes->put ('{locale}/assets/authenticate-client', 'FrontpageController::doClientAuthentication');
+$routes->put ('{locale}/assets/do-userlogin', 'FrontpageController::doClientUserAuthentication');
 
 /**
  * --------------------------------------------------------------------

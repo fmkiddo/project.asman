@@ -1,0 +1,9 @@
+CRITICAL - 2021-09-15 10:04:26 --> Invalid file: .php
+#0 /home/fmkiddo/git/project.asman/engine/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('.php')
+#1 /home/fmkiddo/git/project.asman/engine/Common.php(1119): CodeIgniter\View\View->render('', Array, true)
+#2 /home/fmkiddo/git/project.asman/core/Controllers/DashboardController.php(411): view('', Array)
+#3 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('doc-assetin')
+#4 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#5 /home/fmkiddo/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
