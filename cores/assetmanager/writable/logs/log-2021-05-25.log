@@ -1,0 +1,14 @@
+CRITICAL - 2021-05-25 08:27:15 --> Class 'App\Libraries\Objects\PageAssets' not found
+#0 /home/rizcky/git/project.asman/core/Controllers/BaseController.php(53): App\Controllers\BaseController->runinit()
+#1 /home/rizcky/git/project.asman/engine/CodeIgniter.php(891): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+#2 /home/rizcky/git/project.asman/engine/CodeIgniter.php(399): CodeIgniter\CodeIgniter->createController()
+#3 /home/rizcky/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/rizcky/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-05-25 08:52:06 --> Class 'App\Libraries\Objects\PageAssets' not found
+#0 /home/rizcky/git/project.asman/core/Controllers/BaseController.php(53): App\Controllers\BaseController->runinit()
+#1 /home/rizcky/git/project.asman/engine/CodeIgniter.php(891): App\Controllers\BaseController->initController(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response), Object(CodeIgniter\Log\Logger))
+#2 /home/rizcky/git/project.asman/engine/CodeIgniter.php(399): CodeIgniter\CodeIgniter->createController()
+#3 /home/rizcky/git/project.asman/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/rizcky/git/project.asman/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

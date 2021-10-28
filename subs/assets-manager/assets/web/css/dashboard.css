@@ -1,0 +1,209 @@
+@charset "UTF-8";
+
+.sidebar .nav-item {
+	position: relative;
+}
+
+.sidebar .nav-item {
+	font-size: 1.25rem;
+}
+
+.sidebar .nav-item .nav-link {
+	padding-left: 1.15rem;
+	padding-right: 1.15rem;
+}
+
+.sidebar .nav-item .nav-link span {
+	padding-left: 0.5rem;
+}
+
+.sidebar .nav-item .collapse,
+.sidebar .nav-item .collapsing {
+	margin: 0 1rem;
+}
+
+.sidebar .nav-item .collapse .collapse-inner,
+.sidebar .nav-item .collapsing .collapse-inner {
+    padding: 0.5rem 0;
+    min-width: 10rem;
+    font-size: 0.85rem;
+    margin: 0 0 1rem 0;
+}
+
+.sidebar .nav-item .collapse .collapse-inner hr.collapse-separator,
+.sidebar .nav-item .collapsing .collapse-inner hr.collapse-separator {
+	margin: 0 0.5rem;
+	padding: 0;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-header,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-header {
+	margin: 0;
+	white-space: nowrap;
+	padding: 0.5rem 0.5rem 0.5rem 2.90rem;
+	text-transform: uppercase;
+	font-weight: 800;
+	font-size: 0.65rem;
+	display: block;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item {
+    padding: 0.5rem 0.5rem 0.5rem 2.4rem;
+    margin: 0 0.5rem;
+    display: block;
+    color: #3a3b45;
+    text-decoration: none;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
+	cursor: pointer;
+	background-color: #eaecf4;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
+	background-color: #dddfeb;
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+	color: #4e73df;
+	background-color: #dddfeb;
+	font-weight: 700;
+}
+
+.navbar-nav .dropdown .dropdown-menu {
+	padding: 0;
+}
+
+.navbar-nav .dropdown .dropdown-menu .dropdown-header {
+	padding: 1rem 1.5rem;
+	color: white;
+	margin: 0;
+	font-size: 0.65rem;
+}
+
+.navbar-nav .dropdown .dropdown-menu .dropdown-item {
+	background-color: white;
+	border-bottom: 0.1rem solid #eaecf4;
+	margin: 0;
+}
+
+.navbar-nav .dropdown .dropdown-menu .dropdown-item:hover {
+	text-decoration: none;
+	background-color: #eaecf4;
+	cursor: pointer;
+}
+
+.navbar-nav .dropdown .dropdown-menu .dropdown-item .small {
+	font-size: 0.65rem;
+}
+
+.navbar-nav .dropdown .dropdown-menu .dropdown-item span {
+	font-size: 0.85rem;
+	color: black;
+}
+
+.hidden {
+	display: none;
+}
+
+.bg-lightblue {
+	background-color: #4E73DF;
+}
+
+.icon-circle {
+	height: 2.5rem;
+	width: 2.5rem;
+	border-radius: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center
+}
+
+.dataTable {
+	width: 100%;
+}
+
+.dataTable th, td {
+	white-space: nowrap;
+}
+
+.table.table-pointer {
+	cursor: pointer;
+}
+
+.table.table-centered-content > thead > tr > th,
+.table.table-centered-content > tbody > tr > td {
+	text-align: center;
+}
+
+.card hr {
+	margin: 0.5rem 1.0rem;
+}
+
+.form-control.big {
+	font-size: 20pt;
+}
+
+.input-group-pointer {
+	cursor: pointer;
+}
+
+.row.row-with-padding {
+	padding: 2em 0 0 0;
+}
+
+#asset-images {
+	background: url("images/no-image.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	height: 0;
+	padding-botton: 20%;
+}
+
+#asset-data {
+	width: 100%;
+	height: 400px;
+}
+
+.scroller {
+	overflow: auto;
+}
+
+.accordion .documents .document-header {
+	padding: 0.85em 1em;
+	cursor: pointer;
+	background-color: #DDD;
+	font-weight: bold;
+}
+
+.accordion .documents .document-header:hover {
+	background-color: #999;
+}
+
+.accordion .documents .document-header.clicked {
+	background-color: #999;
+}
+
+.accordion .documents .document-body {
+	padding: 0.85em 1em;
+}
+
+.accordion .documents .document-body .document-details {
+	overflow-x: auto;
+}
+
+.accordion .documents .document-body table th,
+.accordion .documents .document-body table td {
+	font-size: 9pt;
+}
+
+.form-group.checkbox {
+	left: 25px;
+}
