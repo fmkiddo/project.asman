@@ -1,7 +1,5 @@
 <?php include __DIR__ . '/../header.php'; 
 $locations			= $pagedata['data-locations'];
-$ousrlocation		= $pagedata['data-userlocation'];
-$dataSublocations	= $pagedata['data-sublocations'][$ousrlocation];
 $summaries			= $pagedata['mvin-summary'];
 $moveintableheader	= $pagedata['mvin-th'];
 $moveinList			= $pagedata['mvin-lists'];
@@ -379,7 +377,11 @@ endforeach; ?>
 						}
 						break;
 					case 'reset-distribution':
-						$(this).parents ('div#distribute').find ('.documents .document-header').trigger ('click');
+						$divDistributeHead = $(this).parents ('div#distribute').find ('.documents .document-header');
+						if (!$divDistributeHead.hasClass ('collapsed')) {
+							$('input[name="tolocation-id"]').val ('');
+							$divDistributeHead.trigger ('click');
+						}
 						break;
 				}
 			} else if ($(this).is ('div.document-header')) {
@@ -619,15 +621,6 @@ endforeach; ?>
 					}
 					break;
 				case 'table-moveDetails':
-					$dataSublocations = {
-<?php 
-foreach ($dataSublocations as $dataSublocation):
-	foreach ($dataSublocation as $key => $sublocationData):
-		echo "'" . $sublocationData['osbl_idx'] . "': '" . $sublocationData['info']['name'] . "'" . ($key == (count ($dataSublocation) - 1) ? '' : ',');
-	endforeach;
-endforeach;
-?>
-					};
 					$assetDistDT = $.searchDataTable ('dataTable-assetDistribution');
 					$rowCount = $assetDistDT.rows ().count ();
 					$clickedRow = $(this).parents ('tr');
@@ -664,53 +657,71 @@ endforeach;
 					}
 
 					if ($doAdd) {
-						$sublocOptions = $('<select/>', {
-							'name': 'to-sublocation-' + $rowCount,
-							'id': 'to-sublocation-opt',
-							'required': true,
-							'html': $('<option/>', {
-								'disabled': 'disabled',
-								'selected': 'selected',
-								'text': '--- Pilih Sublokasi ---'
-							}).prop ('outerHTML')
+						$data = {
+							'trigger': 'target-sublocations',
+							'transmit': {
+								'tolocation-idx': $('input[name="tolocation-id"]').val ()
+							}
+						};
+						$.ajax ({
+							'url': $.base_url ($locale + '/api/get'),
+							'method': 'put',
+							'data': JSON.stringify ($data),
+							'dataType': 'json'
+						}).done (function ($result) {
+							if (!$result.good) ;
+							else {
+								$dataSublocations = $result['data-sublocations'];
+								$sublocOptions = $('<select/>', {
+									'name': 'to-sublocation-' + $rowCount,
+									'id': 'to-sublocation-opt',
+									'required': true,
+									'html': $('<option/>', {
+										'disabled': 'disabled',
+										'selected': 'selected',
+										'text': '--- Pilih Sublokasi ---'
+									}).prop ('outerHTML')
+								});
+								$.each ($dataSublocations, function ($key, $value) {
+									$('<option/>', {
+										'value': $key,
+										'text': $value
+									}).appendTo ($sublocOptions);
+								});
+								$distributionRow = [
+									$('<input/>', {
+										'type': 'hidden',
+										'id': 'item-id',
+										'name': 'item-id-' + $rowCount,
+										'value': $itemID
+									}).prop ('outerHTML') + 
+									$('<span>', {
+										'id': 'item-code',
+										'text': $clickedRow.find ('span#item-code').text ()
+									}).prop ('outerHTML'),
+									$clickedRow.children (':eq(1)').text (),
+									$clickedRow.children (':eq(2)').text (),
+									$sublocOptions.prop ('outerHTML'),
+									$('<input/>', {
+										'type': 'number',
+										'id': 'move-qty',
+										'name': 'move-qty-' + $rowCount,
+										'data-itemid': $itemID,
+										'min': 1,
+										'max': $moveQty,
+										'value': $moveQty - $distQty
+									}).prop ('outerHTML'),
+									$('<button/>', {
+										'id': 'remove-itemmove',
+										'type': 'button',
+										'class': 'btn btn-primary btn-block',
+										'html': $('<i/>', {'class': 'fas fa-times-circle'}).prop ('outerHTML')
+									}).prop ('outerHTML')
+								];
+								$assetDistDT.row.add ($distributionRow).draw (false);
+							}
+						}).fail (function () {
 						});
-						$.each ($dataSublocations, function ($key, $value) {
-							$('<option/>', {
-								'value': $key,
-								'text': $value
-							}).appendTo ($sublocOptions);
-						});
-						$distributionRow = [
-							$('<input/>', {
-								'type': 'hidden',
-								'id': 'item-id',
-								'name': 'item-id-' + $rowCount,
-								'value': $itemID
-							}).prop ('outerHTML') + 
-							$('<span>', {
-								'id': 'item-code',
-								'text': $clickedRow.find ('span#item-code').text ()
-							}).prop ('outerHTML'),
-							$clickedRow.children (':eq(1)').text (),
-							$clickedRow.children (':eq(2)').text (),
-							$sublocOptions.prop ('outerHTML'),
-							$('<input/>', {
-								'type': 'number',
-								'id': 'move-qty',
-								'name': 'move-qty-' + $rowCount,
-								'data-itemid': $itemID,
-								'min': 1,
-								'max': $moveQty,
-								'value': $moveQty - $distQty
-							}).prop ('outerHTML'),
-							$('<button/>', {
-								'id': 'remove-itemmove',
-								'type': 'button',
-								'class': 'btn btn-primary btn-block',
-								'html': $('<i/>', {'class': 'fas fa-times-circle'}).prop ('outerHTML')
-							}).prop ('outerHTML')
-						];
-						$assetDistDT.row.add ($distributionRow).draw (false);
 					} 
 					break;
 			}

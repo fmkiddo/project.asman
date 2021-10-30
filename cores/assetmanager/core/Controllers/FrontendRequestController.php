@@ -9,10 +9,6 @@ class FrontendRequestController extends BaseController {
 		$this->helpers = ['cookie', 'url_helper'];
 	}
 	
-	private function getLoggedUserID () {
-		return DashboardController::USERID;
-	}
-	
 	private function fileTransferAPI ($files, $targetURL) {
 		$dataCookie	= get_cookie(CLIENT_CONFIG_NAME);
 		$returnData = [
@@ -214,6 +210,16 @@ class FrontendRequestController extends BaseController {
 					$dataOptions = [
 						'data-trigger'	=> 'moveindo-assetdistribution',
 						'data-transmit'	=> $dataTransmit
+					];
+					break;
+				case 'target-sublocations':
+					$dataTransmit	= $json['transmit'];
+					$data = [
+						'target-location'	=> $dataTransmit['tolocation-idx']
+					];
+					$dataOptions = [
+						'data-trigger'	=> 'get-sublocationoflocation',
+						'data-transmit'	=> $data
 					];
 					break;
 			}

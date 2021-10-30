@@ -51,7 +51,7 @@ $signinVerifier = ($isAuthenticated) ? '' : '';
 															<i class="fas fa-landmark fa-fw"></i>
 														</div>
 													</div>
-													<input type="password" class="form-control" name="client-auth" required />
+													<input type="password" id="client-auth" class="form-control" name="client-auth" required />
 												</div>
 											</div>
 											<div class="form-group">
@@ -62,7 +62,7 @@ $signinVerifier = ($isAuthenticated) ? '' : '';
 															<i class="fas fa-lock fa-fw"></i>
 														</div>
 													</div>
-													<input type="password" class="form-control" name="client-pass" required />
+													<input type="password" id="client-pass" class="form-control" name="client-pass" required />
 												</div>
 											</div>
 											<a class="forget" onclick="window.location.href='forgot-authentication'">
@@ -102,7 +102,7 @@ $signinVerifier = ($isAuthenticated) ? '' : '';
 																		<i class="fas fa-user fa-fw"></i>
 																	</div>
 																</div>
-																<input type="text" class="form-control" name="username" required />
+																<input type="text" class="form-control" id="input-username" name="username" required />
 															</div>
 														</div>
 														<a class="forget" onclick="window.location.href='forgot?tag=username'">
@@ -127,7 +127,7 @@ $signinVerifier = ($isAuthenticated) ? '' : '';
 																		<i class="fas fa-key fa-fw"></i>
 																	</div>
 																</div>
-																<input type="password" class="form-control" name="password" required />
+																<input type="password" class="form-control" id="input-password" name="password" required />
 															</div>
 														</div>
 														<a class="forget" onclick="window.location.href='forgot?tag=password'">

@@ -111,7 +111,10 @@ $(document).ready (function () {
 				'{36}': 'Lokasi Asal',
 				'{37}': 'Lokasi Tujuan',
 				'{38}': 'Tambah Aset',
-				'{39}': 'Sublokasi Asal'
+				'{39}': 'Sublokasi Asal',
+				'{40}': '--- Pilih Lokasi ---',
+				'{41}': 'Sublokasi',
+				'{42}': ''
 			},
 			'doc-assetin': {
 				'{0}': 'Penerimaan Aset',

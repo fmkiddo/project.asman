@@ -133,7 +133,7 @@
 	white-space: nowrap;
 }
 
-.table.table-pointer {
+.table.table-pointer td {
 	cursor: pointer;
 }
 

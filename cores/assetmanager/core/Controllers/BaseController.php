@@ -42,6 +42,12 @@ abstract class BaseController extends Controller {
 		$options['pageAssets'] = $this->getPageAssets();
 		return $options;
 	}
+	
+	protected function getLoggedUserID () {
+		$cookie = get_cookie(CLIENT_USER_COOKIE);
+		$userString = base64_decode($cookie);
+		return json_decode($userString, TRUE)['id'];
+	}
 
 	protected function additionalInitialization () { }
 	
@@ -105,7 +111,6 @@ abstract class BaseController extends Controller {
 				$curlOptions['multipart'] = $data;
 				break;
 		}
-		
 		$curl	= \CodeIgniter\Config\Services::curlrequest();
 		$serverResponse = $curl->put(server_url($urlTraget), $curlOptions);
 		$responseData = json_decode($serverResponse->getBody (), TRUE);

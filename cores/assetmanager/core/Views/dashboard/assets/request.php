@@ -391,7 +391,7 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 								'data': JSON.stringify ($data),
 								'dataType': 'json'
 							}).done (function ($result) {
-								if (!$result.good) ;
+								if (!$result.good) window.location.reload ();
 								else {
 								}
 							}); 
@@ -536,6 +536,11 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 							$text.addClass ('d-none');
 						}
 						break;
+					case 'dataTable-assetLists':
+						console.log ('afpknasdfnaksfnkpasnfasdf');
+						break;
+					case 'dataTable-assetListDestroy':
+						break;
 				}
 			}
 		});
@@ -628,6 +633,55 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						$targetDiv.slideDown ();
 						$targetDiv.addClass ('show');
 						$.fn.dataTable.tables ({'visible': true, 'api': true}).columns.adjust ();
+						break;
+					case 'user-location':
+						$assetListsDT = $.searchDataTable ('dataTable-assetLists');
+						$assetListDDT = $.searchDataTable ('dataTable-assetListDestroy');
+						$assetListsDT.clear ().draw (false);
+						$assetListDDT.clear ().draw (false);
+
+						$options = {
+							'trigger': 'asset-list',
+							'type': 'pertable',
+							'from': $(this).val ()
+						};
+						
+						$.ajax ({
+							'url': $.base_url ($locale + '/api/get'),
+							'method': 'put',
+							'data': JSON.stringify ($options),
+							'dataType': 'json'
+						}).done (function ($result) {
+							if (!$result.good) ;
+							else {
+								$dataSublocs = $result.sublocs;
+								$.each ($result.assetitems, function ($arrayId, $item) {
+									$sublocid = $item.osbl_idx;
+									$newRow = {
+										0: $('<input/>', {
+											'type': 'hidden',
+											'id': 'asset-id',
+											'name': 'asset-id-' + $arrayId,
+											'value': $item.idx
+											}).prop ('outerHTML') + 
+											$('<span/>', {'text': $item.code}).prop ('outerHTML'),
+										1: $item.name,
+										2: '',
+										3: $item.qty
+									};
+									$.each ($dataSublocs, function ($id, $subloc) {
+										if (parseInt ($subloc.idx) == parseInt ($sublocid)) {
+											$newRow[2] = $subloc.name;
+											return false;
+										}
+									});
+									$assetListsDT.row.add ($newRow);
+								});
+								$assetListsDT.draw (false);
+							}
+						}).fail (function () {
+							
+						});
 						break;
 				}
 			}

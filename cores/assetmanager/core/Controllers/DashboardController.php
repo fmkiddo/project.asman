@@ -16,10 +16,6 @@ class DashboardController extends BaseController {
 		return (get_cookie(CLIENT_CONFIG_NAME) == NULL);
 	}
 	
-	private function saveCategoryItem ($params=[]): bool {
-		
-	}
-	
 	private function saveUser ($param=[]): array {
 		$dataTrigger = 'userupdate';
 		if ($param['userid'] == 0)
@@ -46,18 +42,14 @@ class DashboardController extends BaseController {
 			if ($param['change-password'] > 0)
 				$dataTransmit['param']['update-password'] = $param['npassword'];
 		}
+		
+		$dataTransmit['data-loggedousr']	= $this->getLoggedUserID();
 			
 		$dataoptions = [
-			'data-trigger'	=> $dataTrigger,
-			'data-transmit'	=> $dataTransmit
+			'data-trigger'		=> $dataTrigger,
+			'data-transmit'		=> $dataTransmit
 		];
 		return $this->dataRequest($dataoptions);
-	}
-	
-	private function getLoggedUserID () {
-		$cookie = get_cookie(CLIENT_USER_COOKIE);
-		$userString = base64_decode($cookie);
-		return json_decode($userString, TRUE)['id'];
 	}
 	
 	protected function additionalInitialization() {
@@ -228,16 +220,29 @@ class DashboardController extends BaseController {
 					$options['idx'] = 0;
 					$options['before'] = 'location';
 					if ($this->request->getMethod(TRUE) === 'POST') {
-						$dataoptions = [
-							'data-trigger'	=> 'locationprofile',
-							'data-transmit'	=> [
-								'olctid'	=> $this->request->getPost('location')
-							]
-						];
-						$result = $this->dataRequest($dataoptions);
-						$options['pagedata'] = $result;
-						$options['idx'] = $this->request->getPost('location');
-						$options['before'] = $this->request->getPost('before');
+						$post = $this->request->getPost();
+						if (array_key_exists('location', $post)) {
+							$dataoptions = [
+								'data-trigger'	=> 'locationprofile',
+								'data-transmit'	=> [
+									'olctid'	=> $this->request->getPost('location')
+								]
+							];
+							$result = $this->dataRequest($dataoptions);
+							$options['pagedata'] = $result;
+							$options['idx'] = $this->request->getPost('location');
+							$options['before'] = $this->request->getPost('before');
+						} else {
+							$dataoptions = [
+								'data-trigger'	=> 'update-locationprofile',
+								'data-transmit'	=> [
+									'data-loggedousr'	=> $this->getLoggedUserID(),
+									'data-form'			=> $post
+								]
+							];
+							$result = $this->dataRequest($dataoptions);
+							
+						}
 					}
 					$pageName = 'dashboard/location/add';
 					break;
@@ -422,8 +427,6 @@ class DashboardController extends BaseController {
 					foreach ($result['mvisList'] as $mvis) if ($mvis->status == 4) $receivedCount++;
 					$options['pagedata'] = [
 						'data-locations'	=> $result['locations'],
-						'data-sublocations'	=> $result['sublocations'],
-						'data-userlocation'	=> $result['ousrlocation'],
 						'mvin-summary'		=> $result['mvisSum'],
 						'mvin-th'			=> ['{8}', '{9}', '{10}', '{11}', '{12}', '{13}'],
 						'mvin-lists'		=> $result['mvisList'],

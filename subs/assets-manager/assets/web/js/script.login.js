@@ -3,6 +3,28 @@
  */
 
 $(document).ready (function ($ready) {
+	$('body').on ('keyup', ':input', function ($evt) {
+		if ($evt.which === 13) {
+			$id = $(this).prop ('id');
+			switch ($id) {
+				default:
+					break;
+				case 'client-auth':
+					if ($(this).val () !== '') $('input#client-pass').focus ();
+					break;
+				case 'client-pass':
+					$('button#submit-auth').trigger ('click');
+					break;
+				case 'input-username':
+					$('button#account-next').trigger ('click');
+					break;
+				case 'input-password':
+					$('button#account-submit').trigger ('click');
+					break;
+			}
+		}
+	});
+	
 	$('body').on ('click', 'button', function ($evt) {
 		if ($(this).is ('button')) {
 			$id = $(this).prop ('id');
