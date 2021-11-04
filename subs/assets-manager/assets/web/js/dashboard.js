@@ -61,7 +61,6 @@ $(document).ready (function () {
 		ahref.addClass ('active');	
 		ahref.parents ('div.collapse').addClass ('show');
 	}
-	$('a.navbar-brand').text (ahref.text().trim ());
 	
 	$.fn.readPreviewImages = function ($target) {
 		$input = $(this);

@@ -22,6 +22,8 @@ $(function () {
 	$pathnames	= $pathname.split ('/');
 	$document	= $pathnames[4];
 	
+	$('body').find ('.navbar-brand').text ($doclocale['title']);
+	
 	if ($document === 'setup') {
 		$setupTexts = $doclocale['setup'];
 		$.each ($setupTexts, function ($key, $text) {
@@ -36,7 +38,10 @@ $(function () {
 		$pagetexts	= $doclocale['pages'];
 		$contents	= $doclocale['contents'][$document];
 		$.each ($pagetexts, function ($key, $text) {
-			
+			$headelements = $('[data-headsmarty="' + $key + '"]');
+			$headelements.each (function () {
+				$(this).text ($text);
+			});
 		});
 		
 		$.each ($contents, function ($key, $text) {

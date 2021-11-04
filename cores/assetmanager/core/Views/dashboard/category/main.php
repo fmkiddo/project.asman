@@ -59,9 +59,12 @@ endif;
 
 <?php include __DIR__ . '/../footer.php'; ?>
 	<script type="text/javascript">
-	$('tr').click (function (event) {
-		$ariaData = $(this).attr ('aria-data');
-		window.location.href = 'asset-categoryitem?' + $ariaData;
+	$(document).ready (function () {
+		$('body').on ('click', 'td', function ($evt) {
+			$tr = $(this).parents ('tr');
+			$ariaData = $tr.attr ('aria-data');
+			window.location.href = 'asset-categoryitem?' + $ariaData;
+		});
 	});
 	</script>
 <?php include __DIR__ . '/../html-footer.php'; ?>

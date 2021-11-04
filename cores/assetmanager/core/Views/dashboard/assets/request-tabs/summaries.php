@@ -31,23 +31,32 @@ foreach ($pagedata['summaries'] as $summary): ?>
 																		<th data-smarty="{11}"></th>
 																		<th data-smarty="{12}"></th>
 																		<th data-smarty="{13}"></th>
+<?php if ($dataUserLocation == 0): ?>									
+																		<th data-smarty="{37}"></th>
+<?php endif; ?>
 																		<th data-smarty="{14}"></th>
 																	</tr>
 																</thead>
 																<tbody>
 <?php $lineId = 1;
-foreach ($dataRequestDocs as $idx => $requestDoc): ?>
-																	<tr class="<?php echo $docstat->getClass ($requestDoc->status); ?>">
+foreach ($dataRequestDocs as $requestDoc):
+	foreach ($requestDoc as $req): ?>
+																	<tr class="<?php echo $docstat->getClass ($req->status); ?>">
 																		<td><?php echo $lineId; ?></td>
-																		<td><?php echo $requestDoc->docnum; ?></td>
-																		<td><?php echo $requestDoc->docdate; ?></td>
-																		<td><?php echo $requestDoc->username; ?></td>
+																		<td><?php echo $req->docnum; ?></td>
+																		<td><?php echo $req->docdate; ?></td>
+																		<td><b><?php echo $doctype->getType ($req->type); ?></b></td>
+																		<td><?php echo $req->username; ?></td>
+<?php if ($dataUserLocation == 0): ?>									
+																		<td><?php echo $req->location_name; ?></td>
+<?php endif; ?>
 																		<td>
-																			<i class="<?php echo $docstat->getIcon ($requestDoc->status); ?>"></i>
-																			<span><?php echo $docstat->getStatusText ($requestDoc->status); ?></span>
+																			<i class="<?php echo $docstat->getIcon ($req->status); ?>"></i>
+																			<span><?php echo $docstat->getStatusText ($req->status); ?></span>
 																		</td>
 																	</tr>
-<?php $lineId += $idx;
+<?php $lineId++;
+	endforeach;
 endforeach; ?>
 																</tbody>
 															</table>

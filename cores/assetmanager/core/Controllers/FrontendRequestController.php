@@ -51,15 +51,70 @@ class FrontendRequestController extends BaseController {
 			$result;
 			$post = $this->request->getPost();
 			$trigger = $post['trigger'];
+			$urlReferer = $this->request->getHeader ('Referer')->getValue ();
 			switch ($trigger) {
 				default:
 					$result = [
 					];
 					break;
+				case 'destroy-request':
+					$post = $this->request->getPost();
+					$dataOptions = [
+						'data-trigger'	=> 'assetsdestroy-request',
+						'data-transmit'	=> []
+					];
+					$transmit = [];
+					$assets	= [];
+					foreach ($post as $key => $data) {
+						switch ($key) {
+							default:
+								if (strpos ($key, 'asset-id') !== FALSE) {
+									$lineId = str_replace('asset-id-', '', $key);
+									$assets[$lineId] = [
+										'asset-idx'	=> $data
+									];
+								}
+								
+								if (strpos ($key, 'subloc-id') !== FALSE) {
+									$lineId = str_replace('subloc-id-', '', $key);
+									$assets[$lineId]['subloc-idx'] = $data;	
+								}
+								
+								if (strpos ($key, 'removal-qty') !== FALSE) {
+									$lineId = str_replace('removal-qty-', '', $key);
+									$assets[$lineId]['request-qty'] = $data;
+								}
+								break;
+							case 'target-location':
+								$transmit['location-idx']	= $data;
+								break;
+						}
+					}
+					$transmit['data-assets'] = $assets;
+					$transmit['data-loggedousr'] = $this->getLoggedUserID();
+					$dataOptions['data-transmit'] = $transmit;
+					
+					$this->dataRequest($dataOptions);
+					
+					return $this->response->redirect($urlReferer, 'GET');
 				case 'requisition-newasset':
+					$isValid = TRUE;
 					$files = $this->request->getFileMultiple('newphotos');
-					$result = $this->fileTransferAPI($files, 'client/api/data-processing');
-					if (!$result['good']) ;
+					foreach ($files as $file) 
+						if (!$file->isValid ()) {
+							$isValid = FALSE;
+							break;
+						}
+					
+					if ($isValid) 
+						$result = $this->fileTransferAPI($files, 'client/api/data-processing');
+					else $result = [
+						'good'					=> TRUE,
+						'uploaded-filenames'	=> [
+						]
+					];
+						
+					if (!$result['good']) $result = [];
 					else {
 						$post = $this->request->getPost();
 						$dataOptions = [
@@ -78,7 +133,7 @@ class FrontendRequestController extends BaseController {
 						];
 						$result = $this->dataRequest($dataOptions);
 					}
-					break;
+					return $this->response->redirect($urlReferer, 'GET');
 			}
 		}
 	}

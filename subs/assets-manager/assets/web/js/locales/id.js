@@ -3,6 +3,7 @@
  */
 $(document).ready (function () {
 	$doclocale = {
+		'title': 'Sistem Manajemen Aset',
 		'setup': {
 			'{0}': 'Halo dan Selamat Datang',
 			'{1}': 'Sepertinya anda baru pertama kali menggunakan software manajer aset ini.',
@@ -46,29 +47,58 @@ $(document).ready (function () {
 			'{39}': 'Kirim'
 		},
 		'user-login': {
-				'{0}': 'Otentikasi',
-				'{1}': 'untuk menggunakan Manajer Aset',
-				'{2}': 'Otentikasi Lisensi',
-				'{3}': 'Lupa',
-				'{4}': 'Otentikasikan',
-				'{5}': 'Masuk',
-				'{6}': 'untuk melanjutkan ke Manajer Aset',
-				'{7}': 'Nama Pengguna/Email',
-				'{8}': 'Lupa Nama Pengguna',
-				'{9}': 'Klik untuk mendaftar',
-				'{10}': 'Daftar Akun',
-				'{11}': 'Klik untuk verifikasi nama pengguna',
-				'{12}': 'Berikut',
-				'{13}': 'Kata Sandi',
-				'{14}': 'Lupa Kata Sandi',
-				'{15}': 'Kembali ke akun',
-				'{16}': 'Kembali',
-				'{17}': 'Mulai masuk ke Manajer Aset',
-				'{18}': 'Halo',
-				'{19}': 'Kunci Otentikasi'
+			'{0}': 'Otentikasi',
+			'{1}': 'untuk menggunakan Manajer Aset',
+			'{2}': 'Otentikasi Lisensi',
+			'{3}': 'Lupa',
+			'{4}': 'Otentikasikan',
+			'{5}': 'Masuk',
+			'{6}': 'untuk melanjutkan ke Manajer Aset',
+			'{7}': 'Nama Pengguna/Email',
+			'{8}': 'Lupa Nama Pengguna',
+			'{9}': 'Klik untuk mendaftar',
+			'{10}': 'Daftar Akun',
+			'{11}': 'Klik untuk verifikasi nama pengguna',
+			'{12}': 'Berikut',
+			'{13}': 'Kata Sandi',
+			'{14}': 'Lupa Kata Sandi',
+			'{15}': 'Kembali ke akun',
+			'{16}': 'Kembali',
+			'{17}': 'Mulai masuk ke Manajer Aset',
+			'{18}': 'Halo',
+			'{19}': 'Kunci Otentikasi'
 		},
 		'pages': {
-			
+			'{0}': 'Dasbor',
+			'{1}': 'Aset',
+			'{2}': 'Menu Aset',
+			'{3}': 'Data Induk Aset',
+			'{4}': 'Register Aset',
+			'{5}': 'Kategori Aset',
+			'{6}': 'Menu Permintaan',
+			'{7}': 'Permintaan Aset',
+			'{8}': 'Menu Pergerakan Aset',
+			'{9}': 'Perpindahan Aset',
+			'{10}': 'Penerimaan Aset',
+			'{11}': 'Pemusnahan Aset',
+			'{14}': 'Lokasi',
+			'{15}': 'Pengguna Sistem',
+			'{16}': 'Menu Pengguna',
+			'{17}': 'Daftar Pengguna',
+			'{18}': 'Buat Pengguna Baru',
+			'{19}': 'Menu Grup',
+			'{20}': 'Daftar Grup Pengguna',
+			'{21}': 'Buat Grup Baru',
+			'{22}': 'Pengelola File',
+			'{23}': 'Pengaturan',
+			'{24}': 'Pengaturan Pengguna',
+			'{25}': 'Profil',
+			'{26}': 'Pengaturan',
+			'{27}': 'Keluar',
+			'{28}': 'Pesan Pesan',
+			'{29}': 'Lihat Semua Pesan',
+			'{30}': 'Pemberitahuan',
+			'{31}': 'Lihat Semua Pemberitahuan'
 		},
 		'contents': {
 			'doc-assetreq': {
@@ -114,7 +144,10 @@ $(document).ready (function () {
 				'{39}': 'Sublokasi Asal',
 				'{40}': '--- Pilih Lokasi ---',
 				'{41}': 'Sublokasi',
-				'{42}': ''
+				'{42}': 'Data Pemusnahan',
+				'{43}': 'Klik untuk mengirimkan pengajuan',
+				'{44}': 'Ajukan',
+				'{45}': 'Klik untuk Ulangi pengajuan anda'
 			},
 			'doc-assetin': {
 				'{0}': 'Penerimaan Aset',
@@ -141,6 +174,34 @@ $(document).ready (function () {
 			},
 			'doc-assetout': {
 				'{0}': 'Perpindahan Aset'
+			},
+			'doc-removal': {
+				'{0}': 'Pemusnahan Aset',
+				'{1}': 'Ringkasan Pemusnahan Aset',
+				'{2}': 'Pemusnahan Aset',
+				'{3}': 'Ringkasan Permintaan Pemusnahan Aset',
+				'{4}': 'No. Dokumen',
+				'{5}': 'Tgl. Dokumen',
+				'{6}': 'Pemohon',
+				'{7}': 'Lokasi',
+				'{8}': 'Status'
+			},
+			'user-profile': {
+				'{0}': 'Profile Pengguna',
+				'{1}': 'Nama Depan',
+				'{2}': 'Nama Tengah',
+				'{3}': 'Nama Belakang',
+				'{4}': 'No. Telpon',
+				'{5}': 'Email',
+				'{6}': 'Alamat 1',
+				'{7}': 'Alamat 2',
+				'{8}': 'Simpan',
+				'{9}': 'Klik untuk menyimpan profil anda',
+				'{10}': 'Batal',
+				'{11}': 'Klik untuk mengulangi isi profil anda'
+			},
+			'file-manager': {
+				'{0}': ''
 			}
 		}
 	};

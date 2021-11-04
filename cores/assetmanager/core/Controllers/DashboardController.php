@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 
 use App\Libraries\DocumentStatus;
+use App\Libraries\DocumentType;
 
 class DashboardController extends BaseController {
 	
@@ -401,6 +402,7 @@ class DashboardController extends BaseController {
 					
 					$options['pagedata'] = $result;
 					$options['docstat']		= new DocumentStatus($result['docStats']);
+					$options['doctype']		= new DocumentType($result['docTypes']);
 					$pageName = 'dashboard/assets/request';
 					break;
 				case 'doc-assetin':
@@ -472,7 +474,14 @@ class DashboardController extends BaseController {
 					$pageName = 'dashboard/assets/move-out';
 					break;
 				case 'doc-removal':
-					$pageName = 'dashboard/assets/destroy-request';
+					$dataoptions = [
+						'data-trigger'	=> 'removal-documents',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $loggedOusr
+						]
+					];
+// 					$result = $this->dataRequest($dataoptions);
+					$pageName = 'dashboard/assets/removal';
 					break;
 				case 'file-manager':
 					$pageName = 'dashboard/filemanager';
@@ -483,6 +492,7 @@ class DashboardController extends BaseController {
 				case 'test1':
 				case 'test2':
 					$pageName = 'dashboard/main';
+					break;
 				case 'logout':
 					return $this->response->redirect(base_url($this->locale . '/assets/do-logout'), 'GET');
 			}
