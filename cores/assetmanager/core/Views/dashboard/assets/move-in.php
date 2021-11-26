@@ -15,7 +15,10 @@ $moveinDetails		= $pagedata['mvin-details'];
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between">
-								<h4 class="card-title" data-smarty="{0}"></h4>
+								<h4 class="card-title">
+									<i class="fas fa-hands fa-fw"></i>
+									<span data-smarty="{0}"></span>
+								</h4>
 							</div>
 							
 							<div class="card-body">
@@ -107,7 +110,7 @@ foreach ($summaries as $summary): ?>
 															<div class="movein-received">
 <?php if ($pagedata['mvin-received'] == 0): ?>
 																<div class="card shadow-none border">
-																	<div class="card-body" style="background-color: #CCC;">
+																	<div class="card-body bg-gray">
 																		<b><span data-smarty="{15}"></span></b>
 																	</div>
 																</div>

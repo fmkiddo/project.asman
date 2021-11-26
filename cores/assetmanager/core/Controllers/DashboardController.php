@@ -8,6 +8,48 @@ use App\Libraries\DocumentType;
 class DashboardController extends BaseController {
 	
 // 	public const USERID = 3;
+
+	private function buildMenuStructures ($menuStructures=[]): string {
+		ob_start(); 
+		foreach ($menuStructures as $menu): 
+			$hasSubs = count ($menu['subs']) > 0; ?>
+					<li class="nav-item">
+<?php 			if (!$hasSubs): ?>
+						<a class="nav-link" onclick="window.location.href='<?php echo $menu['target']; ?>'">
+							<i class="<?php echo $menu['icon']; ?>"></i> <span data-headsmarty="<?php echo $menu['smarty']; ?>"></span>
+						</a>
+<?php 		else: ?>
+						<a class="nav-link collapsed" data-toggle="collapse" data-target="#<?php echo $menu['id']; ?>" aria-expanded="false" aria-controls="<?php $menu['id']?>">
+							<i class="<?php echo $menu['icon']; ?>"></i> <span data-headsmarty="<?php echo $menu['smarty']; ?>"></span>
+						</a>
+						<div id="<?php echo $menu['id']; ?>" class="collapse" data-parent="#sidebar-wrapper" aria-labelledby="header-<?php echo $menu['id']; ?>">
+							<div class="bg-white py-2 collapse-inner rounded">
+<?php			$currSegment = 0;
+				foreach ($menu['subs'] as $segment => $sub):
+					if ($currSegment != $segment):
+						if ($currSegment > 0): ?>
+								<hr class="collapse-separator py-1" />
+<?php
+						endif;
+							$currSegment = $segment; ?>
+								<h6 class="collapse-header" data-headsmarty="<?php echo $sub['title']; ?>"></h6>
+<?php 
+					endif;
+					foreach ($sub['child'] as $child): ?>
+								<a class="collapse-item" onclick="window.location.href='<?php echo $child['target']; ?>'">
+									<i class="<?php echo $child['icon']; ?>"></i> <span data-headsmarty="<?php echo $child['smarty']; ?>"></span>
+								</a>
+<?php 				endforeach;
+				endforeach;
+?>
+							</div>
+						</div>
+<?php 		
+			endif; ?>
+					</li>
+<?php 		endforeach;
+		return ob_get_clean();
+	}
 	
 	private function isUserNotLoggedIn () {
 		return get_cookie(CLIENT_USER_COOKIE) == NULL;
@@ -110,6 +152,11 @@ class DashboardController extends BaseController {
 					break;
 				case 'index':
 				case 'welcome':
+					$dataoptions = [
+						'data-trigger'	=> '',
+						'data-transmit'	=> [
+						]
+					];
 					$pageName = 'dashboard/main';
 					break;
 				case 'master-categories':
@@ -210,10 +257,11 @@ class DashboardController extends BaseController {
 					$dataTransmit = [
 						'data-trigger'	=> 'detailedlocation',
 						'data-transmit'	=> [
-							'olctid' 		=> $this->request->getGet('location')
+							'data-locationcode'	=> $this->request->getGet('location-code')
 						]
 					];
 					$result = $this->dataRequest($dataTransmit);
+					if (count ($result) == 0) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 					$options['pagedata'] = $result;
 					$pageName = 'dashboard/location/detail';
 					break;
@@ -298,6 +346,22 @@ class DashboardController extends BaseController {
 					$pageName = 'dashboard/assets/new-asset';
 					break;
 				case 'form-sublocation':
+					if ($this->request->getMethod(TRUE) === 'GET') {
+						$get = $this->request->getGet();
+						$locationCode = $get['location-code'];
+						$sublocationCode = $get['sublocation-code'];
+						$dataoptions = [
+							'data-trigger'	=> 'load-sublocation',
+							'data-transmit'	=> [
+								'data-locationcode'		=> $locationCode,
+								'data-sublocationcode'	=> ($sublocationCode === 'new') ? 0 : $sublocationCode
+							]
+						];
+						$result = $this->dataRequest($dataoptions);
+						if (count ($result) == 0) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+						
+						$options['pagedata'] = $result;
+					}
 					$pageName = 'dashboard/sublocation';
 					break;
 				case 'users':
@@ -369,7 +433,16 @@ class DashboardController extends BaseController {
 					
 					break;
 				case 'user-profile':
-					$options['pagedata'] = [];
+					$dataoptions = [
+						'data-trigger'	=> 'userprofile',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $this->getLoggedUserID()
+						]
+					];
+					$serverResponse = $this->dataRequest($dataoptions);
+					$options['pagedata'] = [
+						'profile'	=> $serverResponse['data-profile']
+					];
 					$pageName = 'dashboard/users/profile';
 					break;
 				case 'groups':
@@ -473,15 +546,24 @@ class DashboardController extends BaseController {
 					$options['docstat'] = new DocumentStatus($result['docStats']);
 					$pageName = 'dashboard/assets/move-out';
 					break;
-				case 'doc-removal':
+				case 'doc-assetremoval':
 					$dataoptions = [
 						'data-trigger'	=> 'removal-documents',
 						'data-transmit'	=> [
 							'data-loggedousr'	=> $loggedOusr
 						]
 					];
-// 					$result = $this->dataRequest($dataoptions);
+					$result = $this->dataRequest($dataoptions);
+					$options['pagedata'] =	[
+						'data-removaldocs'	=> [],
+						'data-summaries'	=> $result['arvSummaries'],
+						'data-removals'		=> $result['removaldocs']
+					];
+					$options['docstat']	= new DocumentStatus($result['docStats']);
 					$pageName = 'dashboard/assets/removal';
+					break;
+				case 'doc-assetproc':
+					$pageName = 'dashboard/assets/procurement';
 					break;
 				case 'file-manager':
 					$pageName = 'dashboard/filemanager';
@@ -495,6 +577,19 @@ class DashboardController extends BaseController {
 					break;
 				case 'logout':
 					return $this->response->redirect(base_url($this->locale . '/assets/do-logout'), 'GET');
+			}
+			
+			$headOptions = [
+				'data-trigger'	=> 'headdata',
+				'data-transmit'	=> [
+					'data-loggedousr'	=> $this->getLoggedUserID()
+				]
+			];
+			$headResponse = $this->dataRequest($headOptions);
+			if ($headResponse !== NULL) {
+				$options['menus'] = $this->buildMenuStructures($headResponse['data-menustructure']);
+				$options['messages'] = $headResponse['data-messages'];
+				$options['notifs'] = $headResponse['data-notifications'];
 			}
 			
 			if ($render) return view($pageName, $options);

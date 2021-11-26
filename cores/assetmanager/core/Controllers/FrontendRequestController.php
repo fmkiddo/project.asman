@@ -54,11 +54,47 @@ class FrontendRequestController extends BaseController {
 			$urlReferer = $this->request->getHeader ('Referer')->getValue ();
 			switch ($trigger) {
 				default:
-					$result = [
+					if (strpos ($trigger, 'upload-md-') !== FALSE) {
+						$file = $this->request->getFile('uploaded-file');
+						$filename = $file->getTempName();
+						$csv_data = array_map ('str_getcsv', file ($filename));
+						$header = array ();
+						$data = array ();
+						$index = 0;
+						foreach ($csv_data as $csvData):
+							if ($index == 0) $header = $csvData;
+							else array_push($data, $csvData);
+							$index++;
+						endforeach;
+						
+						$dataOptions = [
+							'data-trigger'	=> 'data' . $trigger,
+							'data-transmit'	=> [
+								'data-header'		=> $header,
+								'data-body'			=> $data,
+								'data-loggedousr'	=> $this->getLoggedUserID()
+							]
+						];
+						$result = $this->dataRequest($dataOptions);
+						$failedNum = $result['data-importfailed'];
+						return $this->response->redirect ($urlReferer);
+					}
+					break;
+				case 'sublocation-update':
+					$post = $this->request->getPost ();
+					$dataOptions = [
+						'data-trigger'	=> 'sublocation-addupdate',
+						'data-transmit'	=> [
+							'data-locationcode'		=> $post['location-code'],
+							'data-sublocationcode'	=> $post['code'],
+							'data-description'		=> $post['dscript']
+						]
 					];
+					$result = $this->dataRequest ($dataOptions);
+					return $this->response->redirect (base_url ($this->locale . '/dashboard/location-detail?location-code=' . $post['location-code']));
 					break;
 				case 'destroy-request':
-					$post = $this->request->getPost();
+					$post = $this->request->getPost ();
 					$dataOptions = [
 						'data-trigger'	=> 'assetsdestroy-request',
 						'data-transmit'	=> []
@@ -134,6 +170,25 @@ class FrontendRequestController extends BaseController {
 						$result = $this->dataRequest($dataOptions);
 					}
 					return $this->response->redirect($urlReferer, 'GET');
+				case 'form-profile':
+					$fileUpload = $this->request->getFile('profile-photo');
+					$photoFilename = '';
+					if ($fileUpload->getSize () > 0) {
+						
+					}
+					
+					$post = $this->request->getPost();
+					$post['imageName']	= $photoFilename;
+					$dataOptions = [
+						'data-trigger'	=> 'profile-update',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $this->getLoggedUserID(),
+							'data-form'			=> $post
+						]
+					];
+					
+					$this->dataRequest($dataOptions);
+					return $this->response->redirect ($urlReferer, 'GET');
 			}
 		}
 	}

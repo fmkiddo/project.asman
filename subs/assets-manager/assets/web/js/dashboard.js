@@ -35,7 +35,46 @@ $(document).ready (function () {
 				$pageDataTables.push ($dTable);
 			});
 		};
+	
+		$('a[data-toggle="tab"]').on ('shown.bs.tab', function ($evt) {
+			$.fn.dataTable.tables ({'visible': true, 'api': true}).columns.adjust ();
+		});
+		
+		$curl = location.href.split ('/').pop ();
+		if ($curl === 'index' || $curl === 'welcome') $curl = 'index';
+		$ahref = $('a[onclick="window.location.href=\'' + $curl + '\'"]');
+		if ($ahref.length > 0) $.activateMenuItem ($ahref);
+		else {
+			$explode = $curl.split ('?');
+			$targetUrl = '';
+			switch ($explode[0]) {
+				default:
+					$targetUrl = '';
+					break;
+				case 'asset-details':
+					$targetUrl = 'master-assets';
+					break; 
+				case 'location-detail':
+				case 'form-location':
+				case 'form-sublocation':
+					$targetUrl = 'location';
+					break;
+			}
+			$ahref = $('a[onclick="window.location.href=\'' + $targetUrl + '\'"]');
+			$.activateMenuItem ($ahref);
+		}
+		
+		$.getScript ($.base_url ('assets/web/js/locales/' + $locale + '.js'));
 	});
+	
+	$.activateMenuItem = function ($ahref) {
+		$ahref.parent ('li').addClass ('active');
+		if ($ahref.hasClass ('nav-link')) $ahref.parent ('li').addClass ('active');
+		else {
+			$ahref.addClass ('active');
+			$ahref.parents ('div.collapse').addClass ('show');
+		}
+	}
 	
 	$.searchDataTable = function ($id) {
 		$dataTable = {};
@@ -49,18 +88,35 @@ $(document).ready (function () {
 		return $dataTable;
 	};
 	
-	$('a[data-toggle="tab"]').on ('shown.bs.tab', function ($evt) {
-		$.fn.dataTable.tables ({'visible': true, 'api': true}).columns.adjust ();
-	});
-	var curl = location.href.split ('/').pop ();
-	if (curl === 'index' || curl === 'welcome') curl = 'index';
-	var ahref = $('a[onclick="window.location.href=\'' + curl + '\'"]');
-	ahref.parent ('li').addClass ('active');
-	if (ahref.hasClass ('nav-link')) ahref.parent ('li').addClass ('active');
-	else {	
-		ahref.addClass ('active');	
-		ahref.parents ('div.collapse').addClass ('show');
-	}
+	$.fn.showPreviewCarousel = function ($targetCarousel) {
+		if (!$targetCarousel.hasClass ('carousel')) {
+			console.log ('not carousel');
+			return false;
+		}
+		
+		$input			= $(this);
+		$carouselInner	= $targetCarousel.children ('div.carousel-inner');
+		$myfiles		= $input.prop ('files');
+		if ($myfiles) {
+			$imgs = [];
+			$fileCount = $myfiles.length;
+			
+			for ($id=0; $id<$fileCount; $id++) {
+				$reader = new FileReader ();
+				$($reader).on ('load', function ($event) {
+					$carouselItem = $('<div/>', {
+						'class': 'carousel-item'
+					}).appendTo ($carouselInner);
+					$('<div/>', {
+						'class': 'w-100 carousel-fill',
+						'style': 'background-image: url("' + $event.target.result + '");'
+					}).appendTo ($carouselItem);
+					if ($carouselItem.is ($carouselItem.parent ().children (':eq(0)'))) $carouselItem.addClass ('active');
+				});
+				$reader.readAsDataURL ($myfiles[$id]);
+			}
+		}
+	};
 	
 	$.fn.readPreviewImages = function ($target) {
 		$input = $(this);
@@ -85,8 +141,4 @@ $(document).ready (function () {
 			}
 		}
 	};
-	
-	$(function () {
-		$.getScript ($.base_url ('assets/web/js/locales/' + $locale + '.js'));
-	});
 });

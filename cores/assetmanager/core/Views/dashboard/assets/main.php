@@ -13,7 +13,7 @@ endif;
 							<div class="card-header">
 								<div class="d-flex align-items-center justify-content-between">
 									<h5 class="card-title">
-										<i class="fas fa-cubes fa-fw"></i> <span>Data Aset</span>
+										<i class="fas fa-cubes fa-fw"></i> <span data-smarty="{0}"></span>
 									</h5>
 									<div>
 										<button type="button" class="btn btn-primary" onclick="window.location.href='doc-assetreq'" title="Permintaan Aset">

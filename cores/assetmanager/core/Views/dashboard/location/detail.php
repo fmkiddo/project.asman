@@ -82,14 +82,14 @@ endforeach; ?>
 												<div class="col-md-12">
 													<div class="d-flex justify-content-between align-items-center">
 														<h5>Sublocation Data</h5>
-														<a class="btn btn-primary" href="form-sublocation?location=<?php echo $location->idx; ?>">
+														<a class="btn btn-primary" href="form-sublocation?location-code=<?php echo $location->code; ?>&sublocation-code=new">
 															<i class="fas fa-plus-circle fa-fw"></i> <span>Add Sublocation</span>
 														</a>
 													</div>
 												</div>
 											</div>
 											<div class="">
-												<table id="dataTable-sublocation" class="dataTable">
+												<table id="dataTable-sublocation" class="dataTable table table-striped table-hover">
 													<thead>
 														<tr>
 <?php foreach ($sblheader as $header): ?>
@@ -113,10 +113,10 @@ endforeach; ?>
 																		<i class="fas fa-tasks fa-fw"></i>
 																	</a>
 																	<div class="dropdown-menu" aria-labelledby="dropdownSblActionMenu<?php echo $sublocation->idx; ?>">
-																		<a class="dropdown-item">
+																		<a class="dropdown-item" data-click="edit" onclick="window.location.href='<?php echo base_url ($locale . '/dashboard/form-sublocation?location-code=' . $location->code . '&sublocation-code=' . $sublocation->code);?>'">
 																			<i class="fas fa-edit fa-fw"></i> <span>Edit</span>
 																		</a>
-																		<a class="dropdown-item">
+																		<a class="dropdown-item" onclick="alert('Unsupported Yet!')">
 																			<i class="fas fa-times fa-fw"></i> <span>Delete</span>
 																		</a>
 																	</div>
@@ -129,15 +129,15 @@ endforeach; ?>
 											</div>
 										</div>
 										<div class="tab-pane fade" id="assetdata">
-											<!-- <div class="row">
+											<div class="row">
 												<div class="col-md-12">
 													<div class="d-flex align-items-center justify-content-between">
-														<h5>Asset List</h5>
+														<h5>Asset List Per Location</h5>
 													</div>
 												</div>
-											</div>-->
+											</div>
 											<div>
-												<table id="dataTable-sublocation" class="dataTable">
+												<table id="dataTable-assetList" class="dataTable">
 													<thead>
 														<tr>
 <?php foreach ($assetheader as $th): ?>
@@ -169,9 +169,21 @@ endforeach; ?>
 				</div>
 <?php include __DIR__ . '/../footer.php'; ?>
 	<script type="text/javascript">
-	$('td').click (function () {
-		if (!$(this).is (':last-child')) {
-		}
+	$(document).ready (function () {
+		$('body').on ('click', 'button, td', function ($evt) {
+			if ($(this).is ('button')) {
+			} else if ($(this).is ('td')) {
+				$table = $(this).parents ('table');
+				$tableId = $table.prop ('id');
+				switch ($tableId) {
+					default:
+						break;
+					case 'dataTable-sublocation':
+						if (!$(this).is (':last-child')) $(this).parents ('tr').find ('a[data-click="edit"]').trigger ('click');
+						break;
+				}
+			}
+		});
 	});
 	</script>
 <?php include __DIR__ . '/../html-footer.php'; ?>

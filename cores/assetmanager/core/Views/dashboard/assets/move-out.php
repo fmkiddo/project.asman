@@ -21,7 +21,10 @@ $cancelItem			= 'Batalkan Item';
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between">
-								<h4 class="card-title" data-smarty="{0}"></h4>
+								<h4 class="card-title">
+									<i class="fas fa-truck-moving fa-fw"></i>
+									<span  data-smarty="{0}"></span>
+								</h4>
 								<button type="button" id="createnew-moveout" class="btn btn-primary" title="<?php echo 'Buat dokumen aset keluar baru'; ?>">
 									<i class="fas fa-plus-circle fa-fw"></i> <span>Buat Dokumen Baru</span>
 								</button>
@@ -511,54 +514,437 @@ endforeach; ?>
 			});
 		};
 
-		$('body').on ('click', 'button', function ($evt) {
-			$id = $(this).prop ('id');
-			switch ($id) {
-				default:
-					break;
-				case 'cancel-item':
-					$moveOutDataTable = $.searchDataTable ($moveTable);
-					$moveOutDataTable.row ($(this).parents ('tr')).remove ().draw (false);
-					break;
-				case 'add-asset-items':
-					break;
-				case 'btn-approveomvo':
-					$data = {
-						'trigger': 'moveout-action',
-						'transmit': {
-							'do': 'approve',
-							'docnum': $('input#data-docnum').val ()
+		$('body').on ('click', 'button, td, span#qty-text', function ($evt) {
+			if ($(this).is ('button')) {
+				$id = $(this).prop ('id');
+				switch ($id) {
+					default:
+						break;
+					case 'cancel-item':
+						$moveOutDataTable = $.searchDataTable ($moveTable);
+						$moveOutDataTable.row ($(this).parents ('tr')).remove ().draw (false);
+						break;
+					case 'add-asset-items':
+						break;
+					case 'btn-approveomvo':
+						$data = {
+							'trigger': 'moveout-action',
+							'transmit': {
+								'do': 'approve',
+								'docnum': $('input#data-docnum').val ()
+							}
+						};
+						$.moveOutAction ($data);
+						break;
+					case 'btn-declineomvo':
+						$data = {
+							'trigger': 'moveout-action',
+							'transmit': {
+								'do': 'decline',
+								'docnum': $('input#data-docnum').val ()
+							}
+						};
+						$.moveOutAction ($data);
+						break;
+					case 'btn-marksentomvo':
+						$data = {
+							'trigger': 'moveout-action',
+							'transmit': {
+								'do': 'marksent',
+								'docnum': $('input#data-docnum').val ()
+							}
 						}
-					};
-					$.moveOutAction ($data);
-					break;
-				case 'btn-declineomvo':
-					$data = {
-						'trigger': 'moveout-action',
-						'transmit': {
-							'do': 'decline',
-							'docnum': $('input#data-docnum').val ()
-						}
-					};
-					$.moveOutAction ($data);
-					break;
-				case 'btn-marksentomvo':
-					$data = {
-						'trigger': 'moveout-action',
-						'transmit': {
-							'do': 'marksent',
-							'docnum': $('input#data-docnum').val ()
-						}
-					}
-					$.moveOutAction ($data);
-					break;
-			}
-		});
+						$.moveOutAction ($data);
+						break;
+					case 'createnew-moveout':
+						$('a[href="#moveout-form"]').trigger ('click');
+						break;
+					case 'add-asset':
+						$fromLocation	= $('select[name="moveout-fromlocation"]');
+						if ($fromLocation.val () == null) ;
+						else {
+							$ajaxData = {
+								'trigger': 'asset-list',
+								'type': 'pertable',
+								'from': $fromLocation.val ()
+							};
+							
+							$.ajax ({
+								'url': $.base_url ($locale + '/api/get'),
+								'method': 'put',
+								'data': JSON.stringify ($ajaxData),
+								'dataType': 'json',
+								'contentType': 'application/json'
+							}).done (function ($result) {
+								if (!$result.good) console.log ('asjdbnhasdbhasbd');
+								else {
+									$('button#add-asset-items').attr ('data-click', 'persublocation');
+									$dataTables = [];
+									
+									$ths = $result.tabpanehead;
+									$('select#sublocation').find ('option').not (':first').remove ();
+									$('select#sublocation').prop ('selectedIndex', 0).change ();
+									$.each ($result.sublocs, function ($idx, $subloc) {
+										$('<option/>', {
+											'value': $subloc.idx,
+											'data-target': '#ID' + $subloc.code,
+											'text': $subloc.name
+										}).appendTo ($('select#sublocation'));
 
-		$('body').on ('click', 'span#qty-text', function ($evt) {
-			$qtyInput = $(this).prev ();
-			$(this).addClass ('d-none');
-			$qtyInput.attr ('type', 'number');
+										$navItem = $('<li/>', {'class': 'nav-item'});
+										$navItem.appendTo ('ul#subloctabs');
+										$('<a/>', {
+											'class': 'nav-link',
+											'href': '#ID' + $subloc.code,
+											'data-toggle': 'tab',
+											'text': $subloc.name
+										}).appendTo ($navItem);
+										
+										$tabpane = $('<div/>', {
+											'id': 'ID' + $subloc.code,
+											'class': 'tab-pane fade',
+											'data-sblid': $subloc.idx
+										});
+										$tabpane.appendTo ('div#asset-tabcontents');
+
+										$('<h6/>', {'text': $subloc.name}).appendTo ($tabpane);
+
+										$divpane = $('<div/>', {
+											'style': 'overflow-x: auto;'
+										}).appendTo ($tabpane);
+
+										$table = $('<table/>', {
+											'id': 'dataTable-select' + $subloc.code,
+											'class': 'table table-hover table-striped table-pointer'
+										}).appendTo ($divpane);
+
+										$thead = $('<thead/>').appendTo ($table);
+										$hl = $('<tr/>').appendTo ($thead);
+										$.each ($ths, function ($i, $text) {
+											$('<th/>', {
+												'html': $text
+											}).appendTo ($hl);
+										});
+										$dataTable = $table.DataTable ();
+										
+										$dataTables.push ($dataTable);
+
+										$('h5#sublocation-header').text ($subloc.name);
+									});
+
+									$items = {};
+									$.each ($result.assetitems, function ($idx, $item) {
+										$sblid = $item.osbl_idx;
+										$newRow = [
+											$('<input/>', {
+												'type': 'checkbox',
+												'name': 'movecheck-' + $item.idx,
+												'id': 'asset-item',
+												'value': $item.idx,
+												'className': 'form-control'
+											}).prop ('outerHTML'),
+											$item.code,
+											$item.name,
+											$('select#sublocation').find ('option[value="' + $item.osbl_idx + '"]').text (),
+											$item.qty,
+											$('<input/>', {
+												'type': 'number',
+												'name': 'movenum-' + $item.idx,
+												'id': 'move-qty',
+												'max': $item.qty
+											}).prop ('outerHTML')
+										];
+										$dataTable = $('div[data-sblid="' + $sblid + '"]').find ('table.dataTable').DataTable ();
+										$dataTable.row.add ($newRow).draw (false);
+									});
+
+									$('button#add-asset-items[data-click="persublocation"]').unbind ().click (function ($evt) {
+										$checkedRows = [];
+										$.each ($dataTables, function ($k, $dt) {
+											$dt.$('input:checkbox:checked').each (function () {
+												$row = $(this).parents ('tr');
+												$checkedRows.push ($row);
+											});
+										});
+
+										if ($checkedRows.length == 0) ;
+										else {
+											$moveOutTable = $.searchDataTable ($moveTable);
+											$.each ($checkedRows, function ($id, $row) {
+												$doAdd = false;
+												$rowFound = null;
+												if ($moveOutTable.rows ().count () == 0) $doAdd = true;
+												else {
+													$found = false;
+													$addItemID = $row.find ('input:checkbox');
+													$moveOutTable.$('input#item-id').each (function () {
+														$rowItemID = $(this).val ();
+														if ($addItemID.val () == $rowItemID) {
+															$rowFound = $(this).parents ('tr');
+															$found = true;
+															return false;
+														}
+													});
+
+													if (!$found) $doAdd = true;
+												}
+
+												$inputQty = $row.children (':last-child').find ('input#move-qty');
+												if ($doAdd) {
+													$cancelButton = $('<button/>', {
+														'type': 'button',
+														'class': 'btn btn-danger btn-block',
+														'title': '<?php echo $cancelItem; ?>',
+														'id': 'cancel-item'
+													});
+													$('<i/>', {
+														'class': 'fas fa-times fa-fw'
+													}).appendTo ($cancelButton);
+													$('<span/>', {
+														'text': '<?php echo $cancelItem; ?>'
+													}).appendTo ($cancelButton);
+													$assetItem = $row.find ('input#asset-item');
+													$newRow = [
+														$('<input/>', {
+															'type': 'hidden',
+															'name': 'item-id-' + $assetItem.val (),
+															'id': 'item-id',
+															'value': $assetItem.val ()
+														}).prop ('outerHTML') + ($id + 1),
+														$row.children ('td').eq (1).text (),
+														$row.children ('td').eq (2).text (),
+														$row.children ('td').eq (3).text (),
+														$('<input/>', {
+															'type': 'hidden',
+															'name': 'itemmove-qty-' + $assetItem.val (),
+															'id': 'itemmove-qty',
+															'value': (($inputQty.val () == '') ? 1 : $inputQty.val ()),
+															'max': $inputQty.prop ('max')
+														}).prop ('outerHTML') + 
+														$('<span/>', {
+															'id': 'qty-text',
+															'text': ($inputQty.val () == '') ? 1 : $inputQty.val ()
+														}).prop ('outerHTML'),
+														$cancelButton.prop ('outerHTML')
+													];
+													$moveOutTable.row.add ($newRow);
+												} else {
+													$inputMax = $inputQty.prop ('max');
+													$currentQty = $rowFound.find ('td:eq(4)').text ();
+													$finalQty = (parseInt ($currentQty) + parseInt ($inputQty.val () == '' ? 1 : $inputQty.val ()));
+													if ($finalQty > $inputMax) alert ('<?php echo $alertExceed; ?>');
+													else {
+														$itemmoveQty = $rowFound.find ('input#itemmove-qty');
+														$itemmoveQty.val ($finalQty);
+														$itemmoveQty.change ();
+													}
+												}
+											});
+											$moveOutTable.draw (false);
+											$fromLocation.attr ('disabled', true);
+											$('div#amvos-modal').modal ('hide');
+										}
+									});
+									$('div#amvos-modal').modal ('show');
+								}
+							}).fail (function () {
+							});
+						}
+						break;
+					case 'cancel-asset-items':
+						$checkedRows = [];
+						$('div#amvos-modal').modal ('hide');
+						break;
+				}
+			} else if ($(this).is ('span')) {
+				$qtyInput = $(this).prev ();
+				$(this).addClass ('d-none');
+				$qtyInput.attr ('type', 'number');
+			} else if ($(this).is ('td')) {
+				$tableId = $(this).parents ('table').prop ('id');
+				switch ($tableId) {
+					default:
+						if ($tableId.indexOf ('dataTable-select') == 0) {
+							$itemCheck = $(this).parents ('tr').find ('input:checkbox');
+							$itemCheck.prop ('checked', !$itemCheck.prop ('checked'));
+						}
+						break;
+					case 'dataTable-moveoutMaster':
+						$dataTable = $.searchDataTable ($tableId);
+						if ($dataTable.rows ().count () > 0) {
+							$docnum = $(this).parents ('tr').find ('td:eq(1)').text ();
+							$data = {
+								'trigger': 'clicked-docnum',
+								'transmit': {
+									'source': 'doc-assetout',
+									'clicked-docnum': $docnum
+								}
+							};
+							$.ajax ({
+								'method': 'put',
+								'url': $.base_url ($locale + '/api/sent'),
+								'data': JSON.stringify ($data),
+								'dataType': 'json',
+								'contentType': 'json'
+							}).done (function ($result) {
+								if (!$result.good) ;
+								else {
+									$dataTransmit = $result.dataTransmit;
+									$amvosModal = $('div#amvos-modal');
+									$amvosModalTitle = $amvosModal.find ('.modal-title');
+									$amvosModalTitle.text ($result.dataHead);
+									$amvosModalBody = $amvosModal.find ('div.modal-body');
+									$amvosModalBody.children ().each (function () {
+										$(this).addClass ('d-none');
+									});
+									$amvosModalFooter = $amvosModal.find ('div.modal-footer');
+									$amvosModalFooter.children ().each (function () {
+										$(this).addClass ('d-none');
+									});
+									
+									$amvosModal.attr ('aria-labelledby', 'moveout-details');
+	
+									$('<div/>', {
+										'id': 'moveout-details'
+									}).appendTo ($amvosModalBody);
+									$('<input/>', {
+										'type': 'hidden',
+										'id': 'data-docnum',
+										'value': $result.docnum
+									}).appendTo ('div#moveout-details');
+									$('<div/>', {'id': 'documents', 'class': 'row'}).appendTo ($('div#moveout-details'));
+									$.each ($dataTransmit['data-moveout'], function ($key, $value) {
+										switch ($key) {
+											default:
+												$divCol = $('<div/>', {'class': 'col-md-6'});
+												$formGroup = $('<div/>', {'class': 'form-group'});
+												$('<label/>', {'text': $result.dataLabels[$key]}).appendTo ($formGroup);
+												$inputGroup = $('<div/>', {'class': 'input-group'});
+												$('<input/>', {
+													'type': 'text',
+													'class': 'form-control',
+													'value': $value,
+													'readonly': true
+												}).appendTo ($inputGroup);
+												$inputGroup.appendTo ($formGroup);
+												$formGroup.appendTo ($divCol);
+												$divCol.appendTo ('div#documents');
+												break;
+											case 'status':
+												$divCol = $('<div/>', {'class': 'col-md-6'});
+												$formGroup = $('<div/>', {'class': 'form-group'});
+												$('<label/>', {'text': $result.dataLabels[$key]}).appendTo ($formGroup);
+												$inputGroup = $('<div/>', {'class': 'input-group'});
+												$('<input/>', {
+													'type': 'text',
+													'class': 'form-control',
+													'value': $result.documentStatus,
+													'readonly': true
+												}).appendTo ($inputGroup);
+												$inputGroup.appendTo ($formGroup);
+												$formGroup.appendTo ($divCol);
+												$divCol.appendTo ('div#documents');
+												break;
+											case 'idx':
+											case 'olct_from':
+											case 'olct_to':
+												break;
+										}
+									});
+									$('<hr/>').appendTo ('div#moveout-details');
+	
+									$('<div/>', {'id': 'details', 'class': 'row'}).appendTo ('div#moveout-details');
+									$('<div/>', {'class': 'col-md-12'}).appendTo ('div#moveout-details div#details');
+									$('<div/>', {
+										'html': $('<h6/>', {
+											'text': $result.dataDetails
+										}).prop ('outerHTML')
+									}).appendTo ('div#details div.col-md-12');
+									$('<table/>', {
+										'id': 'dataTable-moveoutDetails',
+										'class': 'dataTable table table-striped table-hover table-pointer'
+									}).appendTo ('div#details div.col-md-12');
+									$('<thead/>').appendTo ('table#dataTable-moveoutDetails');
+									$('<tr/>').appendTo ('table#dataTable-moveoutDetails thead');
+									$.each ($result.dataTransmit['data-moveoutheads'], function ($key, $value) {
+										$('<th/>', {'text': $value}).appendTo ('table#dataTable-moveoutDetails thead tr');
+									});
+									$('<tbody/>').appendTo ('table#dataTable-moveoutDetails');
+									$dataLineId = 1;
+									$.each ($result.dataTransmit['data-moveoutdetail'], function ($key, $detail) {
+										$dataRow = $('<tr/>');
+										$dataRow.appendTo ('table#dataTable-moveoutDetails tbody');
+										$('<td/>', {'text': $dataLineId}).appendTo ($dataRow);
+										$.each ($detail, function ($objKey, $objValue) {
+											switch ($objKey) {
+												default:
+													$('<td/>', {'text': $objValue}).appendTo ($dataRow);
+													break;
+												case 'oita_idx':
+												case 'osbl_idx':
+													break;
+											}
+										});
+										$dataLineId++;
+									});
+	
+									$('<div/>', {
+										'id': 'moveout-detailbtns'
+									}).appendTo ($amvosModalFooter);
+									if ($dataTransmit['data-canapprove'] == 1 && $dataTransmit['data-moveout']['status'] == 1) {
+										$buttons = [
+											$('<button/>', {
+												'id': 'btn-approveomvo',
+												'class': 'btn btn-success',
+												'type': 'button',
+												'html': $('<i/>', {
+													'class': 'fas fa-check fa-fw'
+												}).prop ('outerHTML') + ' ' + $result.btnApprove
+											}),
+											$('<button/>', {
+												'id': 'btn-declineomvo',
+												'class': 'btn btn-danger',
+												'type': 'button',
+												'html': $('<i/>', {
+													'class': 'fas fa-ban fa-fw'
+												}).prop ('outerHTML') + ' ' + $result.btnDecline
+											})
+										];
+										$.each ($buttons, function () {
+											$(this).appendTo ('div#moveout-detailbtns');
+										});
+									}
+	
+									if ($dataTransmit['data-cansend'] == 1 && $dataTransmit['data-moveout']['status'] == 2) {
+										$('<button/>', {
+											'id': 'btn-marksentomvo',
+											'class': 'btn btn-primary',
+											'type': 'button',
+											'html': $('<i/>', {
+												'class': 'fas fa-paper-plane fa-fw'
+											}).prop ('outerHTML') + $result.btnSent
+										}).appendTo ('div#moveout-detailbtns');
+									}
+									
+									$('<button/>', {
+										'id': 'btn-closedetailomvo',
+										'class': 'btn btn-secondary',
+										'type': 'button',
+										'data-dismiss': 'modal',
+										'html': $('<i/>', {
+											'class': 'fas fa-times fa-fw'
+										}).prop ('outerHTML') + ' ' + $result.btnClose
+									}).appendTo ('div#moveout-detailbtns');
+									$('table#dataTable-moveoutDetails').DataTable ();
+									
+									$amvosModal.modal ('show');
+								}
+							}).fail (function () {
+							});
+						}
+						break;
+				}
+			}
 		});
 
 		$('body').on ('focusout', 'input', function ($evt) {
@@ -599,391 +985,6 @@ endforeach; ?>
 					else $qtyText.text ($updtQty);
 					$qtyText.removeClass ('d-none');
 					$(this).attr ('type', 'hidden');
-					break;
-			}
-		});
-
-		$('table').on ('click', 'td', function ($evt) {
-			$tableId = $(this).parents ('table').prop ('id');
-			if ($tableId === 'dataTable-moveoutMaster') {
-				$dataTable = $.searchDataTable ($tableId);
-				if ($dataTable.rows ().count () > 0) {
-					$docnum = $(this).parents ('tr').find ('td:eq(1)').text ();
-					$data = {
-						'trigger': 'clicked-docnum',
-						'transmit': {
-							'source': 'doc-assetout',
-							'clicked-docnum': $docnum
-						}
-					};
-					$.ajax ({
-						'method': 'put',
-						'url': $.base_url ($locale + '/api/sent'),
-						'data': JSON.stringify ($data),
-						'dataType': 'json',
-						'contentType': 'json'
-					}).done (function ($result) {
-						if (!$result.good) ;
-						else {
-							$dataTransmit = $result.dataTransmit;
-							$amvosModal = $('div#amvos-modal');
-							$amvosModalTitle = $amvosModal.find ('.modal-title');
-							$amvosModalTitle.text ($result.dataHead);
-							$amvosModalBody = $amvosModal.find ('div.modal-body');
-							$amvosModalBody.children ().each (function () {
-								$(this).addClass ('d-none');
-							});
-							$amvosModalFooter = $amvosModal.find ('div.modal-footer');
-							$amvosModalFooter.children ().each (function () {
-								$(this).addClass ('d-none');
-							});
-
-							$amvosModal.attr ('aria-labelledby', 'moveout-details');
-
-							$('<div/>', {
-								'id': 'moveout-details'
-							}).appendTo ($amvosModalBody);
-							$('<input/>', {
-								'type': 'hidden',
-								'id': 'data-docnum',
-								'value': $result.docnum
-							}).appendTo ('div#moveout-details');
-							$('<div/>', {'id': 'documents', 'class': 'row'}).appendTo ($('div#moveout-details'));
-							$.each ($dataTransmit['data-moveout'], function ($key, $value) {
-								switch ($key) {
-									default:
-										$divCol = $('<div/>', {'class': 'col-md-6'});
-										$formGroup = $('<div/>', {'class': 'form-group'});
-										$('<label/>', {'text': $result.dataLabels[$key]}).appendTo ($formGroup);
-										$inputGroup = $('<div/>', {'class': 'input-group'});
-										$('<input/>', {
-											'type': 'text',
-											'class': 'form-control',
-											'value': $value,
-											'readonly': true
-										}).appendTo ($inputGroup);
-										$inputGroup.appendTo ($formGroup);
-										$formGroup.appendTo ($divCol);
-										$divCol.appendTo ('div#documents');
-										break;
-									case 'status':
-										$divCol = $('<div/>', {'class': 'col-md-6'});
-										$formGroup = $('<div/>', {'class': 'form-group'});
-										$('<label/>', {'text': $result.dataLabels[$key]}).appendTo ($formGroup);
-										$inputGroup = $('<div/>', {'class': 'input-group'});
-										$('<input/>', {
-											'type': 'text',
-											'class': 'form-control',
-											'value': $result.documentStatus,
-											'readonly': true
-										}).appendTo ($inputGroup);
-										$inputGroup.appendTo ($formGroup);
-										$formGroup.appendTo ($divCol);
-										$divCol.appendTo ('div#documents');
-										break;
-									case 'idx':
-									case 'olct_from':
-									case 'olct_to':
-										break;
-								}
-							});
-							$('<hr/>').appendTo ('div#moveout-details');
-
-							$('<div/>', {'id': 'details', 'class': 'row'}).appendTo ('div#moveout-details');
-							$('<div/>', {'class': 'col-md-12'}).appendTo ('div#moveout-details div#details');
-							$('<div/>', {
-								'html': $('<h6/>', {
-									'text': $result.dataDetails
-								}).prop ('outerHTML')
-							}).appendTo ('div#details div.col-md-12');
-							$('<table/>', {
-								'id': 'dataTable-moveoutDetails',
-								'class': 'dataTable table table-striped table-hover table-pointer'
-							}).appendTo ('div#details div.col-md-12');
-							$('<thead/>').appendTo ('table#dataTable-moveoutDetails');
-							$('<tr/>').appendTo ('table#dataTable-moveoutDetails thead');
-							$.each ($result.dataTransmit['data-moveoutheads'], function ($key, $value) {
-								$('<th/>', {'text': $value}).appendTo ('table#dataTable-moveoutDetails thead tr');
-							});
-							$('<tbody/>').appendTo ('table#dataTable-moveoutDetails');
-							$dataLineId = 1;
-							$.each ($result.dataTransmit['data-moveoutdetail'], function ($key, $detail) {
-								$dataRow = $('<tr/>');
-								$dataRow.appendTo ('table#dataTable-moveoutDetails tbody');
-								$('<td/>', {'text': $dataLineId}).appendTo ($dataRow);
-								$.each ($detail, function ($objKey, $objValue) {
-									switch ($objKey) {
-										default:
-											$('<td/>', {'text': $objValue}).appendTo ($dataRow);
-											break;
-										case 'oita_idx':
-										case 'osbl_idx':
-											break;
-									}
-								});
-								$dataLineId++;
-							});
-
-							$('<div/>', {
-								'id': 'moveout-detailbtns'
-							}).appendTo ($amvosModalFooter);
-							if ($dataTransmit['data-canapprove'] == 1 && $dataTransmit['data-moveout']['status'] == 1) {
-								$buttons = [
-									$('<button/>', {
-										'id': 'btn-approveomvo',
-										'class': 'btn btn-success',
-										'type': 'button',
-										'html': $('<i/>', {
-											'class': 'fas fa-check fa-fw'
-										}).prop ('outerHTML') + ' ' + $result.btnApprove
-									}),
-									$('<button/>', {
-										'id': 'btn-declineomvo',
-										'class': 'btn btn-danger',
-										'type': 'button',
-										'html': $('<i/>', {
-											'class': 'fas fa-ban fa-fw'
-										}).prop ('outerHTML') + ' ' + $result.btnDecline
-									})
-								];
-								$.each ($buttons, function () {
-									$(this).appendTo ('div#moveout-detailbtns');
-								});
-							}
-
-							if ($dataTransmit['data-cansend'] == 1 && $dataTransmit['data-moveout']['status'] == 2) {
-								$('<button/>', {
-									'id': 'btn-marksentomvo',
-									'class': 'btn btn-primary',
-									'type': 'button',
-									'html': $('<i/>', {
-										'class': 'fas fa-paper-plane fa-fw'
-									}).prop ('outerHTML') + $result.btnSent
-								}).appendTo ('div#moveout-detailbtns');
-							}
-							
-							$('<button/>', {
-								'id': 'btn-closedetailomvo',
-								'class': 'btn btn-secondary',
-								'type': 'button',
-								'data-dismiss': 'modal',
-								'html': $('<i/>', {
-									'class': 'fas fa-times fa-fw'
-								}).prop ('outerHTML') + ' ' + $result.btnClose
-							}).appendTo ('div#moveout-detailbtns');
-							$('table#dataTable-moveoutDetails').DataTable ();
-							
-							$amvosModal.modal ('show');
-						}
-					}).fail (function () {
-					});
-				}
-			}
-		});
-		
-		$('button').click (function ($evt) {
-			$id = $(this).attr ('id');
-			switch ($id) {
-				default:
-					break;
-				case 'createnew-moveout':
-					$('a[href="#moveout-form"]').trigger ('click');
-					break;
-				case 'add-asset':
-					$fromLocation	= $('select[name="moveout-fromlocation"]');
-					if ($fromLocation.val () == null) ;
-					else {
-						$ajaxData = {
-							'trigger': 'asset-list',
-							'type': 'pertable',
-							'from': $fromLocation.val ()
-						};
-						
-						$.ajax ({
-							'url': $.base_url ($locale + '/api/get'),
-							'method': 'put',
-							'data': JSON.stringify ($ajaxData),
-							'dataType': 'json',
-							'contentType': 'application/json'
-						}).done (function ($result) {
-							if (!$result.good) console.log ('asjdbnhasdbhasbd');
-							else {
-								$('button#add-asset-items').attr ('data-click', 'persublocation');
-								$dataTables = [];
-								
-								$ths = $result.tabpanehead;
-								$('select#sublocation').find ('option').not (':first').remove ();
-								$('select#sublocation').prop ('selectedIndex', 0).change ();
-								$.each ($result.sublocs, function ($idx, $subloc) {
-									$('<option/>', {
-										'value': $subloc.idx,
-										'data-target': '#ID' + $subloc.code,
-										'text': $subloc.name
-									}).appendTo ($('select#sublocation'));
-
-									$navItem = $('<li/>', {'class': 'nav-item'});
-									$navItem.appendTo ('ul#subloctabs');
-									$('<a/>', {
-										'class': 'nav-link',
-										'href': '#ID' + $subloc.code,
-										'data-toggle': 'tab',
-										'text': $subloc.name
-									}).appendTo ($navItem);
-									
-									$tabpane = $('<div/>', {
-										'id': 'ID' + $subloc.code,
-										'class': 'tab-pane fade',
-										'data-sblid': $subloc.idx
-									});
-									$tabpane.appendTo ('div#asset-tabcontents');
-
-									$('<h6/>', {'text': $subloc.name}).appendTo ($tabpane);
-
-									$divpane = $('<div/>', {
-										'style': 'overflow-x: auto;'
-									}).appendTo ($tabpane);
-
-									$table = $('<table/>', {
-										'id': 'dataTable-' + $subloc.code,
-										'class': 'table table-hover table-striped table-pointer'
-									}).appendTo ($divpane);
-
-									$thead = $('<thead/>').appendTo ($table);
-									$hl = $('<tr/>').appendTo ($thead);
-									$.each ($ths, function ($i, $text) {
-										$('<th/>', {
-											'html': $text
-										}).appendTo ($hl);
-									});
-									$dataTable = $table.DataTable ();
-									
-									$dataTables.push ($dataTable);
-
-									$('h5#sublocation-header').text ($subloc.name);
-								});
-
-								$items = {};
-								$.each ($result.assetitems, function ($idx, $item) {
-									$sblid = $item.osbl_idx;
-									$newRow = [
-										$('<input/>', {
-											'type': 'checkbox',
-											'name': 'movecheck-' + $item.idx,
-											'id': 'asset-item',
-											'value': $item.idx,
-											'className': 'form-control'
-										}).prop ('outerHTML'),
-										$item.code,
-										$item.name,
-										$('select#sublocation').find ('option[value="' + $item.osbl_idx + '"]').text (),
-										$item.qty,
-										$('<input/>', {
-											'type': 'number',
-											'name': 'movenum-' + $item.idx,
-											'id': 'move-qty',
-											'max': $item.qty
-										}).prop ('outerHTML')
-									];
-									$dataTable = $('div[data-sblid="' + $sblid + '"]').find ('table.dataTable').DataTable ();
-									$dataTable.row.add ($newRow).draw (false);
-								});
-
-								$('button#add-asset-items[data-click="persublocation"]').unbind ().click (function ($evt) {
-									$checkedRows = [];
-									$.each ($dataTables, function ($k, $dt) {
-										$dt.$('input:checkbox:checked').each (function () {
-											$row = $(this).parents ('tr');
-											$checkedRows.push ($row);
-										});
-									});
-
-									if ($checkedRows.length == 0) ;
-									else {
-										$moveOutTable = $.searchDataTable ($moveTable);
-										$.each ($checkedRows, function ($id, $row) {
-											$doAdd = false;
-											$rowFound = null;
-											if ($moveOutTable.rows ().count () == 0) $doAdd = true;
-											else {
-												$found = false;
-												$addItemID = $row.find ('input:checkbox');
-												$moveOutTable.$('input#item-id').each (function () {
-													$rowItemID = $(this).val ();
-													if ($addItemID.val () == $rowItemID) {
-														$rowFound = $(this).parents ('tr');
-														$found = true;
-														return false;
-													}
-												});
-
-												if (!$found) $doAdd = true;
-											}
-
-											$inputQty = $row.children (':last-child').find ('input#move-qty');
-											if ($doAdd) {
-												$cancelButton = $('<button/>', {
-													'type': 'button',
-													'class': 'btn btn-danger btn-block',
-													'title': '<?php echo $cancelItem; ?>',
-													'id': 'cancel-item'
-												});
-												$('<i/>', {
-													'class': 'fas fa-times fa-fw'
-												}).appendTo ($cancelButton);
-												$('<span/>', {
-													'text': '<?php echo $cancelItem; ?>'
-												}).appendTo ($cancelButton);
-												$assetItem = $row.find ('input#asset-item');
-												$newRow = [
-													$('<input/>', {
-														'type': 'hidden',
-														'name': 'item-id-' + $assetItem.val (),
-														'id': 'item-id',
-														'value': $assetItem.val ()
-													}).prop ('outerHTML') + ($id + 1),
-													$row.children ('td').eq (1).text (),
-													$row.children ('td').eq (2).text (),
-													$row.children ('td').eq (3).text (),
-													$('<input/>', {
-														'type': 'hidden',
-														'name': 'itemmove-qty-' + $assetItem.val (),
-														'id': 'itemmove-qty',
-														'value': (($inputQty.val () == '') ? 1 : $inputQty.val ()),
-														'max': $inputQty.prop ('max')
-													}).prop ('outerHTML') + 
-													$('<span/>', {
-														'id': 'qty-text',
-														'text': ($inputQty.val () == '') ? 1 : $inputQty.val ()
-													}).prop ('outerHTML'),
-													$cancelButton.prop ('outerHTML')
-												];
-												$moveOutTable.row.add ($newRow);
-											} else {
-												$inputMax = $inputQty.prop ('max');
-												$currentQty = $rowFound.find ('td:eq(4)').text ();
-												$finalQty = (parseInt ($currentQty) + parseInt ($inputQty.val () == '' ? 1 : $inputQty.val ()));
-												if ($finalQty > $inputMax) alert ('<?php echo $alertExceed; ?>');
-												else {
-													$itemmoveQty = $rowFound.find ('input#itemmove-qty');
-													$itemmoveQty.val ($finalQty);
-													$itemmoveQty.change ();
-												}
-											}
-										});
-										$moveOutTable.draw (false);
-										$fromLocation.attr ('disabled', true);
-										$('div#amvos-modal').modal ('hide');
-									}
-								});
-								$('div#amvos-modal').modal ('show');
-							}
-						}).fail (function () {
-						});
-					}
-					break;
-				case 'cancel-asset-items':
-					$checkedRows = [];
-					$('div#amvos-modal').modal ('hide');
 					break;
 			}
 		});

@@ -15,7 +15,10 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header d-flex justify-content-between">
-								<h4 class="card-title" data-smarty="{0}"></h4>
+								<h4 class="card-title">
+									<i class="fas fa-box fa-fw"></i>
+									<span data-smarty="{0}"></span>
+								</h4>
 							</div>
 							
 							<div class="card-body">
@@ -65,6 +68,17 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 	<script>
 	$(document).ready (function () {
 		$moveReqTable = 'movereq-tablelist';
+
+		$(function () {
+			$filter = parseInt ($('input#data-filter').val ());
+			if ($filter > 0) {
+				$locationSelect = $('select#user-location');
+				$locationSelect.val ($filter);
+				$locationSelect.trigger ('change');
+				$locationSelect.prop ('disabled', true);
+			}
+		});
+		
 		$.searchAssets = function ($fromLocation, $input) {
 			$amvrsModal = $('div#amvrs-modal');
 			if ($input === null || $input.length === 0 || $input === "") {
@@ -406,7 +420,7 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						$('input#images-input').click ();
 						break;
 					case 'clear-images':
-						$('div#asset-images').empty ();
+						$('div#asset-images').children ('div.carousel-inner').empty ();
 						$('div#asset-images-container').addClass ('d-none');
 						$('input#images-input').val ('');
 						break;
@@ -478,7 +492,10 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 				switch ($tableId) {
 					default:
 						$modal = $(this).parents ('div.modal');
-						if ($modal.is ('div.modal#amvrs-modal')) $(this).parents ('tr').find ('input#asset-item').prop ('checked', true);
+						if ($modal.is ('div.modal#amvrs-modal')) {
+							$assetItem = $(this).parents ('tr').find ('input#asset-item');
+							$assetItem.prop ('checked', !$assetItem.prop ('checked'));
+						}
 						break;
 					case 'movereq-tablelist': 
 						$td = $(this);
@@ -667,8 +684,8 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						break;
 					case 'images-input':
 						$assetImages = $('div#asset-images');
-						$assetImages.empty ();
-						$(this).readPreviewImages ($assetImages);
+						$assetImages.children ('div.carousel-inner').empty ();
+						$(this).readPreviewImages ($assetImages.children ('div.carousel-inner'));
 						$('div#asset-images-container').removeClass ('d-none');
 						break;
 					case 'move-qty':

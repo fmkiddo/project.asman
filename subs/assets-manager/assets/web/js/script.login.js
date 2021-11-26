@@ -73,6 +73,7 @@ $(document).ready (function ($ready) {
 						});
 						$('span#welcome-message').fadeOut ('fast', function () {
 							$('span#login-message').fadeIn ('fast');
+							$('input#input-password').focus ();
 						});
 					}
 					break;

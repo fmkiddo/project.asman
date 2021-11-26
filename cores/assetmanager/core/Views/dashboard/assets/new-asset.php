@@ -11,6 +11,10 @@ endif;
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header">
+								<h4 class="card-title">
+									<i class="fas fa-form fa-fw"></i>
+									<span data-smarty="{0}"></span>
+								</h4>
 							</div>
 							<hr />
 							<div class="card-body">

@@ -89,16 +89,18 @@
 																			<div class="card-body">
 																				<div class="row">
 																					<div class="col d-none" id="asset-images-container">
-																						<div id="asset-images" class="carousel slide carousel-fade bg-secondary" data-ride="carousel" data-interval="false" data-ride="carousel" data-wrap="false">
+																						<div id="asset-images" class="carousel slide carousel-fade carousel-fill bg-secondary" data-ride="carousel" data-interval="false" data-ride="carousel" data-wrap="false">
+																							<div class="carousel-inner">
+																							</div>
+																							<a class="carousel-control-prev" href="#asset-images" role="button" data-slide="prev">
+																								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+																								<span class="sr-only" data-smarty=""></span>
+																							</a>
+																							<a class="carousel-control-next" href="#asset-images" role="button" data-slide="next">
+																								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+																								<span class="sr-only" data-smarty=""></span>
+																							</a>
 																						</div>
-																						<a class="carousel-control-prev" href="#asset-images" role="button" data-slide="prev">
-																							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-																							<span class="sr-only" data-smarty=""></span>
-																						</a>
-																						<a class="carousel-control-next" href="#asset-images" role="button" data-slide="next">
-																							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-																							<span class="sr-only" data-smarty=""></span>
-																						</a>
 																					</div>
 																				</div>
 																			</div>

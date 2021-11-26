@@ -207,3 +207,74 @@
 .form-group.checkbox {
 	left: 25px;
 }
+
+.image-display {
+	position: relative;
+	height: 0;
+	width: 100%;
+	padding-bottom: 100%;
+}
+
+.image-container {
+	position: relative;
+	height: 0;
+	padding-bottom: 100%;
+	background-image: url("images/no-image.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.image-container #image-carousel {
+	position: relative;
+	height: 0;
+	padding-bottom: 100%;
+	height: 100%;
+}
+
+.carousel-fill {
+	position: relative;
+	height: 0;
+	padding-bottom: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.image-display .display-overlay {
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.7);
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    color:black;
+    text-align: center;
+    transition: 0.25s;
+}
+
+.image-display .display-overlay:hover {
+	cursor: pointer;
+	background-color: rgba(150, 150, 150, 0.9);
+}
+
+.bg-gray {
+	background-color: #ccc;
+}
+
+.glow-point {
+	font-size: 14pt;
+}
+
+.glow-point li {
+	cursor: pointer;
+	color: #AA0000;
+	transition: 0.3s;
+}
+
+.glow-point li:not(:last-child) {
+	margin-bottom: 5px;
+}
+
+.glow-point li:hover {
+	color: #DD0000;
+}

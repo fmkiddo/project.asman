@@ -1,5 +1,6 @@
 
 												<div class="tab-pane fade" id="request-destroy">
+													<input type="hidden" id="data-filter" value="<?php echo $dataUserLocation; ?>" />
 													<div class="row row-with-padding">
 														<div class="col-md-12">
 															<h6></h6>
@@ -13,18 +14,12 @@
 																	<span data-smarty="{20}"></span>
 																</label>
 																<div class="input-group">
-<?php 
-if ($dataUserLocation == 0):
-?>
 																	<select name="user-location" class="form-control" id="user-location">
 																		<option disabled="disabled" selected="selected" data-smarty="{40}"></option>
 <?php foreach ($dataLocations as $id => $name): ?>
 																		<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
 <?php endforeach; ?>
 																	</select>
-<?php 
-endif; 
-?>
 																</div>
 															</div>
 														</div>

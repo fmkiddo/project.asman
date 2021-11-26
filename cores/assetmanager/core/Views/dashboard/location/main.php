@@ -76,8 +76,8 @@ if (isset ($pagedata) && count($pagedata) > 0):
 	});
 	$('td').click (function () {
 		if (!$(this).is (':last-child')) {
-			$dataTarget = $(this).parents ('tr').attr ('data-target');
-			window.location.href = 'location-detail?location=' + $dataTarget;
+			$dataTarget = $(this).parents ('tr').children (':first-child').text ();
+			window.location.href = 'location-detail?location-code=' + $dataTarget;
 		}
 	});
 	</script>
