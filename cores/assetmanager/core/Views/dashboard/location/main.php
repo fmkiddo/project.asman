@@ -4,9 +4,9 @@
 						<div class="card">
 							<div class="card-header">
 								<div class="d-flex align-items-center justify-content-between">
-									<h4 class="card-title"><i class="fas fa-landmark fa-fw"></i> <span>Locations</span></h4>
+									<h4 class="card-title"><i class="fas fa-landmark fa-fw"></i> <span data-smarty="{0}"></span></h4>
 									<a class="btn btn-primary" href="form-location">
-										<i class="fas fa-plus-circle fa-fw"></i> <span>Location</span>
+										<i class="fas fa-plus-circle fa-fw"></i> <span data-smarty="{1}"></span>
 									</a>
 								</div>
 							</div>
@@ -17,13 +17,17 @@ if (isset ($pagedata) && count($pagedata) > 0):
 	$header 	= $pagedata['header'];
 	$locations	= $pagedata['locations'];
 ?>
-								<table id="dataTable-location" class="dataTable table table-striped table-hover">
+								<table id="dataTable-location" class="dataTable table table-striped table-hover table-bordered">
 									<thead>
 										<tr>
-<?php foreach ($header as $th): ?>
-											<th><?php echo $th; ?></th>
-<?php endforeach; ?>
-											<th>Operations</th>
+											<th data-smarty="{2}"></th>
+											<th data-smarty="{3}"></th>
+											<th data-smarty="{4}"></th>
+											<th data-smarty="{5}"></th>
+											<th data-smarty="{6}"></th>
+											<th data-smarty="{7}"></th>
+											<th data-smarty="{8}"></th>
+											<th data-smarty="{9}"></th>
 										</tr>
 									</thead>
 									<tbody>

@@ -559,6 +559,11 @@ endforeach; ?>
 					case 'createnew-moveout':
 						$('a[href="#moveout-form"]').trigger ('click');
 						break;
+					case 'data-print':
+						$docnum = $(this).attr ('data-target');
+						$('form#print').find ('input[name="doc-target"]').val ($docnum);
+						$('form#print').submit ();
+						break;
 					case 'add-asset':
 						$fromLocation	= $('select[name="moveout-fromlocation"]');
 						if ($fromLocation.val () == null) ;
@@ -792,6 +797,12 @@ endforeach; ?>
 									$dataTransmit = $result.dataTransmit;
 									$amvosModal = $('div#amvos-modal');
 									$amvosModalTitle = $amvosModal.find ('.modal-title');
+
+									if ($result.dataTransmit['data-moveout'].status == 2) { 
+										$('button#data-print').removeClass ('d-none');
+										$('button#data-print').attr ('data-target', $result.dataTransmit['data-moveout'].docnum);
+									}
+									
 									$amvosModalTitle.text ($result.dataHead);
 									$amvosModalBody = $amvosModal.find ('div.modal-body');
 									$amvosModalBody.children ().each (function () {
@@ -997,6 +1008,7 @@ endforeach; ?>
 				$(this).attr ('aria-labelledby', '');
 			}
 			$(this).find ('.modal-title').empty ();
+			$(this).find ('button#data-print').addClass ('d-none');
 			$(this).find ('.modal-body').children ('div.row').removeClass ('d-none');
 			$(this).find ('.modal-body').find ('div#asset-display').remove ();
 			$(this).find ('.nav-tabs').empty ();
@@ -1011,8 +1023,22 @@ endforeach; ?>
 	<div id="amvos-modal" class="modal fade" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-xl modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header d-flex align-items-center">
 					<h5 class="modal-title"></h5>
+					<div id="right-contents" class="d-inline">
+						<div class="d-none">
+							<form id="print" target="_blank" method="post" action="<?php echo base_url ($locale . '/docs/print'); ?>">
+								<input type="hidden" name="target" value="print" />
+								<input type="hidden" name="doc-target" value="" />
+							</form>
+						</div>
+						<button type="button" class="btn btn-info d-none" id="data-print" data-target="">
+							<i class="fas fa-print fa-fw"></i>
+						</button>
+						<button type="button" class="btn btn-link" data-dismiss="modal" aria-label="close">
+							<i class="fas fa-times-circle fa-fw"></i><span aria-hidden="true"></span>
+						</button>
+					</div>
 				</div>
 				
 				<div class="modal-body">

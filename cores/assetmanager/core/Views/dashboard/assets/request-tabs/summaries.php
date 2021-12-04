@@ -23,7 +23,7 @@ foreach ($pagedata['summaries'] as $summary): ?>
 													<hr />
 													<div class="row">
 														<div class="col">
-															<table id="dataTable-moverequest" class="dataTable table table-striped table-hover table-pointer table-centered-content">
+															<table id="dataTable-mutateSummaries" class="dataTable table table-striped table-hover table-pointer table-centered-content">
 																<thead>
 																	<tr>
 																		<th>#</th>
@@ -43,7 +43,7 @@ foreach ($dataRequestDocs as $requestDoc):
 	foreach ($requestDoc as $req): ?>
 																	<tr class="<?php echo $docstat->getClass ($req->status); ?>">
 																		<td><?php echo $lineId; ?></td>
-																		<td><?php echo $req->docnum; ?></td>
+																		<td id="docnum"><?php echo $req->docnum; ?></td>
 																		<td><?php echo $req->docdate; ?></td>
 																		<td><b><?php echo $doctype->getType ($req->type); ?></b></td>
 																		<td><?php echo $req->username; ?></td>

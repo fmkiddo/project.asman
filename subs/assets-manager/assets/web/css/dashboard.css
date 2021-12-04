@@ -137,6 +137,10 @@
 	cursor: pointer;
 }
 
+.table.table-centered-header th {
+	text-align: center;
+}
+
 .table.table-centered-content > thead > tr > th,
 .table.table-centered-content > tbody > tr > td {
 	text-align: center;

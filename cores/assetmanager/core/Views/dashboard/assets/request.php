@@ -642,6 +642,18 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 							$removeQty.next ().addClass ('d-none');
 						}
 						break;
+					case 'dataTable-mutateSummaries':
+						$row = $(this).parents ('tr');
+						$docnum = $row.find ('td#docnum');
+						$.ajax ({
+							'url': '<?php echo base_url ($locale . '/api/get'); ?>',
+							'method': 'put',
+							'data': JSON.stringify ({'trigger': 'request-mutate', 'docnum': $docnum}),
+							'dataType': 'json'
+						}).done (function ($result) {
+						}).fail (function () {
+						});
+						break;
 				}
 			}
 		});

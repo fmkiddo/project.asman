@@ -1,3 +1,6 @@
 {
-	"name": "project.mithril/project.mithril"
+	"name": "project.mithril/project.mithril",
+	"require": {
+		"dompdf/dompdf": "^1.1"
+	}
 }

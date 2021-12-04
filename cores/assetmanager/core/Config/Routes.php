@@ -43,6 +43,9 @@ $routes->post ('{locale}/dashboard/(:any)', 'DashboardController::displayDashboa
 $routes->post ('{locale}/api/process', 'FrontendRequestController::postRequest');
 
 $routes->add ('ajax-request/frontend', 'FrontendRequestController::ajaxRequest');
+// $routes->add ('{locale}/docs', 'PortableDocumentController::loadPortableDocument');
+$routes->add ('{locale}/docs/print', 'PortableDocumentController::loadPortableDocument');
+
 $routes->put ('{locale}/api/get', 'FrontendRequestController::ajaxRequest');
 $routes->put ('{locale}/api/sent', 'FrontendRequestController::ajaxRequest');
 $routes->put ('{locale}/client/setup/firsttime-process', 'SystemSetupController::doFirstTimeSetup');

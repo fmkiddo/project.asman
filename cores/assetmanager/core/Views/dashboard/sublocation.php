@@ -7,7 +7,12 @@ $sublocation	= $pagedata['data-pages']['data-sublocation'];
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<h5 class="card-title"><span data-smarty="{0}"></span> <span><?php echo ucwords(strtolower($location->name)); ?></span></h5>
+								<div class="d-flex justify-content-between">
+									<h5 class="card-title"><span data-smarty="{0}"></span> <span><?php echo ucwords(strtolower($location->name)); ?></span></h5>
+									<a role="button" class="btn btn-primary" onclick="window.location.href='<?php echo $referal; ?>'">
+										<i class="fas fa-arrow-left fa-fw"></i>
+									</a>
+								</div>
 							</div>
 							<div class="card-body">
 								<div class="row">
@@ -73,7 +78,7 @@ $sublocation	= $pagedata['data-pages']['data-sublocation'];
 												<div class="form-group">
 													<label data-smarty="{12}"></label>
 													<div class="input-group">
-														<input type="text" class="form-control" value="<?php echo $location->pic; ?>" readonly />
+														<input type="text" class="form-control" value="<?php echo $location->contact_person; ?>" readonly />
 													</div>
 												</div>
 											</div>

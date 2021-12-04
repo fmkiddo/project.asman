@@ -250,7 +250,7 @@ class DashboardController extends BaseController {
 					break;
 				case 'location':
 					$result = $this->dataRequest(['data-trigger' => 'location']);
-					$options['pagedata']	= $result;
+					$options['pagedata']		= $result;
 					$pageName = 'dashboard/location/main';
 					break;
 				case 'location-detail':
@@ -263,6 +263,9 @@ class DashboardController extends BaseController {
 					$result = $this->dataRequest($dataTransmit);
 					if (count ($result) == 0) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 					$options['pagedata'] = $result;
+					$options['locationheader']	= [
+						'{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}'
+					];
 					$pageName = 'dashboard/location/detail';
 					break;
 				case 'form-location':
@@ -360,7 +363,8 @@ class DashboardController extends BaseController {
 						$result = $this->dataRequest($dataoptions);
 						if (count ($result) == 0) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
 						
-						$options['pagedata'] = $result;
+						$options['pagedata']	= $result;
+						$options['referal']		= $this->request->getHeader ('Referer')->getValue ();
 					}
 					$pageName = 'dashboard/sublocation';
 					break;
