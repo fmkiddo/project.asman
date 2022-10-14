@@ -3,7 +3,8 @@ $dataUsername		= $pagedata['dataTransmit']['data-username'];
 $dataUserLocation	= $pagedata['dataTransmit']['data-userlocation'];
 $dataLocations		= $pagedata['dataTransmit']['data-locations'];
 $dataRequestDocs	= $pagedata['dataTransmit']['data-requests'];
-$dataAssets			= $pagedata['dataTransmit']['data-assets'];
+$dataAssets		= $pagedata['dataTransmit']['data-assets'];
+$requestNew		= $pagedata['requisition'];
 ?>
 				<style>
 				#amvrs-modal table.table.dataTable th,
@@ -29,12 +30,12 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 												<div class="nav-tabs-wrapper">
 													<ul class="nav nav-tabs nav-fill" data-toggle="tabs">
 														<li class="nav-item">
-															<a class="nav-link active" href="#summary" data-toggle="tab">
+															<a class="nav-link <?php echo ($requestNew == 0) ? 'active' : ''; ?>" href="#summary" data-toggle="tab">
 																<i class="fas fa-database fa-fw"></i> <span data-smarty="{1}"></span>
 															</a>
 														</li>
 														<li class="nav-item">
-															<a class="nav-link" href="#request-new" data-toggle="tab">
+															<a class="nav-link <?php echo ($requestNew == 1) ? 'active' : ''; ?>" href="#request-new" data-toggle="tab">
 																 <i class="fas fa-boxes fa-fw"></i> <span data-smarty="{2}"></span>
 															</a>
 														</li>
@@ -77,6 +78,7 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 				$locationSelect.trigger ('change');
 				$locationSelect.prop ('disabled', true);
 			}
+			$requestNew = <?php echo $pagedata['requisition']; ?>;
 		});
 		
 		$.searchAssets = function ($fromLocation, $input) {
@@ -348,7 +350,7 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 											'name': 'itemmove-qty-' + $checkedInput.val (),
 											'id': 'itemmove-qty',
 											'value': $moveQty.val () == '' ? 1 : $moveQty.val (),
-											'max': $moveQty.prop ('max')
+											'max': $moveQty.prop ('1max')
 										}).prop ('outerHTML') +
 										$('<span/>', {
 											'id': 'qty-text',
@@ -410,9 +412,8 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 								'data': JSON.stringify ($data),
 								'dataType': 'json'
 							}).done (function ($result) {
-								if (!$result.good) window.location.reload ();
-								else {
-								}
+								if (!$result.good) ;
+								else window.location.reload ();
 							}); 
 						}
 						break;
@@ -444,7 +445,13 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						if ($reqDTEmpty) ;
 						else {
 							$formReqExist = $('form#form-requestexisting');
-							$data = {
+							if (!$formReqExist.validateForm ()) ;
+							else {
+								$formReqExist.attr ('action', $.base_url ($locale + '/api/process'));
+								$formReqExist.attr ('method', 'post');
+								$formReqExist.find ('button#dosave-requestexisting').click ();
+							}
+							/** $data = {
 								'trigger': 'assetreq-existing',
 								'form-data': $formReqExist.serializeArray ()
 							};
@@ -458,7 +465,7 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 								if (!$result.good) ;
 								else window.location.reload (false);
 							}).fail (function () {
-							});
+							});**/
 						}
 						break;
 					case 'reset-requestexisting':
@@ -488,13 +495,17 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						break;
 				}
 			} else if ($(this).is ('td')) {
+				$srcTable = $(this).parents ('table.dataTable');
+				$srcDT = $srcTable.DataTable ();
 				$tableId = $(this).parents ('table').prop ('id');
 				switch ($tableId) {
 					default:
 						$modal = $(this).parents ('div.modal');
 						if ($modal.is ('div.modal#amvrs-modal')) {
-							$assetItem = $(this).parents ('tr').find ('input#asset-item');
-							$assetItem.prop ('checked', !$assetItem.prop ('checked'));
+							$selectRow = $(this).parent ();
+							
+							if (!($(this).is ($selectRow.children ().first ()) || $(this).is ($selectRow.children ().last ()))) 
+								$selectRow.children ().last ().find  ('input').focus ();
 						}
 						break;
 					case 'movereq-tablelist': 
@@ -532,17 +543,23 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 
 						if ($doAdd) {
 							$newRow = [
-								$('<input/>', {'type': 'hidden', 'id': 'sample-code', 'name': 'sample-code-' + ($rowCount+1), 'value': $code}).prop ('outerHTML') + $code,
+								$('<input/>', {'type': 'hidden', 'id': 'sample-code', 'name': 'sample-code-' + ($rowCount), 'value': $code}).prop ('outerHTML') + $code,
 								$name,
 								$('<input/>', {
 									'type': 'hidden',
 									'id': 'input-reqextqty',
-									'name': 'input-reqextqty-' + ($rowCount+1),
+									'name': 'input-reqextqty-' + ($rowCount),
 									'value': 1
 								}).prop ('outerHTML') + 
 								$('<span/>', {
 									'id': 'input-reqextqty-text',
 									'text': 1
+								}).prop ('outerHTML'),
+								$('<input/>', {
+									'type': 'text',
+									'id': 'input-reqextremarks',
+									'name': 'input-reqextremarks-' + ($rowCount),
+									'required': true
 								}).prop ('outerHTML'),
 								$('<button/>', {
 									'id': 'cancel-asset',
@@ -573,67 +590,78 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						}
 						break;
 					case 'dataTable-assetLists':
-						$('select#user-location').prop ('disabled', true);
-						
-						$removalDT = $.searchDataTable ('dataTable-assetListDestroy');
-						$clickedRow = $(this).parents ('tr');
-						
-						$doAdd = false; 
-						$itemFound = null;
-						$rowCount = $removalDT.rows ().count ();
-						if ($rowCount == 0) $doAdd = true;
-						else {
-							$doAdd = true;
-							$removalDT.$('tr').each (function () {
-								$tr = $(this);
-								$itemIdx = $clickedRow.find ('#asset-id').val ();
-								$rowItemIdx = $tr.find ('#asset-id').val ();
-								if ($itemIdx == $rowItemIdx) {
-									$doAdd = false;
-									$itemFound = $tr;
-									return false;
-								}
-							});
-						}
-
-						if ($doAdd) {
-							$newRow = [
-								$('<input/>', {
-									'type': 'hidden',
-									'id': 'asset-id',
-									'name': 'asset-id-' + $rowCount,
-									'value': $clickedRow.find ('#asset-id').val ()
-								}).prop ('outerHTML') + $clickedRow.children (':eq(0)').children (':eq(1)').prop ('outerHTML'),
-								$clickedRow.children (':eq(1)').text (),
-								$('<input/>', {
-									'type': 'hidden',
-									'id': 'subloc-id',
-									'name': 'subloc-id-' + $rowCount,
-									'value': $clickedRow.find ('#subloc-id').val ()
-								}).prop ('outerHTML') + $clickedRow.children (':eq(2)').children (':eq(1)').prop ('outerHTML'),
-								$('<input/>', {
-									'type': 'hidden',
-									'id': 'removal-qty',
-									'name': 'removal-qty-' + $rowCount,
-									'max': $clickedRow.children (':eq(3)').text (),
-									'value': 1
-								}).prop ('outerHTML') + 
-								$('<span/>', {'id': 'removal-qty-text', 'text': 1}).prop ('outerHTML'),
-								$('<button/>', {
-									'type': 'button',
-									'id': 'delete-row',
-									'class': 'btn btn-danger btn-block',
-									'html': $('<i/>', {'class': 'fas fa-times-circle fa-fw'}).prop ('outerHTML')
-								}).prop ('outerHTML')
-							];
-							$removalDT.row.add ($newRow);
+						if ($srcDT.data ().count () == 0) {
+							console.log ('<Needs Message Box> Not selected location');
 						} else {
-							$removeQty	= $itemFound.find ('#removal-qty');
-							$cval		= parseInt ($removeQty.val ());
-							$removeQty.val ($cval + 1);
-							$removeQty.trigger ('change');
-						}
-						$removalDT.draw (false);
+							$('select#user-location').prop ('disabled', true);
+							
+							$removalDT = $.searchDataTable ('dataTable-assetListDestroy');
+							
+							$clickedRow = $(this).parents ('tr');
+							
+							$doAdd = false; 
+							$itemFound = null;
+							$rowCount = $removalDT.rows ().count ();
+							if ($rowCount == 0) $doAdd = true;
+							else {
+								$doAdd = true;
+								$removalDT.$('tr').each (function () {
+									$tr = $(this);
+									$itemIdx = $clickedRow.find ('#asset-id').val ();
+									$rowItemIdx = $tr.find ('#asset-id').val ();
+									if ($itemIdx == $rowItemIdx) {
+										$doAdd = false;
+										$itemFound = $tr;
+										return false;
+									}
+								});
+							}
+
+							if ($doAdd) {
+								$newRow = [
+									$('<input/>', {
+										'type': 'hidden',
+										'id': 'asset-id',
+										'name': 'asset-id-' + $rowCount,
+										'value': $clickedRow.find ('#asset-id').val ()
+									}).prop ('outerHTML') + $clickedRow.children (':eq(0)').children (':eq(1)').prop ('outerHTML'),
+									$clickedRow.children (':eq(1)').text (),
+									$('<input/>', {
+										'type': 'hidden',
+										'id': 'subloc-id',
+										'name': 'subloc-id-' + $rowCount,
+										'value': $clickedRow.find ('#subloc-id').val ()
+									}).prop ('outerHTML') + $clickedRow.children (':eq(2)').children (':eq(1)').prop ('outerHTML'),
+									$('<input/>', {
+										'type': 'hidden',
+										'id': 'removal-qty',
+										'name': 'removal-qty-' + $rowCount,
+										'max': $clickedRow.children (':eq(3)').text (),
+										'value': 1
+									}).prop ('outerHTML') + 
+									$('<span/>', {'id': 'removal-qty-text', 'text': 1}).prop ('outerHTML'),
+									$('<input/>', {
+										'type': 'text',
+										'id': 'remarks-destroy-id',
+										'name': 'remarks-destroy-id-' + $rowCount,
+										'required': true
+									}).prop ('outerHTML'),
+									$('<button/>', {
+										'type': 'button',
+										'id': 'delete-row',
+										'class': 'btn btn-danger btn-block',
+										'html': $('<i/>', {'class': 'fas fa-times-circle fa-fw'}).prop ('outerHTML')
+									}).prop ('outerHTML')
+								];
+								$removalDT.row.add ($newRow);
+							} else {
+								$removeQty	= $itemFound.find ('#removal-qty');
+								$cval		= parseInt ($removeQty.val ());
+								$removeQty.val ($cval + 1);
+								$removeQty.trigger ('change');
+							}
+							$removalDT.draw (false);
+						} 
 						break;
 					case 'dataTable-assetListDestroy':
 						if ($(this).is ($(this).parents ('tr').children (':eq(3)'))) {
@@ -643,16 +671,18 @@ $dataAssets			= $pagedata['dataTransmit']['data-assets'];
 						}
 						break;
 					case 'dataTable-mutateSummaries':
-						$row = $(this).parents ('tr');
-						$docnum = $row.find ('td#docnum');
-						$.ajax ({
-							'url': '<?php echo base_url ($locale . '/api/get'); ?>',
-							'method': 'put',
-							'data': JSON.stringify ({'trigger': 'request-mutate', 'docnum': $docnum}),
-							'dataType': 'json'
-						}).done (function ($result) {
-						}).fail (function () {
-						});
+						if ($srcDT.data ().count () > 0) {
+							$row = $(this).parents ('tr');
+							$docnum = $row.find ('td#docnum');
+							$.ajax ({
+								'url': '<?php echo base_url ($locale . '/api/get'); ?>',
+								'method': 'put',
+								'data': JSON.stringify ({'trigger': 'request-mutate', 'docnum': $docnum}),
+								'dataType': 'json'
+							}).done (function ($result) {
+							}).fail (function () {
+							});
+						}
 						break;
 				}
 			}

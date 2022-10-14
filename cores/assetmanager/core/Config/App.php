@@ -266,8 +266,9 @@ class App extends BaseConfig
 	*/
 	public $CSPEnabled = false;
 	
-	public $serverURL			= 'http://localhost:8080';
+	public $serverURL		= 'http://localhost:8080';
 	public $clientAccessKey		= '';
-	public $clientEncryptionKey = '';
+	public $clientEncryptionKey	= '';
 	public $authExpiration		= 3600;
+	public $publicDomain		= '';
 }

@@ -5,12 +5,8 @@ use CodeIgniter\HTTP\Files\UploadedFile;
 
 class FrontendRequestController extends BaseController {
 	
-	protected function additionalInitialization() {
-		$this->helpers = ['cookie', 'url_helper'];
-	}
-	
 	private function fileTransferAPI ($files, $targetURL) {
-		$dataCookie	= get_cookie(CLIENT_CONFIG_NAME);
+		$dataCookie	= get_cookie($this->prefix . CLIENT_CONFIG_NAME);
 		$returnData = [
 			'good'					=> TRUE,
 			'uploaded-filenames'	=> [
@@ -26,12 +22,12 @@ class FrontendRequestController extends BaseController {
 					'basic'
 				],
 				'headers'	=> [
-					'Accept'		=> 'application/json',
+					'Accept'	=> 'application/json',
 					'Content-Type'	=> 'multipart/form-data'
 				],
 				'multipart'	=> [
 					'data-trigger'	=> 'newassetreq-imageupload',
-					'data-file'		=> $curlFile
+					'data-file'	=> $curlFile
 				]
 			];
 			$curl = \Config\Services::curlrequest();
@@ -45,9 +41,14 @@ class FrontendRequestController extends BaseController {
 		return $returnData;
 	}
 	
+	protected function additionalInitialization() {
+		$this->helpers = ['cookie', 'url_helper'];
+	}
+	
 	public function postRequest () {
 		if ($this->request->getMethod(TRUE) !== 'POST') return $this->response->redirect(base_url($this->locale . '/dashboard'));
 		else {
+			// $auths	= get_cookie ($this->prefix . CLIENT_CONFIG_NAME);
 			$result;
 			$post = $this->request->getPost();
 			$trigger = $post['trigger'];
@@ -71,10 +72,11 @@ class FrontendRequestController extends BaseController {
 							'data-trigger'	=> 'data' . $trigger,
 							'data-transmit'	=> [
 								'data-header'		=> $header,
-								'data-body'			=> $data,
+								'data-body'		=> $data,
 								'data-loggedousr'	=> $this->getLoggedUserID()
 							]
 						];
+						
 						$result = $this->dataRequest($dataOptions);
 						$failedNum = $result['data-importfailed'];
 						return $this->response->redirect ($urlReferer);
@@ -86,7 +88,7 @@ class FrontendRequestController extends BaseController {
 						'data-trigger'	=> 'sublocation-addupdate',
 						'data-transmit'	=> [
 							'data-locationcode'		=> $post['location-code'],
-							'data-sublocationcode'	=> $post['code'],
+							'data-sublocationcode'		=> $post['code'],
 							'data-description'		=> $post['dscript']
 						]
 					];
@@ -114,6 +116,11 @@ class FrontendRequestController extends BaseController {
 								if (strpos ($key, 'subloc-id') !== FALSE) {
 									$lineId = str_replace('subloc-id-', '', $key);
 									$assets[$lineId]['subloc-idx'] = $data;	
+								}
+								
+								if (strpos ($key, 'remarks-destroy-id') !== FALSE) {
+									$lineId = str_replace('remarks-destroy-id-', '', $key);
+									$assets[$lineId]['remarks'] = $data;
 								}
 								
 								if (strpos ($key, 'removal-qty') !== FALSE) {
@@ -144,11 +151,12 @@ class FrontendRequestController extends BaseController {
 					
 					if ($isValid) 
 						$result = $this->fileTransferAPI($files, 'client/api/data-processing');
-					else $result = [
-						'good'					=> TRUE,
-						'uploaded-filenames'	=> [
-						]
-					];
+					else 
+						$result = [
+							'good'			=> TRUE,
+							'uploaded-filenames'	=> [
+							]
+						];
 						
 					if (!$result['good']) $result = [];
 					else {
@@ -158,11 +166,12 @@ class FrontendRequestController extends BaseController {
 							'data-transmit'	=> [
 								'data-formnewasset'	=> [
 									'requisition-location'	=> $post['requisition-location'],
-									'new-name'				=> $post['new-name'],
-									'new-description'		=> $post['new-description'],
-									'new-valueestimation'	=> $post['new-valueestimation'],
-									'new-requestqty'		=> $post['new-requestqty'],
-									'new-imagenames'		=> implode(', ', $result['uploaded-filenames'])
+									'name'			=> $post['new-name'],
+									'description'		=> $post['new-description'],
+									'valueestimation'	=> $post['new-valueestimation'],
+									'requestqty'		=> $post['new-requestqty'],
+									'remarks'		=> $post['new-remarks'],
+									'imagenames'		=> implode(', ', $result['uploaded-filenames'])
 								],
 								'data-loggedousr'	=> $this->getLoggedUserID()
 							]
@@ -170,6 +179,40 @@ class FrontendRequestController extends BaseController {
 						$result = $this->dataRequest($dataOptions);
 					}
 					return $this->response->redirect($urlReferer, 'GET');
+				case 'requisition-additionalasset':
+					$post = $this->request->getPost ();
+					
+					$dataAdditions	= [];
+					foreach ($post as $key => $value) {
+						if (strpos ($key, 'sample-code') !== FALSE) {
+							$lineId	= str_replace ('sample-code-', '', $key);
+							$dataAdditions[$lineId]['code'] = $value;
+						}
+						
+						if (strpos ($key, 'input-reqextqty') !== FALSE) {
+							$lineId = str_replace ('input-reqextqty-', '', $key);
+							$dataAdditions[$lineId]['qty'] = $value;
+						}
+						
+						if (strpos ($key, 'input-reqextremarks') !== FALSE) {
+							$lineId = str_replace ('input-reqextremarks-', '', $key);
+							$dataAdditions[$lineId]['remarks'] = $value;
+						}
+					}
+					
+					$dataOptions = [
+						'data-trigger'	=> 'existing-requisition',
+						'data-transmit'	=> [
+							'data-formrequest'	=> [
+								'data-locationidx'	=> $post['requisition-location'],
+								'data-additions'	=> $dataAdditions
+							],
+							'data-loggedousr'	=> $this->getLoggedUserID()
+						]
+					];
+					$this->dataRequest ($dataOptions);
+					return $this->response->redirect ($urlReferer, 'GET');
+					break;
 				case 'form-profile':
 					$fileUpload = $this->request->getFile('profile-photo');
 					$photoFilename = '';
@@ -183,11 +226,80 @@ class FrontendRequestController extends BaseController {
 						'data-trigger'	=> 'profile-update',
 						'data-transmit'	=> [
 							'data-loggedousr'	=> $this->getLoggedUserID(),
-							'data-form'			=> $post
+							'data-form'		=> $post
 						]
 					];
 					
 					$this->dataRequest($dataOptions);
+					return $this->response->redirect ($urlReferer, 'GET');
+				case 'images-upload':
+					$images = $this->request->getFileMultiple ('images');
+					$fileTransmit	= array ();
+					$index	= 0;
+					foreach ($images as $image) {
+						$fileContents	= base64_encode (file_get_contents ($image));
+						$fileTransmit[$index]	= [
+							'name'		=> $image->getRandomName (),
+							'mime'		=> $image->getType (),
+							'size'		=> $image->getSize (),
+							'content'	=> $fileContents
+						];
+						$index++;
+					}
+					
+					$dataOptions	= [
+						'data-trigger'	=> 'images-bulkupload',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $this->getLoggedUserID (),
+							'data-images'		=> $fileTransmit
+						]
+					];
+					$responseData	= $this->dataRequest ($dataOptions);
+					return $this->response->redirect ($urlReferer, 'GET');
+				case 'destroy-action':
+					$post	= $this->request->getPost ();
+					$dataOptions	= [
+						'data-trigger'	=> 'destroy-doaction',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $this->getLoggedUserID (),
+							'data-docnum'		=> $post['docnum'],
+							'data-doaction'		=> $post['action']
+						]
+					];
+					
+					$responseData	= $this->dataRequest ($dataOptions);
+					return $this->response->redirect ($urlReferer, 'GET');
+				case 'removal-action':
+					$post	= $this->request->getPost ();
+					
+					$detailUpdate = [];
+					foreach ($post as $name => $value) {
+						if (strpos ($name, 'detail-line') !== FALSE) {
+							$lineid = str_replace ('detail-line-', '', $name);
+							$detailUpdate[$lineid]['data-lineid'] = $value;
+						}
+						
+						if (strpos ($name, 'remove-method') !== FALSE) {
+							$lineid = str_replace ('remove-method-', '', $name);
+							$detailUpdate[$lineid]['data-method'] = $value;
+						}
+						
+						if (strpos ($name, 'remove-qty') !== FALSE) {
+							$lineid = str_replace ('remove-qty-', '', $name);
+							$detailUpdate[$lineid]['data-qty'] = $value;
+						}
+					}
+					
+					$dataOptions	= [
+						'data-trigger'	=> 'removal-doaction',
+						'data-transmit'	=> [
+							'data-docidx'		=> $post['doc-id'],
+							'data-loggedousr'	=> $this->getLoggedUserID (),
+							'data-detailupdate'	=> $detailUpdate
+						]
+					];
+					
+					$responseData	= $this->dataRequest ($dataOptions);
 					return $this->response->redirect ($urlReferer, 'GET');
 			}
 		}
@@ -219,7 +331,7 @@ class FrontendRequestController extends BaseController {
 					break;
 				case 'request-newattribute':
 					$dataOptions['data-transmit'] = [
-						'attrib-count' => $json['newattribute']['attrcount']
+						'attrib-count'	=> $json['newattribute']['attrcount']
 					];
 					break;
 				case 'asset-category':
@@ -244,20 +356,11 @@ class FrontendRequestController extends BaseController {
 					if (array_key_exists('barcode', $json)) $dataOptions['data-transmit']['barcode-search'] = $json['barcode'];
 					break;
 				case 'asset-requestin':
+					$ipaddr = $this->request->getIPAddress ();
 					$dataOptions = [
 						'data-trigger'	=> 'moveout-request',
 						'data-transmit'	=> [
-							'data-formrequest'	=> $json['form-data'],
-							'data-loggedousr'	=> $data_ousridx
-						]
-					];
-					break;
-				case 'assetreq-newasset':
-					break;
-				case 'assetreq-existing':
-					$dataOptions = [
-						'data-trigger'	=> 'existing-requisition',
-						'data-transmit'	=> [
+							'data-ipaddress'	=> $ipaddr,
 							'data-formrequest'	=> $json['form-data'],
 							'data-loggedousr'	=> $data_ousridx
 						]
@@ -296,6 +399,24 @@ class FrontendRequestController extends BaseController {
 								]
 							];
 							break;
+						case 'doc-assetproc':
+							$dataOptions = [
+								'data-trigger'	=> 'procure-documentdetailed',
+								'data-transmit'	=> [
+									'data-docnum'		=> $dataTransmit['clicked-docnum'],
+									'data-loggedousr'	=> $data_ousridx
+								]
+							];
+							break;
+						case 'doc-assetremoval':
+							$dataOptions = [
+								'data-trigger'	=> 'removal-documentdetailed',
+								'data-transmit'	=> [
+									'data-docnum'		=> $dataTransmit['clicked-docnum'],
+									'data-loggedousr'	=> $data_ousridx
+								]
+							];
+							break;
 					}
 					break;
 				case 'movein-action':
@@ -315,8 +436,44 @@ class FrontendRequestController extends BaseController {
 					];
 					break;
 				case 'distribute-assets':
-					$dataTransmit = $json['transmit'];
-					$dataTransmit['data-loggedousr'] = $data_ousridx;
+					$params	= $json['transmit'];
+					
+					$dataTransmit = [
+						'data-mvidocnum'	=> '',
+						'data-mviparams'	=> [
+						],
+						'data-loggedousr'	=> $data_ousridx
+					];
+					
+					$mviParams = array ();
+					
+					foreach ($params as $param) {
+						$name = $param['name'];
+						switch ($name) {
+							default:
+								if (strpos ($name, 'item-id') !== FALSE) {
+									$line = str_replace ('item-id-', '', $name);
+									$mviParams[$line]['oita_idx'] = $param['value'];
+								}
+								
+								if (strpos ($name, 'to-sublocation') !== FALSE) {
+									$line = str_replace ('to-sublocation-', '', $name);
+									$mviParams[$line]['osbl_idx'] = $param['value'];
+								}
+								
+								if (strpos ($name, 'move-qty') !== FALSE) {
+									$line = str_replace ('move-qty-', '', $name);
+									$mviParams[$line]['qty'] = $param['value'];
+								}
+								break;
+							case 'movein-docnum':
+								$dataTransmit['data-mvidocnum'] = $param['value'];
+								break;
+						}
+					}
+					
+					$dataTransmit['data-mviparams'] = $mviParams;
+					
 					$dataOptions = [
 						'data-trigger'	=> 'moveindo-assetdistribution',
 						'data-transmit'	=> $dataTransmit
@@ -330,6 +487,41 @@ class FrontendRequestController extends BaseController {
 					$dataOptions = [
 						'data-trigger'	=> 'get-sublocationoflocation',
 						'data-transmit'	=> $data
+					];
+					break;
+				case 'targeted-assetlists':
+					$dataTransmit	= $json['transmit'];
+					$dataOptions = [
+						'data-trigger'	=> 'get-sublocationassetlists',
+						'data-transmit'	=> [
+							'data-locationidx'	=> $dataTransmit['location'],
+							'data-sublocationidx'	=> $dataTransmit['sublocation']
+						]
+					];
+					break;
+				case 'dialog-button':
+					$dataOptions = [
+						'data-trigger'	=> 'get-dialogbutton',
+						'data-transmit'	=> [
+							'data-locale'	=> $this->locale,
+							'data-type'	=> $json['data']
+						]
+					];
+					break;
+				case 'file-removal':
+					$filenames	= $json['filenames'];
+					$filenames	= explode (';', $filenames);
+					$dataOptions = [
+						'data-trigger'	=> 'images-removals',
+						'data-transmit'	=> $filenames
+					];
+					break;
+				case 'fetch-images':
+					$dataOptions = [
+						'data-trigger'	=> 'load-assetimages',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $data_ousridx
+						]
 					];
 					break;
 			}

@@ -16,6 +16,7 @@ abstract class BaseController extends Controller {
 	protected $config;
 	protected $pageData;
 	protected $assets = [];
+	protected $prefix = '__fmk_secure__';
 	private $pageAssets;
 	
 	private function runinit () {
@@ -44,7 +45,7 @@ abstract class BaseController extends Controller {
 	}
 	
 	protected function getLoggedUserID () {
-		$cookie = get_cookie(CLIENT_USER_COOKIE);
+		$cookie = get_cookie($this->prefix . CLIENT_USER_COOKIE);
 		$userString = base64_decode($cookie);
 		return json_decode($userString, TRUE)['id'];
 	}
@@ -89,9 +90,8 @@ abstract class BaseController extends Controller {
 		return json_decode($serverResponse->getBody (), TRUE);
 	}
 	
-	protected function dataRequest ($data = array(), $urlTraget='client/api/request-data', $curlType = 'JSON'): array {
-		$cookieData = get_cookie(CLIENT_CONFIG_NAME);
-		
+	protected function dataRequest ($data = array(), $urlTarget='client/api/request-data', $curlType = 'JSON'): array {
+		$cookieData = get_cookie($this->prefix . CLIENT_CONFIG_NAME);
 		$curlOptions = [
 			'auth'		=> [
 				$cookieData,
@@ -111,8 +111,9 @@ abstract class BaseController extends Controller {
 				$curlOptions['multipart'] = $data;
 				break;
 		}
+		
 		$curl	= \CodeIgniter\Config\Services::curlrequest();
-		$serverResponse = $curl->put(server_url($urlTraget), $curlOptions);
+		$serverResponse = $curl->put(server_url($urlTarget), $curlOptions);
 		$responseData = json_decode($serverResponse->getBody (), TRUE);
 		$returnData = [];
 		if ($responseData['status'] == 200) 

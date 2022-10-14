@@ -163,7 +163,9 @@ $signinVerifier = ($isAuthenticated) ? '' : '';
 		</div>
 	</div>
 <?php foreach ($assets->getScripts () as $script): ?>
-	<script src="<?php echo $script->print (); ?>"></script>
+	<script type="text/javascript" src="<?php echo $script->print (); ?>"></script>
 <?php endforeach; ?>
+	<script type="text/javascript">
+	</script>
 </body>
 </html>

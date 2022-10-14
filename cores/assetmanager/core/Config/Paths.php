@@ -57,7 +57,7 @@ class Paths
 	 *
 	 * This variable must contain the name of your "tests" directory.
 	 */
-	public $testsDirectory = __DIR__ . '/../../tests';
+	public $testsDirectory = __DIR__ . '/../../../tests';
 
 	/*
 	 * ---------------------------------------------------------------

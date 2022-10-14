@@ -157,40 +157,17 @@
 		font-weight: bold;
 		padding: 0;
 	}
-	
+
 	.document-body table.table.table-invoice-detailed th {
-		border: 0.5px solid black;
-	}
-	
-	.document-body table.table.table-invoice-detailed th:first-child {
-		width: 5%;
-		white-space: nowrap;
-	}
-	
-	.document-body table.table.table-invoice-detailed th:nth-child(2) {
-		width: 12%;
-		white-space: nowrap;
-	}
-	
-	.document-body table.table.table-invoice-detailed th:nth-child(3) {
-		width: 55%;
-		white-space: nowrap;
-	}
-	
-	.document-body table.table.table-invoice-detailed th:last-child {
-		width: 7%;
-		white-space: nowrap;
+		border: 0.5px solid #000;
+		padding: 5px 0;
 	}
 	
 	.document-body table.table.table-invoice-detailed td {
-		vertical-align: text-top;
-		padding: 5px;
 		border-left: 0.5px solid #000;
 		border-right: 0.5px solid #000;
-	}
-	
-	.document-body table.table.table-invoice-detailed td:last-child {
-		text-align: center;
+		padding: 5px 3px;
+		vertical-align: text-top;
 	}
 	
 	.document-footer {
@@ -204,13 +181,18 @@
 		border-collapse: collapse;
 	}
 	
-	.document-footer table.table.table-bordered th {
+	.document-footer table.table.table-bordered thead th {
 		padding: 5px 0;
 		border: 0.5px solid #000;
 	}
 	
-	.document-footer table.table.table-bordered td {
-		height: 70px;
+	.document-footer table.table.table-bordered tbody td {
+		height: 78px;
+		border: 0.5px solid #000;
+	}
+	
+	.document-footer table.table.table-bordered tfoot th {
+		height: 25px;
 		border: 0.5px solid #000;
 	}
 	</style>

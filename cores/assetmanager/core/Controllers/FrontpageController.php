@@ -5,16 +5,17 @@ namespace App\Controllers;
 class FrontpageController extends BaseController {
 	
 	// osamjodex_6172d3b6dabf7
-	
+
 	const KEYCOOKIETIME	= 2147483647;
 	private const token = 'fmkiddo'; 
+	private $domain	= 'app.jodamoexchange.com';
 	
 	private function isUserLogged () {
-		return get_cookie(CLIENT_USER_COOKIE) !== NULL;
+		return get_cookie($this->prefix . CLIENT_USER_COOKIE) !== NULL;
 	}
 	
 	private function clientCheck ($dataConfig) {
-		$cookie = get_cookie(CLIENT_CONFIG_NAME);
+		$cookie = get_cookie($this->prefix . CLIENT_CONFIG_NAME);
 		if ($cookie == NULL) return ['status' => 401, 'message' => 'Unauthorized Access'];
 		else {
 			$curlOptions	= [
@@ -24,7 +25,7 @@ class FrontpageController extends BaseController {
 					'basic'
 				],
 				'headers'	=> [
-					'Accept'		=> 'application/json',
+					'Accept'	=> 'application/json',
 					'Content-Type'	=> 'application/json'
 				],
 				'json'		=> $dataConfig
@@ -36,7 +37,7 @@ class FrontpageController extends BaseController {
 	}
 	
 	private function verifyClient () {
-		$cookie = get_cookie(CLIENT_CONFIG_NAME);
+		$cookie = get_cookie($this->prefix . CLIENT_CONFIG_NAME);
 		$response = [];
 		if ($cookie == NULL) {
 			$requestJSON	= $this->request->getJSON(TRUE);
@@ -52,6 +53,7 @@ class FrontpageController extends BaseController {
 						$configData['clientpasscode'] = $data['value'];
 						break;
 				}
+				
 			$authResponse	= $this->authenticate($configData);
 			$response['response']	= $authResponse;
 			if ($authResponse['status'] != 200)  $response['good'] = FALSE;
@@ -64,6 +66,7 @@ class FrontpageController extends BaseController {
 				]
 			];
 		}
+		
 		return $response;
 	}
 	
@@ -77,7 +80,7 @@ class FrontpageController extends BaseController {
 		else {
 			if ($status['response']['status'] == 200) {
 				$cookieData = base64_encode(json_encode($status['response']['message'][1]));
-				set_cookie(CLIENT_CONFIG_NAME, $cookieData, FrontpageController::KEYCOOKIETIME);
+				set_cookie(CLIENT_CONFIG_NAME, $cookieData, FrontpageController::KEYCOOKIETIME, $this->domain, '/', $this->prefix, true, false, 'strict');
 			}
 			$response = [
 				'status'	=> 200,
@@ -130,43 +133,21 @@ class FrontpageController extends BaseController {
 		];
 	}
 	
+	public function index () {
+		$target_URI	= '%s/assets/user-login';
+		$locale = $this->request->getDefaultLocale ();
+		$url		= sprintf ($target_URI, $locale);
+		return $this->response->redirect (base_url ($url), 'GET');
+	}
+	
 	public function authentication () {
-		$cookie = get_cookie(CLIENT_CONFIG_NAME);
+		$cookie = get_cookie($this->prefix . CLIENT_CONFIG_NAME);
 		$isClientAuthenticated = ($cookie !== NULL);
 		$options = $this->getPageOptions();
 		$options['authenticated'] = $isClientAuthenticated;
 		if ($isClientAuthenticated && !$this->isAdminUserSet()) return $this->response->redirect(base_url($this->locale . '/client/setup/firsttime'), 'GET');
 		elseif ($isClientAuthenticated && $this->isUserLogged()) return $this->response->redirect(base_url($this->locale . '/dashboard/welcome'), 'GET');
 		else return view ('frontpage/user-login', $options);
-	}
-	
-	public function doClientUserAuthentication () {
-		if ($this->request->getMethod(TRUE) !== 'PUT') ;
-		else {
-			$json = $this->request->getJSON(TRUE);
-			$dataForm = [];
-			foreach ($json as $data) $dataForm[$data['name']] = $data['value'];
-			$dataOptions = [
-				'data-trigger'	=> 'user-verification',
-				'data-transmit'	=> [
-					'verifier'		=> $dataForm['userVerifier'],
-					'form-data'		=> [
-						'data-username'	=> $dataForm['username'],
-						'data-password'	=> $dataForm['password']
-					]
-				]
-			];
-			$response	= $this->clientCheck($dataOptions);
-			if ($response['status'] == 200) {
-				$cookieData = base64_encode(json_encode($response['message']['data-transmit']));
-				set_cookie(CLIENT_USER_COOKIE, $cookieData, CLIENT_TIME_COOKIE);
-				$response = [
-					'good'	=> TRUE
-				];
-			}
-			$this->response->setJSON ($response);
-			$this->response->send ();
-		}
 	}
 	
 	public function doClientAuthentication () {
@@ -181,12 +162,43 @@ class FrontpageController extends BaseController {
 		$this->response->send ();
 	}
 	
+	public function doClientUserAuthentication () {
+		if ($this->request->getMethod(TRUE) !== 'PUT') ;
+		else {
+			$json = $this->request->getJSON(TRUE);
+			$dataForm = [];
+			foreach ($json as $data) $dataForm[$data['name']] = $data['value'];
+			$dataOptions = [
+				'data-trigger'	=> 'user-verification',
+				'data-transmit'	=> [
+					'verifier'		=> $dataForm['userVerifier'],
+					'ip-address'		=> $this->request->getIPAddress (),
+					'form-data'		=> [
+						'data-username'	=> $dataForm['username'],
+						'data-password'	=> $dataForm['password']
+					]
+				]
+			];
+			$response	= $this->clientCheck($dataOptions);
+			if ($response['status'] == 200) {
+				$cookieData = base64_encode(json_encode($response['message']['data-transmit']));
+				set_cookie(CLIENT_USER_COOKIE, $cookieData, CLIENT_TIME_COOKIE, $this->domain, '/', $this->prefix, true, false, 'strict');
+				$response = [
+					'good'	=> TRUE
+				];
+			}
+			$this->response->setJSON ($response);
+			$this->response->send ();
+		}
+	}
+	
 	public function forgetAuthentication () {
-		
+		delete_cookie($this->prefix . CLIENT_CONFIG_NAME, $this->domain, '/');
+		return $this->response->redirect(base_url($this->locale . '/assets/user-login'), 'GET');
 	}
 	
 	public function userLogout () {
-		delete_cookie(CLIENT_USER_COOKIE);
+		delete_cookie($this->prefix . CLIENT_USER_COOKIE, $this->domain, '/');
 		return $this->response->redirect(base_url($this->locale . '/assets/user-login'), 'GET');
 	}
 	
@@ -196,7 +208,7 @@ class FrontpageController extends BaseController {
 // 	}
 	
 	public function resetCookie () {
-		delete_cookie(CLIENT_CONFIG_NAME);
+		delete_cookie($this->prefix . CLIENT_CONFIG_NAME, $this->domain, '/');
 		return $this->response->redirect(base_url($this->locale . '/assets/user-login'), 'GET');
 	}
 }

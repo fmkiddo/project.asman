@@ -79,6 +79,11 @@ else:
 								<a class="collapse-item" onclick="window.location.href='user-settings'">
 									<i class="fas fa-cog fa-fw"></i> <span data-headsmarty="{27}"></span>
 								</a>
+<?php if ($loggerType === TRUE): ?>
+								<a class="collapse-item" onclick="window.location.href='system-settings'">
+									<i class="fas fa-cog fa-fw"></i> <span data-headsmarty="{39}"></span>
+								</a>
+<?php endif ?>
 							</div>
 						</div>
 					</li>
@@ -149,6 +154,7 @@ else:
 									<i class="fa fa-user fa-fw"></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right bg-primary" aria-labelledby="user-dropdown">
+									<h4 class="dropdown-header"><span data-headsmarty="{38}"></span>, <?php echo $logger; ?></h4>
 									<a class="dropdown-item d-flex align-items-center" onclick="window.location.href='user-profile'">
 										<i class="fas fa-id-card fa-fw"></i> <span class="ml-2" data-headsmarty="{26}"></span>
 									</a>

@@ -16,11 +16,11 @@ endif;
 										<i class="fas fa-cubes fa-fw"></i> <span data-smarty="{0}"></span>
 									</h5>
 									<div>
-										<button type="button" class="btn btn-primary" onclick="window.location.href='doc-assetreq'" title="Permintaan Aset">
-											<i class="fas fa-archive fa-fw"></i> <span>Permintaan</span>
+										<button type="button" class="btn btn-primary" onclick="window.location.href='doc-assetreq'" data-smarty="{1}">
+											<i class="fas fa-archive fa-fw"></i> <span data-smarty="{2}"></span>
 										</button>
-										<button type="button" class="btn btn-primary" onclick="window.location.href='new-asset'" title="Register Aset Baru">
-											<i class="fas fa-plus-circle fa-fw"></i> <span>Tambah Aset</span>
+										<button type="button" class="btn btn-primary" onclick="window.location.href='new-asset'" data-smarty="{3}">
+											<i class="fas fa-plus-circle fa-fw"></i> <span data-smarty="{4}"></span>
 										</button>
 									</div>
 								</div>
@@ -33,7 +33,7 @@ endif;
 <?php 
 foreach ($colHeader as $th):
 ?>
-											<th><?php echo $th; ?></th>
+											<th data-smarty="<?php echo $th; ?>"></th>
 <?php 
 endforeach;
 ?>

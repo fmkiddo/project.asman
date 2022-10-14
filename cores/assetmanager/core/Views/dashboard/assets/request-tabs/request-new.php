@@ -1,5 +1,5 @@
 
-												<div class="tab-pane fade" id="request-new">
+												<div class="tab-pane fade <?php echo ($requestNew == 1) ? 'show active' : ''; ?>"" id="request-new">
 													<div class="row row-with-padding">
 														<div class="col">
 															<div class="form-group">
@@ -31,8 +31,8 @@
 																	<div class="input-group">
 																		<select name="requisition-location" class="form-control" required>
 																			<option disabled="disabled" selected="selected" data-smarty="{20}"></option>
-<?php foreach ($dataLocations as $idx => $name): ?>
-																			<option value="<?php echo $idx; ?>"><?php echo $name; ?></option>
+<?php foreach ($dataLocations as $idx => $value): ?>
+																			<option value="<?php echo $idx; ?>"><?php echo $value['code'] . ' - ' . $value['name']; ?></option>
 <?php endforeach; ?>
 																		</select>
 																	</div>
@@ -66,6 +66,12 @@
 																					<label for="new-valueestimation" data-smarty="{27}"></label>
 																					<div class="input-group">
 																						<input type="number" class="form-control" name="new-valueestimation" data-smarty="{28}" placeholder="" value="0" />
+																					</div>
+																				</div>
+																				<div class="form-group">
+																					<label for="new-remarks" data-smarty="{46}"></label>
+																					<div class="input-group">
+																						<input type="text" class="form-control" name="new-remarks" placeholder="" value="" />
 																					</div>
 																				</div>
 																			</div>
@@ -124,16 +130,17 @@
 																	<h6 data-smarty="{19}"></h6>
 																</div>
 															</div>
-															<form role="form" id="form-requestexisting">
+															<form role="form" id="form-requestexisting" enctype="appl">
+																<input type="hidden" name="trigger" value="requisition-additionalasset" />
 																<input type="hidden" name="requisition-type" value="request-existingasset" />
 <?php if ($dataUserLocation  == 0): ?>
 																<div class="form-group">
 																	<label for="requisition-location" data-smarty="{20}"></label>
 																	<div class="input-group">
-																		<select name="requisition-location" class="form-control">
+																		<select name="requisition-location" class="form-control" required>
 																			<option disabled="disabled" selected="selected" data-smarty="{20}"></option>
-<?php foreach ($dataLocations as $idx => $name): ?>
-																			<option value="<?php echo $idx; ?>"><?php echo $name; ?></option>
+<?php foreach ($dataLocations as $idx => $value): ?>
+																			<option value="<?php echo $idx; ?>"><?php echo $value['code'] . ' - ' . $value['name']; ?></option>
 <?php endforeach; ?>
 																		</select>
 																	</div>
@@ -209,6 +216,7 @@ endforeach; ?>
 																									<th data-smarty="{34}"></th>
 																									<th data-smarty="{35}"></th>
 																									<th data-smarty="{25}"></th>
+																									<th data-smarty="{46}"></th>
 																									<th><i class="fas fa-times fa-fw"></i></th>
 																								</tr>
 																							</thead>
@@ -223,6 +231,7 @@ endforeach; ?>
 																	</div>
 																</div>
 																<div class="text-right">
+																	<button type="submit" id="dosave-requestexisting" class="d-none"></button>
 																	<button type="button" id="save-requestexisting" class="btn btn-primary" data-smarty="{31}">
 																		<i class="fas fa-save fa-fw"></i> <span data-smarty="{31}"></span>
 																	</button>

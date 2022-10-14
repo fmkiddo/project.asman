@@ -3,7 +3,6 @@ if (isset ($pagedata)):
 	$location = $pagedata['location'];
 	$sublocations = $pagedata['sublocations'];
 	$locationassets = $pagedata['locationassets'];
-	$assetheader = $pagedata['assetheader'];
 else:
 	$location = NULL;
 	$sublocations = NULL;
@@ -138,24 +137,33 @@ endforeach; ?>
 												<div class="col-md-12">
 													<div class="d-flex align-items-center justify-content-between">
 														<h6><span data-smarty="{22}"></span><?php echo $location->name; ?></h6>
-														<a class="btn btn-primary" onclick="window.location.href='new-asset'">
-															<i class="fas fa-plus-circle fa-fw"></i><span data-smarty="{23}"></span>
-														</a>
+														<div>
+															<button type="button" id="export-csv" class="btn btn-primary" data-smarty="{32}">
+																<i class="fas fa-file-csv fa-fw"></i> <span data-smarty="{31}"></span>
+															</button>
+															<button class="btn btn-primary" onclick="window.location.href='new-asset'">
+																<i class="fas fa-plus-circle fa-fw"></i><span data-smarty="{23}"></span>
+															</button>
+														</div>
 													</div>
 												</div>
 											</div>
 											<div>
-												<table id="dataTable-assetList" class="dataTable">
+												<table id="dataTable-assetList" class="dataTable table table-striped table-hover table-pointer">
 													<thead>
 														<tr>
+															<th>#</th>
 <?php foreach ($assetheader as $th): ?>
-															<th><?php echo $th; ?></th>
+															<th data-smarty="<?php echo $th; ?>"></th>
 <?php endforeach; ?>
 														</tr>
 													</thead>
 													<tbody>
-<?php foreach ($locationassets as $locationasset): ?>
+<?php 
+$line_idx = 1;
+foreach ($locationassets as $locationasset): ?>
 														<tr>
+															<td><?php echo $line_idx; ?></td>
 															<td><?php echo $locationasset->code; ?></td>
 															<td><?php echo $locationasset->name; ?></td>
 															<td><?php echo $locationasset->sublocation; ?></td>
@@ -164,7 +172,8 @@ endforeach; ?>
 															<td><?php echo $locationasset->po_number; ?></td>
 															<td class="text-center"><?php echo $locationasset->qty; ?></td>
 														</tr>
-<?php endforeach; ?>
+<?php $line_idx++;
+endforeach; ?>
 													</tbody>
 												</table>
 											</div>

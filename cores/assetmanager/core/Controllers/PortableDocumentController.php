@@ -69,7 +69,7 @@ class PortableDocumentController extends BaseController {
 				$dompdf->setPaper ('A4', 'portrait');
 // 				$dompdf->setOptions($pdfopt);
 				$dompdf->render ();
-				$dompdf->stream ('ASMDOC' . $result['document-type'] . '_' . date('Ymd-His') . ".pdf", array("Attachment" => FALSE));
+				$dompdf->stream ('ASMDOC' . $result['document-type'] . '_' . date('Ymd-His') . ".pdf", array("Attachment" => TRUE));
 			}
 		}
 	}

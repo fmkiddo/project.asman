@@ -16,7 +16,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('FrontpageController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -35,6 +35,7 @@ $routes->get ('{locale}/client/setup/firsttime', 'SystemSetupController::firstTi
 $routes->get ('{locale}/assets/user-login', 'FrontpageController::authentication');
 $routes->get ('{locale}/assets/authenticate-client', 'FrontpageController::doClientAuthentication');
 $routes->get ('{locale}/assets/do-logout', 'FrontpageController::userLogout');
+$routes->get ('{locale}/assets/reset-client', 'FrontpageController::forgetAuthentication');
 $routes->get ('{locale}/dashboard', 'DashboardController::displayDashboard');
 $routes->get ('{locale}/dashboard/(:any)', 'DashboardController::displayDashboard/$1');
 

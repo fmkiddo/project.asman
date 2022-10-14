@@ -67,7 +67,7 @@ $details		= $data['document-details'];
 						<table class="table table-invoice-detailed table-bordered">
 							<thead>
 								<tr>
-									<th>No.</th><th>Kode</th><th>Deskripsi</th><th>Sublokasi</th><th>Qty</th>
+									<th width="5%">No.</th><th width="13%">Kode</th><th>Deskripsi</th><th width="22%">Sublokasi</th><th width="5%">Qty</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -75,7 +75,7 @@ $details		= $data['document-details'];
 $line = 1;
 foreach ($details as $detail): ?>
 								<tr>
-									<td><?php echo $line; ?></td><td><?php echo $detail->code; ?></td><td><?php echo $detail->name; ?></td><td><?php echo $detail->osbl_name; ?></td><td><?php echo $detail->qty; ?></td>
+									<td align="center"><?php echo $line; ?></td><td align="center"><?php echo $detail->code; ?></td><td><?php echo $detail->name; ?></td><td align="center"><?php echo $detail->osbl_name; ?></td><td align="center"><?php echo $detail->qty; ?></td>
 								</tr>
 <?php
 $line++;

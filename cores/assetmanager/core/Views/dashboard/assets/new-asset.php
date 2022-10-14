@@ -1,6 +1,6 @@
 <?php include __DIR__ . '/../header.php'; 
 if (isset ($pagedata)):
-	$categories = $pagedata['data-categories'];
+	$categories	= $pagedata['data-categories'];
 	$locations	= $pagedata['data-locations'];
 else:
 	$categories = '';

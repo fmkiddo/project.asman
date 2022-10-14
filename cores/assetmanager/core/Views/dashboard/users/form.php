@@ -110,7 +110,7 @@ $mlocations	= $pagedata['mlocs'];
 													<select id="accesslocation" class="form-control">
 														<option disabled="disabled" selected>--- Pilih Lokasi Akses ---</option>
 <?php foreach ($mlocations as $location): ?>
-														<option value="<?php echo $location->idx; ?>"><?php echo $location->name; ?></option>
+														<option value="<?php echo $location->idx; ?>"><?php echo $location->code . ' - ' . $location->name; ?></option>
 <?php endforeach; ?>
 													</select>
 												</div>
@@ -145,6 +145,7 @@ $mlocations	= $pagedata['mlocs'];
 					break;
 				case 'renew-password':
 					$('div#update-password').slideDown ();
+					$('input[name="change-password"]').val (1);
 					break;
 				case 'cancel-renewpassword':
 					$('div#update-password').slideUp ();

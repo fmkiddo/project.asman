@@ -1,13 +1,17 @@
 <?php
 namespace App\Controllers;
 
-
 use App\Libraries\DocumentStatus;
 use App\Libraries\DocumentType;
 
 class DashboardController extends BaseController {
 	
 // 	public const USERID = 3;
+
+	private $noneSelectedText	= [
+		'id'	=> 'Tidak ada yang dipilih',
+		'en'	=> 'Nothing selected'
+	];
 
 	private function buildMenuStructures ($menuStructures=[]): string {
 		ob_start(); 
@@ -39,7 +43,7 @@ class DashboardController extends BaseController {
 								<a class="collapse-item" onclick="window.location.href='<?php echo $child['target']; ?>'">
 									<i class="<?php echo $child['icon']; ?>"></i> <span data-headsmarty="<?php echo $child['smarty']; ?>"></span>
 								</a>
-<?php 				endforeach;
+<?php 					endforeach;
 				endforeach;
 ?>
 							</div>
@@ -52,11 +56,16 @@ class DashboardController extends BaseController {
 	}
 	
 	private function isUserNotLoggedIn () {
-		return get_cookie(CLIENT_USER_COOKIE) == NULL;
+		return get_cookie($this->prefix . CLIENT_USER_COOKIE) == NULL;
 	}
 	
 	private function isConfigCookieNotSet () {
-		return (get_cookie(CLIENT_CONFIG_NAME) == NULL);
+		return (get_cookie($this->prefix . CLIENT_CONFIG_NAME) == NULL);
+	}
+	
+	private function doYouHaveAccess () {
+		$haveAccess = TRUE;
+		return $haveAccess;
 	}
 	
 	private function saveUser ($param=[]): array {
@@ -65,10 +74,10 @@ class DashboardController extends BaseController {
 			$dataTransmit	= [
 				'userid'	=> $param['userid'],
 				'param'		=> [
-					'new-username'			=> $param['username'],
-					'new-email'				=> $param['email'],
-					'new-password'			=> $param['password'],
-					'new-usergroup'			=> $param['accesslevel'],
+					'new-username'		=> $param['username'],
+					'new-email'		=> $param['email'],
+					'new-password'		=> $param['password'],
+					'new-usergroup'		=> $param['accesslevel'],
 					'new-accesslocation'	=> $param['accesslocation']
 				]
 			];
@@ -76,8 +85,8 @@ class DashboardController extends BaseController {
 			$dataTransmit	= [
 				'userid'	=> $param['userid'],
 				'param'		=> [
-					'update-email'			=> $param['email'],
-					'update-usergroup'		=> $param['accesslevel'],
+					'update-email'		=> $param['email'],
+					'update-usergroup'	=> $param['accesslevel'],
 					'update-accesslocation'	=> $param['accesslocation']
 				]
 			];
@@ -134,6 +143,43 @@ class DashboardController extends BaseController {
 		];
 	}
 	
+	private function renderLocationList ($result): array {
+		$locArray = [];
+		$dataoptions	= [
+			'data-trigger'	=> 'user-retrieve',
+			'data-transmit'	=> [
+				'data-loggedousr'	=> $this->getLoggedUserID ()
+			]
+		];
+		$users	= $this->dataRequest ($dataoptions)['userdata'];
+		if ($users->olct_idx == 0):
+			$locations = $result['locations'];
+			$idx = 0;
+			foreach ($locations as $location) {
+				$locArray[$idx] = [
+					'id'	=> $location->idx,
+					'code'	=> $location->code,
+					'name'	=> $location->name
+				];
+				$idx++;
+			}
+		else:
+			$idx = 0;
+			foreach ($locations as $location) {
+				if ($location->idx == $users->olct_idx) {
+					$locArray[$idx] = [
+						'id'	=> $location->idx,
+						'code'	=> $location->code,
+						'name'	=> $location->name
+					];
+					break;
+				}
+				$idx++;
+			}
+		endif;
+		return $locArray;
+	}
+	
 	public function displayDashboard ($param='') {
 		if ($this->isConfigCookieNotSet())
 			return $this->response->redirect(base_url($this->locale . '/assets/user-login'), 'GET');
@@ -153,10 +199,15 @@ class DashboardController extends BaseController {
 				case 'index':
 				case 'welcome':
 					$dataoptions = [
-						'data-trigger'	=> '',
+						'data-trigger'	=> 'dashboard-summary',
 						'data-transmit'	=> [
+							'data-loggedousr'	=> $this->getLoggedUserID ()
 						]
 					];
+					$result	= $this->dataRequest ($dataoptions);
+					$options ['pagedata'] = $result;
+					$options ['docstats'] = new DocumentStatus ($result['docStats']);
+					$options ['doctypes'] = new DocumentType ($result['docTypes']);
 					$pageName = 'dashboard/main';
 					break;
 				case 'master-categories':
@@ -242,9 +293,7 @@ class DashboardController extends BaseController {
 					break;
 				case 'master-loanee':
 					$pagedata = [];
-					
 					$pageName = 'dashboard/loanee/main';
-					
 					$options['pagedata'] = $pagedata;
 					
 					break;
@@ -265,6 +314,9 @@ class DashboardController extends BaseController {
 					$options['pagedata'] = $result;
 					$options['locationheader']	= [
 						'{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}'
+					];
+					$options['assetheader'] = [
+						'{24}', '{25}', '{26}', '{27}', '{28}', '{29}', '{30}', 
 					];
 					$pageName = 'dashboard/location/detail';
 					break;
@@ -289,7 +341,7 @@ class DashboardController extends BaseController {
 								'data-trigger'	=> 'update-locationprofile',
 								'data-transmit'	=> [
 									'data-loggedousr'	=> $this->getLoggedUserID(),
-									'data-form'			=> $post
+									'data-form'		=> $post
 								]
 							];
 							$result = $this->dataRequest($dataoptions);
@@ -348,6 +400,33 @@ class DashboardController extends BaseController {
 					];
 					$pageName = 'dashboard/assets/new-asset';
 					break;
+				case 'asset-service':
+					$method = $this->request->getMethod (TRUE);
+					$get	= $this->request->getGet ();
+					if (!array_key_exists ('service-form', $get) || $get['service-form'] === 'false')
+						$pageName	= 'dashboard/service/main';
+					else if ($get['service-form'] === 'true') {
+						if (array_key_exists ('form-submitted', $get)) {
+							$post		= $this->request->getPost ();
+						} else {
+							$dataoptions	= [
+								'data-trigger'	=> 'location'
+							];
+							$locationResult	= $this->dataRequest ($dataoptions);
+							$options['psassets'] = [
+								'styles'	=> [
+									base_url('assets/vendors/bootstrap/css/bootstrap-select.css')
+								],
+								'scripts'	=> [
+									base_url('assets/vendors/bootstrap/js/bootstrap-select.js')
+								]
+							];
+							$options['pagedata']['datalist-locations']	= $this->renderLocationList ($locationResult);
+							$options['pagedata']['noneselected']		= $this->noneSelectedText;
+							$pageName	= 'dashboard/service/form';
+						}
+					} else return $this->response->redirect (base_url ($this->locale . '/dashboard/asset-service?service-form=false'));
+					break;
 				case 'form-sublocation':
 					if ($this->request->getMethod(TRUE) === 'GET') {
 						$get = $this->request->getGet();
@@ -403,9 +482,7 @@ class DashboardController extends BaseController {
 							
 							$saveResult = NULL;
 							if ($npswd === $cpswd) $saveResult = $this->saveUser($post);
-							else {
-								$saveResult = [];
-							}
+							else $saveResult = [];
 							$options['saveresult'] = $saveResult;
 						}
 					} else {
@@ -477,9 +554,10 @@ class DashboardController extends BaseController {
 					];
 					$result = $this->dataRequest($dataoptions);
 					
-					$options['pagedata'] = $result;
-					$options['docstat']		= new DocumentStatus($result['docStats']);
-					$options['doctype']		= new DocumentType($result['docTypes']);
+					$options['pagedata'] 			= $result;
+					$options['pagedata']['requisition']	= (array_key_exists ('requisition', $this->request->getGet ())) ? 1 : 0;
+					$options['docstat']			= new DocumentStatus($result['docStats']);
+					$options['doctype']			= new DocumentType($result['docTypes']);
 					$pageName = 'dashboard/assets/request';
 					break;
 				case 'doc-assetin':
@@ -539,14 +617,15 @@ class DashboardController extends BaseController {
 					
 					$options['pagedata'] = [
 						'data-locations'	=> $result['locations'],
-						'omvoths'			=> $result['mvosHead'],
-						'useridx'			=> $loggedOusr,
-						'username'			=> $username,
+						'omvoths'		=> $result['mvosHead'],
+						'useridx'		=> $loggedOusr,
+						'username'		=> $username,
 						'user-location'		=> $userLocation,
-						'mvout-th'			=> ['#', 'Kode', 'Nama Aset', 'Sublokasi Awal', 'Qty', 'Hapus'],
+						'mvout-th'		=> ['{8}', '{23}', '{24}', '{25}', '{26}', '{27}'],
 						'mvout-summary'		=> $result['mvosSumm'],
 						'mvout-lists'		=> $result['mvosList']
 					];
+					
 					$options['docstat'] = new DocumentStatus($result['docStats']);
 					$pageName = 'dashboard/assets/move-out';
 					break;
@@ -559,7 +638,7 @@ class DashboardController extends BaseController {
 					];
 					$result = $this->dataRequest($dataoptions);
 					$options['pagedata'] =	[
-						'data-removaldocs'	=> [],
+						'data-removaldocs'	=> $result['pendingDocs'],
 						'data-summaries'	=> $result['arvSummaries'],
 						'data-removals'		=> $result['removaldocs']
 					];
@@ -567,10 +646,54 @@ class DashboardController extends BaseController {
 					$pageName = 'dashboard/assets/removal';
 					break;
 				case 'doc-assetproc':
+					$dataOptions	= [
+						'data-trigger'	=> 'procure-summaries',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $loggedOusr,
+							'data-locale'		=> $this->locale
+						]
+					];
+					
+					$result	= $this->dataRequest ($dataOptions);
+					$options['pagedata']['req-summaries'] 	= $result['summaries'];
+					$options['pagedata']['req-list']	= $result['requestlist'];
+					$options['pagedata']['req-summstyle'] 	= $result['styles'];
+					$options['pagedata']['req-titlecode']	= $result['titles'];
 					$pageName = 'dashboard/assets/procurement';
 					break;
 				case 'file-manager':
+					$dataoptions	= [
+						'data-trigger'	=> 'load-assetimages',
+						'data-transmit'	=> [
+							'data-loggedousr'	=> $loggedOusr
+						]
+					];
+					$result	= $this->dataRequest ($dataoptions);
+					$imageList	= array ();
+					$index = 0;
+					foreach ($result['data-imagelist'] as $image) {
+						$imageList[$index]	= [
+							'filename'	=> $image['name'],
+							'filesize'	=> round (($image['size'] / 1024), 2) . " KB",
+							'filetype'	=> $image['mime'],
+							'date_created'	=> date ('d-m-Y H:i:s', $image['lastc']),
+							'filecontents'	=> $image['content']
+						];
+						$index++;
+					}
+					
+					$options['pagedata']	= [
+						'data-userstat'	=> $result['data-userstat'],
+						'data-images'	=> $imageList
+					];
 					$pageName = 'dashboard/filemanager';
+					break;
+				case 'user-settings':
+					$pageName = 'dashboard/user-settings';
+					break;
+					break;
+				case 'system-settings':
+					$pageName = 'dashboard/syssettings/main';
 					break;
 				case 'about':
 					$pageName = 'dashboard/about';
@@ -589,11 +712,14 @@ class DashboardController extends BaseController {
 					'data-loggedousr'	=> $this->getLoggedUserID()
 				]
 			];
+			
 			$headResponse = $this->dataRequest($headOptions);
 			if ($headResponse !== NULL) {
-				$options['menus'] = $this->buildMenuStructures($headResponse['data-menustructure']);
-				$options['messages'] = $headResponse['data-messages'];
-				$options['notifs'] = $headResponse['data-notifications'];
+				$options['logger']	= $headResponse['data-logger'];
+				$options['loggerType']	= $headResponse['data-loggertype'];
+				$options['menus']	= $this->buildMenuStructures($headResponse['data-menustructure']);
+				$options['messages']	= $headResponse['data-messages'];
+				$options['notifs']	= $headResponse['data-notifications'];
 			}
 			
 			if ($render) return view($pageName, $options);

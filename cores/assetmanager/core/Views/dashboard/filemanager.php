@@ -1,5 +1,5 @@
 <?php include __DIR__ . '/header.php'; 
-$images = [];
+$images = $pagedata['data-images'];
 ?>
 				<div class="row">
 					<div class="col-md-12">
@@ -21,7 +21,7 @@ $images = [];
 														<span data-smarty="{1}"></span>
 													</a>
 												</li>
-												<li class="nav-item">
+												<li class="nav-item <?php echo ($pagedata['data-userstat'] != 0) ? 'd-none' : ''; ?>">
 													<a class="nav-link" href="#file-upload" data-toggle="tab">
 														<i class="fab fa-wpforms fa-fw"></i>
 														<span data-smarty="{7}"></span>
@@ -35,7 +35,7 @@ $images = [];
 											<div class="row row-with-padding">
 												<div class="col-md-12">
 													<div class="d-flex justify-content-between">
-														<h6 data-smarty="{35}"></h6>
+														<h6 data-smarty="{36}"></h6>
 														<span>
 															<button type="button" class="btn btn-primary" id="upload-files">
 																<i class="fas fa-upload fa-fw"></i>
@@ -43,11 +43,11 @@ $images = [];
 															</button>
 															<button type="button" class="btn btn-primary" id="delete-files">
 																<i class="fas fa-times fa-fw"></i>
-																<span data-smarty="{36}"></span>
+																<span data-smarty="{37}"></span>
 															</button>
 														</span>
 													</div>
-													<table id="dataTable-imageList" class="dataTable table table-hover table-striped table-pointer" data-page-length="50">
+													<table id="dataTable-imageList" class="dataTable table table-hover table-striped table-pointer" data-page-length="10">
 														<thead>
 															<tr>
 																<th><input type="checkbox" id="check-allimages" /></th>
@@ -59,13 +59,29 @@ $images = [];
 															</tr>
 														</thead>
 														<tbody>
+<?php
+foreach ($images as $image) {
+?>
+															<tr>
+																<td style="text-align: center"><input type="checkbox" id="image-select" name="<?php echo $image['filename']; ?>" /></td>
+																<td style="height: 150px;">
+																	<img id="<?php echo $image['filename']; ?>" src="data:<?php echo $image['filetype']; ?>;base64,<?php echo $image['filecontents']; ?>" width="100" />
+																</td>
+																<td><?php echo $image['filename']; ?></td>
+																<td><?php echo $image['date_created']; ?></td>
+																<td><?php echo $image['filesize']; ?></td>
+																<td><a download="<?php echo $image['filename']; ?>" href="data:<?php echo $image['filetype']?>;base64,<?php echo $image['filecontents']; ?>" data-smarty="{6}"></a></td>
+															</tr>
+<?php
+}
+?>
 														</tbody>
 													</table>
 												</div>
 											</div>
 										</div>
 										
-										<div class="tab-pane fade" id="file-upload">
+										<div class="tab-pane fade <?php echo ($pagedata['data-userstat'] != 0) ? 'd-none' : ''; ?>" id="file-upload">
 											<div class="row row-with-padding">
 												<div class="col-md-4">
 													<div class="card card-plain border">
@@ -76,7 +92,7 @@ $images = [];
 															<form id="upload-images" method="post" action="<?php echo base_url($locale . '/api/process'); ?>" enctype="multipart/form-data">
 																<div class="d-none">
 																	<input type="hidden" class="form-control" name="trigger" value="images-upload" readonly="readonly" required />
-																	<input type="file" id="images" class="form-control" name="images" accept="image/jpeg, image/jpg, image/png, image/tiff" multiple required />
+																	<input type="file" id="images" class="form-control" name="images[]" accept="image/jpeg, image/jpg, image/png, image/tiff" multiple required />
 																</div>
 																<div class="d-block">
 																	<div class="image-display">
@@ -105,7 +121,7 @@ $images = [];
 																</div>
 																<div class="d-flex justify-content-between">
 																	<button type="submit" id="submit-images" class="btn btn-primary" data-smarty="{13}">
-																		<span id="submit-message" class="hidden" data-smarty="{37}"></span>
+																		<span id="submit-message" class="hidden" data-smarty="{38}"></span>
 																		<i class="fas fa-upload fa-fw"></i>
 																		<span data-smarty="{14}"></span>
 																	</button>
@@ -128,7 +144,7 @@ $images = [];
 															<form role="form" id="formuploadmasterdata" method="post" enctype="multipart/form-data" action="<?php echo base_url ($locale . '/api/process'); ?>">
 																<input type="hidden" id="trigger" name="trigger" value="" />
 																<div class="form-group">
-																	<label><span data-smarty="{23}"></span>:</label>
+																	<label><span data-smarty="{24}"></span>:</label>
 																	<select id="upload-type" class="form-control" required>
 																		<option disabled="disabled" selected="selected" data-smarty="{16}"></option>
 																		<option value="md-locations" data-smarty="{17}"></option>
@@ -137,11 +153,12 @@ $images = [];
 																		<option value="md-categories" data-smarty="{20}"></option>
 																		<option value="md-assetitems" data-smarty="{21}"></option>
 																		<option value="md-assetitemdetails" data-smarty="{22}"></option>
+																		<option value="md-assetitemimage" data-smarty="{23}"></option>
 																	</select>
 																</div>
 																<input type="file" name="uploaded-file" class="form-control" accept="text/csv, text/txt" required />
 																<div class="text-right">
-																	<button type="submit" class="btn btn-primary" id="submit-file" data-smarty="{25}">
+																	<button type="submit" class="btn btn-primary" id="submit-file" data-smarty="{26}">
 																		<i class="fas fa-upload fa-fw"></i>
 																		<span data-smarty="{14}"></span>
 																	</button>
@@ -151,11 +168,10 @@ $images = [];
 													</div>
 													<div class="card card-plain border">
 														<div class="card-header">
-															<h6 class="card-title" data-smarty="{26}"></h6>
+															<h6 class="card-title" data-smarty="{27}"></h6>
 														</div>
 														<div class="card-body bg-light">
 															<ol class="glow-point">
-																<li data-smarty="{27}"></li>
 																<li data-smarty="{28}"></li>
 																<li data-smarty="{29}"></li>
 																<li data-smarty="{30}"></li>
@@ -163,6 +179,7 @@ $images = [];
 																<li data-smarty="{32}"></li>
 																<li data-smarty="{33}"></li>
 																<li data-smarty="{34}"></li>
+																<li data-smarty="{35}"></li>
 															</ol>
 														</div>
 													</div>
@@ -177,9 +194,49 @@ $images = [];
 				</div>
 
 <?php include __DIR__ . '/footer.php'; ?>
-
 	<script>
 	$(document).ready (function () {
+		$.fn.dialogButtonHandler = function () {
+			$name	= $(this).prop ('name');
+			$dialog	= $(this).parents ('div#page-modal');
+			$dialogLabel = $dialog.attr ('aria-labelledby');
+			switch ($dialogLabel) {
+				default:
+					break;
+				case 'file-delete':
+					switch ($name) {
+						default:
+							break;
+						case 'dialog-btn-no':
+							$dialog.modal ('hide');
+							break;
+						case 'dialog-btn-yes':
+							$filenames = '';
+							$imageSelects.each (function () {
+								$name = $(this).prop ('name');
+								if ($filenames.length == 0) $filenames = $filenames.concat ($name);
+								else $filenames = $filenames.concat (';', $name);
+							});
+							
+							$data	= {
+								'trigger': 'file-removal',
+								'filenames': $filenames
+							};
+							
+							$.ajax ({
+								'url': $.base_url ($locale + '/api/sent'),
+								'method': 'put',
+								'data': JSON.stringify ($data),
+								'dataType': 'json'
+							}).done (function ($result) {
+								if ($result.good) location.reload (false);
+							});
+							break;
+					}
+					break;
+			}
+		};
+		
 		$('body').on ('change', 'input, select', function ($evt) {
 			if ($(this).is ('select')) {
 				$id = $(this).prop ('id');
@@ -197,13 +254,17 @@ $images = [];
 					default:
 						break;
 					case 'check-allimages':
-						console.log ($(this).prop ('checked'));
+						$dataTable 	= $('body').find ('table.dataTable');
+						$tbody		= $dataTable.find ('tbody');
+						$status		= $(this).is (':checked');
+						$tbody.find ('input#image-select:checkbox').prop ('checked', $status);
 						break;
 					case 'images':
 						$imageUpload = $('div#image-carousel');
 						$imageUpload.children ('.carousel-inner').empty ();
 						$('input#images').showPreviewCarousel ($imageUpload);
 						$('span.display-overlay').addClass ('d-none');
+						$('.image-container').attr ('style', 'background-image: none;');
 						break;
 				}
 			}
@@ -214,16 +275,18 @@ $images = [];
 				$id = $(this).prop ('id');
 				switch ($id) {
 					default:
+						$(this).dialogButtonHandler ();
 						break;
 					case 'upload-files': 
 						$('a[href="#file-upload"]').trigger ('click');
 						break;
 					case 'pick-images':
-						$('input[name="images"]').trigger ('click');
+						$('input[id="images"]').trigger ('click');
 						break;
 					case 'delete-files':
-						$fileSelects = $('input#file-select');
-						if ($fileSelects.length == 0) alert ('no file selected');
+						$imageSelects = $('input#image-select:checked');
+						if ($imageSelects.length == 0) alert ('no file selected');
+						else $.showMessageDialog ("File Delete Confirmation", "Are you sure you want to delete selected file(s)?", "file-delete", modalSize.medium, messageType.yesno);
 						break;
 					case 'submit-images':
 						if ($('input#images').prop ('files').length == 0) alert ($(this).find ('span#submit-message').text ());
@@ -231,10 +294,21 @@ $images = [];
 					case 'reset-images':
 						$('div#image-carousel').children ('.carousel-inner').empty ();
 						$('span.display-overlay').removeClass ('d-none');
+						$('.image-container').removeAttr ('style');
 						break;
 				}
 			} else if ($(this).is ('span')) {
 				if ($(this).hasClass ('display-overlay')) $('button#pick-images').trigger ('click');
+			}
+		});
+		
+		$('body').on ('click', 'td', function ($evt) {
+			$trParent = $(this).parents ('tr');
+			if (!$(this).is ($trParent.children ().eq (0))) {
+				$td = $(this).parents ('tr').children ().eq (0);
+				$imageSelect = $td.find ('input:checkbox');
+				$status = $imageSelect.is (':checked');
+				$imageSelect.prop ('checked', !$status);
 			}
 		});
 	});

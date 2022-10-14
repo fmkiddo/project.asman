@@ -1,5 +1,5 @@
 
-												<div class="tab-pane fade show active" id="summary">
+												<div class="tab-pane fade <?php echo ($requestNew == 0) ? 'show active' : ''; ?>" id="summary">
 													<div class="row row-with-padding">
 <?php $partition = (12 / count ($pagedata['summaries']));
 foreach ($pagedata['summaries'] as $summary): ?>
@@ -52,7 +52,7 @@ foreach ($dataRequestDocs as $requestDoc):
 <?php endif; ?>
 																		<td>
 																			<i class="<?php echo $docstat->getIcon ($req->status); ?>"></i>
-																			<span><?php echo $docstat->getStatusText ($req->status); ?></span>
+																			<span><?php echo $docstat->getStatusText ($req->status, $locale); ?></span>
 																		</td>
 																	</tr>
 <?php $lineId++;
