@@ -1,0 +1,70 @@
+CRITICAL - 2022-02-07 11:35:26 --> Undefined index: images.0
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(194): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 194, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-02-07 11:35:46 --> Undefined index: images.0
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(194): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 194, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-02-07 11:36:55 --> Undefined index: images.0
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(194): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 194, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-02-07 14:50:41 --> Invalid file: register-newuser.php
+#0 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('register-newuse...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('register-newuse...', Array, true)
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontpageController.php(209): view('register-newuse...', Array)
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontpageController->registerNewUser()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontpageController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-02-07 14:50:54 --> Undefined variable: authenticated
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/frontpage/register-newuser.php(3): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 3, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('frontpage/regis...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontpageController.php(209): view('frontpage/regis...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontpageController->registerNewUser()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontpageController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-02-07 14:51:18 --> Undefined variable: authenticated
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/frontpage/register-newuser.php(3): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 3, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('frontpage/regis...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontpageController.php(209): view('frontpage/regis...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontpageController->registerNewUser()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontpageController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-02-07 14:51:43 --> Undefined variable: assets
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/frontpage/register-newuser.php(11): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 11, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('frontpage/regis...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontpageController.php(209): view('frontpage/regis...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontpageController->registerNewUser()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontpageController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-02-07 15:56:11 --> Undefined variable: assets
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/frontpage/register-newuser.php(11): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 11, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('frontpage/regis...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontpageController.php(209): view('frontpage/regis...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontpageController->registerNewUser()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontpageController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

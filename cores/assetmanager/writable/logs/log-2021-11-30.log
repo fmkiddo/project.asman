@@ -1,0 +1,23 @@
+CRITICAL - 2021-11-30 16:33:21 --> Undefined index: target
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 22, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-30 23:12:11 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 49, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(203): App\Controllers\BaseController->getLoggedUserID()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-30 23:12:13 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 49, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(203): App\Controllers\BaseController->getLoggedUserID()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}

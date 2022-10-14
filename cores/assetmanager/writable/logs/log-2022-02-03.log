@@ -1,0 +1,7 @@
+CRITICAL - 2022-02-03 09:05:44 --> Undefined index: data-importfailed
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 79, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

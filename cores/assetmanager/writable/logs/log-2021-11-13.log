@@ -1,0 +1,14 @@
+CRITICAL - 2021-11-13 09:52:34 --> Undefined index: data-profile
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(427): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 427, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('user-profile')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-13 14:16:49 --> Undefined index: data-profile
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(427): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 427, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('user-profile')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

@@ -16,7 +16,8 @@ class DocumentStatus {
 		2	=> 'bg-info text-white',
 		3	=> 'bg-secondary text-white',
 		4	=> 'bg-success text-white',
-		5	=> 'bg-light text-dark'
+		5	=> 'bg-light text-dark',
+		6	=> 'bg-secondary text-white'
 	];
 	
 	private $statusText = [];
@@ -34,8 +35,8 @@ class DocumentStatus {
 		return $this->bgs[$input];
 	}
 	
-	public function getStatusText ($input = 1) {
-		return $this->statusText[$input];
+	public function getStatusText ($input = 1, $locale = 'id') {
+		return $this->statusText[$input][$locale];
 	}
 	
 	public function isReceived ($input = 1) {

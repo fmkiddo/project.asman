@@ -1,0 +1,10 @@
+CRITICAL - 2021-11-12 10:57:33 --> Undefined variable: pageData
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/assets/removal.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/asset...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(574): view('dashboard/asset...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('doc-removal')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

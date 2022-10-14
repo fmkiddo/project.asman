@@ -1,0 +1,49 @@
+CRITICAL - 2021-11-03 13:30:13 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:30:17 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:30:27 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:30:39 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:30:45 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:33:46 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-03 13:33:51 --> Undefined index: categoryitem
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(166): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 166, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('asset-categoryi...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

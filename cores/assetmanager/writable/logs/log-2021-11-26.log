@@ -1,0 +1,111 @@
+CRITICAL - 2021-11-26 10:34:58 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:35:31 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:36:42 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:37:42 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:39:44 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:41:01 --> Undefined index: trigger
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 53, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 10:52:34 --> Undefined index: data-type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/sublocation.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/sublo...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(592): view('dashboard/sublo...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('form-sublocatio...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-26 10:52:39 --> Undefined variable: locale
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(94): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 94, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-26 11:03:19 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(93): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-26 11:19:25 --> Undefined index: locationheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(3): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 3, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(592): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-26 11:20:01 --> Undefined index: locationheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(3): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 3, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(593): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-26 11:24:41 --> Undefined index: data-type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/sublocation.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/sublo...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(593): view('dashboard/sublo...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('form-sublocatio...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-26 11:25:11 --> Undefined index: data-type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/sublocation.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/sublo...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(594): view('dashboard/sublo...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('form-sublocatio...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

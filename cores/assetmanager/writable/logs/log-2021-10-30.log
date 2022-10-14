@@ -1,0 +1,108 @@
+CRITICAL - 2021-10-30 15:14:12 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(228): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-10-30 15:15:35 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(228): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-10-30 15:15:58 --> Undefined index: type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(129): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 129, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:16:18 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(96): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 96, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:17:34 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(96): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 96, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:18:20 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(96): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 96, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:19:03 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(96): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 96, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:19:22 --> Trying to access array offset on value of type null
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(96): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', '/home/fmkiddo/g...', 96, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:20:17 --> Undefined index: type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(130): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 130, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:20:53 --> Undefined index: type
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(130): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 130, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:21:03 --> Undefined index: from
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(131): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 131, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-10-30 15:21:39 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(229): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->ajaxRequest()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-10-30 19:54:15 --> Invalid file: dashboard/assets/destroy-request.php
+#0 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('dashboard/asset...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/asset...', Array, true)
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(490): view('dashboard/asset...', Array)
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('doc-removal')
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}

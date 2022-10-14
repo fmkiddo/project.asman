@@ -13,8 +13,8 @@ class DocumentType {
 		$this->types[$id] = $value;
 	}
 	
-	public function getType ($id) {
+	public function getType ($id, $locale='id') {
 		if (!array_key_exists($id, $this->types)) return '--- not found ---';
-		return $this->types[$id];
+		return $this->types[$id][$locale];
 	}
 }

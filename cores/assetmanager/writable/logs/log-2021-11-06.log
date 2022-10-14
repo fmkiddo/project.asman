@@ -1,0 +1,157 @@
+CRITICAL - 2021-11-06 10:15:58 --> Undefined variable: pagedata
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/main.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/main', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(509): view('dashboard/main', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-06 10:48:43 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:00 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:08 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:15 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:23 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:35 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 12:24:44 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(506): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 14:13:05 --> Undefined index: child
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 29, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(536): App\Controllers\DashboardController->buildMenuStructures(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-06 14:13:11 --> Undefined index: child
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 29, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(536): App\Controllers\DashboardController->buildMenuStructures(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-06 14:14:39 --> Undefined index: child
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 29, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(536): App\Controllers\DashboardController->buildMenuStructures(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-06 14:14:41 --> Undefined index: child
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 29, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(536): App\Controllers\DashboardController->buildMenuStructures(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-06 14:14:59 --> Undefined index: child
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(29): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 29, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(535): App\Controllers\DashboardController->buildMenuStructures(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('index')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2021-11-06 15:50:15 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(420): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('user-profile')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-06 15:51:55 --> Undefined variable: profile
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/users/profile.php(30): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 30, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/users...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(564): view('dashboard/users...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('user-profile')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}

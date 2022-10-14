@@ -1,0 +1,157 @@
+CRITICAL - 2021-12-02 08:25:14 --> Undefined variable: totalTime
+#0 /home/fmkiddo/git/project.asman/cores/engine/Debug/Toolbar/Views/toolbar.tpl.php(56): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 56, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/Debug/Toolbar.php(498): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Debug/Toolbar.php(455): CodeIgniter\Debug\Toolbar->format(Array, 'html')
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Config/Events.php(50): CodeIgniter\Debug\Toolbar->respond()
+#4 [internal function]: CodeIgniter\Events\Events::Config\{closure}()
+#5 /home/fmkiddo/git/project.asman/cores/engine/Events/Events.php(188): call_user_func(Object(Closure))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(293): CodeIgniter\Events\Events::trigger('pre_system')
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-12-02 08:27:29 --> Undefined index: good
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 54, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-12-02 08:35:02 --> Undefined index: good
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 54, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-12-02 08:37:11 --> Undefined index: good
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 54, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-12-02 08:37:34 --> Undefined index: good
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 54, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-12-02 08:38:20 --> Undefined index: good
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 54, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-12-02 08:40:18 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 08:40:40 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 08:41:47 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 08:55:50 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 09:08:42 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 09:22:40 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 09:23:21 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 09:32:18 --> Object of class CodeIgniter\Entity could not be converted to string
+#0 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include()
+#1 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(68): view('dashboard/porta...', Array)
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-12-02 09:34:41 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(53): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-12-02 10:22:58 --> Undefined variable: pdfopt
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(70): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 70, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}

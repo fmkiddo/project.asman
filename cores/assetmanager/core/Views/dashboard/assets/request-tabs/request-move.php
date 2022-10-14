@@ -37,8 +37,8 @@
 																				<input type="hidden" name="moveout-fromlocation-hidden" id="moveout-locations" value="" />
 																				<select name="moveout-fromlocation" class="form-control" id="location-opt">
 																					<option disabled="disabled" selected="selected">--- Pilih Lokasi Asal ---</option>
-<?php foreach ($dataLocations as $key => $name): ?>
-																					<option value="<?php echo $key; ?>"><?php echo $name; ?></option>
+<?php foreach ($dataLocations as $key => $value): ?>
+																					<option value="<?php echo $key; ?>"><?php echo $value['code'] . ' - ' . $value['name']; ?></option>
 <?php endforeach; ?>
 																				</select>
 																			</div>
@@ -49,10 +49,20 @@
 																				<input type="hidden" name="moveout-tolocation-hidden" id="moveout-locations" value="<?php echo $dataUserLocation; ?>" />
 																				<select name="moveout-tolocation" class="form-control" id="location-opt" <?php echo $dataUserLocation > 0 ? 'disabled="disabled"' : ''; ?>>
 																					<option disabled="disabled" <?php echo $dataUserLocation > 0 ? '' : 'selected="selected"'; ?>>--- Pilih Lokasi Tujuan ---</option>
-<?php foreach ($dataLocations as $key => $name): ?>
-																					<option value="<?php echo $key; ?>" <?php echo $key == $dataUserLocation ? 'selected="selected"' : ''; ?>><?php echo $name; ?></option>
+<?php foreach ($dataLocations as $key => $value): ?>
+																					<option value="<?php echo $key; ?>" <?php echo $key == $dataUserLocation ? 'selected="selected"' : ''; ?>><?php echo $value['code'] . ' - ' . $value['name']; ?></option>
 <?php endforeach; ?>
 																				</select>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label for="moveout-remarks" data-smarty="{46}"></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control" name="moveout-remarks" id="moveout-remarks" value="" />
 																			</div>
 																		</div>
 																	</div>

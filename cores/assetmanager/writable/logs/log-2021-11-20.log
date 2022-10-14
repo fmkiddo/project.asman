@@ -1,0 +1,8 @@
+CRITICAL - 2021-11-20 11:36:58 --> array_map(): Expected parameter 2 to be an array, object given
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'array_map(): Ex...', '/home/fmkiddo/g...', 62, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/FrontendRequestController.php(62): array_map('str_getcsv', Object(CodeIgniter\HTTP\Files\UploadedFile))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\FrontendRequestController->postRequest()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\FrontendRequestController))
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}

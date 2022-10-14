@@ -16,8 +16,8 @@
 																<div class="input-group">
 																	<select name="user-location" class="form-control" id="user-location">
 																		<option disabled="disabled" selected="selected" data-smarty="{40}"></option>
-<?php foreach ($dataLocations as $id => $name): ?>
-																		<option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+<?php foreach ($dataLocations as $id => $value): ?>
+																		<option value="<?php echo $id; ?>"><?php echo $value['code'] . ' - ' . $value['name']; ?></option>
 <?php endforeach; ?>
 																	</select>
 																</div>
@@ -76,6 +76,7 @@
 																					<th data-smarty="{35}"></th>
 																					<th data-smarty="{41}"></th>
 																					<th data-smarty="{25}"></th>
+																					<th data-smarty="{46}"></th>
 																					<th><i class="fas fa-times-circle fa-fw"></i></th>
 																				</tr>
 																			</thead>

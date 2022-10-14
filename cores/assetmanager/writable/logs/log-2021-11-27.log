@@ -1,0 +1,428 @@
+CRITICAL - 2021-11-27 09:35:54 --> Undefined variable: locationheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(60): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 60, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(599): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 09:36:36 --> Undefined variable: locationheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(58): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 58, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(599): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 09:37:17 --> Undefined variable: locationheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(599): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 10:14:21 --> Undefined index: assetheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(7): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 7, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(599): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 10:14:41 --> Undefined index: sblheader
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/location/detail.php(5): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 5, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/locat...', Array, true)
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(599): view('dashboard/locat...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 10:17:37 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(263): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-27 10:17:51 --> 22 : The requested URL returned error: 500 Internal Server Error
+#0 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(821): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested U...')
+#1 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(449): CodeIgniter\HTTP\CURLRequest->sendRequest(Array)
+#2 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(158): CodeIgniter\HTTP\CURLRequest->send('put', 'http://localhos...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/HTTP/CURLRequest.php(265): CodeIgniter\HTTP\CURLRequest->request('put', 'http://localhos...', Array)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/BaseController.php(115): CodeIgniter\HTTP\CURLRequest->put('http://localhos...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/DashboardController.php(263): App\Controllers\BaseController->dataRequest(Array)
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\DashboardController->displayDashboard('location-detail')
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\DashboardController))
+#8 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2021-11-27 10:39:15 --> Call to a member function getValue() on null
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:39:35 --> Call to a member function getValue() on null
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:39:35 --> Call to a member function getValue() on null
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:41:23 --> Call to a member function getValue() on null
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:49:42 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:49:48 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:50:09 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:51:01 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/DomPDF/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:51:59 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:52:00 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:52:03 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:55:03 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:55:44 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 10:55:49 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:55:51 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:55:51 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:59:06 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 10:59:37 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:00:05 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:03:07 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:03:36 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:04:42 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:05:07 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:05:31 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:09:06 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:09:14 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:09:27 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:09:40 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:09:46 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendors/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendors/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 11:31:24 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:42:08 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:42:26 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 11:44:44 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 11:44:57 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(21): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 11:47:23 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 12:14:41 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:15:08 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:23:09 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:23:32 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:28:02 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:28:08 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:31:05 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:31:46 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:32:35 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Adapter/CPDF.php(198): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): Dompdf\Adapter\CPDF->__construct()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 12:32:46 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Adapter/CPDF.php(198): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): Dompdf\Adapter\CPDF->__construct()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 12:34:58 --> Class 'Dompdf\Cpdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/CanvasFactory.php(57): Dompdf\Adapter\CPDF->__construct('letter', 'portrait', Object(Dompdf\Dompdf))
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Dompdf.php(299): Dompdf\CanvasFactory::get_instance(Object(Dompdf\Dompdf), 'letter', 'portrait')
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/ThirdParty/vendor/dompdf/src/Adapter/CPDF.php(198): Dompdf\Dompdf->__construct()
+#3 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): Dompdf\Adapter\CPDF->__construct()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-11-27 12:40:05 --> Class 'Dompdf\Adapter\CPDF' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-27 12:43:13 --> App\Controllers\PortableDocumentController::downloadPortableDocument(): Failed opening required 'cores/assetmanager/core/ThirdParty/vendor/dompdf/autoload.inc.php' (include_path='.:/opt/lampp/lib/php')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2021-11-27 12:43:43 --> App\Controllers\PortableDocumentController::downloadPortableDocument(): Failed opening required '/home/fmkiddo/git/project.asman/cores/assetmanager/core/' (include_path='.:/opt/lampp/lib/php')
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2021-11-27 12:46:42 --> Invalid file: portables/test.php
+#0 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(228): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('portables/test....')
+#1 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('portables/test', Array, true)
+#2 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(24): view('portables/test')
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#4 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2021-11-27 12:47:52 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}

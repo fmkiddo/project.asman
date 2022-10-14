@@ -49,7 +49,7 @@ foreach ($dataRemovals as $removal): ?>
 																<td><?php echo $removal->location_name; ?></td>
 																<td><i class="<?php echo $docstat->getIcon ($removal->status); ?>"></i></td>
 																<td><?php echo $removal->approval_date === NULL ? 'N/A' : $removal->approval_date; ?></td>
-																<td><?php echo $docstat->getStatusText ($removal->status); ?></td>
+																<td><?php echo $docstat->getStatusText ($removal->status, $locale); ?></td>
 															</tr>
 <?php $lineid++;
 endforeach; ?>

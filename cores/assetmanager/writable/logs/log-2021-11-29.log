@@ -1,0 +1,176 @@
+CRITICAL - 2021-11-29 08:28:13 --> Class 'Dompdf\Dompdf' not found
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-29 10:38:07 --> Call to a member function getValue() on null
+#0 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2021-11-29 10:45:39 --> Undefined index: docnum
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(14): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 14, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-29 10:57:43 --> Undefined index: target
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(12): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 12, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2021-11-29 10:59:23 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(39): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 10:59:30 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(39): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:01:16 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(46): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:02:01 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(46): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:02:01 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(46): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:02:12 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(47): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:03:02 --> Undefined variable: resources
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(2): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 2, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(54): view('dashboard/porta...')
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:54 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:56 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:57 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:57 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:58 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 11:18:58 --> Undefined variable: is_portable
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/header.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', '/home/fmkiddo/g...', 8, Array)
+#1 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Views/dashboard/portables/test.php(1): include('/home/fmkiddo/g...')
+#2 /home/fmkiddo/git/project.asman/cores/engine/View/View.php(246): include('/home/fmkiddo/g...')
+#3 /home/fmkiddo/git/project.asman/cores/engine/Common.php(1119): CodeIgniter\View\View->render('dashboard/porta...', Array, true)
+#4 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(43): view('dashboard/porta...', Array)
+#5 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->downloadPortableDocument()
+#6 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#7 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2021-11-29 12:10:06 --> Undefined index: target
+#0 /home/fmkiddo/git/project.asman/cores/assetmanager/core/Controllers/PortableDocumentController.php(22): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', '/home/fmkiddo/g...', 22, Array)
+#1 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(918): App\Controllers\PortableDocumentController->loadPortableDocument()
+#2 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PortableDocumentController))
+#3 /home/fmkiddo/git/project.asman/cores/engine/CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /home/fmkiddo/git/project.asman/subs/assets-manager/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
