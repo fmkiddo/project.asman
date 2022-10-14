@@ -24,10 +24,10 @@
 
 .sidebar .nav-item .collapse .collapse-inner,
 .sidebar .nav-item .collapsing .collapse-inner {
-    padding: 0.5rem 0;
-    min-width: 10rem;
-    font-size: 0.85rem;
-    margin: 0 0 1rem 0;
+	padding: 0.5rem 0;
+	min-width: 10rem;
+	font-size: 0.85rem;
+	margin: 0 0 1rem 0;
 }
 
 .sidebar .nav-item .collapse .collapse-inner hr.collapse-separator,
@@ -49,13 +49,13 @@
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
-    padding: 0.5rem 0.5rem 0.5rem 2.4rem;
-    margin: 0 0.5rem;
-    display: block;
-    color: #3a3b45;
-    text-decoration: none;
-    border-radius: 0.35rem;
-    white-space: nowrap;
+	padding: 0.5rem 0.5rem 0.5rem 2.4rem;
+	margin: 0 0.5rem;
+	display: block;
+	color: #3a3b45;
+	text-decoration: none;
+	border-radius: 0.35rem;
+	white-space: nowrap;
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
@@ -241,19 +241,19 @@
 	padding-bottom: 100%;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+	background-size: contain;
 }
 
 .image-display .display-overlay {
-    position: absolute;
-    background-color: rgba(200, 200, 200, 0.7);
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    color:black;
-    text-align: center;
-    transition: 0.25s;
+	position: absolute;
+	background-color: rgba(200, 200, 200, 0.7);
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	color:black;
+	text-align: center;
+	transition: 0.25s;
 }
 
 .image-display .display-overlay:hover {
@@ -281,4 +281,110 @@
 
 .glow-point li:hover {
 	color: #DD0000;
+}
+
+.card-stats .statistics {
+	position: relative;
+	text-align: center;
+	padding: 15px 0;
+}
+
+.card-stats .statistics .title {
+	margin-bottom: 0;
+}
+
+.card-stats .statistics .stats-title {
+	margin-bottom: 5px;
+	color: #9a9a9a;
+	font-weight: 400;
+}
+
+.card-stats .statistics.statistics-horizontal,
+.card-stats .statistics.statistics-horizontal .info-title {
+	padding: 0;
+}
+.card-stats .icon {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 15px;
+}
+
+.card-stats [class*="col-"] .statistics:after {
+	position: absolute;
+	right: 0;
+	top: 20px;
+	width: 1px;
+	height: calc(100% - 40px);
+	content: "";
+	background: #ddd;
+}
+
+.card-stats [class*="col-"]:last-child .statistics:after {
+	display: none;
+}
+
+.info .icon {
+	color: #888;
+	transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.info .icon > i {
+	font-size: 2.3em
+}
+
+.info .info-title {
+	margin: 15px 0 5px;
+	padding: 0 15px;
+	color: #2c2c2c;
+	font-weight: 700;
+}
+
+.info p {
+	color: #888;
+	padding: 0 15px;
+	font-size: 1.1em;
+}
+
+.icon.icon-primary {
+	color: #f96332;
+}
+
+.icon.icon-primary.icon-circle {
+	box-shadow: 0 9px 30px -6px rgba(249, 99, 50, 0.5);
+}
+
+.icon.icon-info {
+	color: #2ca8ff;
+}
+
+.icon.icon-info.icon-circle {
+	box-shadow: 0 9px 30px -6px rgba(44, 168, 255, 0.5);
+}
+
+.icon.icon-success {
+	color: #18ce0f;
+}
+
+.icon.icon-success.icon-circle {
+	box-shadow: 0 9px 30px -6px rgba(24, 206, 15, 0.5);
+}
+
+.icon.icon-warning {
+	color: #ffb236;
+}
+
+.icon.icon-warning.icon-circle {
+	box-shadow: 0 9px 30px -6px rgba(255, 178, 54, 0.5);
+}
+
+.icon.icon-danger {
+	color: #ff3636;
+}
+
+.icon.icon-danger.icon-circle {
+	box-shadow: 0 9px 30px -6px rgba(255, 54, 54, 0.5);
+}
+
+.icon.icon-white {
+	color: #fff;
 }

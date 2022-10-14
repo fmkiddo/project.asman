@@ -11,7 +11,7 @@ var	modalSize = {
 },	messageType = {
 	"ok"			: 0,
 	"yesno"			: 1,
-	"yesnocancel"	: 2,
+	"yesnocancel"		: 2,
 	"okcancel"		: 3
 };
 var $locale	= $(location).attr ('href').replace (basePath + '/', '').split ('/')[0];
@@ -46,7 +46,7 @@ $.showMessageDialog = function (title, message, name, size, type) {
 		"method"		: "put",
 		"data"			: JSON.stringify (json),
 		"dataType"		: "json",
-		"contentType"	: "application/json"
+		"contentType"		: "application/json"
 	}).done (function (result) {
 		if (result.status == 200) {
 			pageModal.attr ('aria-labelledby', name);

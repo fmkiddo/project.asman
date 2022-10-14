@@ -37,18 +37,19 @@ $(document).ready (function ($ready) {
 					$pendingLayer.addClass ('item-pending');
 					if (!$form.validateForm ()) {
 						$(this).parents ('.card').next ().removeClass ('item-pending');	
-					} else 
+					} else {
+						console.log ('data sending');
+						$data = JSON.stringify ($form.serializeArray ());
 						$.ajax ({
 							'url': $.base_url ($locale + '/assets/authenticate-client'),
 							'method': 'put',
-							'data': JSON.stringify ($form.serializeArray ()),
+							'data': $data,
 							'dataType': 'json',
 							'contentType': 'json'
 						}).done (function ($result) {
 							setTimeout (function () {
-								$pendingLayer.removeClass ('item-pending');
-								if ($result.status != 200) console.log ($result.message);
-								else {
+								if ($result.status != 200) {
+								} else {
 									if (!$result.message[1]) window.location.href = $.base_url ($locale + '/client/setup/firsttime');
 									else {
 										$cardSlider = $pendingLayer.prev ().find ('#card-slider');
@@ -56,11 +57,22 @@ $(document).ready (function ($ready) {
 									}
 								}
 							}, 1500);
+						}).fail (function ($jqXHR, $status, $error) {
+							console.log ('Status: ' + $status + ', Error: ' + $error);
+							console.log ($jqXHR);
+						}).always (function () {
+							if ($pendingLayer.hasClass ('item-pending'))
+								setTimeout (function () {
+									$pendingLayer.removeClass ('item-pending');
+								}, 1500);
 						});
-					
+					}
 					break;
 				case 'submit-auth':
 					$(this).prev ().trigger ('click');
+					/** $form = $(this).parents ('form');
+					console.log (JSON.stringify ($form.serializeArray ()));
+					console.log ('adfnjkbnajsdfajisfnjasndfa'); **/
 					break;
 				case 'account-next':
 					$inputUsername = $('input[name="username"]').val ();

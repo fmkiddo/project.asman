@@ -39,6 +39,10 @@ $(document).ready (function () {
 		$('a[data-toggle="tab"]').on ('shown.bs.tab', function ($evt) {
 			$.fn.dataTable.tables ({'visible': true, 'api': true}).columns.adjust ();
 		});
+	
+		$('a[data-toggle="pill"]').on ('shown.bs.tab', function ($evt) {
+			$.fn.dataTable.tables ({'visible': true, 'api': true}).columns.adjust ();
+		});
 		
 		$curl = location.href.split ('/').pop ();
 		if ($curl === 'index' || $curl === 'welcome') $curl = 'index';

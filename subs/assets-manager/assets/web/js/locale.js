@@ -21,6 +21,7 @@ $(function () {
 	$pathname	= $(location).attr ('pathname');
 	$pathnames	= $pathname.split ('/');
 	$document	= $pathnames[4];
+	$document	= ($document == 'welcome') ? 'index' : $document;
 	
 	$('body').find ('.navbar-brand').text ($doclocale['title']);
 	
